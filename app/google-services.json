@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "750120344464",
+    "firebase_url": "https://mad-assignment-8dfad-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "mad-assignment-8dfad",
+    "storage_bucket": "mad-assignment-8dfad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750120344464:android:aa22111d0c53f1be993115",
+        "android_client_info": {
+          "package_name": "my.com.abibasInven"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "750120344464-ooqumsjjp7rimoa1t3j1f890b2golgeh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLgIFcDFoUz1Oi9gAPiIdxABoxs-tY4MQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "750120344464-ooqumsjjp7rimoa1t3j1f890b2golgeh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
