@@ -4,61 +4,69 @@ import com.google.firebase.firestore.Blob
 import com.google.firebase.firestore.DocumentId
 import java.util.*
 
-data class Delivery(
-    @DocumentId
-    var deliveryID     : String = "",
-    var orderID        : String = "",
-    var deliveryStatus : String = "",
-    var userId         : String = "",
-    var deliveryDate   : Date = Date()
+
+
+data class StockOut(
+    var ID          : String = "",
+    var OutletID    : String = "",
+    var DateTime    : Date = Date(),
+    var Status      : String = ""
 )
 
-data class Order(
-    var orderID          : String = "",
-    var orderType        : String = "",
-    var orderDestination : String = "",
-    var orderQty         : Int = 0
-)
-
-data class OrderDetails(
-    var orderDetailsID   : String = "",
+data class Item(
+    var ID               : String = "",
     var productID        : String = "",
-    var orderID          : String = ""
+    var orderID          : String = "",
+    var qty              : Int = 0
 )
 
 data class Outlet (
-    var outletID           : String = "",
-    var outletName         : String = "",
-    var outletLocation     : String = "",
-    var outletAvailability : String = "",
-    var outletPhoto        : Blob = Blob.fromBytes(ByteArray(0))
+    var ID           : String = "",
+    var name         : String = "",
+    var availability : String = "",
+    var latitude     : Double = 0.0,
+    var longitude    : Double = 0.0,
+    var photo        : Blob = Blob.fromBytes(ByteArray(0))
 )
 
 data class Product (
-    var productID           : String = "",
-    var productName         : String = "",
-    var productQty          : Int = 0,
-    var productQtyThreshold : Int = 0,
-    var productCategory     : String = "",
-    var productPhoto        : Blob = Blob.fromBytes(ByteArray(0)),
-    var productLocation     : String = "",
-    var supplierID          : String = ""
+    var ID           : String = "",
+    var name         : String = "",
+    var qty          : Int = 0,
+    var qtyThreshold : Int = 0,
+    var categoryID     : String = "",
+    var photo        : Blob = Blob.fromBytes(ByteArray(0)),
+    var locationID     : String = "",
+    var supplierID   : String = ""
 )
 
-data class Stock (
-    var stockID      : String = "",
+data class StockIn (
+    var ID           : String = "",
     var productID    : String = "",
-    var stockInQty   : Int = 0,
-    var stockOutQty  : Int = 0,
+    var qty          : Int = 0,
     var dateTime     : Date = Date()
 )
 
 data class Supplier (
-    var supplierID           : String = "",
-    var supplierName         : String = "",
-    var phoneNo              : String = "",
-    var supplierEmail        : String = "",
-    var supplierLocation     : String = "",
-    var supplierDetails      : String = "",
-    var supplierAvailability : String = ""
+    var ID           : String = "",
+    var name         : String = "",
+    var phoneNo      : String = "",
+    var email        : String = "",
+    var latitude     : Double = 0.0,
+    var longitude    : Double = 0.0,
 )
+
+data class User (
+    var ID           : String = "",
+    var email        : String = "",
+    var role         : String = "",
+    var name         : String = "",
+    var photo        : Blob = Blob.fromBytes(ByteArray(0)),
+    var attempt      : Int = 0,
+    var password     : String = "",
+        )
+
+data class Category (
+    var ID           : String = "",
+    var name         : String = ""
+        )

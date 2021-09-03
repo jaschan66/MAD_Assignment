@@ -17,14 +17,14 @@ class OutletViewModel : ViewModel() {
 
 
     fun get(id: String): Outlet? {
-        return outlet.value?.find { it -> it.outletID == id}
+        return outlet.value?.find { it -> it.ID == id}
     }
 
     fun getAll() = outlet
 
     //set will be used for both adding and updating purpose
     fun set(o:Outlet) {
-        col.document(o.outletID).set(o)
+        col.document(o.ID).set(o)
     }
 
     fun remove(id: String) {
@@ -32,11 +32,11 @@ class OutletViewModel : ViewModel() {
     }
 
     fun deleteAll() {
-        outlet.value?.forEach { it -> remove(it.outletID) }
+        outlet.value?.forEach { it -> remove(it.ID) }
     }
 
     private fun idExists(id: String): Boolean {
-        return outlet.value?.any { it -> it.outletID == id } ?: false // if found return true if not found then return false
+        return outlet.value?.any { it -> it.ID == id } ?: false // if found return true if not found then return false
     }
 
     fun validate(o: Outlet, insert: Boolean = true): String {
@@ -44,22 +44,22 @@ class OutletViewModel : ViewModel() {
         var errorMessage = ""
 
         if (insert)/*if it is true */{
-            errorMessage += if (o.outletID== "") "- Order ID cannot be empty.\n"
-            else if (!o.outletID.matches(regexId)) "- Order ID format is invalid.\n"
-            else if (idExists(o.outletID)) "- Order ID is duplicated.\n" //if the function return true then error message will be added
+            errorMessage += if (o.ID== "") "- Outlet ID cannot be empty.\n"
+            else if (!o.ID.matches(regexId)) "- Outlet ID format is invalid.\n"
+            else if (idExists(o.ID)) "- Outlet ID is duplicated.\n" //if the function return true then error message will be added
             else ""
         }
 
-        errorMessage += if (o.outletLocation == "") "- Outlet location is required. \n"
+        errorMessage += if (o.latitude == 0.0) "- Outlet location is required. \n"
         else ""
 
-        errorMessage += if (o.outletName == "") "- Outlet name is required. \n"
+        errorMessage += if (o.longitude == 0.0) "- Outlet location is required. \n"
         else ""
 
-        errorMessage += if (o.outletAvailability == "") "- Order quantity is required. \n"
+        errorMessage += if (o.name == "") "- Outlet name is required. \n"
         else ""
 
-        errorMessage += if (o.outletPhoto.toBytes().isEmpty()) "- Outlet photo is required. \n"
+        errorMessage += if (o.photo.toBytes().isEmpty()) "- Outlet photo is required. \n"
         else ""
 
         //TODO Add in more validation based on the needs of your fields
