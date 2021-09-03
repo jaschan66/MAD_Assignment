@@ -1,8 +1,9 @@
-package my.com.abibasInven
+package my.com.abibasInven.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import my.com.abibasInven.R
 import my.com.abibasInven.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -15,17 +16,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val accountFragment=AccountFragment()
-        val homeFragment=HomeFragment()
-        val productFragment=ProductFragment()
+        val accountFragment= AccountFragment()
+        val homeFragment= HomeFragment()
+        val productFragment= ProductFragment()
 
         setCurrentFragment(accountFragment)
 
         binding.bottomNavigationView.setOnItemSelectedListener{
             when(it.itemId){
-                R.id.account->setCurrentFragment(accountFragment)
-                R.id.home->setCurrentFragment(homeFragment)
-                R.id.product->setCurrentFragment(productFragment)
+                R.id.account ->setCurrentFragment(accountFragment)
+                R.id.home ->setCurrentFragment(homeFragment)
+                R.id.product ->setCurrentFragment(productFragment)
 
             }
             true
