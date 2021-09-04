@@ -2,4 +2,22 @@
     <string name="app_name">Abibas</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="EmailHint">Nicky@gmail.com</string>
+    <string name="HintPass">ABC123</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="abibaslogo">AbibasLogo</string>
+    <string name="your_e_mail">Your E-mail</string>
+    <string name="next_step">Next Step</string>
+    <string name="your_password">Your Password</string>
+    <string name="your_name">Your Name</string>
+    <string name="you_role">You Role</string>
+    <string name="create_user">Create User</string>
+    <string name="hintName">Nicky Tan Jit Hwa</string>
+    <string name="addimg">addImg</string>
+    <string-array name="userRole">
+        <item>Manager</item>
+        <item>Staff</item>
+    </string-array>
 </resources>

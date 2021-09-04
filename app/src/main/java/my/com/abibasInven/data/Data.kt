@@ -7,6 +7,7 @@ import java.util.*
 
 
 data class StockOut(
+    @DocumentId
     var ID          : String = "",
     var OutletID    : String = "",
     var DateTime    : Date = Date(),
@@ -14,13 +15,15 @@ data class StockOut(
 )
 
 data class Item(
+    @DocumentId
     var ID               : String = "",
     var productID        : String = "",
-    var orderID          : String = "",
+    var stockOutID          : String = "",
     var qty              : Int = 0
 )
 
 data class Outlet (
+    @DocumentId
     var ID           : String = "",
     var name         : String = "",
     var availability : String = "",
@@ -30,6 +33,7 @@ data class Outlet (
 )
 
 data class Product (
+    @DocumentId
     var ID           : String = "",
     var name         : String = "",
     var qty          : Int = 0,
@@ -41,6 +45,7 @@ data class Product (
 )
 
 data class StockIn (
+    @DocumentId
     var ID           : String = "",
     var productID    : String = "",
     var qty          : Int = 0,
@@ -48,6 +53,7 @@ data class StockIn (
 )
 
 data class Supplier (
+    @DocumentId
     var ID           : String = "",
     var name         : String = "",
     var phoneNo      : String = "",
@@ -57,7 +63,7 @@ data class Supplier (
 )
 
 data class User (
-    var ID           : String = "",
+    @DocumentId
     var email        : String = "",
     var role         : String = "",
     var name         : String = "",
@@ -67,6 +73,7 @@ data class User (
         )
 
 data class Category (
+    @DocumentId
     var ID           : String = "",
     var name         : String = ""
         )

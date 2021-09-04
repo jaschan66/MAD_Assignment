@@ -31,10 +31,7 @@ class HomeFragment : Fragment() {
             }
             true
         }
-
-
         return binding.root
     }
-
 
 }

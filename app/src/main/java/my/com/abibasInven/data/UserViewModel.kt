@@ -16,15 +16,15 @@ class UserViewModel : ViewModel() {
     }
 
 
-    fun get(id: String): User? {
-        return user.value?.find { it -> it.ID == id}
+    fun get(email: String): User? {
+        return user.value?.find { it -> it.email == email}
     }
 
     fun getAll() = user
 
     //set will be used for both adding and updating purpose
     fun set(u:User) {
-        col.document(u.ID).set(u)
+        col.document(u.email).set(u)
     }
 
     fun remove(id: String) {
@@ -32,26 +32,17 @@ class UserViewModel : ViewModel() {
     }
 
     fun deleteAll() {
-        user.value?.forEach { it -> remove(it.ID) }
+        user.value?.forEach { it -> remove(it.email) }
     }
 
-    private fun idExists(id: String): Boolean {
-        return user.value?.any { it -> it.ID == id } ?: false // if found return true if not found then return false
+    private fun idExists(email: String): Boolean {
+        return user.value?.any { it -> it.email == email } ?: false // if found return true if not found then return false
     }
 
     fun validate(u: User, insert: Boolean = true): String {
-        val regexId = Regex("0") //TODO: Add in the regex pattern based on the needs
+        //val regexId = Regex("") //TODO: Add in the regex pattern based on the needs
         var errorMessage = ""
 
-        if (insert)/*if it is true */{
-            errorMessage += if (u.ID== "") "- User ID cannot be empty.\n"
-            else if (!u.ID.matches(regexId)) "- User ID format is invalid.\n"
-            else if (idExists(u.ID)) "- User ID is duplicated.\n" //if the function return true then error message will be added
-            else ""
-        }
-
-        errorMessage += if (u.email == "") "- User email is required. \n"
-        else ""
 
         errorMessage += if (u.role == "") "- User role is required. \n"
         else ""
