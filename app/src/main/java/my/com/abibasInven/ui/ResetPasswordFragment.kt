@@ -38,41 +38,50 @@ class ResetPasswordFragment : Fragment() {
         return binding.root
     }
 
+
     private fun changePassword() {
         var newPass = binding.edtNewPassword.text.toString().trim()
         var newConfirmPass = binding.edtNewConfirmPassword.text.toString().trim()
-        var u = vm.get(email)
-        if (newPass == newConfirmPass) {
-            val user = auth.currentUser
-            if (user != null) {
-                val credential = EmailAuthProvider
-                    .getCredential(u!!.email,u!!.password)
-                user.reauthenticate(credential)
-                    .addOnCompleteListener{
-                        if(it.isSuccessful) {
+        var checkResult = checkIfEmpty(newPass,newConfirmPass)
+        if (checkResult == false) {
+            var u = vm.get(email)
+            if (newPass == newConfirmPass) {
+                val user = auth.currentUser
+                if (user != null) {
+                    val credential = EmailAuthProvider
+                        .getCredential(u!!.email, u!!.password)
+                    user.reauthenticate(credential)
+                        .addOnCompleteListener {
+                            if (it.isSuccessful) {
 
-                            user.updatePassword(newPass)
-                                .addOnCompleteListener { task ->
-                                    if (task.isSuccessful) {
-                                        informationDialog("Successful change the password")
-                                        auth.signOut()
+                                user.updatePassword(newPass)
+                                    .addOnCompleteListener { task ->
+                                        if (task.isSuccessful) {
+                                            informationDialog("Successful change the password")
+                                            auth.signOut()
+                                        }
                                     }
-                                }
+                            } else {
+                                errorDialog("Failed to change the password")
+                            }
                         }
-                        else{
-                            errorDialog("Failed to change the password")
-                        }
-                    }
+                }
+
+                user!!.updatePassword(newPass)
+
+                u?.password = newPass
+                vm.set(u!!)
+            } else {
+                errorDialog("Password does not match")
             }
 
-            user!!.updatePassword(newPass)
-
-            u?.password = newPass
-            vm.set(u!!)
         }
-        else {
-            errorDialog("Password does not match")
+        else{
+            errorDialog("The field cannot be empty")
         }
+    }
+    private fun checkIfEmpty(newPass: String, newConPass: String): Boolean {
+        return newPass == "" || newConPass == ""
     }
 
 }
