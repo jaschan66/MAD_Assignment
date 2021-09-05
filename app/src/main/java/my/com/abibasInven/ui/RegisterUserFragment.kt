@@ -27,7 +27,6 @@ class RegisterUserFragment : Fragment() {
     private val nav by lazy {findNavController()}
     private val email by lazy { requireArguments().getString("email", "")}
     private val password by lazy { requireArguments().getString("password","")}
-    private lateinit var roleR : String
     private val vm: UserViewModel by activityViewModels()
 
     private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
@@ -48,13 +47,7 @@ class RegisterUserFragment : Fragment() {
     }
 
     private fun createUser() {
-        var i = binding.RegisterSpinnerRole.selectedItemId.toInt()
-        if (i == 0){
-            roleR = "Manager"
-        }
-        else {
-            roleR = "Staff"
-        }
+        var roleR = binding.RegisterSpinnerRole.selectedItem.toString()
 
         val u = User(
             email = email,

@@ -34,4 +34,14 @@
         android:name="my.com.abibasInven.ui.RegisterUserFragment"
         android:label="fragment_register_user"
         tools:layout="@layout/fragment_register_user" />
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="my.com.abibasInven.ui.ForgotPasswordFragment"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password" />
+    <fragment
+        android:id="@+id/resetPasswordFragment"
+        android:name="my.com.abibasInven.ui.ResetPasswordFragment"
+        android:label="fragment_reset_password"
+        tools:layout="@layout/fragment_reset_password" />
 </navigation>

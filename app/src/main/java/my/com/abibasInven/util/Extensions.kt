@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.graphics.drawable.toBitmap
 import androidx.core.graphics.scale
 import androidx.fragment.app.Fragment
@@ -38,6 +39,8 @@ fun Fragment.informationDialog(text: String) {
 fun Fragment.snackbar(text: String) {
     Snackbar.make(requireView(), text, Snackbar.LENGTH_SHORT).show()
 }
+
+
 
 // Usage: Hide keyboard from fragment
 fun Fragment.hideKeyboard() {

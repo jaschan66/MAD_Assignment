@@ -70,10 +70,10 @@ data class User (
     var photo        : Blob = Blob.fromBytes(ByteArray(0)),
     var attempt      : Int = 0,
     var password     : String = "",
-        )
+)
 
 data class Category (
     @DocumentId
     var ID           : String = "",
     var name         : String = ""
-        )
+)
