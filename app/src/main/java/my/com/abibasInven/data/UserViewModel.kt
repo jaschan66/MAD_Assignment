@@ -1,5 +1,7 @@
 package my.com.abibasInven.data
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.ktx.firestore
@@ -10,9 +12,11 @@ class UserViewModel : ViewModel() {
 
     private val col = Firebase.firestore.collection("user")
     private val user = MutableLiveData<List<User>>()
+    private val staff = MutableLiveData<List<User>>()
 
     init {
-        col.addSnapshotListener { it, _ -> user.value = it?.toObjects()  }
+        col.addSnapshotListener { it, _ -> user.value = it?.toObjects()
+        staff.value = user.value?.filter {it -> it.role == "Staff"}}
     }
 
 
@@ -20,24 +24,34 @@ class UserViewModel : ViewModel() {
         return user.value?.find { it -> it.email == email}
     }
 
+
     fun getAll() = user
+
+    fun getAllStaff() = staff
 
     //set will be used for both adding and updating purpose
     fun set(u:User) {
         col.document(u.email).set(u)
     }
 
-    fun remove(id: String) {
-        col.document(id).delete()
+    fun remove(email: String) {
+        col.document(email).delete()
     }
 
     fun deleteAll() {
         user.value?.forEach { it -> remove(it.email) }
     }
 
+    fun deleteAllStaff() {
+        staff.value?.forEach { it -> remove(it.email) }
+    }
+
     private fun idExists(email: String): Boolean {
         return user.value?.any { it -> it.email == email } ?: false // if found return true if not found then return false
     }
+
+
+
 
     fun validate(u: User, insert: Boolean = true): String {
         //val regexId = Regex("") //TODO: Add in the regex pattern based on the needs
