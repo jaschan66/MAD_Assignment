@@ -77,3 +77,11 @@ data class Category (
     var ID           : String = "",
     var name         : String = ""
 )
+
+data class Location (
+    @DocumentId
+    val ID       : String = "",
+    val categoryID       : String = "",
+    val occupiedCapacity : Int = 0,
+    val maxCapacity : Int = 0
+        )

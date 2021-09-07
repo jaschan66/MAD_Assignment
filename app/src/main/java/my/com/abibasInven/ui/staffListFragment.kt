@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -29,13 +30,15 @@ class staffListFragment : Fragment() {
 
         // TODO
 
-        //binding.btnAddStaff.setOnClickListener { nav.navigate() }
-        binding.btnDeleteAllStaff.setOnClickListener { deleteAllStaff() }
+        binding.btnAddStaff.setOnClickListener { nav.navigate(R.id.registerFragment) }
 
         adapter = StaffAdapter() { holder, user ->
 
             holder.root.setOnClickListener {
                 //nav.navigate()
+            }
+            holder.btnUpdate.setOnClickListener {
+                nav.navigate(R.id.updateStaffFragment, bundleOf("email" to user.email))
             }
             holder.btnDelete.setOnClickListener { deleteStaff(user.email) }
 
@@ -55,8 +58,6 @@ class staffListFragment : Fragment() {
         vm.remove(email)
     }
 
-    private fun deleteAllStaff() {
-        vm.deleteAllStaff()
-    }
+
 
 }

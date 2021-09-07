@@ -34,6 +34,7 @@ class UserViewModel : ViewModel() {
         col.document(u.email).set(u)
     }
 
+
     fun remove(email: String) {
         col.document(email).delete()
     }
@@ -74,6 +75,8 @@ class UserViewModel : ViewModel() {
 
         return errorMessage
     }
+
+
 
 
 

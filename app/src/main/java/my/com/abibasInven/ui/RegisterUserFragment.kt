@@ -65,7 +65,7 @@ class RegisterUserFragment : Fragment() {
         }
         else{
             vm.set(u)
-            nav.navigate(R.id.homeFragment)
+            nav.navigate(R.id.staffListFragment)
         }
     }
 

@@ -57,8 +57,11 @@ class ResetPasswordFragment : Fragment() {
                                 user.updatePassword(newPass)
                                     .addOnCompleteListener { task ->
                                         if (task.isSuccessful) {
+                                            u.attempt = 0
+                                            vm.set(u)
                                             informationDialog("Successful change the password")
                                             auth.signOut()
+                                            nav.navigate(R.id.loginFragment)
                                         }
                                     }
                             } else {
