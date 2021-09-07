@@ -25,6 +25,11 @@
     <string name="staffimg">StaffImg</string>
     <string name="delete_all">Delete All</string>
     <string name="add">Add</string>
+    <string name="reset">Reset</string>
+    <string name="update">Update</string>
+    <string name="updatestaffimg">updateStaffImg</string>
+    <string name="name">Name</string>
+    <string name="role">Role</string>
     <string-array name="userRole">
         <item>Manager</item>
         <item>Staff</item>
