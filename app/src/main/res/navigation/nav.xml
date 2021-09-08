@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/staffListFragment">
+    app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/accountFragment"
         android:name="my.com.abibasInven.ui.AccountFragment"
@@ -64,4 +64,9 @@
         android:name="my.com.abibasInven.ui.UpdateStaffFragment"
         android:label="fragment_update_staff"
         tools:layout="@layout/fragment_update_staff" />
+    <fragment
+        android:id="@+id/locationAddingFragment"
+        android:name="my.com.abibasInven.ui.LocationAddingFragment"
+        android:label="fragment_location_adding"
+        tools:layout="@layout/fragment_location_adding" />
 </navigation>
