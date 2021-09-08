@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/staffListFragment">
     <fragment
         android:id="@+id/accountFragment"
         android:name="my.com.abibasInven.ui.AccountFragment"
@@ -56,7 +56,7 @@
         tools:layout="@layout/fragment_location_details" />
     <fragment
         android:id="@+id/staffListFragment"
-        android:name="my.com.abibasInven.ui.staffListFragment"
+        android:name="my.com.abibasInven.ui.StaffListFragment"
         android:label="fragment_staff_list"
         tools:layout="@layout/fragment_staff_list" />
     <fragment
@@ -69,4 +69,9 @@
         android:name="my.com.abibasInven.ui.LocationAddingFragment"
         android:label="fragment_location_adding"
         tools:layout="@layout/fragment_location_adding" />
+    <fragment
+        android:id="@+id/staffDetailsFragment"
+        android:name="my.com.abibasInven.ui.StaffDetailsFragment"
+        android:label="fragment_staff_details"
+        tools:layout="@layout/fragment_staff_details" />
 </navigation>
