@@ -16,7 +16,6 @@ import com.example.logindemo.util.errorDialog
 import my.com.abibasInven.R
 import my.com.abibasInven.data.User
 import my.com.abibasInven.data.UserViewModel
-import my.com.abibasInven.databinding.FragmentHomeBinding
 import my.com.abibasInven.databinding.FragmentRegisterUserBinding
 
 
