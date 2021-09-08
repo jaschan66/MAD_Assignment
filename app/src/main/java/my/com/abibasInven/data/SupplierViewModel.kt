@@ -40,12 +40,12 @@ class SupplierViewModel : ViewModel() {
     }
 
     fun validate(s: Supplier, insert: Boolean = true): String {
-        val regexId = Regex("0") //TODO: Add in the regex pattern based on the needs
+        //val regexId = Regex("S") //TODO: Add in the regex pattern based on the needs
         var errorMessage = ""
 
         if (insert)/*if it is true */{
             errorMessage += if (s.ID== "") "- Supplier ID cannot be empty.\n"
-            else if (!s.ID.matches(regexId)) "- Supplier ID format is invalid.\n"
+            //else if (!s.ID.matches(regexId)) "- Supplier ID format is invalid.\n"
             else if (idExists(s.ID)) "- Supplier ID is duplicated.\n" //if the function return true then error message will be added
             else ""
         }

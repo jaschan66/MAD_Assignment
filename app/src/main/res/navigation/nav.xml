@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/staffListFragment">
+    app:startDestination="@id/supplierAddFragment">
     <fragment
         android:id="@+id/accountFragment"
         android:name="my.com.abibasInven.ui.AccountFragment"
@@ -74,4 +74,9 @@
         android:name="my.com.abibasInven.ui.StaffDetailsFragment"
         android:label="fragment_staff_details"
         tools:layout="@layout/fragment_staff_details" />
+    <fragment
+        android:id="@+id/supplierAddFragment"
+        android:name="my.com.abibasInven.ui.SupplierAddFragment"
+        android:label="fragment_supplier_add"
+        tools:layout="@layout/fragment_supplier_add" />
 </navigation>
