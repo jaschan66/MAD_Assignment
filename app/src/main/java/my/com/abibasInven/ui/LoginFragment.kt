@@ -46,14 +46,14 @@ class LoginFragment : Fragment() {
 
 
 
-        auth = Firebase.auth
-        val currentUser = auth.currentUser
-        if (currentUser != null) {
-            nav.navigate(R.id.homeFragment)
-        }
-        else{
-            super.onCreate(savedInstanceState)
-        }
+//        auth = Firebase.auth
+//        val currentUser = auth.currentUser
+//        if (currentUser != null) {
+//            nav.navigate(R.id.homeFragment)
+//        }
+//        else{
+//            super.onCreate(savedInstanceState)
+//        }
 
 
 
@@ -72,7 +72,7 @@ class LoginFragment : Fragment() {
                                     vm.set(u)
                                     val message = "Successfully login"
                                     informationDialog(message)
-                                    nav.navigate(R.id.homeFragment)
+                                    nav.navigate(R.id.accountFragment, bundleOf("email" to u.email))
                                 }
                                 else {
                                     u.attempt = u.attempt + 1

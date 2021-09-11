@@ -19,21 +19,26 @@ import my.com.abibasInven.data.UserViewModel
 import my.com.abibasInven.databinding.FragmentRegisterUserBinding
 
 
-
 class RegisterUserFragment : Fragment() {
 
     private lateinit var binding: FragmentRegisterUserBinding
-    private val nav by lazy {findNavController()}
-    private val email by lazy { requireArguments().getString("email", "")}
-    private val password by lazy { requireArguments().getString("password","")}
+    private val nav by lazy { findNavController() }
+    private val email by lazy { requireArguments().getString("email", "") }
+    private val password by lazy { requireArguments().getString("password", "") }
     private val vm: UserViewModel by activityViewModels()
 
-    private val launcher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-        if (it.resultCode == Activity.RESULT_OK) {
-            binding.addImgView.setImageURI(it.data?.data)
+    private val launcher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == Activity.RESULT_OK) {
+                binding.addImgView.setImageURI(it.data?.data)
+            }
         }
-    }
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
 
         binding = FragmentRegisterUserBinding.inflate(inflater, container, false)
         // TODO
@@ -52,8 +57,8 @@ class RegisterUserFragment : Fragment() {
             email = email,
             password = password,
             name = binding.edtRegisterName.text.toString().trim(),
-            photo = binding.addImgView.cropToBlob(300,300),
-            role =  roleR,
+            photo = binding.addImgView.cropToBlob(300, 300),
+            role = roleR,
             attempt = 0
         )
 
@@ -61,8 +66,7 @@ class RegisterUserFragment : Fragment() {
         if (err != "") {
             errorDialog(err)
             return
-        }
-        else{
+        } else {
             vm.set(u)
             nav.navigate(R.id.staffListFragment)
         }

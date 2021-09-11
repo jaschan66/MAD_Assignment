@@ -68,7 +68,6 @@ class UpdateStaffFragment : Fragment() {
         binding.imgStaffPhoto.setImageBitmap(s.photo.toBitmap())
         binding.edtUpdateStaffName.setText(s.name)
         binding.spnRole.setSelection(1)
-
     }
 
     private fun update(s: User) {
