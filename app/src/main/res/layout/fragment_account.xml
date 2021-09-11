@@ -42,6 +42,8 @@
                     android:layout_width="8dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:contentDescription="@string/accountimg"
+                    tools:ignore="ImageContrastCheck"
                     tools:src="@tools:sample/avatars" />
 
                 <LinearLayout
@@ -90,9 +92,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/questrial"
-                android:paddingLeft="17dp"
+                android:paddingStart="17dp"
                 android:paddingTop="16dp"
-                android:text="Change Password"
+                android:text="@string/change_password"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -101,9 +103,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/questrial"
-                android:paddingLeft="17dp"
+                android:paddingStart="17dp"
                 android:paddingTop="16dp"
-                android:text="Change Profile Photo"
+                android:text="@string/change_profile_photo"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -124,9 +126,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/questrial"
-                android:paddingLeft="17dp"
+                android:paddingStart="17dp"
                 android:paddingTop="16dp"
-                android:text="Manage Staff"
+                android:text="@string/manage_staff"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:visibility="gone"
