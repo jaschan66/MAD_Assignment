@@ -5,12 +5,26 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.fragment.findNavController
+import com.example.logindemo.util.cropToBlob
+import com.example.logindemo.util.errorDialog
+import com.example.logindemo.util.informationDialog
 import com.example.logindemo.util.toBitmap
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.Blob
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.tasks.await
 import my.com.abibasInven.R
+import my.com.abibasInven.data.User
 import my.com.abibasInven.data.UserViewModel
+import my.com.abibasInven.data.img
 import my.com.abibasInven.databinding.FragmentAccountBinding
 
 
@@ -25,11 +39,56 @@ class AccountFragment : Fragment() {
 
         binding = FragmentAccountBinding.inflate(inflater, container, false)
 
+        vm.getAll()
+
         val u = vm.get(email)
+        val password = u?.password
+        val args = bundleOf(
+            "email" to email
+        )
+
+        val s = vm.get(email)
+
+        if(img == Blob.fromBytes(ByteArray(0))){
+            if (s != null) {
+                binding.lblAccName.text = s.name
+                binding.lblAccountRole.text = s.role
+                binding.accountImg.setImageBitmap(s.photo.toBitmap())
+            }
+        } else {
+            if (s != null) {
+                binding.lblAccName.text = s.name
+                binding.lblAccountRole.text = s.role
+                binding.accountImg.setImageBitmap(img.toBitmap())
+            }
+        }
+
+
+
+
+
+        binding.accountChgPass.setOnClickListener {
+            if (password != null) {
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener { task ->
+                        if (task.isSuccessful) {
+                            nav.navigate(R.id.resetPasswordFragment,args)
+                        } else {
+                            errorDialog("Unsuccessful")
+                        }
+                    }
+            }
+        }
+        binding.accountChgPhoto.setOnClickListener { nav.navigate(R.id.userChgPicFragment, args) }
+        if (u?.role == "Manager"){
+            binding.view3.isVisible = true
+            binding.accountManageStaff.isVisible = true
+        }
+
+        binding.accountManageStaff.setOnClickListener { nav.navigate(R.id.staffListFragment) }
 
 
         binding.bottomNavigationView.selectedItemId = R.id.account
-
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.home -> nav.navigate(R.id.homeFragment)
@@ -40,24 +99,24 @@ class AccountFragment : Fragment() {
             true
         }
 
-        binding.lblAccName.text = u?.name
-        binding.lblAccountRole.text = u?.role
-        binding.accountImg.setImageBitmap(u?.photo?.toBitmap())
-
-        //binding.accountChgPass.setOnClickListener { nav.navigate() }
-        //binding.accountChgPhoto.setOnClickListener { nav.navigate() }
-        if (u?.role == "Manager"){
-            binding.view3.isVisible = true
-            binding.accountManageStaff.isVisible = true
-        }
-
-        binding.accountManageStaff.setOnClickListener { nav.navigate(R.id.staffListFragment) }
-
-
-
-
         return binding.root
     }
-
+//    fun reset() {
+//
+//        val col = Firebase.firestore.collection("user")
+//        col.document(email).get().addOnSuccessListener {
+//        }
+//
+//
+//
+//
+//        val s = vm.get(email)
+//        if (s != null) {
+//            binding.lblAccName.text = s.name
+//            binding.lblAccountRole.text = s.role
+//            binding.accountImg.setImageBitmap(s.photo.toBitmap())
+//
+//        }
+//    }
 
 }

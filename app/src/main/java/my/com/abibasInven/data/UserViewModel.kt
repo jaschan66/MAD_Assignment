@@ -2,6 +2,7 @@ package my.com.abibasInven.data
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.ktx.firestore
@@ -13,17 +14,16 @@ class UserViewModel : ViewModel() {
     private val col = Firebase.firestore.collection("user")
     private val user = MutableLiveData<List<User>>()
     private val staff = MutableLiveData<List<User>>()
+    private val userLiveData = MutableLiveData<User>()
 
     init {
         col.addSnapshotListener { it, _ -> user.value = it?.toObjects()
         staff.value = user.value?.filter {it -> it.role == "Staff"}}
     }
 
-
     fun get(email: String): User? {
         return user.value?.find { it -> it.email == email}
     }
-
 
     fun getAll() = user
 

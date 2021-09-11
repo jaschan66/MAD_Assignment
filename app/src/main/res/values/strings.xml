@@ -46,6 +46,9 @@
     <string name="change_profile_photo">Change Profile Photo</string>
     <string name="manage_staff">Manage Staff</string>
     <string name="accountimg">accountImg</string>
+    <string name="set_image">Set Image</string>
+    <string name="change_profile_picture">Change Profile Picture</string>
+    <string name="imgchgprofilepic">imgChgProfilePic</string>
     <string-array name="userRole">
         <item>Manager</item>
         <item>Staff</item>

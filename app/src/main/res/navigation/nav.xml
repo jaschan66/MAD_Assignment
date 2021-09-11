@@ -79,4 +79,9 @@
         android:name="my.com.abibasInven.ui.SupplierAddFragment"
         android:label="fragment_supplier_add"
         tools:layout="@layout/fragment_supplier_add" />
+    <fragment
+        android:id="@+id/userChgPicFragment"
+        android:name="my.com.abibasInven.ui.UserChgPicFragment"
+        android:label="fragment_user_chg_pic"
+        tools:layout="@layout/fragment_user_chg_pic" />
 </navigation>
