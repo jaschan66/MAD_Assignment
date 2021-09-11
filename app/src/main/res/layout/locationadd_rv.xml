@@ -28,6 +28,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 android:background="#9CE3FF"
+                android:fontFamily="@font/questrial"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -37,6 +38,7 @@
                 android:id="@+id/textView10"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/questrial"
                 android:text="Category : "
                 app:layout_constraintBottom_toBottomOf="@+id/spnCategory"
                 app:layout_constraintEnd_toStartOf="@+id/guideline19"
@@ -54,6 +56,7 @@
                 android:id="@+id/textView11"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/questrial"
                 android:text="Max Capcity : "
                 app:layout_constraintEnd_toStartOf="@+id/guideline19"
                 tools:layout_editor_absoluteY="79dp" />

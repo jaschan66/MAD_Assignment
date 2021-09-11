@@ -29,7 +29,7 @@ class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private val nav by lazy {findNavController()}
     private val vm: UserViewModel by activityViewModels()
-    private lateinit var auth: FirebaseAuth
+//    private lateinit var auth: FirebaseAuth
    // private val PREFS_NAME = "PrefsFile"
 
 
@@ -85,6 +85,9 @@ class LoginFragment : Fragment() {
                     else {
                         errorDialog("Number of failed attempt exceeded")
                     }
+                }
+                else {
+                    errorDialog("Email or password entered might be invalid")
                 }
             }
             else {
