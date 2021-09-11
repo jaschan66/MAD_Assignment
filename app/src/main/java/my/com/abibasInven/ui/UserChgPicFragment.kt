@@ -45,7 +45,7 @@ class UserChgPicFragment : Fragment() {
             binding.imgChgProfile.setImageBitmap(u.photo.toBitmap())
         }
         else{
-            binding.imgChgProfile.setImageResource(R.drawable.ic_addimg)
+            binding.imgChgProfile.setImageResource(R.drawable.ic_adding)
         }
 
         binding.imgChgProfile.setOnClickListener { chooseImage() }

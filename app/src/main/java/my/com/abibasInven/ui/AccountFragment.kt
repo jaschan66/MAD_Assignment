@@ -39,7 +39,6 @@ class AccountFragment : Fragment() {
 
         binding = FragmentAccountBinding.inflate(inflater, container, false)
 
-        vm.getAll()
 
         val u = vm.get(email)
         val password = u?.password
@@ -62,6 +61,12 @@ class AccountFragment : Fragment() {
                 binding.accountImg.setImageBitmap(img.toBitmap())
             }
         }
+        if (u?.photo == Blob.fromBytes(ByteArray(0))) {
+            binding.accountImg.setImageResource(R.drawable.ic_addimg)
+        }
+
+
+
 
 
 
