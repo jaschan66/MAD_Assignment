@@ -20,6 +20,7 @@ class ItemViewModel : ViewModel() {
         return items.value?.find { it -> it.ID == id}
     }
 
+
     fun getAll() = items
 
     //set will be used for both adding and updating purpose

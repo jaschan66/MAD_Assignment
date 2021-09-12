@@ -10,14 +10,18 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.logindemo.util.errorDialog
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import my.com.abibasInven.R
 import my.com.abibasInven.data.Location
 import my.com.abibasInven.data.LocationViewModel
+import my.com.abibasInven.data.RackType
 import my.com.abibasInven.data.UserViewModel
 import my.com.abibasInven.databinding.FragmentHomeBinding
 import my.com.abibasInven.databinding.FragmentLocationListingBinding
 import my.com.abibasInven.util.LocationAdapter
 import my.com.abibasInven.util.StaffAdapter
+import java.util.*
 
 
 class LocationListingFragment : Fragment() {
@@ -33,13 +37,13 @@ class LocationListingFragment : Fragment() {
         binding = FragmentLocationListingBinding.inflate(inflater, container, false)
 
         // TODO
-        adapter = LocationAdapter() { holder, location ->
+        adapter = LocationAdapter() { holder, rackType ->
             // Item click
-            holder.root.setOnClickListener {
-                nav.navigate(R.id.locationDetailsFragment, bundleOf("id" to location.ID))
+            holder.btnRackDetail.setOnClickListener {
+                nav.navigate(R.id.locationAddingFragment, bundleOf("rackID" to rackType.ID))
             }
             // Delete button click
-            holder.btnDeleteRack.setOnClickListener { delete(location.ID) }
+            holder.btnDeleteRack.setOnClickListener { delete(rackType.ID) }
         }
 
         binding.rvLocationListing.adapter = adapter
@@ -50,7 +54,7 @@ class LocationListingFragment : Fragment() {
 
 
         vm.getAllRack().observe(viewLifecycleOwner) { list ->
-            list.groupBy { it.ID}
+            //list.groupBy { it.ID}
             adapter.submitList(list)
             binding.lblRackCount.text = "${list.size} location(s)"
             binding.lblTotalRack.text = list.size.toString()
@@ -70,6 +74,7 @@ class LocationListingFragment : Fragment() {
     private fun createNewLocation() {
 
         // TODO: create location at firebase
+        var save = ""
         for(i in 1..6){
             val l = Location(
                 ID   = generateAlphabet(binding.lblTotalRack.text.toString().toInt()).toString()+i,
@@ -79,7 +84,14 @@ class LocationListingFragment : Fragment() {
                 maxCapacity = 0,
                 )
             vm.set(l)
-
+            save += generateAlphabet(binding.lblTotalRack.text.toString().toInt()).toString()+i + ","
+            if( i == 6 ){
+                val r = RackType(
+                    ID = generateAlphabet(binding.lblTotalRack.text.toString().toInt()).toString(),
+                    rackData = save
+                )
+                vm.setRackType(r)
+            }
         }
 
         val err = "Done"
@@ -105,6 +117,8 @@ class LocationListingFragment : Fragment() {
 
     private fun delete(id: String) {
         // TODO: Delete
-        vm.delete(id)
+        vm.deleteAllRack(id)
+        vm.deleteRack(id)
+
     }
 }

@@ -12,15 +12,18 @@ import kotlin.collections.ArrayList
 class LocationViewModel : ViewModel() {
 
     private val col = Firebase.firestore.collection("location")
+    private val colRack = Firebase.firestore.collection("rackType")
+    private val rackType = MutableLiveData<List<RackType>>()
     private val location = MutableLiveData<List<Location>>()
     private val rack = MutableLiveData<List<Location>>()
 
     init {
 
         col.addSnapshotListener { snap, _ -> location.value = snap?.toObjects()
-            rack.value = location.value?.filter { it.rackType == "A"}
+            rack.value = location.value?.filter { it.rackType != it.rackType }
 
         }
+        colRack.addSnapshotListener { snap, _ -> rackType.value = snap?.toObjects() }
 
 
 //            var rackList : MutableList<String> = ArrayList()
@@ -38,13 +41,12 @@ class LocationViewModel : ViewModel() {
 
 //            var test =  MutableLiveData(forLocationList)
 
-
-
-
     }
 
 
-
+    fun getRackByRackType(id : String): Location?{
+        return location.value?.find { l -> l.ID == id }
+    }
 
     fun get(id : String): Location?{
 
@@ -53,23 +55,38 @@ class LocationViewModel : ViewModel() {
 
 //    fun findbyRackType(rackType : String): Location?{
 //        return location.value?.find { l -> l.rackType == rackType }
-//    }
-
+//  }
 
     fun getAll() = location
 
-    fun getAllRack() = rack
+    fun getAllRack() = rackType
 
     fun delete(id : String){
         col.document(id).delete()
+    }
+
+    fun deleteRack(id : String){
+        colRack.document(id).delete()
     }
 
     fun deleteAll(){
         location.value?.forEach{ l -> delete(l.ID)}
     }
 
+    fun deleteAllRack(id: String){
+        location.value?.forEach{ l ->
+            if( l.rackType == id ){
+                delete(l.ID)
+            }
+        }
+    }
+
     fun set(l: Location){
         col.document(l.ID).set(l)
+    }
+
+    fun setRackType(r: RackType){
+        colRack.document(r.ID).set(r)
     }
 
     //-------------------------------------------------------------------

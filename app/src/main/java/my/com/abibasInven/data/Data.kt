@@ -86,3 +86,10 @@ data class Location (
     val occupiedCapacity : Int = 0,
     val maxCapacity : Int = 0,
 )
+
+data class RackType (
+    @DocumentId
+    var ID: String = "",
+    var rackData: String = "",
+
+)
