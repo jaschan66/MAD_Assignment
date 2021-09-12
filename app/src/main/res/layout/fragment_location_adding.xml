@@ -7,55 +7,163 @@
     tools:context=".ui.LocationAddingFragment">
 
     <Button
-        android:id="@+id/btnAddLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="270dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="@font/questrial"
-        android:text="Add"
+        android:id="@+id/btnUpdateCompartment5"
+        android:layout_width="103dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="24dp"
+        android:text="Button"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline23"
+        app:layout_constraintStart_toStartOf="@+id/guideline24"
+        app:layout_constraintTop_toBottomOf="@+id/edtMaxCapacity4"
+        app:layout_constraintVertical_bias="0.112" />
+
+    <EditText
+        android:id="@+id/edtMaxCapacity4"
+        android:layout_width="78dp"
+        android:layout_height="19dp"
+        android:layout_marginStart="20dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/textView24"
+        app:layout_constraintStart_toStartOf="@+id/guideline24"
+        app:layout_constraintTop_toTopOf="@+id/textView24" />
+
+    <Spinner
+        android:id="@+id/spinner3"
+        android:layout_width="79dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView23"
+        app:layout_constraintStart_toStartOf="@+id/guideline24"
+        app:layout_constraintTop_toTopOf="@+id/textView23" />
+
+    <Button
+        android:id="@+id/btnCompartment24"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="18dp"
+        android:text="A6"
+        app:layout_constraintEnd_toEndOf="@+id/btnCompartment22"
+        app:layout_constraintStart_toStartOf="@+id/btnCompartment22"
+        app:layout_constraintTop_toBottomOf="@+id/btnCompartment22" />
+
+    <Button
+        android:id="@+id/btnCompartment23"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:text="A5"
+        app:layout_constraintEnd_toEndOf="@+id/btnCompartment21"
+        app:layout_constraintStart_toStartOf="@+id/btnCompartment21"
+        app:layout_constraintTop_toBottomOf="@+id/btnCompartment21" />
+
+    <Button
+        android:id="@+id/btnCompartment22"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="24dp"
+        android:text="A3"
+        app:layout_constraintEnd_toStartOf="@+id/guideline23"
+        app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+    <Button
+        android:id="@+id/btnCompartment21"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="24dp"
+        android:text="A2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+    <Button
+        android:id="@+id/btnCompartment20"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:text="A4"
+        app:layout_constraintEnd_toEndOf="@+id/btnCompartment19"
+        app:layout_constraintStart_toStartOf="@+id/btnCompartment19"
+        app:layout_constraintTop_toBottomOf="@+id/btnCompartment19" />
+
+    <Button
+        android:id="@+id/btnCompartment19"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="24dp"
+        android:text="A1"
+        app:layout_constraintStart_toStartOf="@+id/guideline29"
+        app:layout_constraintTop_toBottomOf="@+id/textView19" />
+
+    <TextView
+        android:id="@+id/textView19"
+        android:layout_width="220dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="94dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="97dp"
+        android:background="@color/teal_200"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvLocationAdd" />
-
-    <TextView
-        android:id="@+id/textView14"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/questrial"
-        android:text="Rack : "
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/lblRackID"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:fontFamily="@font/questrial"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView14"
-        app:layout_constraintStart_toEndOf="@+id/textView14"
-        app:layout_constraintTop_toTopOf="@+id/textView14"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="Rack A" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvLocationAdd"
-        android:layout_width="350dp"
-        android:layout_height="432dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="16dp"
-        app:layoutManager="LinearLayoutManager"
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_begin="205dp"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Max Capacity"
+        app:layout_constraintEnd_toStartOf="@+id/guideline24"
+        app:layout_constraintTop_toBottomOf="@+id/textView23" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Category"
+        app:layout_constraintEnd_toStartOf="@+id/guideline24"
+        app:layout_constraintTop_toBottomOf="@+id/lblCompartmentDetails3" />
+
+    <TextView
+        android:id="@+id/lblCompartmentDetails3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Details"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lblRackID"
-        tools:listitem="@layout/locationadd_rv" />
+        app:layout_constraintTop_toBottomOf="@+id/btnCompartment23" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline23"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="315dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline29"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="95dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

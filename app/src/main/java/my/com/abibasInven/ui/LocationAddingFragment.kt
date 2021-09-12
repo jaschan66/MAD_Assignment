@@ -10,11 +10,12 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import my.com.abibasInven.R
-import my.com.abibasInven.data.UserViewModel
+import my.com.abibasInven.data.LocationViewModel
+
 import my.com.abibasInven.databinding.FragmentLocationAddingBinding
-import my.com.abibasInven.databinding.FragmentStaffListBinding
+
 import my.com.abibasInven.util.LocationAddAdapter
-import my.com.abibasInven.util.StaffAdapter
+
 
 
 class LocationAddingFragment : Fragment() {
@@ -22,7 +23,7 @@ class LocationAddingFragment : Fragment() {
 
     private lateinit var binding: FragmentLocationAddingBinding
     private val nav by lazy {findNavController()}
-    private val vm: UserViewModel by activityViewModels()
+    private val vm: LocationViewModel by activityViewModels()
 
     private lateinit var adapter: LocationAddAdapter
 
@@ -32,7 +33,7 @@ class LocationAddingFragment : Fragment() {
 
         // TODO
 
-        binding.btnAddLocation.setOnClickListener { addLocation() }
+
 
         adapter = LocationAddAdapter() { holder, user ->
 
@@ -41,8 +42,7 @@ class LocationAddingFragment : Fragment() {
 
 
         }
-        binding.rvLocationAdd.adapter = adapter
-        binding.rvLocationAdd.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+
 
         return binding.root
     }
