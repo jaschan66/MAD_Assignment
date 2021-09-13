@@ -9,49 +9,116 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.example.logindemo.util.errorDialog
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import my.com.abibasInven.R
+import my.com.abibasInven.data.Location
 import my.com.abibasInven.data.LocationViewModel
+import my.com.abibasInven.data.RackType
 import my.com.abibasInven.data.UserViewModel
 import my.com.abibasInven.databinding.FragmentHomeBinding
 import my.com.abibasInven.databinding.FragmentLocationListingBinding
 import my.com.abibasInven.util.LocationAdapter
 import my.com.abibasInven.util.StaffAdapter
+import java.util.*
 
 
 class LocationListingFragment : Fragment() {
 
     private lateinit var binding: FragmentLocationListingBinding
-    private val nav by lazy {findNavController()}
-
-    private lateinit var adapter: LocationAdapter
+    private val nav by lazy { findNavController() }
     private val vm: LocationViewModel by activityViewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    private lateinit var adapter: LocationAdapter
 
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        // Inflate the layout for this fragment
         binding = FragmentLocationListingBinding.inflate(inflater, container, false)
 
         // TODO
-
-        adapter = LocationAdapter() { holder, location ->
-
-            holder.root.setOnClickListener {
-                //nav.navigate()
+        adapter = LocationAdapter() { holder, rackType ->
+            // Item click
+            holder.btnRackDetail.setOnClickListener {
+                nav.navigate(R.id.locationAddingFragment, bundleOf("rackID" to rackType.ID))
             }
-            holder.btnDetail.setOnClickListener {
-                nav.navigate(R.id.locationDetailsFragment, bundleOf("locationID" to location.ID))
-            }
+            // Delete button click
+            holder.btnDeleteRack.setOnClickListener { delete(rackType.ID) }
+        }
+
+        binding.rvLocationListing.adapter = adapter
+        binding.rvLocationListing.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+
+        binding.btnCreateLocation.setOnClickListener { createNewLocation() }
+
+
+
+        vm.getAllRack().observe(viewLifecycleOwner) { list ->
+            //list.groupBy { it.ID}
+            adapter.submitList(list)
+            binding.lblRackCount.text = "${list.size} location(s)"
+            binding.lblTotalRack.text = list.size.toString()
+
+
+//                list.filter { l -> l.rackType == l.rackType }
+
 
         }
-        binding.rvLocation.adapter = adapter
-        binding.rvLocation.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
-        vm.getAll().observe(viewLifecycleOwner) {
-            adapter.submitList(it)
-            binding.lblLocationCount.text = "${it.size} rack(s)"
-        }
 
 
         return binding.root
     }
 
+
+    private fun createNewLocation() {
+
+        // TODO: create location at firebase
+        var save = ""
+        for(i in 1..6){
+            val l = Location(
+                ID   = generateAlphabet(binding.lblTotalRack.text.toString().toInt()).toString()+i,
+                rackType =  generateAlphabet(binding.lblTotalRack.text.toString().toInt()).toString(),
+                categoryID  = "",
+                occupiedCapacity = 0,
+                maxCapacity = 0,
+                )
+            vm.set(l)
+            save += generateAlphabet(binding.lblTotalRack.text.toString().toInt()).toString()+i + ","
+            if( i == 6 ){
+                val r = RackType(
+                    ID = generateAlphabet(binding.lblTotalRack.text.toString().toInt()).toString(),
+                    rackData = save
+                )
+                vm.setRackType(r)
+            }
+        }
+
+        val err = "Done"
+
+        errorDialog(err)
+
+        nav.navigate(R.id.locationDetailsFragment, bundleOf("newRackID" to binding.lblTotalRack.text.toString()))
+
+    }
+
+
+
+    private fun generateAlphabet(num: Int) :Char{
+
+        var ascii = 0
+        if(num in 0..25){
+            ascii = num + 65
+
+        }
+        return ascii.toChar()
+
+    }
+
+    private fun delete(id: String) {
+        // TODO: Delete
+        vm.deleteAllRack(id)
+        vm.deleteRack(id)
+
+    }
 }

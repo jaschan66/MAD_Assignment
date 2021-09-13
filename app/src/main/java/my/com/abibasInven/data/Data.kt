@@ -81,7 +81,15 @@ data class Category (
 data class Location (
     @DocumentId
     val ID       : String = "",
+    val rackType : String = "",
     val categoryID       : String = "",
     val occupiedCapacity : Int = 0,
-    val maxCapacity : Int = 0
-        )
+    val maxCapacity : Int = 0,
+)
+
+data class RackType (
+    @DocumentId
+    var ID: String = "",
+    var rackData: String = "",
+
+)
