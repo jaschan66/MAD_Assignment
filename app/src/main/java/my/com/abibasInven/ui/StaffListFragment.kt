@@ -1,5 +1,6 @@
 package my.com.abibasInven.ui
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.logindemo.util.snackbar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import my.com.abibasInven.R
 import my.com.abibasInven.data.UserViewModel
@@ -30,6 +32,7 @@ class StaffListFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
 
+
         binding = FragmentStaffListBinding.inflate(inflater, container, false)
 
         // TODO
@@ -45,18 +48,29 @@ class StaffListFragment : Fragment() {
                 nav.navigate(R.id.updateStaffFragment, bundleOf("email" to user.email))
             }
             holder.btnDelete.setOnClickListener {
-                //TODO - NEED TO PRESS 2 TIMES IN ORDER TO DELETE THE SECOND RECORD
-                var auth : FirebaseAuth = FirebaseAuth.getInstance()
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(user.email, user.password)
-                val user1 = auth.currentUser
-                user1?.delete()
-                    ?.addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            snackbar("user deleted successfully")
-                            deleteStaff(user.email)
-                        }
+                //TODO Need to do the delete process for 2 times in order to delete the 2nd record and those after 2nd record as well
+                val builder = AlertDialog.Builder(context)
+                builder.setMessage("Are you sure you want to Delete?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes") { dialog, id ->
+                        // Delete selected note from database
+                        var auth : FirebaseAuth = FirebaseAuth.getInstance()
+                        FirebaseAuth.getInstance().signInWithEmailAndPassword(user.email, user.password)
+                        val user1 = auth.currentUser
+                        user1?.delete()
+                            ?.addOnCompleteListener { task ->
+                                if (task.isSuccessful) {
+                                    snackbar("user deleted successfully")
+                                    deleteStaff(user.email)
+                                }
+                            }
                     }
-
+                    .setNegativeButton("No") { dialog, id ->
+                        // Dismiss the dialog
+                        dialog.dismiss()
+                    }
+                val alert = builder.create()
+                alert.show()
             }
 
         }

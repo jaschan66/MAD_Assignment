@@ -15,6 +15,7 @@ import com.example.logindemo.util.cropToBlob
 import com.example.logindemo.util.errorDialog
 import com.example.logindemo.util.informationDialog
 import com.example.logindemo.util.toBitmap
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.Blob
 import com.google.firebase.firestore.ktx.firestore
@@ -39,6 +40,8 @@ class AccountFragment : Fragment() {
 
         binding = FragmentAccountBinding.inflate(inflater, container, false)
 
+        val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        bottomNav.visibility = View.VISIBLE
 
         val u = vm.get(email)
         val password = u?.password
@@ -68,10 +71,6 @@ class AccountFragment : Fragment() {
 
 
 
-
-
-
-
         binding.accountChgPass.setOnClickListener {
             if (password != null) {
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
@@ -92,17 +91,6 @@ class AccountFragment : Fragment() {
 
         binding.accountManageStaff.setOnClickListener { nav.navigate(R.id.staffListFragment) }
 
-
-        binding.bottomNavigationView.selectedItemId = R.id.account
-        binding.bottomNavigationView.setOnItemSelectedListener {
-            when(it.itemId){
-                R.id.home -> nav.navigate(R.id.homeFragment)
-                R.id.account -> nav.navigate(R.id.accountFragment)
-                R.id.product -> nav.navigate(R.id.productFragment)
-
-            }
-            true
-        }
 
         return binding.root
     }

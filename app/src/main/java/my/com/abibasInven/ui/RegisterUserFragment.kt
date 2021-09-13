@@ -13,6 +13,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.logindemo.util.cropToBlob
 import com.example.logindemo.util.errorDialog
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import my.com.abibasInven.R
 import my.com.abibasInven.data.User
 import my.com.abibasInven.data.UserViewModel

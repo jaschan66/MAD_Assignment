@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.logindemo.util.errorDialog
 import com.example.logindemo.util.hideKeyboard
 import com.example.logindemo.util.informationDialog
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import my.com.abibasInven.R
@@ -31,6 +32,9 @@ class ForgotPasswordFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         binding = FragmentForgotPasswordBinding.inflate(inflater, container, false)
+
+        val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        bottomNav.visibility = View.GONE
 
         // TODO
         vm.getAll()

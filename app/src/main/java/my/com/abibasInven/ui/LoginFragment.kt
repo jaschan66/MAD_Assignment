@@ -14,6 +14,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.logindemo.util.errorDialog
 import com.example.logindemo.util.informationDialog
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
@@ -38,6 +41,8 @@ class LoginFragment : Fragment() {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         vm.getAll()
+
+
 
         binding.btnForgetPass.setOnClickListener {
             val email    = binding.edtLoginEmail.text.toString().trim()
@@ -92,6 +97,15 @@ class LoginFragment : Fragment() {
             }
             else {
                 errorDialog("The field cannot be empty")
+
+//            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+//                .addOnCompleteListener { task ->
+//                    if (task.isSuccessful) {
+//                        nav.navigate(R.id.accountFragment)
+//                    } else {
+//                        val err = task.exception?.message.toString()
+//                        errorDialog(err)
+//                    }
             }
         }
 

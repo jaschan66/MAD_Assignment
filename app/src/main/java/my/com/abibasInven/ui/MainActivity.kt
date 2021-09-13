@@ -16,7 +16,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.bottomNavigationView.setOnItemSelectedListener {
+            when(it.itemId){
+                R.id.home -> nav.navigate(R.id.homeFragment)
+                R.id.account -> nav.navigate(R.id.accountFragment)
+                R.id.product -> nav.navigate(R.id.productFragment)
 
+            }
+            true
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.logindemo.util.errorDialog
 import com.example.logindemo.util.informationDialog
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -27,6 +28,7 @@ class ResetPasswordFragment : Fragment() {
     private val email by lazy { requireArguments().getString("email", "")}
     private val vm: UserViewModel by activityViewModels()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
 
         binding = FragmentResetPasswordBinding.inflate(inflater, container, false)
 

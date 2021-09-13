@@ -12,6 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.logindemo.util.errorDialog
 import com.example.logindemo.util.toBitmap
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import my.com.abibasInven.R
 import my.com.abibasInven.data.User
 import my.com.abibasInven.data.UserViewModel
@@ -30,6 +31,7 @@ class UpdateStaffFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+
 
         binding = FragmentUpdateStaffBinding.inflate(inflater, container, false)
 

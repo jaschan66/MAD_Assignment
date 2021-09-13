@@ -9,6 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.fragment.findNavController
 import com.example.logindemo.util.errorDialog
 import com.google.android.gms.tasks.OnCompleteListener
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -37,7 +38,6 @@ class RegisterFragment : Fragment() {
                     "password" to password
                 )
 
-
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(email,password)
                     .addOnCompleteListener(
                         OnCompleteListener<AuthResult>{ task ->
@@ -51,9 +51,9 @@ class RegisterFragment : Fragment() {
                         }
                     )
             }
-            else {
-                errorDialog("The field cannot be empty")
-            }
+//            else {
+//                errorDialog("The field cannot be empty")
+//            }
 
         }
 
