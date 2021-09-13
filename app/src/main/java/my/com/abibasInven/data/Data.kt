@@ -5,6 +5,7 @@ import com.google.firebase.firestore.DocumentId
 import java.util.*
 
 var img : Blob = Blob.fromBytes(ByteArray(0))
+var emailLogin : String = ""
 
 data class StockOut(
     @DocumentId

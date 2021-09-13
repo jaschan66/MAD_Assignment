@@ -16,6 +16,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.bottomNavigationView.selectedItemId = R.id.account
+
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.home -> nav.navigate(R.id.homeFragment)

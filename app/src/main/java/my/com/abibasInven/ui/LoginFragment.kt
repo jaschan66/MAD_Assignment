@@ -23,6 +23,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import my.com.abibasInven.R
 import my.com.abibasInven.data.UserViewModel
+import my.com.abibasInven.data.emailLogin
 import my.com.abibasInven.databinding.FragmentAccountBinding
 import my.com.abibasInven.databinding.FragmentLoginBinding
 
@@ -78,7 +79,8 @@ class LoginFragment : Fragment() {
                                     vm.set(u)
                                     val message = "Successfully login"
                                     informationDialog(message)
-                                    nav.navigate(R.id.accountFragment, bundleOf("email" to u.email))
+                                    emailLogin = email
+                                    nav.navigate(R.id.accountFragment)
                                 }
                                 else {
                                     u.attempt = u.attempt + 1

@@ -25,6 +25,7 @@ import kotlinx.coroutines.tasks.await
 import my.com.abibasInven.R
 import my.com.abibasInven.data.User
 import my.com.abibasInven.data.UserViewModel
+import my.com.abibasInven.data.emailLogin
 import my.com.abibasInven.data.img
 import my.com.abibasInven.databinding.FragmentAccountBinding
 
@@ -33,7 +34,7 @@ class AccountFragment : Fragment() {
 
     private lateinit var binding: FragmentAccountBinding
     private val nav by lazy {findNavController()}
-    private val email by lazy { requireArguments().getString("email", "") }
+
     private val vm : UserViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -43,13 +44,13 @@ class AccountFragment : Fragment() {
         val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
         bottomNav.visibility = View.VISIBLE
 
-        val u = vm.get(email)
+        val u = vm.get(emailLogin)
         val password = u?.password
         val args = bundleOf(
-            "email" to email
+            "email" to emailLogin
         )
 
-        val s = vm.get(email)
+        val s = vm.get(emailLogin)
 
         if(img == Blob.fromBytes(ByteArray(0))){
             if (s != null) {
@@ -73,7 +74,7 @@ class AccountFragment : Fragment() {
 
         binding.accountChgPass.setOnClickListener {
             if (password != null) {
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(emailLogin, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             nav.navigate(R.id.resetPasswordFragment,args)
