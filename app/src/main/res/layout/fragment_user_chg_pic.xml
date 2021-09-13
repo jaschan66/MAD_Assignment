@@ -24,10 +24,11 @@
         android:id="@+id/imgChgProfile"
         android:layout_width="160dp"
         android:layout_height="160dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="148dp"
         android:contentDescription="@string/imgchgprofilepic"
         android:src="@drawable/ic_addimg"
         app:layout_constraintEnd_toStartOf="@+id/guideline24"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="@+id/guideline23"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,8 +40,9 @@
         android:fontFamily="@font/questrial"
         android:text="@string/set_image"
         app:layout_constraintEnd_toStartOf="@+id/guideline24"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="@+id/guideline23"
-        app:layout_constraintTop_toBottomOf="@+id/imgChgProfile" />
+        app:layout_constraintTop_toBottomOf="@+id/btnCamera" />
 
     <TextView
         android:id="@+id/textView13"
@@ -54,4 +56,15 @@
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnCamera"
+        android:layout_width="53dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="16dp"
+        app:icon="@drawable/ic_baseline_photo_camera_24"
+        app:layout_constraintEnd_toStartOf="@+id/guideline24"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="@+id/guideline23"
+        app:layout_constraintTop_toBottomOf="@+id/imgChgProfile" />
 </androidx.constraintlayout.widget.ConstraintLayout>

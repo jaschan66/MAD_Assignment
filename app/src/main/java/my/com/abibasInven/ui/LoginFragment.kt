@@ -41,7 +41,8 @@ class LoginFragment : Fragment() {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         vm.getAll()
-
+        val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        bottomNav.visibility = View.GONE
 
 
         binding.btnForgetPass.setOnClickListener {

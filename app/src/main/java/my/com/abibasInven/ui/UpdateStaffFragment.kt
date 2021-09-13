@@ -35,9 +35,6 @@ class UpdateStaffFragment : Fragment() {
 
         binding = FragmentUpdateStaffBinding.inflate(inflater, container, false)
 
-        // TODO
-
-
         reset()
         val s = vm.get(email)
         binding.edtUpdateStaffName.isEnabled = false
