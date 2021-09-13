@@ -16,11 +16,16 @@ class LocationViewModel : ViewModel() {
     private val rackType = MutableLiveData<List<RackType>>()
     private val location = MutableLiveData<List<Location>>()
     private val rack = MutableLiveData<List<Location>>()
+    private val rackMaxCapacity = MutableLiveData<List<Location>>()
+
 
     init {
 
         col.addSnapshotListener { snap, _ -> location.value = snap?.toObjects()
             rack.value = location.value?.filter { it.rackType != it.rackType }
+            rackMaxCapacity.value = location.value?.filter{it.maxCapacity!=0}
+
+
 
         }
         colRack.addSnapshotListener { snap, _ -> rackType.value = snap?.toObjects() }
@@ -43,6 +48,9 @@ class LocationViewModel : ViewModel() {
 
     }
 
+    fun getMaxCapacity() = rackMaxCapacity
+
+    fun getLocationSize() = location.value?.size ?:0
 
     fun getRackByRackType(id : String): Location?{
         return location.value?.find { l -> l.ID == id }
@@ -53,9 +61,8 @@ class LocationViewModel : ViewModel() {
         return location.value?.find { l -> l.ID == id }
     }
 
-//    fun findbyRackType(rackType : String): Location?{
-//        return location.value?.find { l -> l.rackType == rackType }
-//  }
+
+
 
     fun getAll() = location
 
