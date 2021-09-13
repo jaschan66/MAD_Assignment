@@ -42,13 +42,12 @@ class SupplierListFragment : Fragment() {
 
             //Haven't do
 //            holder.root.setOnClickListener {
-//                nav.navigate(R.id.staffDetailsFragment, bundleOf("email" to user.email))
+//                nav.navigate(R.id.staffDetailsFragment, bundleOf("suppId" to user.ID))
 //            }
-//            holder.btnUpdate.setOnClickListener {
-//                nav.navigate(R.id.updateStaffFragment, bundleOf("email" to user.email))
-//            }
+            holder.btnUpdate.setOnClickListener {
+                nav.navigate(R.id.supplierUpdateFragment, bundleOf("suppId" to user.ID))
+            }
             holder.btnDelete.setOnClickListener {
-                //TODO Need to do the delete process for 2 times in order to delete the 2nd record and those after 2nd record as well
                 val builder = AlertDialog.Builder(context)
                 builder.setMessage("Are you sure you want to Delete?")
                     .setCancelable(false)

@@ -21,21 +21,20 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.logindemo.util.errorDialog
 import com.example.logindemo.util.snackbar
+import com.example.logindemo.util.toBitmap
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import my.com.abibasInven.R
 import my.com.abibasInven.data.Supplier
 import my.com.abibasInven.data.SupplierViewModel
-import my.com.abibasInven.databinding.FragmentSupplierAddBinding
+import my.com.abibasInven.data.User
+import my.com.abibasInven.databinding.FragmentSupplierUpdateBinding
 
-class SupplierAddFragment : Fragment(), OnMapReadyCallback {
+class SupplierUpdateFragment : Fragment(), OnMapReadyCallback {
 
     //Map variables
     private lateinit var mMap: GoogleMap
@@ -49,20 +48,27 @@ class SupplierAddFragment : Fragment(), OnMapReadyCallback {
         Manifest.permission.ACCESS_COARSE_LOCATION
     )
 
-    private lateinit var binding: FragmentSupplierAddBinding
+    private lateinit var binding: FragmentSupplierUpdateBinding
     private val nav by lazy { findNavController() }
     private val vm: SupplierViewModel by activityViewModels()
 
+    private val suppId by lazy { requireArguments().getString("suppId", null) }
+
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentSupplierAddBinding.inflate(inflater, container, false)
+        binding = FragmentSupplierUpdateBinding.inflate(inflater, container, false)
 
+        reset()
+        val s = vm.get(suppId)
         binding.btnReset.setOnClickListener { reset() }
-        binding.btnSubmit.setOnClickListener { createSupplier() }
+        binding.btnUpdateSup.setOnClickListener {
+            if (s != null) {
+                update(s)
+            }
+        }
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
@@ -83,7 +89,6 @@ class SupplierAddFragment : Fragment(), OnMapReadyCallback {
                 ActivityCompat.requestPermissions(requireActivity(), permissions, 100)
             }
         }
-        binding.map.isVisible = false
         binding.edtSupLoc.isEnabled = false
         binding.map.onCreate(savedInstanceState)
         binding.map.onResume()
@@ -91,19 +96,60 @@ class SupplierAddFragment : Fragment(), OnMapReadyCallback {
         return binding.root
     }
 
-    // Request location permission
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<String>,
-        grantResults: IntArray
-    ) {
-        if (requestCode == 100 && grantResults.isNotEmpty() && grantResults[0] + grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-            // permission are granted
-            // call method
-            getCurrentLocation()
+    private fun reset() {
+
+        val supp = vm.get(suppId)
+        if (supp == null) {
+            nav.navigateUp()
+            return
+        }
+
+        load(supp)
+    }
+
+
+    private fun load(s: Supplier) {
+        val lat = s.latitude
+        val lon = s.longitude
+        val location = "$lat,$lon"
+
+        with(binding) {
+            edtSupName.setText(s.name)
+            edtSupPhone.setText(s.phoneNo)
+            edtSupEmail.setText(s.email)
+            edtSupLoc.setText(location)
+        }
+    }
+
+    private fun update(s: Supplier) {
+
+        if (binding.edtSupLoc.text.toString().isNotEmpty()) {
+
+            // Get and split geoPoint into latitude & longitude
+            val geoPoint = binding.edtSupLoc.text.toString()
+            val splitPoint = geoPoint.split(",")
+            val latitude = splitPoint[0].toDouble()
+            val longitude = splitPoint[1].toDouble()
+
+            val updateSup = Supplier(
+                ID = suppId,
+                name = binding.edtSupName.text.toString().trim(),
+                phoneNo = binding.edtSupPhone.text.toString().trim(),
+                email = binding.edtSupEmail.text.toString().trim(),
+                latitude = latitude,
+                longitude = longitude,
+            )
+
+            val e = vm.validate(s, false)
+            if (e != "") {
+                errorDialog(e)
+                return
+            } else {
+                vm.set(updateSup)
+                nav.navigateUp()
+            }
         } else {
-            //when permissions are denied
-            snackbar("permission denied")
+            errorDialog("- Location cannot be empty")
         }
     }
 
@@ -170,55 +216,6 @@ class SupplierAddFragment : Fragment(), OnMapReadyCallback {
             startActivity(
                 Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             )
-        }
-    }
-
-    // send data to Firestore
-    private fun createSupplier() {
-        if (binding.edtSupLoc.text.toString().isNotEmpty()) {
-
-            // Get and split geoPoint into latitude & longitude
-            val geoPoint = binding.edtSupLoc.text.toString()
-            val splitPoint = geoPoint.split(",")
-            val latitude = splitPoint[0].toDouble()
-            val longitude = splitPoint[1].toDouble()
-
-            // Auto increment ID
-            val id = "S00" + (vm.calSize() + 1).toString()
-            val chkID = vm.validID(id)
-
-            val s = Supplier(
-                ID = chkID,
-                name = binding.edtSupName.text.toString().trim(),
-                phoneNo = binding.edtSupPhone.text.toString().trim(),
-                email = binding.edtSupEmail.text.toString().trim(),
-                latitude = latitude,
-                longitude = longitude,
-            )
-
-            val err = vm.validate(s)
-            if (err != "") {
-                errorDialog(err)
-                return
-            } else {
-                vm.set(s)
-                nav.navigate(R.id.supplierListFragment)
-            }
-        } else {
-            errorDialog("- Location cannot be empty")
-        }
-    }
-
-    // Reset all edt
-    private fun reset() {
-        with(binding) {
-            edtSupName.text.clear()
-            edtSupPhone.text.clear()
-            edtSupEmail.text.clear()
-            edtSupLoc.text.clear()
-            map.isVisible = false
-
-            edtSupName.requestFocus()
         }
     }
 

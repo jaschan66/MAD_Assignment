@@ -30,8 +30,8 @@
 
     <Button
         android:id="@+id/btnAddSupplier"
-        android:layout_width="103dp"
-        android:layout_height="45dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:backgroundTint="#000000"
         android:fontFamily="@font/questrial"
