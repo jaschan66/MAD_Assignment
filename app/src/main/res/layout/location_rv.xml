@@ -40,12 +40,12 @@
                 android:id="@+id/btnRackDetail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="72dp"
                 android:layout_marginTop="5dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="5dp"
                 android:text="Detail"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/btnDeleteRack"
+                app:layout_constraintStart_toEndOf="@+id/lblRack"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
@@ -59,6 +59,20 @@
                 app:iconPadding="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+            <Button
+                android:id="@+id/btnEditRack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:paddingHorizontal="8dp"
+                app:icon="@drawable/ic_baseline_edit_24"
+                app:iconPadding="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/btnDeleteRack"
+                app:layout_constraintStart_toEndOf="@+id/btnRackDetail"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 

@@ -31,6 +31,7 @@ class LocationAdapter (
         val lblRack : TextView = view.findViewById(R.id.lblRack)
         val btnRackDetail : Button = view.findViewById(R.id.btnRackDetail)
         val btnDeleteRack : Button = view.findViewById(R.id.btnDeleteRack)
+        val btnEditRack : Button = view.findViewById(R.id.btnEditRack)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationAdapter.ViewHolder {

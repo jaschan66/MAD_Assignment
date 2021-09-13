@@ -23,6 +23,20 @@ import my.com.abibasInven.util.LocationAddAdapter
 import android.R.attr.button
 
 import android.graphics.drawable.ColorDrawable
+import android.R.attr.button
+import android.R.attr.button
+
+import android.graphics.drawable.Drawable
+import android.R.attr.button
+
+
+
+
+
+
+
+
+
 
 
 
@@ -36,7 +50,11 @@ class LocationAddingFragment : Fragment() {
     private val nav by lazy {findNavController()}
     private val vm: LocationViewModel by activityViewModels()
     private val rackID by lazy { requireArguments().getString("rackID","N/A") }
+    private val isUpdateRack by lazy { requireArguments().getString("isUpdateRack","N/A") }
     private var currentCompartmentID : String = ""
+
+
+
 
 
     private lateinit var adapter: LocationAddAdapter
@@ -49,17 +67,13 @@ class LocationAddingFragment : Fragment() {
 
 
 
-
         reset()
 
 
 
-//        when(Color.BLUE){
-//            (binding.btnCompartment1.getBackground() as ColorDrawable).color -> binding.btnUpdateCompartment.text = "update"
-//        }
-//        var l = vm.get(currentCompartmentID)
-//        l.ID
-//        when(l.ID)
+        if(isUpdateRack!="N/A"){
+            binding.btnUpdateCompartment.text="Update"
+        }
 
 
         with(binding){
@@ -79,7 +93,8 @@ class LocationAddingFragment : Fragment() {
             btnCompartment6.setOnClickListener { displayCompartmentDetails(btnCompartment6.text.toString()) }
 
             btnUpdateCompartment.setOnClickListener { updateCompartmentDetails(currentCompartmentID) }
-
+        }
+        //check whether it's being added
             val l = vm.getAll()
             var j = 0
             val locationFound = vm.getLocationSize()
@@ -99,11 +114,21 @@ class LocationAddingFragment : Fragment() {
 
                 }
                 j++
-
-
             }
 
-        }
+//        val buttonBackground: Drawable = binding.btnCompartment1.getBackground()
+//        val buttonColor = binding.btnCompartment1.getBackground() as ColorDrawable
+//         binding.textView23.text = buttonBackground.toString()
+//        when(Color.BLUE){
+//            (binding.btnCompartment1.background as ColorDrawable).color
+//        }
+
+//        binding.textView23.text=addCompartmentCount.toString()
+//       if(addCompartmentCount>5){
+//           nav.navigate(R.id.locationListingFragment)
+//       }
+
+
 
         return binding.root
     }
@@ -124,6 +149,8 @@ class LocationAddingFragment : Fragment() {
             vm.set(uLocation)
 
             //invisible
+
+
             componentDetailInvi()
             
 

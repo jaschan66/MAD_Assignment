@@ -61,6 +61,25 @@ class LocationViewModel : ViewModel() {
         return location.value?.find { l -> l.ID == id }
     }
 
+    //generate ID
+    private fun idExists(id: String): Boolean {
+        return location.value?.any { it -> it.ID == id }
+            ?: false // if found return true if not found then return false
+    }
+
+//    fun validID(id: String): String {
+//        val newID: String
+//        val getLastSupplier = supplier.value?.lastOrNull()?.ID.toString()
+//
+//        return if (idExists(id)) {
+//            val num: String = getLastSupplier.substringAfterLast("S")
+//            newID = "S00" + (num.toIntOrNull()?.plus(1)).toString()
+//            newID
+//        } else {
+//            newID = "S00" + (calSize() + 1).toString()
+//            newID
+//        }
+//    }
 
 
 

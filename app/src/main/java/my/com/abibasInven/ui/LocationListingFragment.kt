@@ -42,8 +42,12 @@ class LocationListingFragment : Fragment() {
             holder.btnRackDetail.setOnClickListener {
                 nav.navigate(R.id.locationAddingFragment, bundleOf("rackID" to rackType.ID))
             }
+            holder.btnEditRack.setOnClickListener {
+                nav.navigate(R.id.locationAddingFragment, bundleOf("rackID" to rackType.ID, "isUpdateRack" to "true"))
+            }
             // Delete button click
             holder.btnDeleteRack.setOnClickListener { delete(rackType.ID) }
+
         }
 
         binding.rvLocationListing.adapter = adapter
@@ -94,9 +98,6 @@ class LocationListingFragment : Fragment() {
             }
         }
 
-        val err = "Done"
-
-        errorDialog(err)
 
         nav.navigate(R.id.locationDetailsFragment, bundleOf("newRackID" to binding.lblTotalRack.text.toString()))
 
