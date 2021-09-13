@@ -79,25 +79,52 @@ class LocationListingFragment : Fragment() {
 
         // TODO: create location at firebase
         var save = ""
-        for(i in 1..6){
-            val l = Location(
-                ID   = generateAlphabet(binding.lblTotalRack.text.toString().toInt()).toString()+i,
-                rackType =  generateAlphabet(binding.lblTotalRack.text.toString().toInt()).toString(),
-                categoryID  = "",
-                occupiedCapacity = 0,
-                maxCapacity = 0,
-                )
-            vm.set(l)
-            save += generateAlphabet(binding.lblTotalRack.text.toString().toInt()).toString()+i + ","
-            if( i == 6 ){
-                val r = RackType(
-                    ID = generateAlphabet(binding.lblTotalRack.text.toString().toInt()).toString(),
-                    rackData = save
-                )
-                vm.setRackType(r)
-            }
-        }
 
+        if (vm.getLocationSize() == 0){
+            for(i in 1..6){
+                val l = Location(
+                    ID   = generateAlphabet(binding.lblTotalRack.text.toString().toInt()).toString()+i,
+                    rackType =  generateAlphabet(binding.lblTotalRack.text.toString().toInt()).toString(),
+                    categoryID  = "",
+                    occupiedCapacity = 0,
+                    maxCapacity = 0,
+                )
+                vm.set(l)
+                save += generateAlphabet(binding.lblTotalRack.text.toString().toInt()).toString()+i + ","
+                if( i == 6 ){
+                    val r = RackType(
+                        ID = generateAlphabet(binding.lblTotalRack.text.toString().toInt()).toString(),
+                        rackData = save
+                    )
+                    vm.setRackType(r)
+                }
+            }
+        } else {
+            val t = vm.validID()
+
+            val alpha = t
+            val num =  alpha.first().code + 1
+
+            for(i in 1..6){
+                val l = Location(
+                    ID   = num.toChar().toString() + i,
+                    rackType =  num.toChar().toString(),
+                    categoryID  = "",
+                    occupiedCapacity = 0,
+                    maxCapacity = 0,
+                )
+                vm.set(l)
+                save += num.toChar().toString()+i + ","
+                if( i == 6 ){
+                    val r = RackType(
+                        ID = num.toChar().toString(),
+                        rackData = save
+                    )
+                    vm.setRackType(r)
+                }
+            }
+
+        }
 
         nav.navigate(R.id.locationDetailsFragment, bundleOf("newRackID" to binding.lblTotalRack.text.toString()))
 
@@ -106,6 +133,8 @@ class LocationListingFragment : Fragment() {
 
 
     private fun generateAlphabet(num: Int) :Char{
+
+
 
         var ascii = 0
         if(num in 0..25){
