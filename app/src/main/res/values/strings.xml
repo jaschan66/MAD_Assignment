@@ -31,13 +31,11 @@
     <string name="name">Name</string>
     <string name="role">Role</string>
     <string name="product">Product</string>
-    <string name="supplier">Supplier</string>
     <string name="outlet">Outlet</string>
     <string name="home">Home</string>
     <string name="account">Account</string>
     <string name="phone">Phone</string>
     <string name="e_mail">E-mail</string>
-    <string name="location">Location</string>
     <string name="add_supplier">Add Supplier</string>
     <string name="hint_phone">0123456789</string>
     <string name="submit">Submit</string>
@@ -53,6 +51,14 @@
     <string name="productimg">productImg</string>
     <string name="delete">Delete</string>
     <string name="edit">Edit</string>
+    <string name="sports_shoes">Sports Shoes</string>
+    <string name="product_name">Product Name</string>
+    <string name="quantity_threshold">Quantity threshold</string>
+    <string name="category">Category</string>
+    <string name="location">Location</string>
+    <string name="supplier">Supplier</string>
+    <string name="button">Button</string>
+    <string name="addproductimage">addProductImage</string>
     <string-array name="userRole">
         <item>Manager</item>
         <item>Staff</item>

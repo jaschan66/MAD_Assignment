@@ -31,6 +31,8 @@ class ProductViewModel : ViewModel() {
         col.document(id).delete()
     }
 
+    fun calSize() = product.value?.size ?: 0
+
     fun deleteAll() {
         product.value?.forEach { it -> remove(it.ID) }
     }
@@ -39,21 +41,23 @@ class ProductViewModel : ViewModel() {
         return product.value?.any { it -> it.ID == id } ?: false // if found return true if not found then return false
     }
 
-    fun validate(p: Product, insert: Boolean = true): String {
+    fun validate(p: Product): String {
         val regexId = Regex("0") //TODO: Add in the regex pattern based on the needs
         var errorMessage = ""
 
-        if (insert)/*if it is true */{
-            errorMessage += if (p.ID== "") "- Product ID cannot be empty.\n"
-            else if (!p.ID.matches(regexId)) "- Product ID format is invalid.\n"
-            else if (idExists(p.ID)) "- Product ID is duplicated.\n" //if the function return true then error message will be added
-            else ""
-        }
+        errorMessage += if (p.categoryID == "") "- Product name is required. \n"
+        else ""
+
+        errorMessage += if (p.locationID == "") "- Product name is required. \n"
+        else ""
+
+        errorMessage += if (p.supplierID == "") "- Product name is required. \n"
+        else ""
 
         errorMessage += if (p.name == "") "- Product name is required. \n"
         else ""
 
-        errorMessage += if (p.qty == 0) "- Product quantity is required. \n"
+        errorMessage += if (p.name == "") "- Product name is required. \n"
         else ""
 
         errorMessage += if (p.photo.toBytes().isEmpty()) "- Product photo is required. \n"
@@ -66,6 +70,20 @@ class ProductViewModel : ViewModel() {
         //TODO Add in more validation based on the needs of your fields
 
         return errorMessage
+    }
+
+    fun validID(id: String): String {
+        val newID: String
+        val getLastProduct = product.value?.lastOrNull()?.ID.toString()
+
+        return if (idExists(id)) {
+            val num: String = getLastProduct.substringAfterLast("P")
+            newID = "P00" + (num.toIntOrNull()?.plus(1)).toString()
+            newID
+        } else {
+            newID = "P00" + (calSize() + 1).toString()
+            newID
+        }
     }
 
 

@@ -15,6 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import my.com.abibasInven.R
 import my.com.abibasInven.data.ProductViewModel
+import my.com.abibasInven.data.SpinnerViewModel
 import my.com.abibasInven.data.UserViewModel
 import my.com.abibasInven.databinding.FragmentHomeBinding
 import my.com.abibasInven.databinding.FragmentProductBinding
@@ -28,6 +29,7 @@ class ProductFragment : Fragment() {
     private lateinit var binding: FragmentProductBinding
     private val nav by lazy {findNavController()}
     private val vm: ProductViewModel by activityViewModels()
+    private val vmSpn : SpinnerViewModel by activityViewModels()
 
 
     private lateinit var adapter: ProductAdapter
@@ -39,8 +41,11 @@ class ProductFragment : Fragment() {
         binding = FragmentProductBinding.inflate(inflater, container, false)
 
         // TODO
+        vmSpn.getLocation()
+        vmSpn.getSupplierName()
 
-//        binding.btnProductAdd.setOnClickListener { nav.navigate(R.id.registerFragment) }
+
+       binding.btnProductAdd.setOnClickListener { nav.navigate(R.id.productAddFragment) }
 
         adapter = ProductAdapter() { holder, product ->
 
@@ -51,7 +56,7 @@ class ProductFragment : Fragment() {
 //                nav.navigate(R.id.updateStaffFragment, bundleOf("product" to product.ID))
             }
             holder.btnDelete.setOnClickListener {
-                //TODO Need to do the delete process for 2 times in order to delete the 2nd record and those after 2nd record as well
+
                 val builder = AlertDialog.Builder(context)
                 builder.setMessage("Are you sure you want to Delete?")
                     .setCancelable(false)
