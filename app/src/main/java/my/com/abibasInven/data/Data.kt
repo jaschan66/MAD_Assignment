@@ -16,7 +16,7 @@ data class StockOut(
     @DocumentId
     var ID          : String = "",
     var OutletID    : String = "",
-    var DateTime    : Date = Date(),
+    var dateTime     : String = "",
     var Status      : String = ""
 )
 
@@ -55,7 +55,7 @@ data class StockIn (
     var ID           : String = "",
     var productID    : String = "",
     var qty          : Int = 0,
-    var dateTime     : Date = Date()
+    var dateTime     : String = "",
 )
 
 data class Supplier (
@@ -81,7 +81,7 @@ data class User (
 data class Category (
     @DocumentId
     var ID           : String = "",
-    var name         : String = ""
+    var name         : String = "",
 )
 
 data class Location (
@@ -97,5 +97,19 @@ data class RackType (
     @DocumentId
     var ID: String = "",
     var rackData: String = "",
+)
 
+data class Delivery(
+    @DocumentId
+    var ID: String = "",
+    var storeID : String = "",
+    var deliveryStatus : String = "",
+)
+
+data class DeliveryItem(
+    @DocumentId
+    var ID: String = "",
+    var productID : String = "",
+    var deliveryQty : Int = 0,
+    var deliveryID : String = "",
 )

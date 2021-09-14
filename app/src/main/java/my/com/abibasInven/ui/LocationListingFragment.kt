@@ -1,5 +1,6 @@
 package my.com.abibasInven.ui
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.logindemo.util.errorDialog
+import com.example.logindemo.util.snackbar
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import my.com.abibasInven.R
@@ -46,7 +48,22 @@ class LocationListingFragment : Fragment() {
                 nav.navigate(R.id.locationEditingFragment, bundleOf("rackID" to rackType.ID, "isUpdateRack" to "true"))
             }
             // Delete button click
-            holder.btnDeleteRack.setOnClickListener { delete(rackType.ID) }
+            holder.btnDeleteRack.setOnClickListener {
+
+                val builder = AlertDialog.Builder(context)
+                builder.setMessage("Are you sure you want to Delete?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes") { dialog, id ->
+                        snackbar("Rack deleted successfully")
+                        delete(rackType.ID)
+                    }
+                    .setNegativeButton("No") { dialog, id ->
+                        // Dismiss the dialog
+                        dialog.dismiss()
+                    }
+                val alert = builder.create()
+                alert.show()
+            }
 
         }
 

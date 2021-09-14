@@ -95,6 +95,16 @@
         android:label="fragment_supplier_update"
         tools:layout="@layout/fragment_supplier_update" />
     <fragment
+        android:id="@+id/locationEditingFragment"
+        android:name="my.com.abibasInven.ui.LocationEditingFragment"
+        android:label="fragment_location_editing"
+        tools:layout="@layout/fragment_location_editing" />
+    <fragment
+        android:id="@+id/stockInFragment"
+        android:name="my.com.abibasInven.ui.StockInFragment"
+        android:label="fragment_stock_in"
+        tools:layout="@layout/fragment_stock_in" />
+    <fragment
         android:id="@+id/productAddFragment"
         android:name="my.com.abibasInven.ui.ProductAddFragment"
         android:label="fragment_product_add"

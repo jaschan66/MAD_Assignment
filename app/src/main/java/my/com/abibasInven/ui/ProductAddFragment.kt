@@ -37,6 +37,7 @@ class ProductAddFragment : Fragment() {
     private val vmPro : ProductViewModel by activityViewModels()
     private val vmSpn : SpinnerViewModel by activityViewModels()
 
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         binding = FragmentProductAddBinding.inflate(inflater, container, false)
