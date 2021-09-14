@@ -6,19 +6,61 @@
     android:layout_height="match_parent"
     tools:context=".ui.ProductFragment">
 
-
-    <TextView
-        android:id="@+id/accountFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Product Page"
-        android:textColor="#43a047"
-        android:textSize="40sp"
-        android:textStyle="italic|bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <View
+        android:id="@+id/view5"
+        android:layout_width="390dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="8dp"
+        android:background="#B1B1B1"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="268dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintBottom_toBottomOf="@+id/view5"
+        app:layout_constraintStart_toStartOf="@+id/view5"
+        app:layout_constraintTop_toTopOf="@+id/view5" />
+
+    <Button
+        android:id="@+id/btnProductAdd"
+        android:layout_width="43dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="8dp"
+        android:paddingStart="10dp"
+        app:icon="@drawable/ic_baseline_add_24"
+        app:layout_constraintBottom_toBottomOf="@+id/view5"
+        app:layout_constraintEnd_toEndOf="@+id/view5"
+        app:layout_constraintTop_toTopOf="@+id/view5" />
+
+    <Button
+        android:id="@+id/btnProductSearch"
+        android:layout_width="43dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="8dp"
+        android:paddingStart="10dp"
+        app:icon="@drawable/ic_baseline_search_24"
+        app:layout_constraintBottom_toBottomOf="@+id/view5"
+        app:layout_constraintEnd_toStartOf="@+id/btnProductAdd"
+        app:layout_constraintTop_toTopOf="@+id/view5" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/productrv"
+        android:layout_width="391dp"
+        android:layout_height="613dp"
+        app:layoutManager="GridLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view5"
+        app:spanCount="2"
+        tools:listitem="@layout/product_rv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

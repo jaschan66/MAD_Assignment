@@ -39,9 +39,9 @@ data class Product (
     var name         : String = "",
     var qty          : Int = 0,
     var qtyThreshold : Int = 0,
-    var categoryID     : String = "",
+    var categoryID   : String = "",
     var photo        : Blob = Blob.fromBytes(ByteArray(0)),
-    var locationID     : String = "",
+    var locationID   : String = "",
     var supplierID   : String = ""
 )
 
