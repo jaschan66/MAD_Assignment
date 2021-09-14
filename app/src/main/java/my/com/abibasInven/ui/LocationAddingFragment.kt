@@ -28,19 +28,7 @@ import android.R.attr.button
 
 import android.graphics.drawable.Drawable
 import android.R.attr.button
-
-
-
-
-
-
-
-
-
-
-
-
-
+import com.example.logindemo.util.informationDialog
 
 
 class LocationAddingFragment : Fragment() {
@@ -50,8 +38,10 @@ class LocationAddingFragment : Fragment() {
     private val nav by lazy {findNavController()}
     private val vm: LocationViewModel by activityViewModels()
     private val rackID by lazy { requireArguments().getString("rackID","N/A") }
-    private val isUpdateRack by lazy { requireArguments().getString("isUpdateRack","N/A") }
+
+
     private var currentCompartmentID : String = ""
+    private var successAddingCount : Int = 0
 
 
 
@@ -71,9 +61,7 @@ class LocationAddingFragment : Fragment() {
 
 
 
-        if(isUpdateRack!="N/A"){
-            binding.btnUpdateCompartment.text="Update"
-        }
+
 
 
         with(binding){
@@ -94,27 +82,30 @@ class LocationAddingFragment : Fragment() {
 
             btnUpdateCompartment.setOnClickListener { updateCompartmentDetails(currentCompartmentID) }
         }
+
         //check whether it's being added
-            val l = vm.getAll()
-            var j = 0
-            val locationFound = vm.getLocationSize()
-            for (i in 1..locationFound){
+//            val l = vm.getAll()
+//            var j = 0
+//            val locationFound = vm.getLocationSize()
+//            for (i in 1..locationFound){
+//
+//                if(l.value?.get(j)?.maxCapacity!! >0)
+//                {
+//                    when(l.value?.get(j)?.ID){
+//                        binding.btnCompartment1.text -> binding.btnCompartment1.setBackgroundColor(Color.BLUE)
+//                        binding.btnCompartment2.text -> binding.btnCompartment2.setBackgroundColor(Color.BLUE)
+//                        binding.btnCompartment3.text -> binding.btnCompartment3.setBackgroundColor(Color.BLUE)
+//                        binding.btnCompartment4.text -> binding.btnCompartment4.setBackgroundColor(Color.BLUE)
+//                        binding.btnCompartment5.text -> binding.btnCompartment5.setBackgroundColor(Color.BLUE)
+//                        binding.btnCompartment6.text -> binding.btnCompartment6.setBackgroundColor(Color.BLUE)
+//                    }
+//
+//
+//
+//                }
+//                j++
+//            }
 
-                if(l.value?.get(j)?.maxCapacity!! >0)
-                {
-                    when(l.value?.get(j)?.ID){
-                        binding.btnCompartment1.text -> binding.btnCompartment1.setBackgroundColor(Color.BLUE)
-                        binding.btnCompartment2.text -> binding.btnCompartment2.setBackgroundColor(Color.BLUE)
-                        binding.btnCompartment3.text -> binding.btnCompartment3.setBackgroundColor(Color.BLUE)
-                        binding.btnCompartment4.text -> binding.btnCompartment4.setBackgroundColor(Color.BLUE)
-                        binding.btnCompartment5.text -> binding.btnCompartment5.setBackgroundColor(Color.BLUE)
-                        binding.btnCompartment6.text -> binding.btnCompartment6.setBackgroundColor(Color.BLUE)
-                    }
-
-
-                }
-                j++
-            }
 
 //        val buttonBackground: Drawable = binding.btnCompartment1.getBackground()
 //        val buttonColor = binding.btnCompartment1.getBackground() as ColorDrawable
@@ -147,20 +138,49 @@ class LocationAddingFragment : Fragment() {
                 //categoryID = binding.spnCategory.selectedItem.toString()
             )
             vm.set(uLocation)
-
+            successAddingCount++
             //invisible
-
-
             componentDetailInvi()
+
+            if(successAddingCount==6){
+                nav.navigate(R.id.locationListingFragment)
+            }
+
+
+
             
 
             when(currentCompartmentID){
-                binding.btnCompartment1.text -> binding.btnCompartment1.setBackgroundColor(Color.BLUE)
-                binding.btnCompartment2.text -> binding.btnCompartment2.setBackgroundColor(Color.BLUE)
-                binding.btnCompartment3.text -> binding.btnCompartment3.setBackgroundColor(Color.BLUE)
-                binding.btnCompartment4.text -> binding.btnCompartment4.setBackgroundColor(Color.BLUE)
-                binding.btnCompartment5.text -> binding.btnCompartment5.setBackgroundColor(Color.BLUE)
-                binding.btnCompartment6.text -> binding.btnCompartment6.setBackgroundColor(Color.BLUE)
+                binding.btnCompartment1.text -> {
+                    binding.btnCompartment1.setBackgroundColor(Color.BLUE)
+                    binding.btnCompartment1.isEnabled = false
+                    binding.btnCompartment1.setTextColor(Color.WHITE)
+                }
+                binding.btnCompartment2.text -> {
+                    binding.btnCompartment2.setBackgroundColor(Color.BLUE)
+                    binding.btnCompartment2.isEnabled = false
+                    binding.btnCompartment2.setTextColor(Color.WHITE)
+                }
+                binding.btnCompartment3.text -> {
+                    binding.btnCompartment3.setBackgroundColor(Color.BLUE)
+                    binding.btnCompartment3.isEnabled = false
+                    binding.btnCompartment3.setTextColor(Color.WHITE)
+                }
+                binding.btnCompartment4.text -> {
+                    binding.btnCompartment4.setBackgroundColor(Color.BLUE)
+                    binding.btnCompartment4.isEnabled = false
+                    binding.btnCompartment4.setTextColor(Color.WHITE)
+                }
+                binding.btnCompartment5.text -> {
+                    binding.btnCompartment5.setBackgroundColor(Color.BLUE)
+                    binding.btnCompartment5.isEnabled = false
+                    binding.btnCompartment5.setTextColor(Color.WHITE)
+                }
+                binding.btnCompartment6.text -> {
+                    binding.btnCompartment6.setBackgroundColor(Color.BLUE)
+                    binding.btnCompartment6.isEnabled = false
+                    binding.btnCompartment6.setTextColor(Color.WHITE)
+                }
             }
 
 

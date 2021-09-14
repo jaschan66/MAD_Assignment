@@ -94,4 +94,9 @@
         android:name="my.com.abibasInven.ui.SupplierUpdateFragment"
         android:label="fragment_supplier_update"
         tools:layout="@layout/fragment_supplier_update" />
+    <fragment
+        android:id="@+id/locationEditingFragment"
+        android:name="my.com.abibasInven.ui.LocationEditingFragment"
+        android:label="fragment_location_editing"
+        tools:layout="@layout/fragment_location_editing" />
 </navigation>

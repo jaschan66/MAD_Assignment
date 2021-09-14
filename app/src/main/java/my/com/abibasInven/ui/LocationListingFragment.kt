@@ -40,10 +40,10 @@ class LocationListingFragment : Fragment() {
         adapter = LocationAdapter() { holder, rackType ->
             // Item click
             holder.btnRackDetail.setOnClickListener {
-                nav.navigate(R.id.locationAddingFragment, bundleOf("rackID" to rackType.ID))
+                nav.navigate(R.id.locationDetailsFragment, bundleOf("rackID" to rackType.ID))
             }
             holder.btnEditRack.setOnClickListener {
-                nav.navigate(R.id.locationAddingFragment, bundleOf("rackID" to rackType.ID, "isUpdateRack" to "true"))
+                nav.navigate(R.id.locationEditingFragment, bundleOf("rackID" to rackType.ID, "isUpdateRack" to "true"))
             }
             // Delete button click
             holder.btnDeleteRack.setOnClickListener { delete(rackType.ID) }
@@ -98,6 +98,7 @@ class LocationListingFragment : Fragment() {
                     )
                     vm.setRackType(r)
                 }
+                nav.navigate(R.id.locationAddingFragment, bundleOf("rackID" to generateAlphabet(binding.lblTotalRack.text.toString().toInt()).toString()))
             }
         } else {
             val t = vm.validID()
@@ -123,10 +124,12 @@ class LocationListingFragment : Fragment() {
                     vm.setRackType(r)
                 }
             }
+            nav.navigate(R.id.locationAddingFragment, bundleOf("rackID" to num.toChar().toString()))
 
         }
 
-        nav.navigate(R.id.locationDetailsFragment, bundleOf("newRackID" to binding.lblTotalRack.text.toString()))
+
+
 
     }
 
