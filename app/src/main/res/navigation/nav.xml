@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/locationListingFragment">
+    app:startDestination="@id/categoryListFragment">
     <fragment
         android:id="@+id/accountFragment"
         android:name="my.com.abibasInven.ui.AccountFragment"
@@ -109,4 +109,19 @@
         android:name="my.com.abibasInven.ui.ProductAddFragment"
         android:label="fragment_product_add"
         tools:layout="@layout/fragment_product_add" />
+    <fragment
+        android:id="@+id/supplierDetailsFragment"
+        android:name="my.com.abibasInven.ui.SupplierDetailsFragment"
+        android:label="fragment_supplier_details"
+        tools:layout="@layout/fragment_supplier_details" />
+    <fragment
+        android:id="@+id/categoryAddFragment"
+        android:name="my.com.abibasInven.ui.CategoryAddFragment"
+        android:label="fragment_category_add"
+        tools:layout="@layout/fragment_category_add" />
+    <fragment
+        android:id="@+id/categoryListFragment"
+        android:name="my.com.abibasInven.ui.CategoryListFragment"
+        android:label="fragment_category_list"
+        tools:layout="@layout/fragment_category_list" />
 </navigation>

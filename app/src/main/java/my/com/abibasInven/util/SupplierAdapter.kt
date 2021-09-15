@@ -4,7 +4,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -25,7 +24,7 @@ class SupplierAdapter(
         val root = view
         val txtName: TextView = view.findViewById(R.id.lblSupplierName)
         val btnUpdate: Button = view.findViewById(R.id.btnSupplierUpdate)
-        val btnDelete: TextView = view.findViewById(R.id.btnSupplierDelete)
+        val btnDelete: Button = view.findViewById(R.id.btnSupplierDelete)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SupplierAdapter.ViewHolder {

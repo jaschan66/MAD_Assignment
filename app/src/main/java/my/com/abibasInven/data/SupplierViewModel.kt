@@ -91,11 +91,11 @@ class SupplierViewModel : ViewModel() {
         val getLastSupplier = supplier.value?.lastOrNull()?.ID.toString()
 
         return if (idExists(id)) {
-            val num: String = getLastSupplier.substringAfterLast("S")
-            newID = "S00" + (num.toIntOrNull()?.plus(1)).toString()
+            val num: String = getLastSupplier.substringAfterLast("SU")
+            newID = "SU" + (num.toIntOrNull()?.plus(1)).toString()
             newID
         } else {
-            newID = "S00" + (calSize() + 1).toString()
+            newID = "SU" + (calSize() + 1).toString()
             newID
         }
     }

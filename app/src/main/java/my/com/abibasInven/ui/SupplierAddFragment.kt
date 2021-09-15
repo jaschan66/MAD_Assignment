@@ -184,7 +184,7 @@ class SupplierAddFragment : Fragment(), OnMapReadyCallback {
             val longitude = splitPoint[1].toDouble()
 
             // Auto increment ID
-            val id = "S00" + (vm.calSize() + 1).toString()
+            val id = "SU" + (vm.calSize() + 1).toString()
             val chkID = vm.validID(id)
 
             val s = Supplier(

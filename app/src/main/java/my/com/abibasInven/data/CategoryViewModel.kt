@@ -20,7 +20,9 @@ class CategoryViewModel : ViewModel() {
         return category.value?.find { it -> it.ID == id}
     }
 
-    fun getAll() = category
+    fun getAllCategory() = category
+
+    fun calSize() = category.value?.size ?: 0
 
     //set will be used for both adding and updating purpose
     fun set(c:Category) {
@@ -40,13 +42,10 @@ class CategoryViewModel : ViewModel() {
     }
 
     fun validate(c: Category, insert: Boolean = true): String {
-        val regexId = Regex("0") //TODO: Add in the regex pattern based on the needs
         var errorMessage = ""
 
         if (insert)/*if it is true */{
-            errorMessage += if (c.ID== "") "- Category ID cannot be empty.\n"
-            else if (!c.ID.matches(regexId)) "- Category ID format is invalid.\n"
-            else if (idExists(c.ID)) "- Category ID is duplicated.\n" //if the function return true then error message will be added
+            errorMessage += if (idExists(c.ID)) "- Category ID is duplicated.\n" //if the function return true then error message will be added
             else ""
         }
 
@@ -60,6 +59,18 @@ class CategoryViewModel : ViewModel() {
         return errorMessage
     }
 
+    fun validID(id: String): String {
+        val newID: String
+        val getLastSupplier = category.value?.lastOrNull()?.ID.toString()
 
+        return if (idExists(id)) {
+            val num: String = getLastSupplier.substringAfterLast("CA")
+            newID = "CA" + (num.toIntOrNull()?.plus(1)).toString()
+            newID
+        } else {
+            newID = "CA" + (calSize() + 1).toString()
+            newID
+        }
+    }
 
 }

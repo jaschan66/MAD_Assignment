@@ -16,7 +16,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.logindemo.util.errorDialog
@@ -72,23 +71,27 @@ class SupplierUpdateFragment : Fragment(), OnMapReadyCallback {
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
-        binding.btnLocation.setOnClickListener {
-            if (ContextCompat.checkSelfPermission(
-                    requireContext(),
-                    Manifest.permission.ACCESS_FINE_LOCATION
-                ) == PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(
-                    requireContext(),
-                    Manifest.permission.ACCESS_COARSE_LOCATION
-                ) == PackageManager.PERMISSION_GRANTED
-            ) {
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED &&
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            //Load map with supplier location from firebase
+            binding.map.getMapAsync(this)
+            binding.btnLocation.setOnClickListener {
                 getCurrentLocation()
-            } else {
-                //when permission is not granted
-                //Request permission
-                ActivityCompat.requestPermissions(requireActivity(), permissions, 100)
             }
+        } else {
+            //when permission is not granted
+            //Request permission
+            ActivityCompat.requestPermissions(requireActivity(), permissions, 100)
+            nav.navigateUp()
         }
+
         binding.edtSupLoc.isEnabled = false
         binding.map.onCreate(savedInstanceState)
         binding.map.onResume()
@@ -175,7 +178,8 @@ class SupplierUpdateFragment : Fragment(), OnMapReadyCallback {
                     binding.edtSupLoc.setText(geopoint)
                     binding.edtSupLoc.isEnabled = false
 
-                    binding.map.getMapAsync(this)
+                    // binding.map.getMapAsync(this)
+
                 } else {
                     //Initialize location request
                     locationRequest = LocationRequest()
@@ -225,7 +229,6 @@ class SupplierUpdateFragment : Fragment(), OnMapReadyCallback {
 
         // If notEmpty then load Google Map
         if (geoPoint.isNotEmpty()) {
-            binding.map.isVisible = true
 
             binding.map.let {
                 mMap = googleMap

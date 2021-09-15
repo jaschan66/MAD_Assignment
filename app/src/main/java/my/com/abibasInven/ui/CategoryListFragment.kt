@@ -12,43 +12,44 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.logindemo.util.snackbar
 import my.com.abibasInven.R
-import my.com.abibasInven.data.SupplierViewModel
-import my.com.abibasInven.databinding.FragmentSupplierListBinding
-import my.com.abibasInven.util.SupplierAdapter
+import my.com.abibasInven.data.CategoryViewModel
+import my.com.abibasInven.databinding.FragmentCategoryListBinding
+import my.com.abibasInven.util.CategoryAdapter
 
-class SupplierListFragment : Fragment() {
+class CategoryListFragment : Fragment() {
 
-    private lateinit var binding: FragmentSupplierListBinding
+    private lateinit var binding: FragmentCategoryListBinding
     private val nav by lazy { findNavController() }
-    private val vm: SupplierViewModel by activityViewModels()
+    private val vm: CategoryViewModel by activityViewModels()
 
-    private lateinit var adapter: SupplierAdapter
+    private lateinit var adapter: CategoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentSupplierListBinding.inflate(inflater, container, false)
+        binding = FragmentCategoryListBinding.inflate(inflater, container, false)
 
-        binding.btnAddSupplier.setOnClickListener { nav.navigate(R.id.supplierAddFragment) }
+        binding.btnCategoryAdd.setOnClickListener { nav.navigate(R.id.categoryAddFragment) }
 
-        adapter = SupplierAdapter() { holder, user ->
+        adapter = CategoryAdapter() { holder, category ->
 
-            holder.root.setOnClickListener {
-                nav.navigate(R.id.supplierDetailsFragment, bundleOf("suppId" to user.ID))
-            }
-            holder.btnUpdate.setOnClickListener {
-                nav.navigate(R.id.supplierUpdateFragment, bundleOf("suppId" to user.ID))
-            }
+            //Haven't do
+//            holder.root.setOnClickListener {
+//                nav.navigate(R.id.categoryDetailsFragment, bundleOf("categoryId" to category.ID))
+//            }
+//            holder.btnEdit.setOnClickListener {
+//                nav.navigate(R.id.categoryUpdateFragment, bundleOf("categoryId" to category.ID))
+//            }
             holder.btnDelete.setOnClickListener {
                 val builder = AlertDialog.Builder(context)
                 builder.setMessage("Are you sure you want to Delete?")
                     .setCancelable(false)
                     .setPositiveButton("Yes") { dialog, id ->
 
-                        snackbar("Supplier deleted successfully")
-                        deleteSupplier(user.ID)
+                        snackbar("Category deleted successfully")
+                        deleteCategory(category.ID)
                     }
                     .setNegativeButton("No") { dialog, id ->
                         // Dismiss the dialog
@@ -59,23 +60,23 @@ class SupplierListFragment : Fragment() {
             }
         }
 
-        binding.supplierRv.adapter = adapter
-        binding.supplierRv.addItemDecoration(
+        binding.categoryListRv.adapter = adapter
+        binding.categoryListRv.addItemDecoration(
             DividerItemDecoration(
                 context,
                 DividerItemDecoration.VERTICAL
             )
         )
 
-        vm.getAllSupplier().observe(viewLifecycleOwner) {
+        vm.getAllCategory().observe(viewLifecycleOwner) {
             adapter.submitList(it)
-            binding.lblSupplierCount.text = "${it.size} Supplier(s)"
         }
 
         return binding.root
     }
 
-    private fun deleteSupplier(email: String) {
-        vm.remove(email)
+    private fun deleteCategory(id: String) {
+        vm.remove(id)
     }
+
 }
