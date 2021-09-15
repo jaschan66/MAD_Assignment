@@ -72,7 +72,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_end="84dp" />
+        app:layout_constraintGuide_end="83dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline25"
@@ -149,8 +149,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvLocationDetails"
-        android:layout_width="245dp"
-        android:layout_height="188dp"
+        android:layout_width="383dp"
+        android:layout_height="179dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="92dp"
         app:layoutManager="LinearLayoutManager"

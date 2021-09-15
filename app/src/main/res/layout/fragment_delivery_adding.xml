@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.DeliveryAddingFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="quantity"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline33"
+        app:layout_constraintTop_toBottomOf="@+id/textView26" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="261dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="136dp"
+        android:layout_marginEnd="52dp"
+        android:text="Delivery Adding Fragment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="205dp" />
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:text="product"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toStartOf="@+id/guideline33"
+        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+
+    <Spinner
+        android:id="@+id/spnDeliveryProduct"
+        android:layout_width="177dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView26"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline33"
+        app:layout_constraintTop_toTopOf="@+id/textView26" />
+
+    <EditText
+        android:id="@+id/edtDeliveryQty"
+        android:layout_width="172dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="24dp"
+        android:ems="10"
+        android:hint="delivery quantity"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/textView28"
+        app:layout_constraintStart_toStartOf="@+id/guideline33"
+        app:layout_constraintTop_toTopOf="@+id/textView28"
+        app:layout_constraintVertical_bias="0.382" />
+
+    <Button
+        android:id="@+id/btnAddDelivery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="18dp"
+        android:text="Add"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline33"
+        app:layout_constraintTop_toBottomOf="@+id/edtDeliveryQty" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

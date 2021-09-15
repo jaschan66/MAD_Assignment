@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.LocationEditingFragment" >
+
+    <Button
+        android:id="@+id/btnUpdateCompartment7"
+        android:layout_width="103dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="16dp"
+        android:text="Update"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline28"
+        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintStart_toStartOf="@+id/guideline27"
+        app:layout_constraintTop_toBottomOf="@+id/edtMaxCapacity2"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <EditText
+        android:id="@+id/edtMaxCapacity2"
+        android:layout_width="97dp"
+        android:layout_height="49dp"
+        android:layout_marginStart="12dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/textView17"
+        app:layout_constraintStart_toStartOf="@+id/guideline27"
+        app:layout_constraintTop_toTopOf="@+id/textView17"
+        app:layout_constraintVertical_bias="0.533" />
+
+    <Spinner
+        android:id="@+id/spnCategory2"
+        android:layout_width="105dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView14"
+        app:layout_constraintStart_toStartOf="@+id/guideline27"
+        app:layout_constraintTop_toTopOf="@+id/textView14"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="14dp"
+        android:text="Max Capacity"
+        app:layout_constraintEnd_toStartOf="@+id/guideline27"
+        app:layout_constraintTop_toBottomOf="@+id/textView14" />
+
+    <TextView
+        android:id="@+id/lblCompartmentDetails2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="Details"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnUpdateCompartment5" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="14dp"
+        android:text="Category"
+        app:layout_constraintEnd_toStartOf="@+id/guideline27"
+        app:layout_constraintTop_toBottomOf="@+id/lblCompartmentDetails2" />
+
+    <Button
+        android:id="@+id/btnUpdateCompartment6"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:text="A6"
+        app:layout_constraintEnd_toEndOf="@+id/btnUpdateCompartment3"
+        app:layout_constraintStart_toStartOf="@+id/btnUpdateCompartment3"
+        app:layout_constraintTop_toBottomOf="@+id/btnUpdateCompartment3" />
+
+    <Button
+        android:id="@+id/btnUpdateCompartment5"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:text="A5"
+        app:layout_constraintEnd_toEndOf="@+id/btnUpdateCompartment2"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/btnUpdateCompartment2"
+        app:layout_constraintTop_toBottomOf="@+id/btnUpdateCompartment2" />
+
+    <Button
+        android:id="@+id/btnUpdateCompartment3"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="24dp"
+        android:text="A3"
+        app:layout_constraintEnd_toStartOf="@+id/guideline28"
+        app:layout_constraintTop_toBottomOf="@+id/lblTitle2" />
+
+    <Button
+        android:id="@+id/btnUpdateCompartment2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="24dp"
+        android:text="A2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblTitle2" />
+
+    <Button
+        android:id="@+id/btnUpdateCompartment4"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:text="A4"
+        app:layout_constraintEnd_toEndOf="@+id/btnUpdateCompartment1"
+        app:layout_constraintStart_toStartOf="@+id/btnUpdateCompartment1"
+        app:layout_constraintTop_toBottomOf="@+id/btnUpdateCompartment1" />
+
+    <Button
+        android:id="@+id/btnUpdateCompartment1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="24dp"
+        android:text="A1"
+        app:layout_constraintStart_toStartOf="@+id/guideline26"
+        app:layout_constraintTop_toBottomOf="@+id/lblTitle2" />
+
+    <TextView
+        android:id="@+id/lblTitle2"
+        android:layout_width="220dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="88dp"
+        android:background="@color/teal_200"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Rack A" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="84dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="83dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_end="206dp"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="Location Editing"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnBackForLocationEditing"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="538dp"
+        android:padding="7dp"
+        app:icon="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline27"
+        app:layout_constraintHorizontal_bias="0.133"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>

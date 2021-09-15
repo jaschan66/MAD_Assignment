@@ -30,6 +30,7 @@ class LocationDetailsFragment : Fragment() {
 
         // TODO
 
+
         adapter = LocationDetailsAdapter() { holder, user ->
 
 
@@ -38,7 +39,8 @@ class LocationDetailsFragment : Fragment() {
         binding.rvLocationDetails.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
 
-        vm.getAll().observe(viewLifecycleOwner) {
+        vm.getAllProductHaveLocation().observe(viewLifecycleOwner) {
+
             adapter.submitList(it)
         }
 

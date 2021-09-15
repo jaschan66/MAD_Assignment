@@ -10,9 +10,13 @@ class ProductViewModel : ViewModel() {
 
     private val col = Firebase.firestore.collection("product")
     private val product = MutableLiveData<List<Product>>()
+    private val productHaveLocation = MutableLiveData<List<Product>>()
 
     init {
-        col.addSnapshotListener { it, _ -> product.value = it?.toObjects()  }
+        col.addSnapshotListener { it, _ -> product.value = it?.toObjects()
+        productHaveLocation.value = product.value?.filter { it -> it.locationID !="" }
+
+        }
     }
 
 
@@ -21,6 +25,12 @@ class ProductViewModel : ViewModel() {
     }
 
     fun getAll() = product
+
+    fun getAllProductHaveLocation() = productHaveLocation
+
+//    fun getSpecificProductForRack(locationID: String): Product?{
+//        return productHaveLocation.value?.find { it -> it.locationID == locationID}
+//    }
 
     //set will be used for both adding and updating purpose
     fun set(p:Product) {
