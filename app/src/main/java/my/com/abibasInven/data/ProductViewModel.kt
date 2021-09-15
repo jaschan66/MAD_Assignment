@@ -87,11 +87,11 @@ class ProductViewModel : ViewModel() {
         val getLastProduct = product.value?.lastOrNull()?.ID.toString()
 
         return if (idExists(id)) {
-            val num: String = getLastProduct.substringAfterLast("P")
-            newID = "P00" + (num.toIntOrNull()?.plus(1)).toString()
+            val num: String = getLastProduct.substringAfterLast("PR")
+            newID = "PR" + (num.toIntOrNull()?.plus(1)).toString()
             newID
         } else {
-            newID = "P00" + (calSize() + 1).toString()
+            newID = "PR" + (calSize() + 1).toString()
             newID
         }
     }

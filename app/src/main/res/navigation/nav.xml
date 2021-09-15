@@ -129,4 +129,9 @@
         android:name="my.com.abibasInven.ui.DeliveryAddingFragment"
         android:label="fragment_delivery_adding"
         tools:layout="@layout/fragment_delivery_adding" />
+    <fragment
+        android:id="@+id/productUpdateFragment"
+        android:name="my.com.abibasInven.ui.ProductUpdateFragment"
+        android:label="fragment_product_update"
+        tools:layout="@layout/fragment_product_update" />
 </navigation>

@@ -39,7 +39,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_begin="178dp" />
+        app:layout_constraintGuide_begin="196dp" />
 
     <ImageView
         android:id="@+id/imgAddProductPhoto"
@@ -58,6 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
+        android:fontFamily="@font/questrial"
         android:text="@string/product_name"
         app:layout_constraintEnd_toStartOf="@+id/guideline35"
         app:layout_constraintTop_toBottomOf="@+id/imgAddProductPhoto" />
@@ -68,6 +69,7 @@
         android:layout_height="36dp"
         android:layout_marginStart="16dp"
         android:ems="10"
+        android:fontFamily="@font/questrial"
         android:hint="@string/sports_shoes"
         android:importantForAutofill="no"
         android:inputType="textPersonName"
@@ -83,6 +85,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
+        android:fontFamily="@font/questrial"
         android:text="@string/quantity_threshold"
         app:layout_constraintEnd_toStartOf="@+id/guideline35"
         app:layout_constraintTop_toBottomOf="@+id/textView17" />
@@ -93,12 +96,13 @@
         android:layout_height="32dp"
         android:layout_marginStart="16dp"
         android:ems="10"
+        android:fontFamily="@font/questrial"
+        android:importantForAutofill="no"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@+id/textView18"
         app:layout_constraintStart_toStartOf="@+id/guideline35"
         app:layout_constraintTop_toTopOf="@+id/textView18"
-        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
-        android:importantForAutofill="no" />
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/textView19"
@@ -106,6 +110,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
+        android:fontFamily="@font/questrial"
         android:text="@string/category"
         app:layout_constraintEnd_toStartOf="@+id/guideline35"
         app:layout_constraintTop_toBottomOf="@+id/textView18" />
@@ -126,6 +131,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
+        android:fontFamily="@font/questrial"
         android:text="@string/location"
         app:layout_constraintEnd_toStartOf="@+id/guideline35"
         app:layout_constraintTop_toBottomOf="@+id/textView19" />
@@ -156,6 +162,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
+        android:fontFamily="@font/questrial"
         android:text="@string/supplier"
         app:layout_constraintEnd_toStartOf="@+id/guideline35"
         app:layout_constraintTop_toBottomOf="@+id/textView20" />
@@ -165,6 +172,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:fontFamily="@font/questrial"
         android:text="@string/add"
         app:layout_constraintEnd_toStartOf="@+id/guideline32"
         app:layout_constraintStart_toStartOf="@+id/guideline31"

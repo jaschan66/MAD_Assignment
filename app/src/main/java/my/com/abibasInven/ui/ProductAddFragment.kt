@@ -48,6 +48,8 @@ class ProductAddFragment : Fragment() {
         val SupSize = vmSpn.calSupSize()
         val spnArray = arrayListOf<String>()
         val spnArray2 = arrayListOf<String>()
+        val spnCategory = vmSpn.getCategory()
+        val spnArray3 = arrayListOf<String>()
 
         val adp2 = ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item)
         adp2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -56,6 +58,10 @@ class ProductAddFragment : Fragment() {
         val adp3 = ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item)
         adp3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spnAddProductSupplier.adapter = adp3
+
+        val adp4 = ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item)
+        adp3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spnAddProductCategory.adapter = adp4
 
         spnLoc.observe(viewLifecycleOwner) { list ->
             //list.groupBy { it.ID}
@@ -89,7 +95,7 @@ class ProductAddFragment : Fragment() {
                 }
             } else if (num <= spnArray2.size ){
                 spnArray2.clear()
-                adp2.clear()
+                adp3.clear()
                 for (i in 0..SupSize - 1) {
                     adp3.add(list[i].ID)
                     spnArray2.add(list[i].ID)
@@ -97,8 +103,24 @@ class ProductAddFragment : Fragment() {
             }
         }
 
-
-
+        spnCategory.observe(viewLifecycleOwner) { list ->
+            //list.groupBy { it.ID}
+            val num3 = list.size
+            val categorySize = vmSpn.calCategorySize()
+            if (list.size > spnArray3.size) {
+                for (i in 0..categorySize - 1) {
+                    adp4.add(list[i].ID)//change here to get value
+                    spnArray3.add(list[i].ID) //change here to get value
+                }
+            } else if (num3 <= spnArray2.size ){
+                spnArray3.clear()
+                adp4.clear()
+                for (i in 0..categorySize - 1) {
+                    adp4.add(list[i].ID)
+                    spnArray3.add(list[i].ID)
+                }
+            }
+        }
 
 
         binding.imgAddProductPhoto.setOnClickListener {
@@ -111,18 +133,21 @@ class ProductAddFragment : Fragment() {
         }
 
 
+
+
         binding.btnAddProduct.setOnClickListener {
-            val id = "P00" + (vmPro.calSize() + 1).toString()
+            val id = "PR" + (vmPro.calSize() + 1).toString()
             val chkID = vmPro.validID(id)
             var locID = binding.spnAddProductLocation.selectedItem.toString()
             var supID = binding.spnAddProductSupplier.selectedItem.toString()
+            var catID = binding.spnAddProductCategory.selectedItem.toString()
 
             val p = Product(
                 ID = chkID,
                 name = binding.edtAddProductName.text.toString().trim(),
                 qty = 0,
                 qtyThreshold = binding.edtAddProductQtyThreshold.text.toString().toInt(),
-                categoryID = "C001",
+                categoryID = catID,
                 photo = binding.imgAddProductPhoto.cropToBlob(300,300),
                 locationID = locID,
                 supplierID = supID

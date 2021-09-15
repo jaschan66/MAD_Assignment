@@ -53,7 +53,7 @@ class ProductFragment : Fragment() {
 //                nav.navigate(R.id.staffDetailsFragment, bundleOf("product" to product.ID))
             }
             holder.btnUpdate.setOnClickListener {
-//                nav.navigate(R.id.updateStaffFragment, bundleOf("product" to product.ID))
+                nav.navigate(R.id.productUpdateFragment, bundleOf("ID" to product.ID))
             }
             holder.btnDelete.setOnClickListener {
 
