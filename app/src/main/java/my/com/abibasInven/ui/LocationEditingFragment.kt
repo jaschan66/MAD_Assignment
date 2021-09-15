@@ -32,6 +32,8 @@ class LocationEditingFragment : Fragment() {
     private val rackID by lazy { requireArguments().getString("rackID","N/A") }
     private val isUpdateRack by lazy { requireArguments().getString("isUpdateRack","N/A") }
     private var currentCompartmentID : String = ""
+
+    //spnCategory
     private val vmSpn : SpinnerViewModel by activityViewModels()
 
 
@@ -39,8 +41,6 @@ class LocationEditingFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-
-
 
         binding = FragmentLocationEditingBinding.inflate(inflater, container, false)
         reset()
@@ -97,9 +97,8 @@ class LocationEditingFragment : Fragment() {
             btnUpdateCompartment4.setOnClickListener { displayCompartmentDetails(btnUpdateCompartment4.text.toString()) }
             btnUpdateCompartment5.setOnClickListener { displayCompartmentDetails(btnUpdateCompartment5.text.toString()) }
             btnUpdateCompartment6.setOnClickListener { displayCompartmentDetails(btnUpdateCompartment6.text.toString()) }
-
             btnUpdateCompartment7.setOnClickListener { updateCompartmentDetails(currentCompartmentID) }
-            btnBackForLocationEditing.setOnClickListener { backToListingFragment() }
+            btnBackForLocationEditing.setOnClickListener { nav.navigateUp() }
         }
 
 
@@ -107,9 +106,7 @@ class LocationEditingFragment : Fragment() {
 
     }
 
-    private fun backToListingFragment() {
-        nav.navigateUp()
-    }
+
 
     private fun updateCompartmentDetails(btnCompartmentID : String) {
 
@@ -119,7 +116,7 @@ class LocationEditingFragment : Fragment() {
             //val l =vm.get(currentCompartmentID)
             val uLocation = Location(
                 ID = currentCompartmentID,
-                categoryID = "",
+                categoryID = binding.spnCategory2.selectedItem.toString(),
                 occupiedCapacity = 0,
                 maxCapacity = binding.edtMaxCapacity2.text.toString().toInt()
                 //categoryID = binding.spnCategory.selectedItem.toString()

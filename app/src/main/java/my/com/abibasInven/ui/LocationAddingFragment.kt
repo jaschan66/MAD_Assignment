@@ -28,7 +28,9 @@ import android.R.attr.button
 
 import android.graphics.drawable.Drawable
 import android.R.attr.button
+import android.widget.ArrayAdapter
 import com.example.logindemo.util.informationDialog
+import my.com.abibasInven.data.SpinnerViewModel
 
 
 class LocationAddingFragment : Fragment() {
@@ -44,6 +46,8 @@ class LocationAddingFragment : Fragment() {
     private var successAddingCount : Int = 0
 
 
+    //spnCategory
+    private val vmSpn : SpinnerViewModel by activityViewModels()
 
 
 
@@ -57,12 +61,40 @@ class LocationAddingFragment : Fragment() {
 
 
 
+
+
+//spnCategory
+        val spnCategory = vmSpn.getCategory()
+        val spnArray2 = arrayListOf<String>()
+
+
+        val adp3 = ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item)
+        adp3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spnCategory.adapter = adp3
+
+
+        //spnCategory
+        spnCategory.observe(viewLifecycleOwner) { list ->
+            //list.groupBy { it.ID}
+            val num = list.size
+            val categorySize = vmSpn.calCategorySize()
+            if (list.size > spnArray2.size) {
+                for (i in 0..categorySize - 1) {
+                    adp3.add(list[i].name)//change here to get value
+                    spnArray2.add(list[i].name) //change here to get value
+                }
+            } else if (num <= spnArray2.size ){
+                spnArray2.clear()
+                adp3.clear()
+                for (i in 0..categorySize - 1) {
+                    adp3.add(list[i].name)
+                    spnArray2.add(list[i].name)
+                }
+            }
+        }
+
+
         reset()
-
-
-
-
-
 
         with(binding){
             lblTitle.text = "Rack " + rackID
@@ -132,7 +164,7 @@ class LocationAddingFragment : Fragment() {
             //val l =vm.get(currentCompartmentID)
             val uLocation = Location(
                 ID = currentCompartmentID,
-                categoryID = "",
+                categoryID = binding.spnCategory.selectedItem.toString(),
                 occupiedCapacity = 0,
                 maxCapacity = binding.edtMaxCapacity.text.toString().toInt()
                 //categoryID = binding.spnCategory.selectedItem.toString()

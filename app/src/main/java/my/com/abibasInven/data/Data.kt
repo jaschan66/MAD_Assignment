@@ -102,7 +102,7 @@ data class RackType (
 data class Delivery(
     @DocumentId
     var ID: String = "",
-    var storeID : String = "",
+    var outletID : String = "",
     var deliveryStatus : String = "",
 )
 

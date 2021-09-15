@@ -10,11 +10,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import my.com.abibasInven.R
 import my.com.abibasInven.data.ProductViewModel
-import my.com.abibasInven.data.SupplierViewModel
-import my.com.abibasInven.databinding.FragmentHomeBinding
 import my.com.abibasInven.databinding.FragmentLocationDetailsBinding
 import my.com.abibasInven.util.LocationDetailsAdapter
-import my.com.abibasInven.util.SupplierAdapter
+
 
 
 class LocationDetailsFragment : Fragment() {
@@ -24,25 +22,39 @@ class LocationDetailsFragment : Fragment() {
     private lateinit var adapter: LocationDetailsAdapter
     private val vm: ProductViewModel by activityViewModels()
 
+    private val rackID by lazy { requireArguments().getString("rackID","N/A") }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         binding = FragmentLocationDetailsBinding.inflate(inflater, container, false)
 
         // TODO
 
+        adapter = LocationDetailsAdapter()
 
-        adapter = LocationDetailsAdapter() { holder, user ->
-
-
-        }
         binding.rvLocationDetails.adapter = adapter
         binding.rvLocationDetails.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
 
-        vm.getAllProductHaveLocation().observe(viewLifecycleOwner) {
+        with(binding){
 
-            adapter.submitList(it)
+            lblTitle4.text = "Rack " + rackID
+            btnLocationDetailCompartment1.text = rackID + "1"
+            btnLocationDetailCompartment2.text = rackID + "2"
+            btnLocationDetailCompartment3.text = rackID + "3"
+            btnLocationDetailCompartment4.text = rackID + "4"
+            btnLocationDetailCompartment5.text = rackID + "5"
+            btnLocationDetailCompartment6.text = rackID + "6"
+
+            btnLocationDetailCompartment1.setOnClickListener { showExistingCompartmentProduct(btnLocationDetailCompartment1.text.toString()) }
+            btnLocationDetailCompartment2.setOnClickListener { showExistingCompartmentProduct(btnLocationDetailCompartment2.text.toString()) }
+            btnLocationDetailCompartment3.setOnClickListener { showExistingCompartmentProduct(btnLocationDetailCompartment3.text.toString()) }
+            btnLocationDetailCompartment4.setOnClickListener { showExistingCompartmentProduct(btnLocationDetailCompartment4.text.toString()) }
+            btnLocationDetailCompartment5.setOnClickListener { showExistingCompartmentProduct(btnLocationDetailCompartment5.text.toString()) }
+            btnLocationDetailCompartment6.setOnClickListener { showExistingCompartmentProduct(btnLocationDetailCompartment6.text.toString()) }
+
         }
+
 
 
         binding.btnBackForLocationEditing2.setOnClickListener { nav.navigateUp() }
@@ -52,6 +64,7 @@ class LocationDetailsFragment : Fragment() {
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
+
                 R.id.home -> nav.navigate(R.id.homeFragment)
                 R.id.account -> nav.navigate(R.id.accountFragment)
                 R.id.product -> nav.navigate(R.id.productFragment)
@@ -59,6 +72,17 @@ class LocationDetailsFragment : Fragment() {
             true
         }
         return binding.root
+    }
+
+    private fun showExistingCompartmentProduct(buttonID : String) {
+
+        vm.getAllProductHaveLocation().observe(viewLifecycleOwner) {
+
+            adapter.submitList(it.takeWhile{ it.locationID == buttonID })
+
+        }
+
+
     }
 
 }

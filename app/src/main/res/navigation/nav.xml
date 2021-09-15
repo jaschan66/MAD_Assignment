@@ -124,4 +124,9 @@
         android:name="my.com.abibasInven.ui.CategoryListFragment"
         android:label="fragment_category_list"
         tools:layout="@layout/fragment_category_list" />
+    <fragment
+        android:id="@+id/deliveryAddingFragment"
+        android:name="my.com.abibasInven.ui.DeliveryAddingFragment"
+        android:label="fragment_delivery_adding"
+        tools:layout="@layout/fragment_delivery_adding" />
 </navigation>

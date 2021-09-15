@@ -9,39 +9,39 @@
     <!-- TODO: Update blank fragment layout -->
 
     <Button
-        android:id="@+id/btnUpdateCompartment13"
+        android:id="@+id/btnLocationDetailCompartment6"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
         android:text="A6"
-        app:layout_constraintEnd_toEndOf="@+id/btnUpdateCompartment10"
+        app:layout_constraintEnd_toEndOf="@+id/btnLocationDetailCompartment3"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/btnUpdateCompartment10"
-        app:layout_constraintTop_toBottomOf="@+id/btnUpdateCompartment10" />
+        app:layout_constraintStart_toStartOf="@+id/btnLocationDetailCompartment3"
+        app:layout_constraintTop_toBottomOf="@+id/btnLocationDetailCompartment3" />
 
     <Button
-        android:id="@+id/btnUpdateCompartment12"
+        android:id="@+id/btnLocationDetailCompartment5"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
         android:text="A5"
-        app:layout_constraintEnd_toEndOf="@+id/btnUpdateCompartment9"
+        app:layout_constraintEnd_toEndOf="@+id/btnLocationDetailCompartment2"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btnUpdateCompartment9"
-        app:layout_constraintTop_toBottomOf="@+id/btnUpdateCompartment9" />
+        app:layout_constraintStart_toStartOf="@+id/btnLocationDetailCompartment2"
+        app:layout_constraintTop_toBottomOf="@+id/btnLocationDetailCompartment2" />
 
     <Button
-        android:id="@+id/btnUpdateCompartment11"
+        android:id="@+id/btnLocationDetailCompartment4"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
         android:text="A4"
-        app:layout_constraintEnd_toEndOf="@+id/btnUpdateCompartment8"
-        app:layout_constraintStart_toStartOf="@+id/btnUpdateCompartment8"
-        app:layout_constraintTop_toBottomOf="@+id/btnUpdateCompartment8" />
+        app:layout_constraintEnd_toEndOf="@+id/btnLocationDetailCompartment1"
+        app:layout_constraintStart_toStartOf="@+id/btnLocationDetailCompartment1"
+        app:layout_constraintTop_toBottomOf="@+id/btnLocationDetailCompartment1" />
 
     <Button
-        android:id="@+id/btnUpdateCompartment10"
+        android:id="@+id/btnLocationDetailCompartment3"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
@@ -91,7 +91,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/btnUpdateCompartment8"
+        android:id="@+id/btnLocationDetailCompartment1"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
@@ -100,7 +100,7 @@
         app:layout_constraintTop_toBottomOf="@+id/lblTitle4" />
 
     <Button
-        android:id="@+id/btnUpdateCompartment9"
+        android:id="@+id/btnLocationDetailCompartment2"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="20dp"
@@ -158,7 +158,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnUpdateCompartment12"
+        app:layout_constraintTop_toBottomOf="@+id/btnLocationDetailCompartment5"
         tools:listitem="@layout/locationdetail_rv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
