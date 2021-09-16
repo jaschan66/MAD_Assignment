@@ -92,13 +92,14 @@
 
     <EditText
         android:id="@+id/edtAddProductQtyThreshold"
-        android:layout_width="126dp"
-        android:layout_height="32dp"
+        android:layout_width="125dp"
+        android:layout_height="41dp"
         android:layout_marginStart="16dp"
         android:ems="10"
         android:fontFamily="@font/questrial"
         android:importantForAutofill="no"
         android:inputType="number"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView18"
         app:layout_constraintStart_toStartOf="@+id/guideline35"
         app:layout_constraintTop_toTopOf="@+id/textView18"

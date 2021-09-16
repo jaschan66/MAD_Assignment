@@ -11,13 +11,20 @@ import androidx.navigation.fragment.findNavController
 import com.example.logindemo.util.cropToBlob
 import com.example.logindemo.util.errorDialog
 import com.example.logindemo.util.toBitmap
-import my.com.abibasInven.R
 import my.com.abibasInven.data.Product
 import my.com.abibasInven.data.ProductViewModel
 import my.com.abibasInven.data.SpinnerViewModel
 import my.com.abibasInven.data.User
 import my.com.abibasInven.databinding.FragmentHomeBinding
 import my.com.abibasInven.databinding.FragmentProductUpdateBinding
+import android.R
+
+
+
+
+
+
+
 
 
 class ProductUpdateFragment : Fragment() {
@@ -47,15 +54,19 @@ class ProductUpdateFragment : Fragment() {
 
 
     private fun update(p: Product) {
+        var catR = binding.edtUpdateProductCategory.selectedItem.toString()
+        var locR = binding.edtUpdateProductLocation.selectedItem.toString()
+        var supR = binding.edtUpdateProductSupplier.selectedItem.toString()
+
         val up = Product(
             ID = p.ID,
             name = binding.edtUpdateProductName.text.toString().trim(),
             qty = p.qty,
             qtyThreshold = binding.edtUpdateQtyThreshold.text.toString().toInt(),
-            categoryID = "CA1",
+            categoryID = catR,
             photo = binding.imgUpdateProduct.cropToBlob(300,300),
-//            locationID = locID,
-//            supplierID = supID
+            locationID = locR,
+            supplierID = supR
         )
 
         val e = vmPro.validate(up)
@@ -87,17 +98,34 @@ class ProductUpdateFragment : Fragment() {
         val spnCategory = vmSpn.getCategory()
         val spnArray3 = arrayListOf<String>()
 
-        val adp2 = ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item)
-        adp2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.edtUpdateProductLocation.adapter = adp2
+        val proSup = p.supplierID
+        val proLoc = p.locationID
+        val proCat = p.categoryID
+        val adp2 = ArrayAdapter<String>(requireContext(),R.layout.simple_spinner_item)
+        adp2.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
 
-        val adp3 = ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item)
-        adp3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.edtUpdateProductSupplier.adapter = adp3
 
-        val adp4 = ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item)
-        adp3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.edtUpdateProductCategory.adapter = adp4
+
+//        val compareValue = "some value"
+//        val adapter = ArrayAdapter.createFromResource(
+//            this,
+//            R.array.select_state,
+//            R.layout.simple_spinner_item
+//        )
+//        adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
+//        mSpinner.setAdapter(adapter)
+//        if (compareValue != null) {
+//            val spinnerPosition = adapter.getPosition(compareValue)
+//            mSpinner.setSelection(spinnerPosition)
+//        }
+
+        val adp3 = ArrayAdapter<String>(requireContext(), R.layout.simple_spinner_item)
+        adp3.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
+
+
+        val adp4 = ArrayAdapter<String>(requireContext(), R.layout.simple_spinner_item)
+        adp4.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
+
 
         spnLoc.observe(viewLifecycleOwner) { list ->
             //list.groupBy { it.ID}
@@ -110,6 +138,9 @@ class ProductUpdateFragment : Fragment() {
                     adp2.add(list[i].ID)
                     spnArray.add(list[i].ID)
                 }
+                val spinnerPosition = adp2.getPosition(proLoc)
+                binding.edtUpdateProductLocation.adapter = adp2
+                binding.edtUpdateProductLocation.setSelection(spinnerPosition)
             } else if (num2 <= spnArray.size ){
                 spnArray.clear()
                 adp2.clear()
@@ -117,6 +148,9 @@ class ProductUpdateFragment : Fragment() {
                     adp2.add(list[i].ID)
                     spnArray.add(list[i].ID)
                 }
+                val spinnerPositionLoc = adp2.getPosition(proLoc)
+                binding.edtUpdateProductLocation.adapter = adp2
+                binding.edtUpdateProductLocation.setSelection(spinnerPositionLoc)
             }
         }
 
@@ -129,6 +163,9 @@ class ProductUpdateFragment : Fragment() {
                     adp3.add(list[i].ID)
                     spnArray2.add(list[i].ID)
                 }
+                val spinnerPosition = adp3.getPosition(proSup)
+                binding.edtUpdateProductSupplier.adapter = adp3
+                binding.edtUpdateProductSupplier.setSelection(spinnerPosition)
             } else if (num <= spnArray2.size ){
                 spnArray2.clear()
                 adp3.clear()
@@ -136,6 +173,9 @@ class ProductUpdateFragment : Fragment() {
                     adp3.add(list[i].ID)
                     spnArray2.add(list[i].ID)
                 }
+                val spinnerPositionSup = adp3.getPosition(proSup)
+                binding.edtUpdateProductSupplier.adapter = adp3
+                binding.edtUpdateProductSupplier.setSelection(spinnerPositionSup)
             }
         }
 
@@ -148,7 +188,10 @@ class ProductUpdateFragment : Fragment() {
                     adp4.add(list[i].ID)//change here to get value
                     spnArray3.add(list[i].ID) //change here to get value
                 }
-            } else if (num3 <= spnArray2.size ){
+                val spinnerPositionCat = adp4.getPosition(proCat)
+                binding.edtUpdateProductCategory.adapter = adp4
+                binding.edtUpdateProductCategory.setSelection(spinnerPositionCat)
+            } else if (num3 <= spnArray3.size ){
                 spnArray3.clear()
                 adp4.clear()
                 for (i in 0..categorySize - 1) {
@@ -159,8 +202,9 @@ class ProductUpdateFragment : Fragment() {
         }
         binding.imgUpdateProduct.setImageBitmap(p.photo.toBitmap())
         binding.edtUpdateProductName.setText(p.name)
-        binding.edtUpdateQtyThreshold.setText(p.qtyThreshold)
-       // binding.edtUpdateProductCategory.adapter.
+        binding.edtUpdateQtyThreshold.setText(p.qtyThreshold.toString())
+
+
     }
 
 
