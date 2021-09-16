@@ -1,6 +1,9 @@
 package my.com.abibasInven.ui
 
+import android.R.attr
+import android.app.Activity
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,6 +16,7 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.logindemo.util.snackbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.zxing.integration.android.IntentIntegrator
 import my.com.abibasInven.R
 import my.com.abibasInven.data.ProductViewModel
 import my.com.abibasInven.data.SpinnerViewModel
@@ -22,6 +26,15 @@ import my.com.abibasInven.databinding.FragmentProductBinding
 import my.com.abibasInven.databinding.FragmentStaffListBinding
 import my.com.abibasInven.util.ProductAdapter
 import my.com.abibasInven.util.StaffAdapter
+import android.R.attr.data
+
+import android.widget.Toast
+import com.example.logindemo.util.errorDialog
+
+import com.google.zxing.integration.android.IntentResult
+
+
+
 
 
 class ProductFragment : Fragment() {
@@ -45,12 +58,18 @@ class ProductFragment : Fragment() {
         vmSpn.getSupplierName()
 
 
-       binding.btnProductAdd.setOnClickListener { nav.navigate(R.id.productAddFragment) }
+        binding.btnScanQR.setOnClickListener {
+         val scanner = IntentIntegrator.forSupportFragment(this)
+            scanner.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
+            scanner.initiateScan()
+        }
+
+        binding.btnProductAdd.setOnClickListener { nav.navigate(R.id.productAddFragment) }
 
         adapter = ProductAdapter() { holder, product ->
 
             holder.root.setOnClickListener {
-//                nav.navigate(R.id.staffDetailsFragment, bundleOf("product" to product.ID))
+               nav.navigate(R.id.productDetailFragment, bundleOf("ID" to product.ID))
             }
             holder.btnUpdate.setOnClickListener {
                 nav.navigate(R.id.productUpdateFragment, bundleOf("ID" to product.ID))
@@ -62,7 +81,7 @@ class ProductFragment : Fragment() {
                     .setCancelable(false)
                     .setPositiveButton("Yes") { dialog, id ->
                         // Delete selected note from database
-                                    snackbar("user deleted successfully")
+                                    snackbar("product deleted successfully")
                                     deleteProduct(product.ID)
                     }
                     .setNegativeButton("No") { dialog, id ->
@@ -82,6 +101,21 @@ class ProductFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(resultCode == Activity.RESULT_OK){
+            val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+            if (result != null) {
+                if (result.contents == null) {
+                    errorDialog("Result not found")
+                } else {
+                    nav.navigate(R.id.productDetailFragment, bundleOf("ID" to result.contents))//Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
+                }
+            } else {
+                super.onActivityResult(requestCode, resultCode, data)
+            }
+        }
     }
 
     private fun deleteProduct(id: String) {

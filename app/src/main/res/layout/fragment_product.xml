@@ -10,7 +10,6 @@
         android:id="@+id/view5"
         android:layout_width="390dp"
         android:layout_height="56dp"
-        android:layout_marginBottom="4dp"
         android:background="#B1B1B1"
         app:layout_constraintBottom_toTopOf="@+id/productrv"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,9 +64,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productrv"
-        android:layout_width="391dp"
-        android:layout_height="613dp"
-        android:layout_marginTop="6dp"
+        android:layout_width="389dp"
+        android:layout_height="556dp"
         app:layoutManager="GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

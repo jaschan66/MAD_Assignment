@@ -74,5 +74,9 @@ dependencies {
     //Image Cropper
     implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
 
+    //QR Code
+    implementation 'com.google.zxing:core:3.2.1'
+    implementation 'com.journeyapps:zxing-android-embedded:3.6.0'
+
 
 }

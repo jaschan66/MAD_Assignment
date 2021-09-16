@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context.INPUT_METHOD_SERVICE
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import android.widget.Toast
@@ -13,6 +14,9 @@ import androidx.fragment.app.Fragment
 import my.com.abibasInven.R
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.Blob
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.MultiFormatWriter
+import com.google.zxing.WriterException
 import java.io.ByteArrayOutputStream
 
 // Usage: Show an error dialog from fragment
@@ -103,4 +107,20 @@ fun ImageView.cropToBlob(width: Int, height: Int): Blob {
         return Blob.fromBytes(ByteArray(0))
     else
         return this.drawable.toBitmap().crop(width, height).toBlob()
+}
+fun generateQRCode(text: String): Bitmap {
+    val width = 500
+    val height = 500
+    val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+    val codeWriter = MultiFormatWriter()
+    try{
+        val bitMatrix = codeWriter.encode(text, BarcodeFormat.QR_CODE, width, height)
+        for (x in 0 until width){
+            for (y in 0 until height){
+                bitmap.setPixel(x,y, if(bitMatrix[x,y]) Color.BLACK else Color.WHITE)
+            }
+        }
+    }catch (e: WriterException){
+    }
+    return bitmap
 }
