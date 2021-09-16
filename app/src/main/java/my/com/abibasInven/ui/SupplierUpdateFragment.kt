@@ -143,7 +143,7 @@ class SupplierUpdateFragment : Fragment(), OnMapReadyCallback {
                 longitude = longitude,
             )
 
-            val e = vm.validate(s, false)
+            val e = vm.validate(updateSup, false)
             if (e != "") {
                 errorDialog(e)
                 return

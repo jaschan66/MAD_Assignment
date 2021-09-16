@@ -4,46 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.CategoryAddFragment" >
+    tools:context=".ui.CategoryUpdateFragment">
 
     <View
-        android:id="@+id/view11"
+        android:id="@+id/view13"
         android:layout_width="0dp"
         android:layout_height="4dp"
         android:layout_marginTop="16dp"
         android:background="@color/grey"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView36" />
+        app:layout_constraintTop_toBottomOf="@+id/textView39" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline38"
+        android:id="@+id/guideline37"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="103dp" />
 
     <TextView
-        android:id="@+id/textView34"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:fontFamily="@font/questrial"
-        android:text="@string/category_name"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/guideline38"
-        app:layout_constraintTop_toBottomOf="@+id/view11" />
-
-    <TextView
-        android:id="@+id/textView36"
+        android:id="@+id/textView39"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/questrial"
-        android:text="@string/add_category"
+        android:text="@string/update_category"
         android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="30sp"
@@ -52,29 +39,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnCateReset"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/questrial"
-        android:text="@string/reset"
-        app:layout_constraintStart_toStartOf="@+id/guideline38"
-        app:layout_constraintTop_toBottomOf="@+id/edtCategoryName" />
-
-    <Button
-        android:id="@+id/btnCateAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:fontFamily="@font/questrial"
-        android:text="@string/submit"
-        app:layout_constraintBottom_toBottomOf="@+id/btnCateReset"
-        app:layout_constraintStart_toEndOf="@+id/btnCateReset"
-        app:layout_constraintTop_toTopOf="@+id/btnCateReset" />
-
     <EditText
-        android:id="@+id/edtCategoryName"
+        android:id="@+id/edtUpdateName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -82,7 +48,44 @@
         android:fontFamily="@font/questrial"
         android:hint="@string/category_hint"
         android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="@+id/guideline38"
-        app:layout_constraintTop_toBottomOf="@+id/textView34" />
+        android:textAlignment="viewStart"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView40" />
+
+    <TextView
+        android:id="@+id/textView40"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/questrial"
+        android:text="@string/category_name"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/guideline37"
+        app:layout_constraintTop_toBottomOf="@+id/view13" />
+
+    <Button
+        android:id="@+id/btnNewCateReset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/questrial"
+        android:text="@string/reset"
+        app:layout_constraintStart_toStartOf="@+id/guideline37"
+        app:layout_constraintTop_toBottomOf="@+id/edtUpdateName" />
+
+    <Button
+        android:id="@+id/btnCateUpdate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/questrial"
+        android:text="@string/update"
+        app:layout_constraintBottom_toBottomOf="@+id/btnNewCateReset"
+        app:layout_constraintStart_toEndOf="@+id/btnNewCateReset"
+        app:layout_constraintTop_toTopOf="@+id/btnNewCateReset" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,9 +35,7 @@ class CategoryAddFragment : Fragment() {
     // send data to Firestore
     private fun createCategory() {
 
-        // Auto increment ID
-        val id = "CA" + (vm.calSize() + 1).toString()
-        val chkID = vm.validID(id)
+        var chkID = vm.validID()
 
         val s = Category(
             ID = chkID,

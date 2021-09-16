@@ -36,12 +36,12 @@ class CategoryListFragment : Fragment() {
         adapter = CategoryAdapter() { holder, category ->
 
             //Haven't do
-//            holder.root.setOnClickListener {
-//                nav.navigate(R.id.categoryDetailsFragment, bundleOf("categoryId" to category.ID))
-//            }
-//            holder.btnEdit.setOnClickListener {
-//                nav.navigate(R.id.categoryUpdateFragment, bundleOf("categoryId" to category.ID))
-//            }
+            holder.root.setOnClickListener {
+                nav.navigate(R.id.categoryDetailsFragment, bundleOf("categoryId" to category.ID, "categoryName" to category.name))
+            }
+            holder.btnEdit.setOnClickListener {
+                nav.navigate(R.id.categoryUpdateFragment, bundleOf("categoryId" to category.ID))
+            }
             holder.btnDelete.setOnClickListener {
                 val builder = AlertDialog.Builder(context)
                 builder.setMessage("Are you sure you want to Delete?")

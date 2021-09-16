@@ -11,17 +11,25 @@ class ProductViewModel : ViewModel() {
     private val col = Firebase.firestore.collection("product")
     private val product = MutableLiveData<List<Product>>()
     private val productHaveLocation = MutableLiveData<List<Product>>()
+    private var supplierProduct = MutableLiveData<List<Product>>()
 
     init {
-        col.addSnapshotListener { it, _ -> product.value = it?.toObjects()
-        productHaveLocation.value = product.value?.filter { it -> it.locationID !="" }
-
+        col.addSnapshotListener { it, _ ->
+            product.value = it?.toObjects()
+            productHaveLocation.value = product.value?.filter { it -> it.locationID != "" }
         }
     }
 
+    fun getSupplierProduct(supp: String): List<Product>? {
+        return product.value?.filter { it -> it.supplierID == supp }
+    }
+
+    fun getCategoryProduct(cate: String): List<Product>? {
+        return product.value?.filter { it -> it.categoryID == cate }
+    }
 
     fun get(id: String): Product? {
-        return product.value?.find { it -> it.ID == id}
+        return product.value?.find { it -> it.ID == id }
     }
 
     fun getAll() = product
@@ -33,7 +41,7 @@ class ProductViewModel : ViewModel() {
 //    }
 
     //set will be used for both adding and updating purpose
-    fun set(p:Product) {
+    fun set(p: Product) {
         col.document(p.ID).set(p)
     }
 
@@ -48,7 +56,8 @@ class ProductViewModel : ViewModel() {
     }
 
     private fun idExists(id: String): Boolean {
-        return product.value?.any { it -> it.ID == id } ?: false // if found return true if not found then return false
+        return product.value?.any { it -> it.ID == id }
+            ?: false // if found return true if not found then return false
     }
 
     fun validate(p: Product): String {
@@ -95,7 +104,5 @@ class ProductViewModel : ViewModel() {
             newID
         }
     }
-
-
 
 }

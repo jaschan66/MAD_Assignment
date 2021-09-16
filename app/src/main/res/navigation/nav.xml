@@ -139,4 +139,14 @@
         android:name="my.com.abibasInven.ui.ProductDetailFragment"
         android:label="fragment_product_detail"
         tools:layout="@layout/fragment_product_detail" />
+    <fragment
+        android:id="@+id/categoryUpdateFragment"
+        android:name="my.com.abibasInven.ui.CategoryUpdateFragment"
+        android:label="fragment_category_update"
+        tools:layout="@layout/fragment_category_update" />
+    <fragment
+        android:id="@+id/categoryDetailsFragment"
+        android:name="my.com.abibasInven.ui.CategoryDetailsFragment"
+        android:label="fragment_category_details"
+        tools:layout="@layout/fragment_category_details" />
 </navigation>
