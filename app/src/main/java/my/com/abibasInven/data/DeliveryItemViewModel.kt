@@ -53,6 +53,16 @@ class DeliveryItemViewModel : ViewModel() {
             newID
         }
     }
+    fun validate(d: Delivery, insert: Boolean = true): String {
+
+        var errorMessage = ""
+
+        if (insert)/*if it is true */ {
+            errorMessage += if (idExists(d.ID)) "- Delivery ID is duplicated.\n"
+            else ""
+        }
+        return errorMessage
+    }
 
 
 

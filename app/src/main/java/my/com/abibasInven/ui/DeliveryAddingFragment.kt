@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.logindemo.util.snackbar
 import my.com.abibasInven.R
 import my.com.abibasInven.data.*
 import my.com.abibasInven.databinding.FragmentDeliveryAddingBinding
@@ -25,42 +26,50 @@ class DeliveryAddingFragment : Fragment() {
     //spnProduct
     private val vmSpn : SpinnerViewModel by activityViewModels()
 
+
+    //private val currentDeliveryID by lazy { requireArguments().getString("deliveryID","N/A") }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         binding = FragmentDeliveryAddingBinding.inflate(inflater, container, false)
 
 
-        binding.btnBackToPrevious.setOnClickListener { nav.navigateUp() }
 
-        //spnCategory
-        val spnProduct = vmSpn.getProduct()
+        //spnOutlet
+        val spnOutlet = vmSpn.getOutlet()
         val spnArray2 = arrayListOf<String>()
 
 
         val adp3 = ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item)
         adp3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spnDeliveryProduct.adapter = adp3
+        binding.spnDeliveryOutlet.adapter = adp3
 
-        spnProduct.observe(viewLifecycleOwner) { list ->
+        spnOutlet.observe(viewLifecycleOwner) { list ->
             //list.groupBy { it.ID}
             val num = list.size
-            val productSize = vmSpn.calProductSize()
+            val outletSize = vmSpn.calOutletSize()
             if (list.size > spnArray2.size) {
-                for (i in 0..productSize - 1) {
+                for (i in 0..outletSize - 1) {
                     adp3.add(list[i].ID)//change here to get value
                     spnArray2.add(list[i].ID) //change here to get value
                 }
             } else if (num <= spnArray2.size ){
                 spnArray2.clear()
                 adp3.clear()
-                for (i in 0..productSize - 1) {
+                for (i in 0..outletSize - 1) {
                     adp3.add(list[i].ID)
                     spnArray2.add(list[i].ID)
                 }
             }
         }
 
+
         binding.btnAddDelivery.setOnClickListener { addDelivery() }
+
+        val id1 = "DV"+ (deliveryvm.calDeliverySize() + 1).toString()
+        val deliveryID = deliveryvm.validID(id1)
+        binding.lblCurrentDeliveryID.text = deliveryID
+
 
 
         return binding.root
@@ -73,18 +82,15 @@ class DeliveryAddingFragment : Fragment() {
         val id1 = "DV"+ (deliveryvm.calDeliverySize() + 1).toString()
         val deliveryID = deliveryvm.validID(id1)
 
-        // id generator for delivery item
-        val id2 = "DVI"+ (deliveryItemvm.calDeliveryItemSize() + 1).toString()
-        val deliveryItemID = deliveryItemvm.validID(id2)
 
-
-        val newDeliveryItem = DeliveryItem(
-            ID = deliveryItemID,
-            productID = binding.spnDeliveryProduct.selectedItem.toString(),
-            deliveryQty = binding.edtDeliveryQty.text.toString().toInt(),
-            deliveryID =  ""
+//binding.spnDeliveryOutlet.selectedItem.toString(),
+        val newDelivery = Delivery(
+            ID = deliveryID,
+            outletID = binding.spnDeliveryOutlet.selectedItem.toString(),
+            deliveryStatus = "ready",
         )
-        deliveryItemvm.set(newDeliveryItem)
+        deliveryvm.set(newDelivery)
+        nav.navigateUp()
 
 
     }

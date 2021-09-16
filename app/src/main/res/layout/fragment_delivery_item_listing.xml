@@ -4,45 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.LocationListingFragment">
+    tools:context=".ui.DeliveryItemListingFragment">
 
     <TextView
-        android:id="@+id/lblTotalRack"
+        android:id="@+id/lblDeliveryItemListingCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="52dp"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/rvDeliveryItemListing"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toEndOf="@+id/textView16"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.551"
-        tools:text="lblTotalRack" />
-
-    <TextView
-        android:id="@+id/lblRackCount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="58dp"
-        android:layout_marginEnd="125dp"
         android:textColor="@color/black"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/btnCreateLocation"
-        app:layout_constraintEnd_toStartOf="@+id/btnCreateLocation"
-        app:layout_constraintHorizontal_bias="0.523"
+        app:layout_constraintBottom_toBottomOf="@+id/btnCloseItemDeliveryListing"
+        app:layout_constraintEnd_toStartOf="@+id/btnCloseItemDeliveryListing"
+        app:layout_constraintHorizontal_bias="0.241"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btnCreateLocation"
-        app:layout_constraintVertical_bias="0.375"
-        tools:text="100 Rack(s)" />
+        app:layout_constraintTop_toTopOf="@+id/btnCloseItemDeliveryListing"
+        tools:text="100 DeliveryItem(s)" />
 
     <Button
-        android:id="@+id/btnCreateLocation"
+        android:id="@+id/btnCloseItemDeliveryListing"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        android:text="Create Location"
+        android:text="Close"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvDeliveryItemListing" />
 
@@ -58,22 +41,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView16"
-        tools:listitem="@layout/location_rv" />
+        app:layout_constraintTop_toBottomOf="@+id/lblDeliveryItemIDListing"
+        tools:listitem="@layout/deliveryitemlisting_rv" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/lblDeliveryItemIDListing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Location Listing"
         android:textColor="@color/black"
         android:textSize="24dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.105"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Delivery ID" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"

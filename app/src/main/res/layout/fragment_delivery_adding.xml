@@ -9,6 +9,46 @@
     <!-- TODO: Update blank fragment layout -->
 
     <TextView
+        android:id="@+id/textView26"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:text="Add Delivery "
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.429"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Delivery"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/guideline33"
+        app:layout_constraintTop_toBottomOf="@+id/textView26" />
+
+    <TextView
+        android:id="@+id/lblCurrentDeliveryID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/textView33"
+        app:layout_constraintStart_toEndOf="@+id/textView33"
+        app:layout_constraintTop_toTopOf="@+id/textView33"
+        app:layout_constraintVertical_bias="1.0"
+        tools:text="CurrentDeliveryID" />
+
+    <TextView
         android:id="@+id/textView30"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,10 +58,10 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline33"
-        app:layout_constraintTop_toBottomOf="@+id/textView28" />
+        app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
     <Spinner
-        android:id="@+id/spnDeliveryProduct2"
+        android:id="@+id/spnDeliveryOutlet"
         android:layout_width="177dp"
         android:layout_height="53dp"
         android:layout_marginStart="16dp"
@@ -31,87 +71,12 @@
         app:layout_constraintStart_toStartOf="@+id/guideline33"
         app:layout_constraintTop_toTopOf="@+id/textView30" />
 
-    <Button
-        android:id="@+id/btnBackToPrevious"
-        android:layout_width="40dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="538dp"
-        android:padding="7dp"
-        app:icon="@drawable/ic_baseline_arrow_back_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline27"
-        app:layout_constraintHorizontal_bias="0.133"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.078" />
-
-    <TextView
-        android:id="@+id/textView28"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="quantity"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline33"
-        app:layout_constraintTop_toBottomOf="@+id/textView26" />
-
-    <TextView
-        android:id="@+id/textView27"
-        android:layout_width="261dp"
-        android:layout_height="43dp"
-        android:layout_marginTop="140dp"
-        android:layout_marginEnd="108dp"
-        android:text="Delivery Adding Fragment"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline33"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="143dp" />
-
-    <TextView
-        android:id="@+id/textView26"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="product ID"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/guideline33"
-        app:layout_constraintTop_toBottomOf="@+id/textView27" />
-
-    <Spinner
-        android:id="@+id/spnDeliveryProduct"
-        android:layout_width="177dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView26"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.106"
-        app:layout_constraintStart_toStartOf="@+id/guideline33"
-        app:layout_constraintTop_toTopOf="@+id/textView26"
-        app:layout_constraintVertical_bias="0.423" />
-
-    <EditText
-        android:id="@+id/edtDeliveryQty"
-        android:layout_width="172dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="24dp"
-        android:ems="10"
-        android:hint="delivery quantity"
-        android:inputType="number"
-        app:layout_constraintBottom_toBottomOf="@+id/textView28"
-        app:layout_constraintStart_toStartOf="@+id/guideline33"
-        app:layout_constraintTop_toTopOf="@+id/textView28"
-        app:layout_constraintVertical_bias="0.382" />
 
     <Button
         android:id="@+id/btnAddDelivery"
@@ -120,9 +85,17 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="20dp"
         android:text="Add"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline33"
-        app:layout_constraintTop_toBottomOf="@+id/spnDeliveryProduct2" />
+        app:layout_constraintTop_toBottomOf="@+id/spnDeliveryOutlet" />
+
+    <Button
+        android:id="@+id/btnCancelAddDelivery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/btnAddDelivery"
+        app:layout_constraintStart_toEndOf="@+id/btnAddDelivery"
+        app:layout_constraintTop_toTopOf="@+id/btnAddDelivery" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
