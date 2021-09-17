@@ -67,8 +67,8 @@ class LocationListingFragment : Fragment() {
 
         }
 
-        binding.rvLocationListing.adapter = adapter
-        binding.rvLocationListing.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+//        binding.rvLocationListing.adapter = adapter
+//        binding.rvLocationListing.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
         binding.btnCreateLocation.setOnClickListener { createNewLocation() }
 

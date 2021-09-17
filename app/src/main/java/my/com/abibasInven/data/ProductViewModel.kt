@@ -9,14 +9,23 @@ import com.google.firebase.ktx.Firebase
 class ProductViewModel : ViewModel() {
 
     private val col = Firebase.firestore.collection("product")
+    private var PRODUCT = listOf<Product>()
     private val product = MutableLiveData<List<Product>>()
     private val productHaveLocation = MutableLiveData<List<Product>>()
+    private val productLessQty = MutableLiveData<List<Product>>()
     private var supplierProduct = MutableLiveData<List<Product>>()
+    private val result = MutableLiveData<List<Product>>()
+
+    private var name = "" // for searching purpose
+
 
     init {
         col.addSnapshotListener { it, _ ->
             product.value = it?.toObjects()
             productHaveLocation.value = product.value?.filter { it -> it.locationID != "" }
+            productLessQty.value = product.value?.filter { it -> it.qty < it.qtyThreshold }
+            PRODUCT = it!!.toObjects<Product>()
+            updateResult()
         }
     }
 
@@ -33,6 +42,24 @@ class ProductViewModel : ViewModel() {
     }
 
     fun getAll() = product
+
+    fun search(name: String){
+        this.name = name
+        updateResult()
+    }
+
+    fun getProductLessQty() = productLessQty
+
+    private fun updateResult() {
+        var list = PRODUCT
+
+        //Search
+        list = list.filter {
+            it.name.contains(name, true)
+        }
+
+        result.value = list
+    }
 
     fun getAllProductHaveLocation() = productHaveLocation
 
@@ -55,28 +82,29 @@ class ProductViewModel : ViewModel() {
         product.value?.forEach { it -> remove(it.ID) }
     }
 
+    fun getResult() = result
+
+
     private fun idExists(id: String): Boolean {
         return product.value?.any { it -> it.ID == id }
             ?: false // if found return true if not found then return false
     }
 
     fun validate(p: Product): String {
-        val regexId = Regex("0") //TODO: Add in the regex pattern based on the needs
+        val regxName = Regex("^[\\p{L} .'-]+$")
         var errorMessage = ""
 
         errorMessage += if (p.categoryID == "") "- Product name is required. \n"
+        else ""
+
+        errorMessage += if (p.name == "") "- Name is required. \n"
+        else if (!p.name.matches(regxName)) "- Name is invalid. \n"
         else ""
 
         errorMessage += if (p.locationID == "") "- Product name is required. \n"
         else ""
 
         errorMessage += if (p.supplierID == "") "- Product name is required. \n"
-        else ""
-
-        errorMessage += if (p.name == "") "- Product name is required. \n"
-        else ""
-
-        errorMessage += if (p.name == "") "- Product name is required. \n"
         else ""
 
         errorMessage += if (p.photo.toBytes().isEmpty()) "- Product photo is required. \n"

@@ -70,6 +70,7 @@
     <string name="imgdetailproduct">imgDetailProduct</string>
     <string name="imgproductqrcode">imgProductQRCode</string>
     <string name="update_category">Update Category</string>
+    <string name="logout">Logout</string>
     <string-array name="userRole">
         <item>Manager</item>
         <item>Staff</item>

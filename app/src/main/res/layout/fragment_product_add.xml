@@ -176,6 +176,17 @@
         android:fontFamily="@font/questrial"
         android:text="@string/add"
         app:layout_constraintEnd_toStartOf="@+id/guideline32"
+        app:layout_constraintStart_toStartOf="@+id/guideline35"
+        app:layout_constraintTop_toBottomOf="@+id/spnAddProductSupplier" />
+
+    <Button
+        android:id="@+id/btnResetAddProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/questrial"
+        android:text="@string/reset"
+        app:layout_constraintEnd_toStartOf="@+id/guideline35"
         app:layout_constraintStart_toStartOf="@+id/guideline31"
         app:layout_constraintTop_toBottomOf="@+id/spnAddProductSupplier" />
 

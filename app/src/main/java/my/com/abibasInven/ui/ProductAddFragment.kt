@@ -43,6 +43,8 @@ class ProductAddFragment : Fragment() {
         binding = FragmentProductAddBinding.inflate(inflater, container, false)
 
 
+        binding.btnResetAddProduct.setOnClickListener { reset() }
+
         val spnLoc = vmSpn.getLocation()
         val spnSup = vmSpn.getSupplierName()
         val SupSize = vmSpn.calSupSize()
@@ -164,6 +166,16 @@ class ProductAddFragment : Fragment() {
 
         return binding.root
     }
+
+    private fun reset() {
+        binding.edtAddProductName.setText("")
+        binding.edtAddProductQtyThreshold.setText("")
+        binding.spnAddProductCategory.setSelection(0)
+        binding.spnAddProductLocation.setSelection(0)
+        binding.spnAddProductSupplier.setSelection(0)
+        binding.imgAddProductPhoto.setImageResource(R.drawable.ic_addimg)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             var result = CropImage.getActivityResult(data)

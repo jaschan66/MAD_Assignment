@@ -2,6 +2,7 @@ package my.com.abibasInven.data
 
 import com.google.firebase.firestore.Blob
 import com.google.firebase.firestore.DocumentId
+import com.google.firebase.firestore.Exclude
 import java.util.*
 
 var img : Blob = Blob.fromBytes(ByteArray(0))
@@ -10,7 +11,6 @@ var emailLogin : String = ""
 data class spnLocation(
     var id : String = "",
 )
-
 
 data class StockOut(
     @DocumentId

@@ -92,8 +92,17 @@ class AccountFragment : Fragment() {
 
         binding.accountManageStaff.setOnClickListener { nav.navigate(R.id.staffListFragment) }
 
+        binding.acountLogOut.setOnClickListener { logout() }
 
         return binding.root
+    }
+
+    private fun logout() {
+        emailLogin = ""
+        img = Blob.fromBytes(ByteArray(0))
+
+        FirebaseAuth.getInstance().signOut()
+        nav.navigate(R.id.loginFragment)
     }
 //    fun reset() {
 //

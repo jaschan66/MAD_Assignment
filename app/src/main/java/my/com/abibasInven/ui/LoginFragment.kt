@@ -22,6 +22,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import my.com.abibasInven.R
+import my.com.abibasInven.data.ProductViewModel
 import my.com.abibasInven.data.UserViewModel
 import my.com.abibasInven.data.emailLogin
 import my.com.abibasInven.databinding.FragmentAccountBinding
@@ -33,6 +34,7 @@ class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private val nav by lazy {findNavController()}
     private val vm: UserViewModel by activityViewModels()
+    private val vmPro: ProductViewModel by activityViewModels()
 //    private lateinit var auth: FirebaseAuth
    // private val PREFS_NAME = "PrefsFile"
 
@@ -44,6 +46,7 @@ class LoginFragment : Fragment() {
         vm.getAll()
         val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
         bottomNav.visibility = View.GONE
+        vmPro.getProductLessQty()
 
 
         binding.btnForgetPass.setOnClickListener {

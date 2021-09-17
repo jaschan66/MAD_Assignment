@@ -17,18 +17,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="212dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintBottom_toBottomOf="@+id/view5"
-        app:layout_constraintStart_toStartOf="@+id/view5"
-        app:layout_constraintTop_toTopOf="@+id/view5" />
-
     <Button
         android:id="@+id/btnProductAdd"
         android:layout_width="43dp"
@@ -38,18 +26,8 @@
         app:icon="@drawable/ic_baseline_add_24"
         app:layout_constraintBottom_toBottomOf="@+id/view5"
         app:layout_constraintEnd_toEndOf="@+id/view5"
-        app:layout_constraintTop_toTopOf="@+id/view5" />
-
-    <Button
-        android:id="@+id/btnProductSearch"
-        android:layout_width="43dp"
-        android:layout_height="46dp"
-        android:layout_marginEnd="8dp"
-        android:paddingStart="10dp"
-        app:icon="@drawable/ic_baseline_search_24"
-        app:layout_constraintBottom_toBottomOf="@+id/view5"
-        app:layout_constraintEnd_toStartOf="@+id/btnProductAdd"
-        app:layout_constraintTop_toTopOf="@+id/view5" />
+        app:layout_constraintTop_toTopOf="@+id/view5"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <Button
         android:id="@+id/btnScanQR"
@@ -59,8 +37,22 @@
         android:paddingStart="10dp"
         app:icon="@drawable/ic_baseline_qr_code_scanner_24"
         app:layout_constraintBottom_toBottomOf="@+id/view5"
-        app:layout_constraintEnd_toStartOf="@+id/btnProductSearch"
-        app:layout_constraintTop_toTopOf="@+id/view5" />
+        app:layout_constraintEnd_toStartOf="@+id/btnProductAdd"
+        app:layout_constraintTop_toTopOf="@+id/view5"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/btnNotification"
+        android:layout_width="42dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:paddingStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view5"
+        app:layout_constraintEnd_toStartOf="@+id/btnScanQR"
+        app:layout_constraintStart_toEndOf="@+id/productSearchView"
+        app:layout_constraintTop_toTopOf="@+id/view5"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productrv"
@@ -73,5 +65,16 @@
         app:layout_constraintTop_toBottomOf="@+id/view5"
         app:spanCount="2"
         tools:listitem="@layout/product_rv" />
+
+    <SearchView
+        android:id="@+id/productSearchView"
+        android:layout_width="220dp"
+        android:layout_height="34dp"
+        app:layout_constraintBottom_toBottomOf="@+id/view5"
+        app:layout_constraintEnd_toStartOf="@+id/btnScanQR"
+        app:layout_constraintHorizontal_bias="0.192"
+        app:layout_constraintStart_toStartOf="@+id/view5"
+        app:layout_constraintTop_toTopOf="@+id/view5"
+        app:layout_constraintVertical_bias="0.454" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

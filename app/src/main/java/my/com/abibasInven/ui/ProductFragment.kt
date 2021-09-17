@@ -21,12 +21,11 @@ import my.com.abibasInven.R
 import my.com.abibasInven.data.ProductViewModel
 import my.com.abibasInven.data.SpinnerViewModel
 import my.com.abibasInven.data.UserViewModel
-import my.com.abibasInven.databinding.FragmentHomeBinding
 import my.com.abibasInven.databinding.FragmentProductBinding
-import my.com.abibasInven.databinding.FragmentStaffListBinding
 import my.com.abibasInven.util.ProductAdapter
 import my.com.abibasInven.util.StaffAdapter
 import android.R.attr.data
+import android.widget.SearchView
 
 import android.widget.Toast
 import com.example.logindemo.util.errorDialog
@@ -49,14 +48,36 @@ class ProductFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-
+        vm.search("")
 
         binding = FragmentProductBinding.inflate(inflater, container, false)
 
         // TODO
         vmSpn.getLocation()
         vmSpn.getSupplierName()
+        val lessQty = vm.getProductLessQty()
+        lessQty.observe(viewLifecycleOwner){
+            if(it.isNotEmpty()){
+                binding.btnNotification.isEnabled = true
+                binding.btnNotification.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_notification_important_24,0,0,0)
+            }
+            else{
+              binding.btnNotification.isEnabled = false
+                binding.btnNotification.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_notifications_24,0,0,0)
+            }
+        }
 
+
+
+
+        binding.productSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(name: String) = true
+            override fun onQueryTextChange(name: String): Boolean {
+                vm.search(name)
+                return true
+            }
+        })
+        binding.btnNotification.setOnClickListener { nav.navigate(R.id.productNotificationFragment) }
 
         binding.btnScanQR.setOnClickListener {
          val scanner = IntentIntegrator.forSupportFragment(this)
@@ -91,12 +112,11 @@ class ProductFragment : Fragment() {
                 val alert = builder.create()
                 alert.show()
             }
-
         }
         binding.productrv.adapter = adapter
         binding.productrv.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
-        vm.getAll().observe(viewLifecycleOwner) {
+        vm.getResult().observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
 
