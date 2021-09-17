@@ -58,6 +58,7 @@ class LocationDetailsFragment : Fragment() {
 
 
         binding.btnBackForLocationEditing2.setOnClickListener { nav.navigateUp() }
+        binding.btnCloseLocationDetail.setOnClickListener { nav.navigateUp() }
         //bottom navigation
 
         binding.bottomNavigationView.selectedItemId = R.id.home
@@ -76,9 +77,14 @@ class LocationDetailsFragment : Fragment() {
 
     private fun showExistingCompartmentProduct(buttonID : String) {
 
-        vm.getAllProductHaveLocation().observe(viewLifecycleOwner) {
+        vm.getAllProductHaveLocation().observe(viewLifecycleOwner) { list ->
 
-            adapter.submitList(it.takeWhile{ it.locationID == buttonID })
+            //adapter.submitList(it.takeWhile{ it.locationID == buttonID })
+            var arrayLocation = list.filter { p ->
+                p.locationID == buttonID
+            }
+            adapter.submitList(arrayLocation)
+            binding.lblLocationProductCount.text = "${list.size} product(s)"
 
         }
 

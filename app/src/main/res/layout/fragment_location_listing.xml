@@ -10,11 +10,12 @@
         android:id="@+id/lblTotalRack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="52dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toTopOf="@+id/rvDeliveryItemListing"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
+        app:layout_constraintHorizontal_bias="0.619"
         app:layout_constraintStart_toEndOf="@+id/textView16"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.551"
@@ -44,10 +45,10 @@
         android:layout_marginEnd="24dp"
         android:text="Create Location"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvDeliveryItemListing" />
+        app:layout_constraintTop_toBottomOf="@+id/rvLocationListing" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvDeliveryItemListing"
+        android:id="@+id/rvLocationListing"
         android:layout_width="362dp"
         android:layout_height="469dp"
         android:layout_marginStart="20dp"
@@ -75,14 +76,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="73dp"
-        app:itemIconTint="@drawable/tab_color"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

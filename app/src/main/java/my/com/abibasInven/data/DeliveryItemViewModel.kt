@@ -19,6 +19,10 @@ class DeliveryItemViewModel : ViewModel() {
         return deliveryItem.value?.find { it -> it.ID == id }
     }
 
+    fun getByDeliveryID(id: String): DeliveryItem? {
+        return deliveryItem.value?.find { it -> it.deliveryID == id }
+    }
+
     fun getAllDeliveryItem() = deliveryItem
 
     fun calDeliveryItemSize() = deliveryItem.value?.size ?: 0

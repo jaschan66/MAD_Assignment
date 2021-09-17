@@ -20,6 +20,12 @@ class OutletViewModel : ViewModel() {
         return outlet.value?.find { it -> it.ID == id}
     }
 
+    fun getByOutletName(name: String): Outlet? {
+        return outlet.value?.find { it -> it.name == name}
+    }
+
+
+
     fun getAll() = outlet
 
     //set will be used for both adding and updating purpose

@@ -22,6 +22,8 @@ class StockInViewModel : ViewModel() {
 
     fun getAll() = stockIn
 
+    fun calStockInSize() = stockIn.value?.size ?: 0
+
     //set will be used for both adding and updating purpose
     fun set(si:StockIn) {
         col.document(si.ID).set(si)
@@ -38,6 +40,24 @@ class StockInViewModel : ViewModel() {
     private fun idExists(id: String): Boolean {
         return stockIn.value?.any { it -> it.ID == id } ?: false // if found return true if not found then return false
     }
+
+
+
+    fun validID(id: String): String {
+        val newID: String
+        val getLastStockIn = stockIn.value?.lastOrNull()?.ID.toString()
+
+        return if (idExists(id)) {
+            val num: String = getLastStockIn.substringAfterLast("SI")
+            newID = "SI" + (num.toIntOrNull()?.plus(1)).toString()
+            newID
+        } else {
+            newID = "SI" + (calStockInSize() + 1).toString()
+            newID
+        }
+    }
+
+
 
     fun validate(si: StockIn, insert: Boolean = true): String {
         val regexId = Regex("0") //TODO: Add in the regex pattern based on the needs
