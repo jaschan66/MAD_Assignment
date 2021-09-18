@@ -11,16 +11,17 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.logindemo.util.toBitmap
 import my.com.abibasInven.R
+import my.com.abibasInven.data.DeliveryItem
 
 import my.com.abibasInven.data.Product
 
 class DeliveryItemAdapter (
-    val fn: (DeliveryItemAdapter.ViewHolder, Product) -> Unit = { _, _ ->}
-): ListAdapter<Product, DeliveryItemAdapter.ViewHolder>(DeliveryItemAdapter.DiffCallback) {
+    val fn: (DeliveryItemAdapter.ViewHolder, DeliveryItem) -> Unit = { _, _ ->}
+): ListAdapter<DeliveryItem, DeliveryItemAdapter.ViewHolder>(DeliveryItemAdapter.DiffCallback) {
 
-    companion object DiffCallback : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(a: Product, b: Product)    = a.ID == b.ID
-        override fun areContentsTheSame(a: Product, b: Product) = a.ID == b.ID
+    companion object DiffCallback : DiffUtil.ItemCallback<DeliveryItem>() {
+        override fun areItemsTheSame(a: DeliveryItem, b: DeliveryItem)    = a.ID == b.ID
+        override fun areContentsTheSame(a: DeliveryItem, b: DeliveryItem) = a.ID == b.ID
     }
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val root = view
@@ -37,13 +38,13 @@ class DeliveryItemAdapter (
     }
 
     override fun onBindViewHolder(holder: DeliveryItemAdapter.ViewHolder, position: Int) {
-        val product = getItem(position)
+        val deliveryItem = getItem(position)
 
-        holder.lblDeliveryItemID.text = product.ID
-        holder.imgDeliveryItemPhoto.setImageBitmap(product.photo.toBitmap())
-        holder.lblDeliveryItemQty.text = product.qty.toString()
+        holder.lblDeliveryItemID.text = deliveryItem.ID
+        holder.imgDeliveryItemPhoto.setImageBitmap(deliveryItem.deliveryItemPhoto.toBitmap())
+        holder.lblDeliveryItemQty.text = deliveryItem.deliveryQty.toString()
 
 
-        fn(holder, product)
+        fn(holder, deliveryItem)
     }
 }

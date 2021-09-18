@@ -123,6 +123,31 @@
                 android:textStyle="bold"
                 android:visibility="gone"
                 tools:visibility="visible" />
+
+            <View
+                android:id="@+id/view15"
+                android:layout_width="360dp"
+                android:layout_height="4dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/grey"
+                android:visibility="visible"
+                app:layout_constraintStart_toEndOf="@+id/chkRmbMe"
+                app:layout_constraintTop_toBottomOf="@+id/edtLoginPassword"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/acountLogOut"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/questrial"
+                android:paddingStart="17dp"
+                android:paddingTop="16dp"
+                android:text="@string/logout"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                tools:visibility="visible" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

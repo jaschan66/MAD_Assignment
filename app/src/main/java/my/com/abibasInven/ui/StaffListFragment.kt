@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -31,11 +32,19 @@ class StaffListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-
+        val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        bottomNav.visibility = View.GONE
 
         binding = FragmentStaffListBinding.inflate(inflater, container, false)
 
-        // TODO
+        binding.svStaff.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(name: String) = true
+            override fun onQueryTextChange(name: String): Boolean {
+                vm.search(name)
+                return true
+            }
+        })
+
 
         binding.btnAddStaff.setOnClickListener { nav.navigate(R.id.registerFragment) }
 
@@ -77,9 +86,9 @@ class StaffListFragment : Fragment() {
         binding.staffrv.adapter = adapter
         binding.staffrv.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
-        vm.getAllStaff().observe(viewLifecycleOwner) {
+        vm.getResult().observe(viewLifecycleOwner) {
             adapter.submitList(it)
-            binding.lblResCount.text = "${it.size} staff(s)"
+
         }
 
         return binding.root

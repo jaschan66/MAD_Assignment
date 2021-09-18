@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/outletListFragment">
+    app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/accountFragment"
         android:name="my.com.abibasInven.ui.AccountFragment"
@@ -160,18 +160,23 @@
         android:label="fragment_delivery_item_adding"
         tools:layout="@layout/fragment_delivery_item_adding" />
     <fragment
-        android:id="@+id/outletListFragment"
-        android:name="my.com.abibasInven.ui.OutletListFragment"
-        android:label="fragment_outlet_list"
-        tools:layout="@layout/fragment_outlet_list" />
+        android:id="@+id/productNotificationFragment"
+        android:name="my.com.abibasInven.ui.ProductNotificationFragment"
+        android:label="fragment_product_notification"
+        tools:layout="@layout/fragment_product_notification" />
     <fragment
-        android:id="@+id/outletAddFragment"
-        android:name="my.com.abibasInven.ui.OutletAddFragment"
-        android:label="fragment_outlet_add"
-        tools:layout="@layout/fragment_outlet_add" />
+        android:id="@+id/deliveryItemListingFragment"
+        android:name="my.com.abibasInven.ui.DeliveryItemListingFragment"
+        android:label="fragment_delivery_item_listing"
+        tools:layout="@layout/fragment_delivery_item_listing" />
     <fragment
-        android:id="@+id/outletUpdateFragment"
-        android:name="my.com.abibasInven.ui.OutletUpdateFragment"
-        android:label="fragment_outlet_update"
-        tools:layout="@layout/fragment_outlet_update" />
+        android:id="@+id/deliveryOutletFragment"
+        android:name="my.com.abibasInven.ui.DeliveryOutletFragment"
+        android:label="fragment_delivery_outlet"
+        tools:layout="@layout/fragment_delivery_outlet" />
+    <fragment
+        android:id="@+id/deliveryOutletPinGenerateFragment"
+        android:name="my.com.abibasInven.ui.DeliveryOutletPinGenerateFragment"
+        android:label="fragment_delivery_outlet_pin_generate"
+        tools:layout="@layout/fragment_delivery_outlet_pin_generate" />
 </navigation>

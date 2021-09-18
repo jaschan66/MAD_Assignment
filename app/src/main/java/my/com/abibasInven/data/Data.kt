@@ -2,22 +2,21 @@ package my.com.abibasInven.data
 
 import com.google.firebase.firestore.Blob
 import com.google.firebase.firestore.DocumentId
+import com.google.firebase.firestore.Exclude
 import java.util.*
+import kotlin.collections.ArrayList
 
 var img : Blob = Blob.fromBytes(ByteArray(0))
 var emailLogin : String = ""
+//var dli : ArrayList<DeliveryItem> = ArrayList<DeliveryItem>()
 
-data class spnLocation(
-    var id : String = "",
-)
 
 
 data class StockOut(
     @DocumentId
     var ID          : String = "",
-    var OutletID    : String = "",
-    var dateTime     : String = "",
-    var Status      : String = ""
+    var dateTime    : String = "",
+    var deliveryID  : String = "",
 )
 
 data class Item(
@@ -34,7 +33,8 @@ data class Outlet (
     var name         : String = "",
     var latitude     : Double = 0.0,
     var longitude    : Double = 0.0,
-    var photo        : Blob = Blob.fromBytes(ByteArray(0))
+    var photo        : Blob = Blob.fromBytes(ByteArray(0)),
+    var pin          : String = "",
 )
 
 data class Product (
@@ -111,4 +111,5 @@ data class DeliveryItem(
     var productID : String = "",
     var deliveryQty : Int = 0,
     var deliveryID : String = "",
+    var deliveryItemPhoto : Blob = Blob.fromBytes(ByteArray(0)),
 )

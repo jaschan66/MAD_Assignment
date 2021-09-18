@@ -10,13 +10,13 @@
         android:id="@+id/lblDeliveryItemListingCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
         android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/btnCloseItemDeliveryListing"
-        app:layout_constraintEnd_toStartOf="@+id/btnCloseItemDeliveryListing"
-        app:layout_constraintHorizontal_bias="0.241"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/btnCloseItemDeliveryListing"
+        app:layout_constraintVertical_bias="0.583"
         tools:text="100 DeliveryItem(s)" />
 
     <Button
@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="20dp"
         android:text="Close"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvDeliveryItemListing" />
@@ -58,14 +58,14 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Delivery ID" />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="73dp"
-        app:itemIconTint="@drawable/tab_color"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav_menu" />
+
+    <Button
+        android:id="@+id/btnDeliver"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Deliver"
+        app:layout_constraintBottom_toBottomOf="@+id/lblDeliveryItemListingCount"
+        app:layout_constraintStart_toEndOf="@+id/lblDeliveryItemListingCount"
+        app:layout_constraintTop_toTopOf="@+id/lblDeliveryItemListingCount" />
 </androidx.constraintlayout.widget.ConstraintLayout>

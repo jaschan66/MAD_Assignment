@@ -37,7 +37,7 @@ class LocationDetailsAdapter (val fn: (ViewHolder, Product) -> Unit = { _,_  -> 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = getItem(position)
-        holder.lblRackProductID.text = product.ID
+        holder.lblRackProductID.text = product.name
         holder.imgRackProductPhoto.setImageBitmap(product.photo.toBitmap())
         holder.lblRackProductQty.text = product.qty.toString()
 

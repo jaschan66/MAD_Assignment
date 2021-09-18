@@ -8,15 +8,16 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.logindemo.util.cropToBlob
 import com.example.logindemo.util.errorDialog
 import com.example.logindemo.util.snackbar
+import com.example.logindemo.util.toBitmap
 import my.com.abibasInven.R
-import my.com.abibasInven.data.DeliveryItem
-import my.com.abibasInven.data.DeliveryItemViewModel
-import my.com.abibasInven.data.DeliveryViewModel
-import my.com.abibasInven.data.SpinnerViewModel
+import my.com.abibasInven.data.*
 import my.com.abibasInven.databinding.FragmentDeliveryItemAddingBinding
 import my.com.abibasInven.databinding.FragmentDeliveryListingBinding
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 class DeliveryItemAddingFragment : Fragment() {
@@ -24,8 +25,10 @@ class DeliveryItemAddingFragment : Fragment() {
     private lateinit var binding: FragmentDeliveryItemAddingBinding
     private val nav by lazy {findNavController()}
 
-    private val deliveryvm : DeliveryViewModel by activityViewModels()
+
     private val deliveryItemvm : DeliveryItemViewModel by activityViewModels()
+    private val productvm : ProductViewModel by activityViewModels()
+    private val stockOutvm : StockOutViewModel by activityViewModels()
 
     private val currentDeliveryID by lazy { requireArguments().getString("currentDeliveryID","N/A") }
 
@@ -35,6 +38,7 @@ class DeliveryItemAddingFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
+
 
         binding = FragmentDeliveryItemAddingBinding.inflate(inflater, container, false)
         // Inflate the layout for this fragment
@@ -82,14 +86,47 @@ class DeliveryItemAddingFragment : Fragment() {
         val id = "DVI" + (deliveryItemvm.calDeliveryItemSize() + 1).toString()
         val deliveryItemID = deliveryItemvm.validID(id)
 
-        if (currentDeliveryID != "N/A" && binding.edtDeliveryQty2.text.toString() != "" && binding.edtDeliveryQty2.text.toString().toInt() != 0 ) {
+//        // id generator for stockOut
+//        val id2 = "SO" + (stockOutvm.calStockOutSize() + 1).toString()
+//        val stockOutID = stockOutvm.validID(id2)
+
+        val currentDateTime = LocalDateTime.now()
+        val dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
+
+        // find the product picture by Delivery Item's product ID store in at here
+            val p = productvm.get(binding.spnDeliveryProduct2.selectedItem.toString())
+
+
+
+
+        if (currentDeliveryID != "N/A" && binding.edtDeliveryQty2.text.toString() != "" && binding.edtDeliveryQty2.text.toString().toInt() != 0 && p!=null ) {
             val newDeliveryItem = DeliveryItem(
                 ID = deliveryItemID,
                 productID = binding.spnDeliveryProduct2.selectedItem.toString(),
                 deliveryQty = binding.edtDeliveryQty2.text.toString().toInt(),
-                deliveryID = currentDeliveryID
+                deliveryID = currentDeliveryID,
+                deliveryItemPhoto = p!!.photo
             )
-            deliveryItemvm.set(newDeliveryItem)
+
+//            deliveryItemvm.set(newDeliveryItem)
+//            val newStockOut = StockOut(
+//                ID = stockOutID,
+//                dateTime = dtf.format(currentDateTime).toString(),
+//                deliveryID = currentDeliveryID,
+//            )
+//            stockOutvm.set(newStockOut)
+
+            val updateProduct = Product(
+                ID = p.ID,
+                name = p.name,
+                qty = p.qty - binding.edtDeliveryQty2.text.toString().toInt(),
+                qtyThreshold = p.qtyThreshold,
+                categoryID = p.categoryID,
+                photo = p.photo,
+                locationID = p.locationID,
+                supplierID = p.supplierID,
+            )
+            productvm.set(updateProduct)
             snackbar(binding.spnDeliveryProduct2.selectedItem.toString() + " has added to " + currentDeliveryID)
         }
         else {
