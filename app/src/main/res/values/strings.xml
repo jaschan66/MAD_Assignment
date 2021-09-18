@@ -70,6 +70,9 @@
     <string name="imgdetailproduct">imgDetailProduct</string>
     <string name="imgproductqrcode">imgProductQRCode</string>
     <string name="update_category">Update Category</string>
+    <string name="outlet_hint">Mid Valley</string>
+    <string name="add_outlet">Add Outlet</string>
+    <string name="edit_outlet">Edit Outlet</string>
     <string-array name="userRole">
         <item>Manager</item>
         <item>Staff</item>

@@ -55,7 +55,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/questrial"
-                    android:text="@string/edit" />
+                    android:text="@string/edit"
+                    android:textColor="@color/white" />
 
                 <Button
                     android:id="@+id/btnCategoryDelete"
@@ -64,7 +65,8 @@
                     android:layout_marginStart="5dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/questrial"
-                    android:text="@string/delete" />
+                    android:text="@string/delete"
+                    android:textColor="@color/white" />
             </LinearLayout>
 
         </LinearLayout>

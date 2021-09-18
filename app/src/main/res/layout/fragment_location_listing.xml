@@ -47,7 +47,7 @@
         app:layout_constraintTop_toBottomOf="@+id/rvDeliveryItemListing" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvDeliveryItemListing"
+        android:id="@+id/rvLocationListing"
         android:layout_width="362dp"
         android:layout_height="469dp"
         android:layout_marginStart="20dp"

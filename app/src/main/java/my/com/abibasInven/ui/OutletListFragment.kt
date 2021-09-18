@@ -12,35 +12,35 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.logindemo.util.snackbar
 import my.com.abibasInven.R
-import my.com.abibasInven.data.CategoryViewModel
-import my.com.abibasInven.databinding.FragmentCategoryListBinding
-import my.com.abibasInven.util.CategoryAdapter
+import my.com.abibasInven.data.OutletViewModel
+import my.com.abibasInven.databinding.FragmentOutletListBinding
+import my.com.abibasInven.util.OutletAdapter
 
-class CategoryListFragment : Fragment() {
+class OutletListFragment : Fragment() {
 
-    private lateinit var binding: FragmentCategoryListBinding
+    private lateinit var binding: FragmentOutletListBinding
     private val nav by lazy { findNavController() }
-    private val vm: CategoryViewModel by activityViewModels()
+    private val vm: OutletViewModel by activityViewModels()
 
-    private lateinit var adapter: CategoryAdapter
+    private lateinit var adapter: OutletAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentCategoryListBinding.inflate(inflater, container, false)
+        binding = FragmentOutletListBinding.inflate(inflater, container, false)
 
-        binding.btnCategoryAdd.setOnClickListener { nav.navigate(R.id.categoryAddFragment) }
+        binding.btnOutletAdd.setOnClickListener { nav.navigate(R.id.outletAddFragment) }
 
-        adapter = CategoryAdapter() { holder, category ->
+        adapter = OutletAdapter() { holder, outlet ->
 
             //Haven't do
-            holder.root.setOnClickListener {
-                nav.navigate(R.id.categoryDetailsFragment, bundleOf("categoryId" to category.ID, "categoryName" to category.name))
-            }
-            holder.btnEdit.setOnClickListener {
-                nav.navigate(R.id.categoryUpdateFragment, bundleOf("categoryId" to category.ID))
+//            holder.root.setOnClickListener {
+//                nav.navigate(R.id.outletDetailsFragment, bundleOf("outletId" to outlet.ID, "outletName" to outlet.name))
+//            }
+            holder.btnUpdate.setOnClickListener {
+                nav.navigate(R.id.outletUpdateFragment, bundleOf("outletId" to outlet.ID))
             }
             holder.btnDelete.setOnClickListener {
                 val builder = AlertDialog.Builder(context)
@@ -48,8 +48,8 @@ class CategoryListFragment : Fragment() {
                     .setCancelable(false)
                     .setPositiveButton("Yes") { dialog, id ->
 
-                        snackbar("Category deleted successfully")
-                        deleteCategory(category.ID)
+                        snackbar("Outlet deleted successfully")
+                        deleteOutlet(outlet.ID)
                     }
                     .setNegativeButton("No") { dialog, id ->
                         // Dismiss the dialog
@@ -59,22 +59,22 @@ class CategoryListFragment : Fragment() {
                 alert.show()
             }
         }
-        binding.categoryListRv.adapter = adapter
-        binding.categoryListRv.addItemDecoration(
+        binding.outletRv.adapter = adapter
+        binding.outletRv.addItemDecoration(
             DividerItemDecoration(
                 context,
                 DividerItemDecoration.VERTICAL
             )
         )
 
-        vm.getAllCategory().observe(viewLifecycleOwner) {
+        vm.getAllOutlet().observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
 
         return binding.root
     }
 
-    private fun deleteCategory(id: String) {
+    private fun deleteOutlet(id: String) {
         vm.remove(id)
     }
 }

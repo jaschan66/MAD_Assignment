@@ -12,18 +12,20 @@ class OutletViewModel : ViewModel() {
     private val outlet = MutableLiveData<List<Outlet>>()
 
     init {
-        col.addSnapshotListener { it, _ -> outlet.value = it?.toObjects()  }
+        col.addSnapshotListener { it, _ -> outlet.value = it?.toObjects() }
     }
 
 
     fun get(id: String): Outlet? {
-        return outlet.value?.find { it -> it.ID == id}
+        return outlet.value?.find { it -> it.ID == id }
     }
 
-    fun getAll() = outlet
+    fun getAllOutlet() = outlet
+
+    fun calSize() = outlet.value?.size ?: 0
 
     //set will be used for both adding and updating purpose
-    fun set(o:Outlet) {
+    fun set(o: Outlet) {
         col.document(o.ID).set(o)
     }
 
@@ -36,16 +38,15 @@ class OutletViewModel : ViewModel() {
     }
 
     private fun idExists(id: String): Boolean {
-        return outlet.value?.any { it -> it.ID == id } ?: false // if found return true if not found then return false
+        return outlet.value?.any { it -> it.ID == id }
+            ?: false // if found return true if not found then return false
     }
 
     fun validate(o: Outlet, insert: Boolean = true): String {
-        val regexId = Regex("0") //TODO: Add in the regex pattern based on the needs
         var errorMessage = ""
 
-        if (insert)/*if it is true */{
-            errorMessage += if (o.ID== "") "- Outlet ID cannot be empty.\n"
-            else if (!o.ID.matches(regexId)) "- Outlet ID format is invalid.\n"
+        if (insert)/*if it is true */ {
+            errorMessage += if (o.ID == "") "- Outlet ID cannot be empty.\n"
             else if (idExists(o.ID)) "- Outlet ID is duplicated.\n" //if the function return true then error message will be added
             else ""
         }
@@ -67,6 +68,38 @@ class OutletViewModel : ViewModel() {
         return errorMessage
     }
 
+    fun validID(): String {
+        var newID: String
 
+        val getLastOutlet = outlet.value?.lastOrNull()?.ID.toString()
+        val num: String = getLastOutlet.substringAfterLast("OL10")
+        newID = "OL10" + (num.toIntOrNull()?.plus(1)).toString()
 
+        if (newID == "OL1010") {
+            newID = "OL1" + (num.toIntOrNull()?.plus(1)).toString()
+            return newID
+        }
+
+        return when (calSize()) {
+            0 -> {
+                newID = "OL10" + (calSize() + 1)
+                newID
+            }
+            in 1..8 -> {
+                val getLastOutlet = outlet.value?.lastOrNull()?.ID.toString()
+                val num: String = getLastOutlet.substringAfterLast("OL10")
+                newID = "OL10" + (num.toIntOrNull()?.plus(1)).toString()
+                if (newID == "OL10null") {
+                    newID = "OL111"
+                    newID
+                } else newID
+            }
+            else -> {
+                val getLastOutlet = outlet.value?.lastOrNull()?.ID.toString()
+                val num: String = getLastOutlet.substringAfterLast("OL1")
+                newID = "OL1" + (num.toIntOrNull()?.plus(1)).toString()
+                newID
+            }
+        }
+    }
 }

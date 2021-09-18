@@ -2,6 +2,7 @@ package my.com.abibasInven.ui
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -16,24 +17,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.logindemo.util.cropToBlob
 import com.example.logindemo.util.errorDialog
 import com.example.logindemo.util.snackbar
-import com.example.logindemo.util.toBitmap
 import com.google.android.gms.location.*
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.theartofdev.edmodo.cropper.CropImage
 import my.com.abibasInven.R
-import my.com.abibasInven.data.Supplier
-import my.com.abibasInven.data.SupplierViewModel
-import my.com.abibasInven.data.User
-import my.com.abibasInven.databinding.FragmentSupplierUpdateBinding
+import my.com.abibasInven.data.Outlet
+import my.com.abibasInven.data.OutletViewModel
+import my.com.abibasInven.databinding.FragmentOutletAddBinding
+import java.io.File
 
-class SupplierUpdateFragment : Fragment(), OnMapReadyCallback {
+class OutletAddFragment : Fragment(), OnMapReadyCallback {
 
     //Map variables
     private lateinit var mMap: GoogleMap
@@ -41,104 +44,73 @@ class SupplierUpdateFragment : Fragment(), OnMapReadyCallback {
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: LocationCallback
 
-    // Permissions
+    // Map Permissions
     private val permissions = arrayOf(
         Manifest.permission.ACCESS_FINE_LOCATION,
         Manifest.permission.ACCESS_COARSE_LOCATION
     )
 
-    private lateinit var binding: FragmentSupplierUpdateBinding
-    private val nav by lazy { findNavController() }
-    private val vm: SupplierViewModel by activityViewModels()
+    private var noImg = false
 
-    private val suppId by lazy { requireArguments().getString("suppId", null) }
+    private lateinit var binding: FragmentOutletAddBinding
+    private val nav by lazy { findNavController() }
+    private val vm: OutletViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-        binding = FragmentSupplierUpdateBinding.inflate(inflater, container, false)
+        binding = FragmentOutletAddBinding.inflate(inflater, container, false)
 
-        reset()
-        binding.btnReset.setOnClickListener { reset() }
-        binding.btnUpdateSup.setOnClickListener { update() }
+        binding.btnOutletReset.setOnClickListener { reset() }
+        binding.btnOutletSubmit.setOnClickListener { createOutlet() }
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
 
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED &&
-            ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            //Load map with supplier location from firebase
-            binding.map.getMapAsync(this)
-            binding.btnLocation.setOnClickListener { getCurrentLocation() }
-        } else {
-            //when permission is not granted
-            //Request permission
-            ActivityCompat.requestPermissions(requireActivity(), permissions, 100)
-            nav.navigateUp()
+        binding.btnOutletLocation.setOnClickListener {
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                getCurrentLocation()
+            } else {
+                //when permission is not granted
+                //Request permission
+                ActivityCompat.requestPermissions(requireActivity(), permissions, 100)
+            }
         }
 
-        binding.edtSupLoc.isEnabled = false
-        binding.map.onCreate(savedInstanceState)
-        binding.map.onResume()
+        binding.imgAddOutletPhoto.setOnClickListener {
+            try {
+                CropImage.activity()
+                    .start(requireContext(), this)
+            } catch (e: ActivityNotFoundException) {
+
+            }
+        }
+
+        binding.outletMap.isVisible = false
+        binding.edtOutletLoc.isEnabled = false
+        binding.outletMap.onCreate(savedInstanceState)
+        binding.outletMap.onResume()
 
         return binding.root
     }
 
-    private fun reset() {
-        val supp = vm.get(suppId)
-        if (supp == null) {
-            nav.navigateUp()
-            return
-        }
-
-        val lat = supp.latitude
-        val lon = supp.longitude
-        val location = "$lat,$lon"
-
-        with(binding) {
-            edtSupName.setText(supp.name)
-            edtSupPhone.setText(supp.phoneNo)
-            edtSupEmail.setText(supp.email)
-            edtSupLoc.setText(location)
-        }
-    }
-
-    private fun update() {
-        if (binding.edtSupLoc.text.toString().isNotEmpty()) {
-
-            // Get and split geoPoint into latitude & longitude
-            val geoPoint = binding.edtSupLoc.text.toString()
-            val splitPoint = geoPoint.split(",")
-            val latitude = splitPoint[0].toDouble()
-            val longitude = splitPoint[1].toDouble()
-
-            val updateSup = Supplier(
-                ID = suppId,
-                name = binding.edtSupName.text.toString().trim(),
-                phoneNo = binding.edtSupPhone.text.toString().trim(),
-                email = binding.edtSupEmail.text.toString().trim(),
-                latitude = latitude,
-                longitude = longitude,
-            )
-
-            val e = vm.validate(updateSup, false)
-            if (e != "") {
-                errorDialog(e)
-                return
-            } else {
-                vm.set(updateSup)
-                nav.navigateUp()
+    //Update the Outlet ImageView
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            val result = CropImage.getActivityResult(data)
+            if (result != null) {
+                binding.imgAddOutletPhoto.setImageURI(result.uri)
+                noImg = true
             }
-        } else {
-            errorDialog("- Location cannot be empty")
         }
     }
 
@@ -160,12 +132,11 @@ class SupplierUpdateFragment : Fragment(), OnMapReadyCallback {
                         location.latitude.toString() + "," + location.longitude.toString()
 
                     snackbar("Location received")
-                    binding.edtSupLoc.isEnabled = true
-                    binding.edtSupLoc.setText(geopoint)
-                    binding.edtSupLoc.isEnabled = false
+                    binding.edtOutletLoc.isEnabled = true
+                    binding.edtOutletLoc.setText(geopoint)
+                    binding.edtOutletLoc.isEnabled = false
 
-                    // binding.map.getMapAsync(this)
-
+                    binding.outletMap.getMapAsync(this)
                 } else {
                     //Initialize location request
                     locationRequest = LocationRequest()
@@ -187,9 +158,9 @@ class SupplierUpdateFragment : Fragment(), OnMapReadyCallback {
                             val testGeoPoint =
                                 lastLocation.latitude.toString() + "," + lastLocation.longitude.toString()
                             snackbar(testGeoPoint)
-                            binding.edtSupLoc.isEnabled = true
-                            binding.edtSupLoc.setText(testGeoPoint)
-                            binding.edtSupLoc.isEnabled = false
+                            binding.edtOutletLoc.isEnabled = true
+                            binding.edtOutletLoc.setText(testGeoPoint)
+                            binding.edtOutletLoc.isEnabled = false
                         }
                     }
                     //Request location update
@@ -209,14 +180,62 @@ class SupplierUpdateFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
+    private fun createOutlet() {
+        if (binding.edtOutletLoc.text.toString().isNotEmpty()) {
+            if (noImg) {
+                // Get and split geoPoint into latitude & longitude
+                val geoPoint = binding.edtOutletLoc.text.toString()
+                val splitPoint = geoPoint.split(",")
+                val latitude = splitPoint[0].toDouble()
+                val longitude = splitPoint[1].toDouble()
+
+                // Auto increment ID
+                val chkID = vm.validID()
+
+                val o = Outlet(
+                    ID = chkID,
+                    name = binding.edtOutletName.text.toString().trim(),
+                    latitude = latitude,
+                    longitude = longitude,
+                    photo = binding.imgAddOutletPhoto.cropToBlob(700, 600),
+                )
+
+                val err = vm.validate(o)
+                if (err != "") {
+                    errorDialog(err)
+                    return
+                } else {
+                    vm.set(o)
+                    nav.navigate(R.id.outletListFragment)
+                }
+            } else {
+                errorDialog("- Outlet image cannot be empty")
+            }
+        } else {
+            errorDialog("- Location cannot be empty")
+        }
+    }
+
+    private fun reset() {
+        with(binding) {
+            edtOutletName.text.clear()
+            imgAddOutletPhoto.setImageResource(R.drawable.ic_addimg)
+            edtOutletLoc.text.clear()
+            outletMap.isVisible = false
+
+            edtOutletName.requestFocus()
+        }
+    }
+
     // Display map output
     override fun onMapReady(googleMap: GoogleMap) {
-        val geoPoint = binding.edtSupLoc.text.toString()
+        val geoPoint = binding.edtOutletLoc.text.toString()
 
         // If notEmpty then load Google Map
         if (geoPoint.isNotEmpty()) {
+            binding.outletMap.isVisible = true
 
-            binding.map.let {
+            binding.outletMap.let {
                 mMap = googleMap
                 val splitPoint = geoPoint.split(",")
                 val latitude = splitPoint[0].toDouble()
@@ -225,10 +244,11 @@ class SupplierUpdateFragment : Fragment(), OnMapReadyCallback {
                 // Add a marker in Supplier Location and move the camera
                 val supplierLocation = LatLng(latitude, longitude)
                 mMap.addMarker(
-                    MarkerOptions().position(supplierLocation).title("Supplier location")
+                    MarkerOptions().position(supplierLocation).title("Outlet location")
                 )
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(supplierLocation, 15f))
             }
         }
     }
+
 }

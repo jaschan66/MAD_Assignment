@@ -32,7 +32,6 @@ data class Outlet (
     @DocumentId
     var ID           : String = "",
     var name         : String = "",
-    var availability : String = "",
     var latitude     : Double = 0.0,
     var longitude    : Double = 0.0,
     var photo        : Blob = Blob.fromBytes(ByteArray(0))
