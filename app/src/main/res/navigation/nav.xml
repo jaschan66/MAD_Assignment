@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/locationListingFragment">
     <fragment
         android:id="@+id/accountFragment"
         android:name="my.com.abibasInven.ui.AccountFragment"
@@ -179,4 +179,29 @@
         android:name="my.com.abibasInven.ui.DeliveryOutletPinGenerateFragment"
         android:label="fragment_delivery_outlet_pin_generate"
         tools:layout="@layout/fragment_delivery_outlet_pin_generate" />
+    <fragment
+        android:id="@+id/deliveryItemUpdateFragment"
+        android:name="my.com.abibasInven.ui.DeliveryItemUpdateFragment"
+        android:label="fragment_delivery_item_update"
+        tools:layout="@layout/fragment_delivery_item_update" />
+    <fragment
+        android:id="@+id/locationDetailsForQRFragment"
+        android:name="my.com.abibasInven.ui.LocationDetailsForQRFragment"
+        android:label="fragment_location_details_for_q_r"
+        tools:layout="@layout/fragment_location_details_for_q_r" />
+    <fragment
+        android:id="@+id/outletAddFragment"
+        android:name="my.com.abibasInven.ui.OutletAddFragment"
+        android:label="fragment_outlet_add"
+        tools:layout="@layout/fragment_outlet_add" />
+    <fragment
+        android:id="@+id/outletListFragment"
+        android:name="my.com.abibasInven.ui.OutletListFragment"
+        android:label="fragment_outlet_list"
+        tools:layout="@layout/fragment_outlet_list" />
+    <fragment
+        android:id="@+id/outletUpdateFragment"
+        android:name="my.com.abibasInven.ui.OutletUpdateFragment"
+        android:label="fragment_outlet_update"
+        tools:layout="@layout/fragment_outlet_update" />
 </navigation>

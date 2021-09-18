@@ -57,6 +57,11 @@ class DeliveryItemViewModel : ViewModel() {
             newID
         }
     }
+
+    fun delete(id : String){
+        col.document(id).delete()
+    }
+
     fun validate(d: Delivery, insert: Boolean = true): String {
 
         var errorMessage = ""
@@ -67,6 +72,7 @@ class DeliveryItemViewModel : ViewModel() {
         }
         return errorMessage
     }
+
 
 
 

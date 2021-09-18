@@ -46,14 +46,10 @@ class DeliveryListingFragment : Fragment() {
                 nav.navigate(R.id.deliveryItemAddingFragment,bundleOf("currentDeliveryID" to delivery.ID))
 
             }
-            holder.btnEditDelivery.setOnClickListener {
-
-            }
             holder.btnDeleteDelivery.setOnClickListener {
 
             }
         }
-
         binding.rvDeliveryListing.adapter = adapter
         binding.rvDeliveryListing.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 

@@ -64,7 +64,9 @@ class DeliveryAddingFragment : Fragment() {
         }
 
 
+
         binding.btnAddDelivery.setOnClickListener { addDelivery() }
+        binding.btnCancelAddDelivery.setOnClickListener { nav.navigateUp() }
 
         val id1 = "DV"+ (deliveryvm.calDeliverySize() + 1).toString()
         val deliveryID = deliveryvm.validID(id1)

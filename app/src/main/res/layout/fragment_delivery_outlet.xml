@@ -106,4 +106,14 @@
         app:layout_constraintStart_toStartOf="@+id/guideline39"
         app:layout_constraintTop_toTopOf="@+id/textView47" />
 
+    <Button
+        android:id="@+id/btnCloseDeliveryOutlet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="Close"
+        app:layout_constraintBottom_toBottomOf="@+id/btnConfirmDeliveryPin"
+        app:layout_constraintStart_toEndOf="@+id/btnConfirmDeliveryPin"
+        app:layout_constraintTop_toTopOf="@+id/btnConfirmDeliveryPin" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

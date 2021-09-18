@@ -1,6 +1,8 @@
 package my.com.abibasInven.ui
 
+import android.app.Activity
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,6 +16,7 @@ import com.example.logindemo.util.errorDialog
 import com.example.logindemo.util.snackbar
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.zxing.integration.android.IntentIntegrator
 import my.com.abibasInven.R
 import my.com.abibasInven.data.Location
 import my.com.abibasInven.data.LocationViewModel
@@ -67,10 +70,16 @@ class LocationListingFragment : Fragment() {
 
         }
 
-//        binding.rvLocationListing.adapter = adapter
-//        binding.rvLocationListing.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        binding.rvLocationListing.adapter = adapter
+        binding.rvLocationListing.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
         binding.btnCreateLocation.setOnClickListener { createNewLocation() }
+
+        binding.btnLocationScanQR.setOnClickListener {
+            val scanner = IntentIntegrator.forSupportFragment(this)
+            scanner.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
+            scanner.initiateScan()
+        }
 
 
 
@@ -163,6 +172,22 @@ class LocationListingFragment : Fragment() {
         }
         return ascii.toChar()
 
+    }
+
+    //QR scan
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(resultCode == Activity.RESULT_OK){
+            val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+            if (result != null) {
+                if (result.contents == null) {
+                    errorDialog("Result not found")
+                } else {
+                    nav.navigate(R.id.locationDetailsFragment, bundleOf("productID" to result.contents))//Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
+                }
+            } else {
+                super.onActivityResult(requestCode, resultCode, data)
+            }
+        }
     }
 
     private fun delete(id: String) {

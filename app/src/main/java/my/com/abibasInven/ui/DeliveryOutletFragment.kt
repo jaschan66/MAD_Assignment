@@ -64,7 +64,7 @@ class DeliveryOutletFragment : Fragment(), OnMapReadyCallback {
             binding.lblCurrentOutletDetails.text = currentOutletID + " details"
 
             //TODO unable to find specific data return null
-            val foundOutLetData = vm.get("OL111")
+            val foundOutLetData = vm.get(currentOutletID)
 
             if(foundOutLetData!=null){
                 binding.lblOutletName.text = foundOutLetData.name
@@ -115,6 +115,7 @@ class DeliveryOutletFragment : Fragment(), OnMapReadyCallback {
         binding.mapDeliveryOutlet.onCreate(savedInstanceState)
         binding.mapDeliveryOutlet.onResume()
         // Inflate the layout for this fragment
+        binding.btnCloseDeliveryOutlet.setOnClickListener { nav.navigateUp() }
         return binding.root
     }
 

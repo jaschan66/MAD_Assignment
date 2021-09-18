@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.LocationDetailsForQRFragment">
+
+    <Button
+        android:id="@+id/btnLocationDetailQRCompartment5"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:text="A5"
+        app:layout_constraintEnd_toEndOf="@+id/btnLocationDetailQRCompartment2"
+        app:layout_constraintStart_toStartOf="@+id/btnLocationDetailQRCompartment2"
+        app:layout_constraintTop_toBottomOf="@+id/btnLocationDetailQRCompartment2" />
+
+    <Button
+        android:id="@+id/btnLocationDetailQRCompartment6"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:text="A6"
+        app:layout_constraintEnd_toEndOf="@+id/btnLocationDetailQRCompartment3"
+        app:layout_constraintStart_toStartOf="@+id/btnLocationDetailQRCompartment3"
+        app:layout_constraintTop_toBottomOf="@+id/btnLocationDetailQRCompartment3" />
+
+    <Button
+        android:id="@+id/btnLocationDetailQRCompartment4"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="16dp"
+        android:text="A4"
+        app:layout_constraintEnd_toEndOf="@+id/btnLocationDetailQRCompartment1"
+        app:layout_constraintStart_toStartOf="@+id/btnLocationDetailQRCompartment1"
+        app:layout_constraintTop_toBottomOf="@+id/btnLocationDetailQRCompartment1" />
+
+    <Button
+        android:id="@+id/btnLocationDetailQRCompartment3"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="4dp"
+        android:text="A3"
+        app:layout_constraintEnd_toStartOf="@+id/guideline46"
+        app:layout_constraintTop_toBottomOf="@+id/lblTitle3" />
+
+    <Button
+        android:id="@+id/btnLocationDetailQRCompartment2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="28dp"
+        android:text="A2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.524"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblTitle3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline46"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="83dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline45"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintGuide_end="206dp"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btnLocationDetailQRCompartment1"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginTop="28dp"
+        android:text="A1"
+        app:layout_constraintTop_toBottomOf="@+id/lblTitle3"
+        tools:layout_editor_absoluteX="103dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline44"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="103dp" />
+
+    <TextView
+        android:id="@+id/lblTitle3"
+        android:layout_width="220dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="88dp"
+        android:background="@color/teal_200"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Rack A" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Product name"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/guideline45"
+        app:layout_constraintTop_toBottomOf="@+id/lblLocationScanQRProductDetail" />
+
+    <TextView
+        android:id="@+id/lblLocationScanQRProductName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="TextView"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView27"
+        app:layout_constraintStart_toStartOf="@+id/guideline45"
+        app:layout_constraintTop_toTopOf="@+id/textView27"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView45"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:text="Product photo"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/guideline45"
+        app:layout_constraintTop_toBottomOf="@+id/textView27" />
+
+    <ImageView
+        android:id="@+id/imgLocationScanQRProductPhoto"
+        android:layout_width="95dp"
+        android:layout_height="102dp"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView45"
+        app:layout_constraintStart_toStartOf="@+id/guideline45"
+        app:layout_constraintTop_toTopOf="@+id/textView45"
+        app:layout_constraintVertical_bias="0.493"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textView48"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="Product quantity"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toStartOf="@+id/guideline45"
+        app:layout_constraintTop_toBottomOf="@+id/textView45" />
+
+    <TextView
+        android:id="@+id/lblLocationScanQRProductQuantity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:text="TextView"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/textView48"
+        app:layout_constraintStart_toStartOf="@+id/guideline45"
+        app:layout_constraintTop_toTopOf="@+id/textView48"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btnLocationScanQRClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:text="Close"
+        app:layout_constraintTop_toBottomOf="@+id/lblLocationScanQRProductQuantity"
+        tools:layout_editor_absoluteX="226dp" />
+
+    <TextView
+        android:id="@+id/lblLocationScanQRProductDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textColor="@color/black"
+        tools:layout_editor_absoluteX="185dp"
+        tools:layout_editor_absoluteY="335dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

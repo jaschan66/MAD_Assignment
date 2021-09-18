@@ -6,12 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.view.size
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.logindemo.util.cropToBlob
-import com.example.logindemo.util.errorDialog
-import com.example.logindemo.util.snackbar
-import com.example.logindemo.util.toBitmap
+import com.example.logindemo.util.*
 import my.com.abibasInven.R
 import my.com.abibasInven.data.*
 import my.com.abibasInven.databinding.FragmentDeliveryItemAddingBinding
@@ -29,6 +27,8 @@ class DeliveryItemAddingFragment : Fragment() {
     private val deliveryItemvm : DeliveryItemViewModel by activityViewModels()
     private val productvm : ProductViewModel by activityViewModels()
     private val stockOutvm : StockOutViewModel by activityViewModels()
+    private val deliveryvm : DeliveryViewModel by activityViewModels()
+    private val outletvm : OutletViewModel by activityViewModels()
 
     private val currentDeliveryID by lazy { requireArguments().getString("currentDeliveryID","N/A") }
 
@@ -48,6 +48,8 @@ class DeliveryItemAddingFragment : Fragment() {
         val spnArray2 = arrayListOf<String>()
 
 
+
+
         val adp3 = ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item)
         adp3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spnDeliveryProduct2.adapter = adp3
@@ -58,20 +60,42 @@ class DeliveryItemAddingFragment : Fragment() {
             val productSize = vmSpn.calProductSize()
             if (list.size > spnArray2.size) {
                 for (i in 0..productSize - 1) {
-                    adp3.add(list[i].ID)//change here to get value
-                    spnArray2.add(list[i].ID) //change here to get value
+                    if(list[i].qty>0){
+                        adp3.add(list[i].ID)//change here to get value
+                        spnArray2.add(list[i].ID) //change here to get value
+                    }
+
                 }
             } else if (num <= spnArray2.size ){
                 spnArray2.clear()
                 adp3.clear()
                 for (i in 0..productSize - 1) {
-                    adp3.add(list[i].ID)
-                    spnArray2.add(list[i].ID)
+                    if(list[i].qty>0) {
+                        adp3.add(list[i].ID)
+                        spnArray2.add(list[i].ID)
+                    }
                 }
             }
         }
 
+        if(binding.spnDeliveryProduct2.size==0){
+            nav.navigateUp()
+            informationDialog("there is no product at store")
+        }
         binding.lblCurrentDeliveryID4.text = currentDeliveryID
+
+        val  foundDeliveryData = deliveryvm.get(currentDeliveryID)
+
+
+
+        if(foundDeliveryData !=null){
+            val foundOutletData  = outletvm.get(foundDeliveryData.outletID)
+            if(foundOutletData!=null){
+                binding.lblCurrentOutletName.text = foundOutletData.name
+            }
+        }
+
+
         binding.btnAddDeliveryItem.setOnClickListener { addDeliveryItem() }
         binding.btnCancelDeliveryItem.setOnClickListener { nav.navigateUp() }
 
@@ -107,15 +131,7 @@ class DeliveryItemAddingFragment : Fragment() {
                 deliveryID = currentDeliveryID,
                 deliveryItemPhoto = p!!.photo
             )
-
-//            deliveryItemvm.set(newDeliveryItem)
-//            val newStockOut = StockOut(
-//                ID = stockOutID,
-//                dateTime = dtf.format(currentDateTime).toString(),
-//                deliveryID = currentDeliveryID,
-//            )
-//            stockOutvm.set(newStockOut)
-
+            deliveryItemvm.set(newDeliveryItem)
             val updateProduct = Product(
                 ID = p.ID,
                 name = p.name,

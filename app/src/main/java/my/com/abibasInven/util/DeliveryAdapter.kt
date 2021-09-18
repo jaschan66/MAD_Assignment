@@ -24,7 +24,6 @@ class DeliveryAdapter (
         val lblDeliveryID : TextView = view.findViewById(R.id.lblDeliveryItemID)
         val btnDeliveryListingAddDeliveryItem : Button = view.findViewById(R.id.btnDeliveryListingAddDeliveryItem)
         val btnDeliveryDetail : Button = view.findViewById(R.id.btnDeliveryDetail)
-        val btnEditDelivery : Button = view.findViewById(R.id.btnEditDelivery)
         val btnDeleteDelivery : Button = view.findViewById(R.id.btnDeleteDelivery)
 
     }

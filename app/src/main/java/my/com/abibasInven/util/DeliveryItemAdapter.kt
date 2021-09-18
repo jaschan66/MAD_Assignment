@@ -3,7 +3,6 @@ package my.com.abibasInven.util
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
@@ -12,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.logindemo.util.toBitmap
 import my.com.abibasInven.R
 import my.com.abibasInven.data.DeliveryItem
-
-import my.com.abibasInven.data.Product
 
 class DeliveryItemAdapter (
     val fn: (DeliveryItemAdapter.ViewHolder, DeliveryItem) -> Unit = { _, _ ->}
@@ -28,6 +25,9 @@ class DeliveryItemAdapter (
         val lblDeliveryItemID : TextView = view.findViewById(R.id.lblDeliveryItemID)
         val imgDeliveryItemPhoto : ImageView = view.findViewById(R.id.imgDeliveryItemPhoto)
         val lblDeliveryItemQty : TextView = view.findViewById(R.id.lblDeliveryItemQty)
+        val btnDeliveryItemEdit : TextView = view.findViewById(R.id.btnDeliveryItemEdit)
+        val btnDeliveryItemDelete : TextView = view.findViewById(R.id.btnDeliveryItemDelete)
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeliveryItemAdapter.ViewHolder {
@@ -39,11 +39,9 @@ class DeliveryItemAdapter (
 
     override fun onBindViewHolder(holder: DeliveryItemAdapter.ViewHolder, position: Int) {
         val deliveryItem = getItem(position)
-
         holder.lblDeliveryItemID.text = deliveryItem.ID
         holder.imgDeliveryItemPhoto.setImageBitmap(deliveryItem.deliveryItemPhoto.toBitmap())
         holder.lblDeliveryItemQty.text = deliveryItem.deliveryQty.toString()
-
 
         fn(holder, deliveryItem)
     }
