@@ -92,14 +92,12 @@ class ProductViewModel : ViewModel() {
     }
 
     fun validate(p: Product): String {
-        val regxName = Regex("^[\\p{L} .'-]+$")
         var errorMessage = ""
 
         errorMessage += if (p.categoryID == "") "- Product name is required. \n"
         else ""
 
         errorMessage += if (p.name == "") "- Name is required. \n"
-        else if (!p.name.matches(regxName)) "- Name is invalid. \n"
         else ""
 
         errorMessage += if (p.locationID == "") "- Product name is required. \n"
@@ -120,18 +118,40 @@ class ProductViewModel : ViewModel() {
         return errorMessage
     }
 
-    fun validID(id: String): String {
-        val newID: String
-        val getLastProduct = product.value?.lastOrNull()?.ID.toString()
+    fun validID(): String {
+        var newID: String
 
-        return if (idExists(id)) {
-            val num: String = getLastProduct.substringAfterLast("PR")
-            newID = "PR" + (num.toIntOrNull()?.plus(1)).toString()
-            newID
-        } else {
-            newID = "PR" + (calSize() + 1).toString()
-            newID
+        val getLastProduct = product.value?.lastOrNull()?.ID.toString()
+        val num: String = getLastProduct.substringAfterLast("PR10")
+        newID = "PR10" + (num.toIntOrNull()?.plus(1)).toString()
+
+        if (newID == "PR1010") {
+            newID = "PR1" + (num.toIntOrNull()?.plus(1)).toString()
+            return newID
         }
+
+        return when (calSize()) {
+            0 -> {
+                newID = "PR10" + (calSize() + 1)
+                newID
+            }
+            in 1..8 -> {
+                val getLastProduct = product.value?.lastOrNull()?.ID.toString()
+                val num: String = getLastProduct.substringAfterLast("PR10")
+                newID = "PR10" + (num.toIntOrNull()?.plus(1)).toString()
+                if (newID == "PR10null") {
+                    newID = "PR111"
+                    newID
+                } else newID
+            }
+            else -> {
+                val getLastProduct = product.value?.lastOrNull()?.ID.toString()
+                val num: String = getLastProduct.substringAfterLast("PR1")
+                newID = "PR1" + (num.toIntOrNull()?.plus(1)).toString()
+                newID
+            }
+        }
+
     }
 
 }

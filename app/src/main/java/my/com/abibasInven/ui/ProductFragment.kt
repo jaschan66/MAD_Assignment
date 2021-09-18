@@ -52,6 +52,9 @@ class ProductFragment : Fragment() {
 
         binding = FragmentProductBinding.inflate(inflater, container, false)
 
+        val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        bottomNav.visibility = View.VISIBLE
+
         // TODO
         vmSpn.getLocation()
         vmSpn.getSupplierName()
@@ -115,6 +118,7 @@ class ProductFragment : Fragment() {
         }
         binding.productrv.adapter = adapter
         binding.productrv.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+        binding.productrv.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.HORIZONTAL))
 
         vm.getResult().observe(viewLifecycleOwner) {
             adapter.submitList(it)

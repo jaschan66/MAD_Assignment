@@ -16,6 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.logindemo.util.cropToBlob
 import com.example.logindemo.util.errorDialog
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
@@ -42,7 +43,8 @@ class ProductAddFragment : Fragment() {
 
         binding = FragmentProductAddBinding.inflate(inflater, container, false)
 
-
+        val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        bottomNav.visibility = View.GONE
         binding.btnResetAddProduct.setOnClickListener { reset() }
 
         val spnLoc = vmSpn.getLocation()
@@ -138,8 +140,7 @@ class ProductAddFragment : Fragment() {
 
 
         binding.btnAddProduct.setOnClickListener {
-            val id = "PR" + (vmPro.calSize() + 1).toString()
-            val chkID = vmPro.validID(id)
+            var chkID = vmPro.validID()
             var locID = binding.spnAddProductLocation.selectedItem.toString()
             var supID = binding.spnAddProductSupplier.selectedItem.toString()
             var catID = binding.spnAddProductCategory.selectedItem.toString()
@@ -179,7 +180,7 @@ class ProductAddFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             var result = CropImage.getActivityResult(data)
-            binding.imgAddProductPhoto.setImageURI(result.uri)
+            if (result != null) binding.imgAddProductPhoto.setImageURI(result.uri)
 
         }
     }
