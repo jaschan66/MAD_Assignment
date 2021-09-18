@@ -75,7 +75,7 @@ class UserChgPicFragment : Fragment() {
             binding.imgChgProfile.setImageResource(R.drawable.ic_adding)
         }
 
-        binding.imgChgProfile.setOnClickListener { chooseImage() }
+
 
 
         // TODO
@@ -111,7 +111,7 @@ class UserChgPicFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             var result = CropImage.getActivityResult(data)
-            binding.imgChgProfile.setImageURI(result.uri)
+            if (result != null) binding.imgChgProfile.setImageURI(result.uri)
 
         }
     }

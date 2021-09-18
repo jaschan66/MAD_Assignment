@@ -1,6 +1,7 @@
 package my.com.abibasInven.ui
 
 import android.app.Activity
+import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.logindemo.util.cropToBlob
 import com.example.logindemo.util.errorDialog
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.theartofdev.edmodo.cropper.CropImage
 import my.com.abibasInven.R
 import my.com.abibasInven.data.User
 import my.com.abibasInven.data.UserViewModel
@@ -44,7 +46,12 @@ class RegisterUserFragment : Fragment() {
         binding = FragmentRegisterUserBinding.inflate(inflater, container, false)
         // TODO
         binding.addImgView.setImageResource(R.drawable.ic_addimg)
-        binding.addImgView.setOnClickListener { chooseImage() }
+        binding.addImgView.setOnClickListener { try {
+            CropImage.activity()
+                .start(requireContext(),this)
+        } catch (e: ActivityNotFoundException) {
+
+        } }
         binding.btnCreateUser.setOnClickListener { createUser() }
 
 
@@ -73,10 +80,12 @@ class RegisterUserFragment : Fragment() {
         }
     }
 
-    private fun chooseImage() {
-        val intent = Intent(Intent.ACTION_GET_CONTENT)
-        intent.type = "image/*"
-        launcher.launch(intent)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            var result = CropImage.getActivityResult(data)
+            if (result != null) binding.addImgView.setImageURI(result.uri)
+
+        }
     }
 
 }

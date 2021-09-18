@@ -1,6 +1,7 @@
 package my.com.abibasInven.ui
 
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,6 +15,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.logindemo.util.errorDialog
 import com.example.logindemo.util.informationDialog
+import com.example.logindemo.util.snackbar
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.AuthResult
@@ -25,6 +27,7 @@ import my.com.abibasInven.R
 import my.com.abibasInven.data.ProductViewModel
 import my.com.abibasInven.data.UserViewModel
 import my.com.abibasInven.data.emailLogin
+import my.com.abibasInven.data.passwordLogin
 import my.com.abibasInven.databinding.FragmentAccountBinding
 import my.com.abibasInven.databinding.FragmentLoginBinding
 
@@ -35,8 +38,7 @@ class LoginFragment : Fragment() {
     private val nav by lazy {findNavController()}
     private val vm: UserViewModel by activityViewModels()
     private val vmPro: ProductViewModel by activityViewModels()
-//    private lateinit var auth: FirebaseAuth
-   // private val PREFS_NAME = "PrefsFile"
+
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -47,12 +49,28 @@ class LoginFragment : Fragment() {
         val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
         bottomNav.visibility = View.GONE
         vmPro.getProductLessQty()
+        vm.get(emailLogin)
 
+
+        val preferences = activity?.getSharedPreferences("checkBo", MODE_PRIVATE)
+        val checkbox = preferences?.getString("remember","")
+
+
+
+        if (checkbox == "true") {
+            vm.getAll()
+            val message = "Successfully login"
+            informationDialog(message)
+            nav.navigate(R.id.productFragment)
+        }else if(checkbox == "false"){
+            super.onCreate(savedInstanceState)
+        }
 
         binding.btnForgetPass.setOnClickListener {
             val email    = binding.edtLoginEmail.text.toString().trim()
             nav.navigate(R.id.forgotPasswordFragment, bundleOf("email" to email))
         }
+
 
 
 
@@ -66,6 +84,42 @@ class LoginFragment : Fragment() {
 //        }
 
 
+
+        binding.chkRmbMe.setOnCheckedChangeListener { compoundButton, b ->
+            if(compoundButton.isChecked){
+                val sharedPref = activity?.getSharedPreferences("checkBo", MODE_PRIVATE)
+                val editor : SharedPreferences.Editor = sharedPref!!.edit()
+                editor.putString("remember","true")
+                editor.apply()
+            }
+            else if (!compoundButton.isChecked){
+                val sharedPref = activity?.getSharedPreferences("checkBo", MODE_PRIVATE)
+                val editor : SharedPreferences.Editor = sharedPref!!.edit()
+                editor.putString("remember","false")
+                editor.apply()
+            }
+        }
+
+
+//        binding.chkRmbMe.setOnCheckedChangeListener(new CompundButton.OnCheckedChangeListener(){
+//            @Override
+//            public void onCheckChanged(CompoundButton compundButton, boolean b) {
+//
+//                if(compoundButton.isChecked()){
+//                    SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = preferences.edit();
+//                    editor.putString("remember","true");
+//                    editor.apply();
+//
+//                }else if (!compoundButton.isChecked()){
+//                    SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+//                    SharedPreferences.Editor editor = preferences.edit();
+//                    editor.putString("remember","false");
+//                    editor.apply();
+//                }
+//
+//            }
+//        })
 
         binding.btnLogin.setOnClickListener {
             val email    = binding.edtLoginEmail.text.toString().trim()
@@ -83,7 +137,12 @@ class LoginFragment : Fragment() {
                                     val message = "Successfully login"
                                     informationDialog(message)
                                     emailLogin = email
-                                    nav.navigate(R.id.accountFragment)
+                                    passwordLogin = password
+                                    nav.navigate(R.id.productFragment)
+                                    val sharedPref = activity?.getSharedPreferences("email", MODE_PRIVATE)
+                                    val editor : SharedPreferences.Editor = sharedPref!!.edit()
+                                    editor.putString("emailLoginRmb",email)
+                                    editor.apply()
                                 }
                                 else {
                                     u.attempt = u.attempt + 1

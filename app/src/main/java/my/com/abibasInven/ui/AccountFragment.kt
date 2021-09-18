@@ -1,5 +1,7 @@
 package my.com.abibasInven.ui
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -23,10 +25,7 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 import my.com.abibasInven.R
-import my.com.abibasInven.data.User
-import my.com.abibasInven.data.UserViewModel
-import my.com.abibasInven.data.emailLogin
-import my.com.abibasInven.data.img
+import my.com.abibasInven.data.*
 import my.com.abibasInven.databinding.FragmentAccountBinding
 
 
@@ -44,13 +43,26 @@ class AccountFragment : Fragment() {
         val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
         bottomNav.visibility = View.VISIBLE
 
-        val u = vm.get(emailLogin)
+
+
+        val preferences = activity?.getSharedPreferences("email", Context.MODE_PRIVATE)
+        val emailLoginRMB = preferences?.getString("emailLoginRmb","")
+//        if (emailLoginRMB != null) {
+//            emailLogin = emailLoginRMB
+//        }
+//        if (emailLoginRMB != null) {
+//            vm.get(emailLoginRMB)
+//        }
+
+
+
+        val u = emailLoginRMB?.let { vm.get(it) }
         val password = u?.password
         val args = bundleOf(
-            "email" to emailLogin
+            "email" to emailLoginRMB
         )
 
-        val s = vm.get(emailLogin)
+        val s = emailLoginRMB?.let { vm.get(it) }
 
         if(img == Blob.fromBytes(ByteArray(0))){
             if (s != null) {
@@ -99,10 +111,16 @@ class AccountFragment : Fragment() {
 
     private fun logout() {
         emailLogin = ""
+        passwordLogin = ""
         img = Blob.fromBytes(ByteArray(0))
-
+        val sharedPref = activity?.getSharedPreferences("checkBo", Context.MODE_PRIVATE)
+        val editor : SharedPreferences.Editor = sharedPref!!.edit()
+        editor.putString("remember","false")
+        editor.apply()
         FirebaseAuth.getInstance().signOut()
         nav.navigate(R.id.loginFragment)
+
+
     }
 //    fun reset() {
 //
