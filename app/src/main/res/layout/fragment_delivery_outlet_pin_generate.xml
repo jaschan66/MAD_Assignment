@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="276dp"
-        android:text="Generate pin"
+        android:text="@string/generate_pin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="65dp"
-        android:text="PIN :"
+        android:text="@string/pin"
         android:textSize="28sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline36"
         app:layout_constraintTop_toBottomOf="@+id/btnOutletGeneratePin" />

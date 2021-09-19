@@ -11,7 +11,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
-        android:text="A5"
+        android:text="@string/a5"
         app:layout_constraintEnd_toEndOf="@+id/btnLocationDetailQRCompartment2"
         app:layout_constraintStart_toStartOf="@+id/btnLocationDetailQRCompartment2"
         app:layout_constraintTop_toBottomOf="@+id/btnLocationDetailQRCompartment2" />
@@ -21,7 +21,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
-        android:text="A6"
+        android:text="@string/a6"
         app:layout_constraintEnd_toEndOf="@+id/btnLocationDetailQRCompartment3"
         app:layout_constraintStart_toStartOf="@+id/btnLocationDetailQRCompartment3"
         app:layout_constraintTop_toBottomOf="@+id/btnLocationDetailQRCompartment3" />
@@ -31,7 +31,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
-        android:text="A4"
+        android:text="@string/a4"
         app:layout_constraintEnd_toEndOf="@+id/btnLocationDetailQRCompartment1"
         app:layout_constraintStart_toStartOf="@+id/btnLocationDetailQRCompartment1"
         app:layout_constraintTop_toBottomOf="@+id/btnLocationDetailQRCompartment1" />
@@ -42,7 +42,7 @@
         android:layout_height="60dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="4dp"
-        android:text="A3"
+        android:text="@string/a3"
         app:layout_constraintEnd_toStartOf="@+id/guideline46"
         app:layout_constraintTop_toBottomOf="@+id/lblTitle3" />
 
@@ -51,7 +51,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="28dp"
-        android:text="A2"
+        android:text="@string/a2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.524"
         app:layout_constraintStart_toStartOf="parent"
@@ -77,10 +77,11 @@
         android:id="@+id/btnLocationDetailQRCompartment1"
         android:layout_width="60dp"
         android:layout_height="60dp"
+        android:layout_marginStart="103dp"
         android:layout_marginTop="28dp"
-        android:text="A1"
-        app:layout_constraintTop_toBottomOf="@+id/lblTitle3"
-        tools:layout_editor_absoluteX="103dp" />
+        android:text="@string/a1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblTitle3" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline44"
@@ -111,7 +112,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Product name"
+        android:text="@string/product_name"
         android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/guideline45"
         app:layout_constraintTop_toBottomOf="@+id/lblLocationScanQRProductDetail" />
@@ -121,7 +122,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="TextView"
+        android:text="@string/textview"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/textView27"
         app:layout_constraintStart_toStartOf="@+id/guideline45"
@@ -133,7 +134,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
-        android:text="Product photo"
+        android:text="@string/product_photo"
         android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/guideline45"
         app:layout_constraintTop_toBottomOf="@+id/textView27" />
@@ -143,10 +144,12 @@
         android:layout_width="95dp"
         android:layout_height="102dp"
         android:layout_marginStart="20dp"
+        android:contentDescription="@string/product_photo"
         app:layout_constraintBottom_toBottomOf="@+id/textView45"
         app:layout_constraintStart_toStartOf="@+id/guideline45"
         app:layout_constraintTop_toTopOf="@+id/textView45"
         app:layout_constraintVertical_bias="0.493"
+        tools:ignore="ImageContrastCheck"
         tools:src="@tools:sample/avatars" />
 
     <TextView
@@ -154,7 +157,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:text="Product quantity"
+        android:text="@string/product_quantity"
         android:textColor="@color/black"
         app:layout_constraintEnd_toStartOf="@+id/guideline45"
         app:layout_constraintTop_toBottomOf="@+id/textView45" />
@@ -164,7 +167,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:text="TextView"
+        android:text="@string/textview"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@+id/textView48"
         app:layout_constraintStart_toStartOf="@+id/guideline45"
@@ -175,17 +178,26 @@
         android:id="@+id/btnLocationScanQRClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="226dp"
         android:layout_marginTop="28dp"
-        android:text="Close"
-        app:layout_constraintTop_toBottomOf="@+id/lblLocationScanQRProductQuantity"
-        tools:layout_editor_absoluteX="226dp" />
+        android:layout_marginEnd="97dp"
+        android:layout_marginBottom="54dp"
+        android:text="@string/close"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblLocationScanQRProductQuantity" />
 
     <TextView
         android:id="@+id/lblLocationScanQRProductDetail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp"
+        android:text="@string/textview"
         android:textColor="@color/black"
-        tools:layout_editor_absoluteX="185dp"
-        tools:layout_editor_absoluteY="335dp" />
+        app:layout_constraintBottom_toTopOf="@+id/textView27"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLocationDetailQRCompartment5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

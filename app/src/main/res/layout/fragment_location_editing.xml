@@ -12,7 +12,7 @@
         android:layout_height="51dp"
         android:layout_marginStart="2dp"
         android:layout_marginTop="16dp"
-        android:text="Update"
+        android:text="@string/update"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline28"
@@ -31,7 +31,9 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView17"
         app:layout_constraintStart_toStartOf="@+id/guideline27"
         app:layout_constraintTop_toTopOf="@+id/textView17"
-        app:layout_constraintVertical_bias="0.533" />
+        app:layout_constraintVertical_bias="0.533"
+        tools:ignore="SpeakableTextPresentCheck"
+        android:importantForAutofill="no" />
 
     <Spinner
         android:id="@+id/spnCategory2"
@@ -41,7 +43,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView14"
         app:layout_constraintStart_toStartOf="@+id/guideline27"
         app:layout_constraintTop_toTopOf="@+id/textView14"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textView17"
@@ -49,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="14dp"
-        android:text="Max Capacity"
+        android:text="@string/max_capacity"
         app:layout_constraintEnd_toStartOf="@+id/guideline27"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
@@ -58,7 +61,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
-        android:text="Details"
+        android:text="@string/details"
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="14dp"
-        android:text="Category"
+        android:text="@string/category"
         app:layout_constraintEnd_toStartOf="@+id/guideline27"
         app:layout_constraintTop_toBottomOf="@+id/lblCompartmentDetails2" />
 
@@ -80,7 +83,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
-        android:text="A6"
+        android:text="@string/a6"
         app:layout_constraintEnd_toEndOf="@+id/btnUpdateCompartment3"
         app:layout_constraintStart_toStartOf="@+id/btnUpdateCompartment3"
         app:layout_constraintTop_toBottomOf="@+id/btnUpdateCompartment3" />
@@ -90,7 +93,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
-        android:text="A5"
+        android:text="@string/a5"
         app:layout_constraintEnd_toEndOf="@+id/btnUpdateCompartment2"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/btnUpdateCompartment2"
@@ -101,7 +104,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="24dp"
-        android:text="A3"
+        android:text="@string/a3"
         app:layout_constraintEnd_toStartOf="@+id/guideline28"
         app:layout_constraintTop_toBottomOf="@+id/lblTitle2" />
 
@@ -110,7 +113,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="24dp"
-        android:text="A2"
+        android:text="@string/a2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -121,7 +124,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="16dp"
-        android:text="A4"
+        android:text="@string/a4"
         app:layout_constraintEnd_toEndOf="@+id/btnUpdateCompartment1"
         app:layout_constraintStart_toStartOf="@+id/btnUpdateCompartment1"
         app:layout_constraintTop_toBottomOf="@+id/btnUpdateCompartment1" />
@@ -131,7 +134,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginTop="24dp"
-        android:text="A1"
+        android:text="@string/a1"
         app:layout_constraintStart_toStartOf="@+id/guideline26"
         app:layout_constraintTop_toBottomOf="@+id/lblTitle2" />
 
@@ -180,13 +183,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:text="Location Editing"
+        android:text="@string/location_editing"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnBackForLocationEditing"
-        android:layout_width="40dp"
+        android:layout_width="48dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
@@ -198,5 +201,6 @@
         app:layout_constraintHorizontal_bias="0.133"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="SpeakableTextPresentCheck" />
 </androidx.constraintlayout.widget.ConstraintLayout>
