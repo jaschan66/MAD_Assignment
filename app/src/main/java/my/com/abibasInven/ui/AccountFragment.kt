@@ -117,8 +117,12 @@ class AccountFragment : Fragment() {
         val editor : SharedPreferences.Editor = sharedPref!!.edit()
         editor.putString("remember","false")
         editor.apply()
+        val sharedPref1 = activity?.getSharedPreferences("email", Context.MODE_PRIVATE)
+        val editor1 : SharedPreferences.Editor = sharedPref1!!.edit()
+        editor1.putString("emailLoginRmb","")
+        editor1.apply()
         FirebaseAuth.getInstance().signOut()
-        nav.navigate(R.id.loginFragment)
+        nav.navigate(R.id.action_accountFragment_to_loginFragment)
 
 
     }

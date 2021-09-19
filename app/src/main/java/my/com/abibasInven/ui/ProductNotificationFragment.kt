@@ -40,8 +40,9 @@ class ProductNotificationFragment : Fragment() {
 
         vmSup.getAllSupplier()
 
-        adapter = ProductNotificationAdapter() { holder, product ->
+        binding.btnBack.setOnClickListener { nav.navigate(R.id.action_productNotificationFragment_to_productFragment) }
 
+        adapter = ProductNotificationAdapter() { holder, product ->
             holder.root.setOnClickListener {
                 nav.navigate(R.id.supplierDetailsFragment, bundleOf("suppId" to product.supplierID))
             }

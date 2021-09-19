@@ -36,6 +36,8 @@ class ForgotPasswordFragment : Fragment() {
         val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
         bottomNav.visibility = View.GONE
 
+        binding.btnBackForgotPassword.setOnClickListener { nav.navigate(R.id.action_forgotPasswordFragment_to_loginFragment) }
+
         // TODO
         vm.getAll()
 

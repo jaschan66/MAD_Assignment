@@ -53,7 +53,7 @@ class RegisterUserFragment : Fragment() {
 
         } }
         binding.btnCreateUser.setOnClickListener { createUser() }
-
+        binding.btnBackRegisterUser.setOnClickListener { nav.navigate(R.id.action_registerUserFragment_to_registerFragment) }
 
         return binding.root
     }

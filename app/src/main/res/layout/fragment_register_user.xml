@@ -7,6 +7,16 @@
     android:outlineProvider="none"
     tools:context=".ui.RegisterUserFragment">
 
+    <TextView
+        android:id="@+id/btnBackRegisterUser"
+        android:layout_width="55dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:drawableStart="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline8"
         android:layout_width="wrap_content"

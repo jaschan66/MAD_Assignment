@@ -114,7 +114,7 @@ class ProductViewModel : ViewModel() {
         errorMessage += if (p.photo.toBytes().isEmpty()) "- Product photo is required. \n"
         else ""
 
-        errorMessage += if (p.qtyThreshold == 0) "- Product quantity threshold is required. \n"
+        errorMessage += if (p.qtyThreshold <= 0) "- Product quantity threshold is required. \n"
         else ""
 
 

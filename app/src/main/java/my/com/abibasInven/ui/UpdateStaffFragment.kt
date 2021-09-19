@@ -34,7 +34,7 @@ class UpdateStaffFragment : Fragment() {
 
 
         binding = FragmentUpdateStaffBinding.inflate(inflater, container, false)
-
+        binding.btnBackUpdateStaff.setOnClickListener { nav.navigate(R.id.action_updateStaffFragment_to_staffListFragment) }
         reset()
         val s = vm.get(email)
         binding.edtUpdateStaffName.isEnabled = false

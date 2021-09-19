@@ -3,12 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/deliveryListingFragment">
+    app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/accountFragment"
         android:name="my.com.abibasInven.ui.AccountFragment"
         android:label="fragment_account"
-        tools:layout="@layout/fragment_account" />
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_accountFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/homeFragment"
         android:name="my.com.abibasInven.ui.HomeFragment"
@@ -28,22 +34,46 @@
         android:id="@+id/registerFragment"
         android:name="my.com.abibasInven.ui.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_staffListFragment"
+            app:destination="@id/staffListFragment"
+            app:popUpTo="@id/staffListFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/registerUserFragment"
         android:name="my.com.abibasInven.ui.RegisterUserFragment"
         android:label="fragment_register_user"
-        tools:layout="@layout/fragment_register_user" />
+        tools:layout="@layout/fragment_register_user" >
+        <action
+            android:id="@+id/action_registerUserFragment_to_registerFragment"
+            app:destination="@id/registerFragment"
+            app:popUpTo="@id/registerFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"
         android:name="my.com.abibasInven.ui.ForgotPasswordFragment"
         android:label="fragment_forgot_password"
-        tools:layout="@layout/fragment_forgot_password" />
+        tools:layout="@layout/fragment_forgot_password" >
+        <action
+            android:id="@+id/action_forgotPasswordFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/resetPasswordFragment"
         android:name="my.com.abibasInven.ui.ResetPasswordFragment"
         android:label="fragment_reset_password"
-        tools:layout="@layout/fragment_reset_password" />
+        tools:layout="@layout/fragment_reset_password" >
+        <action
+            android:id="@+id/action_resetPasswordFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/locationListingFragment"
         android:name="my.com.abibasInven.ui.LocationListingFragment"
@@ -58,12 +88,24 @@
         android:id="@+id/staffListFragment"
         android:name="my.com.abibasInven.ui.StaffListFragment"
         android:label="fragment_staff_list"
-        tools:layout="@layout/fragment_staff_list" />
+        tools:layout="@layout/fragment_staff_list" >
+        <action
+            android:id="@+id/action_staffListFragment_to_accountFragment"
+            app:destination="@id/accountFragment"
+            app:popUpTo="@id/accountFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/updateStaffFragment"
         android:name="my.com.abibasInven.ui.UpdateStaffFragment"
         android:label="fragment_update_staff"
-        tools:layout="@layout/fragment_update_staff" />
+        tools:layout="@layout/fragment_update_staff" >
+        <action
+            android:id="@+id/action_updateStaffFragment_to_staffListFragment"
+            app:destination="@id/staffListFragment"
+            app:popUpTo="@id/staffListFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/locationAddingFragment"
         android:name="my.com.abibasInven.ui.LocationAddingFragment"
@@ -73,7 +115,13 @@
         android:id="@+id/staffDetailsFragment"
         android:name="my.com.abibasInven.ui.StaffDetailsFragment"
         android:label="fragment_staff_details"
-        tools:layout="@layout/fragment_staff_details" />
+        tools:layout="@layout/fragment_staff_details" >
+        <action
+            android:id="@+id/action_staffDetailsFragment_to_staffListFragment"
+            app:destination="@id/staffListFragment"
+            app:popUpTo="@id/staffListFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/supplierAddFragment"
         android:name="my.com.abibasInven.ui.SupplierAddFragment"
@@ -83,7 +131,13 @@
         android:id="@+id/userChgPicFragment"
         android:name="my.com.abibasInven.ui.UserChgPicFragment"
         android:label="fragment_user_chg_pic"
-        tools:layout="@layout/fragment_user_chg_pic" />
+        tools:layout="@layout/fragment_user_chg_pic" >
+        <action
+            android:id="@+id/action_userChgPicFragment_to_accountFragment"
+            app:destination="@id/accountFragment"
+            app:popUpTo="@id/accountFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/supplierListFragment"
         android:name="my.com.abibasInven.ui.SupplierListFragment"
@@ -108,7 +162,13 @@
         android:id="@+id/productAddFragment"
         android:name="my.com.abibasInven.ui.ProductAddFragment"
         android:label="fragment_product_add"
-        tools:layout="@layout/fragment_product_add" />
+        tools:layout="@layout/fragment_product_add" >
+        <action
+            android:id="@+id/action_productAddFragment_to_productFragment"
+            app:destination="@id/productFragment"
+            app:popUpTo="@id/productFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/supplierDetailsFragment"
         android:name="my.com.abibasInven.ui.SupplierDetailsFragment"
@@ -133,12 +193,24 @@
         android:id="@+id/productUpdateFragment"
         android:name="my.com.abibasInven.ui.ProductUpdateFragment"
         android:label="fragment_product_update"
-        tools:layout="@layout/fragment_product_update" />
+        tools:layout="@layout/fragment_product_update" >
+        <action
+            android:id="@+id/action_productUpdateFragment_to_productFragment"
+            app:destination="@id/productFragment"
+            app:popUpTo="@id/productFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/productDetailFragment"
         android:name="my.com.abibasInven.ui.ProductDetailFragment"
         android:label="fragment_product_detail"
-        tools:layout="@layout/fragment_product_detail" />
+        tools:layout="@layout/fragment_product_detail" >
+        <action
+            android:id="@+id/action_productDetailFragment_to_productFragment"
+            app:destination="@id/productFragment"
+            app:popUpTo="@id/productFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/categoryUpdateFragment"
         android:name="my.com.abibasInven.ui.CategoryUpdateFragment"
@@ -163,7 +235,13 @@
         android:id="@+id/productNotificationFragment"
         android:name="my.com.abibasInven.ui.ProductNotificationFragment"
         android:label="fragment_product_notification"
-        tools:layout="@layout/fragment_product_notification" />
+        tools:layout="@layout/fragment_product_notification" >
+        <action
+            android:id="@+id/action_productNotificationFragment_to_productFragment"
+            app:destination="@id/productFragment"
+            app:popUpTo="@id/productFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/deliveryItemListingFragment"
         android:name="my.com.abibasInven.ui.DeliveryItemListingFragment"
@@ -204,4 +282,24 @@
         android:name="my.com.abibasInven.ui.OutletUpdateFragment"
         android:label="fragment_outlet_update"
         tools:layout="@layout/fragment_outlet_update" />
+    <fragment
+        android:id="@+id/stockInSelectMethodFragment"
+        android:name="my.com.abibasInven.ui.StockInSelectMethodFragment"
+        android:label="fragment_stock_in_select_method"
+        tools:layout="@layout/fragment_stock_in_select_method" />
+    <action
+        android:id="@+id/action_global_accountFragment"
+        app:destination="@id/accountFragment"
+        app:popUpTo="@id/accountFragment"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_productFragment"
+        app:destination="@id/productFragment"
+        app:popUpTo="@id/productFragment"
+        app:popUpToInclusive="true" />
+    <action
+        android:id="@+id/action_global_loginFragment"
+        app:destination="@id/loginFragment"
+        app:popUpTo="@id/loginFragment"
+        app:popUpToInclusive="true" />
 </navigation>

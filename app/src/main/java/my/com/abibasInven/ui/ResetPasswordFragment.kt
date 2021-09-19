@@ -1,5 +1,7 @@
 package my.com.abibasInven.ui
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,8 +15,12 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.Blob
 import my.com.abibasInven.R
 import my.com.abibasInven.data.UserViewModel
+import my.com.abibasInven.data.emailLogin
+import my.com.abibasInven.data.img
+import my.com.abibasInven.data.passwordLogin
 import my.com.abibasInven.databinding.FragmentForgotPasswordBinding
 import my.com.abibasInven.databinding.FragmentHomeBinding
 import my.com.abibasInven.databinding.FragmentResetPasswordBinding
@@ -63,7 +69,8 @@ class ResetPasswordFragment : Fragment() {
                                             vm.set(u)
                                             informationDialog("Successful change the password")
                                             auth.signOut()
-                                            nav.navigate(R.id.loginFragment)
+                                            logout()
+                                            nav.navigate(R.id.action_resetPasswordFragment_to_loginFragment)
                                         }
                                     }
                             } else {
@@ -87,6 +94,23 @@ class ResetPasswordFragment : Fragment() {
     }
     private fun checkIfEmpty(newPass: String, newConPass: String): Boolean {
         return newPass == "" || newConPass == ""
+    }
+
+    private fun logout() {
+        emailLogin = ""
+        passwordLogin = ""
+        img = Blob.fromBytes(ByteArray(0))
+        val sharedPref = activity?.getSharedPreferences("checkBo", Context.MODE_PRIVATE)
+        val editor : SharedPreferences.Editor = sharedPref!!.edit()
+        editor.putString("remember","false")
+        editor.apply()
+        val sharedPref1 = activity?.getSharedPreferences("email", Context.MODE_PRIVATE)
+        val editor1 : SharedPreferences.Editor = sharedPref1!!.edit()
+        editor1.putString("emailLoginRmb","")
+        editor1.apply()
+        FirebaseAuth.getInstance().signOut()
+
+
     }
 
 }

@@ -18,13 +18,7 @@ import my.com.abibasInven.data.User
 import my.com.abibasInven.databinding.FragmentHomeBinding
 import my.com.abibasInven.databinding.FragmentProductUpdateBinding
 import android.R
-
-
-
-
-
-
-
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
 class ProductUpdateFragment : Fragment() {
@@ -38,6 +32,8 @@ class ProductUpdateFragment : Fragment() {
 
         binding = FragmentProductUpdateBinding.inflate(inflater, container, false)
 
+        val bottomNav : BottomNavigationView = requireActivity().findViewById(my.com.abibasInven.R.id.bottomNavigationView)
+        bottomNav.visibility = View.GONE
         reset()
         val p = vmPro.get(ID)
         binding.btnProductReset.setOnClickListener { reset() }
@@ -46,7 +42,7 @@ class ProductUpdateFragment : Fragment() {
                 update(p)
             }
         }
-
+        binding.btnBackUpdateProduct.setOnClickListener { nav.navigate(my.com.abibasInven.R.id.action_productUpdateFragment_to_productFragment) }
 
         return binding.root
 

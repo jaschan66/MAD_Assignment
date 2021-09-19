@@ -1,5 +1,7 @@
 package my.com.abibasInven.ui
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -14,6 +16,11 @@ import my.com.abibasInven.R
 import my.com.abibasInven.data.User
 import my.com.abibasInven.data.UserViewModel
 import my.com.abibasInven.databinding.ActivityMainBinding
+import android.content.DialogInterface
+import com.example.logindemo.util.snackbar
+import com.google.firebase.auth.FirebaseAuth
+import my.com.abibasInven.data.test
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,11 +37,26 @@ class MainActivity : AppCompatActivity() {
             when(it.itemId){
                 R.id.home -> nav.navigate(R.id.homeFragment)
                 R.id.account -> nav.navigate(R.id.accountFragment)
-                R.id.product -> nav.navigate(R.id.productFragment)
+                R.id.product -> nav.navigate(R.id.action_global_productFragment)
 
             }
             true
         }
+    }
+
+    override fun onBackPressed() {
+
+        val num = nav.currentDestination?.label
+
+        when(num){
+            "fragment_product" -> super.finish()
+            "fragment_account" -> super.finish()
+            "fragment_home"    -> super.finish()
+            "fragment_login"   -> super.finish()
+        }
+
+        nav.popBackStack()
+
     }
 
 

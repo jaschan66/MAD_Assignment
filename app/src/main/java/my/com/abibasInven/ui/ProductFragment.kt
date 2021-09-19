@@ -31,12 +31,10 @@ import android.widget.Toast
 import com.example.logindemo.util.errorDialog
 
 import com.google.zxing.integration.android.IntentResult
+import my.com.abibasInven.data.test
 
 
-
-
-
-class ProductFragment : Fragment() {
+class ProductFragment : Fragment(){
 
     private lateinit var binding: FragmentProductBinding
     private val nav by lazy {findNavController()}
@@ -59,18 +57,25 @@ class ProductFragment : Fragment() {
         vmSpn.getLocation()
         vmSpn.getSupplierName()
         val lessQty = vm.getProductLessQty()
-        lessQty.observe(viewLifecycleOwner){
-            if(it.isNotEmpty()){
+        lessQty.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
                 binding.btnNotification.isEnabled = true
-                binding.btnNotification.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_notification_important_24,0,0,0)
-            }
-            else{
-              binding.btnNotification.isEnabled = false
-                binding.btnNotification.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_baseline_notifications_24,0,0,0)
+                binding.btnNotification.setCompoundDrawablesWithIntrinsicBounds(
+                    R.drawable.ic_baseline_notification_important_24,
+                    0,
+                    0,
+                    0
+                )
+            } else {
+                binding.btnNotification.isEnabled = false
+                binding.btnNotification.setCompoundDrawablesWithIntrinsicBounds(
+                    R.drawable.ic_baseline_notifications_24,
+                    0,
+                    0,
+                    0
+                )
             }
         }
-
-
 
 
         binding.productSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -144,6 +149,10 @@ class ProductFragment : Fragment() {
 
     private fun deleteProduct(id: String) {
         vm.remove(id)
+    }
+
+    fun onBackPressed(): Boolean {
+        return test == true
     }
 
 

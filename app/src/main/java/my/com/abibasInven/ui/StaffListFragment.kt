@@ -32,11 +32,12 @@ class StaffListFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
+        vm.search("")
         val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
         bottomNav.visibility = View.GONE
 
         binding = FragmentStaffListBinding.inflate(inflater, container, false)
-
+        binding.btnBackStaffList.setOnClickListener { R.id.action_staffListFragment_to_accountFragment }
         binding.svStaff.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(name: String) = true
             override fun onQueryTextChange(name: String): Boolean {

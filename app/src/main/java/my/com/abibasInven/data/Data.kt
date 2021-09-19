@@ -9,6 +9,7 @@ import kotlin.collections.ArrayList
 var img : Blob = Blob.fromBytes(ByteArray(0))
 var emailLogin : String = ""
 var passwordLogin : String = ""
+var test = false
 //var dli : ArrayList<DeliveryItem> = ArrayList<DeliveryItem>()
 
 

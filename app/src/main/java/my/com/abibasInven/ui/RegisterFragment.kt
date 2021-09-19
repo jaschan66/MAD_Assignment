@@ -27,6 +27,7 @@ class RegisterFragment : Fragment() {
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
 
+        binding.btnBackRegister.setOnClickListener { nav.navigate(R.id.action_registerFragment_to_staffListFragment) }
         binding.btnRegisterNext.setOnClickListener {
 
             val email    = binding.edtRegisteremail.text.toString().trim()

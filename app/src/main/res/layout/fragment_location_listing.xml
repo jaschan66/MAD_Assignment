@@ -61,8 +61,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvLocationListing"
-        android:layout_width="362dp"
-        android:layout_height="469dp"
+        android:layout_width="365dp"
+        android:layout_height="405dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="20dp"

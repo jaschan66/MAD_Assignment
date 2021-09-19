@@ -182,7 +182,7 @@ class LocationListingFragment : Fragment() {
                 if (result.contents == null) {
                     errorDialog("Result not found")
                 } else {
-                    nav.navigate(R.id.locationDetailsFragment, bundleOf("productID" to result.contents))//Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
+                    nav.navigate(R.id.locationDetailsForQRFragment, bundleOf("productID" to result.contents))//Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
                 }
             } else {
                 super.onActivityResult(requestCode, resultCode, data)

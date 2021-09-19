@@ -55,6 +55,8 @@ class ProductAddFragment : Fragment() {
         val spnCategory = vmSpn.getCategory()
         val spnArray3 = arrayListOf<String>()
 
+        binding.btnBackAddProduct.setOnClickListener { nav.navigate(R.id.action_productAddFragment_to_productFragment) }
+
         val adp2 = ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item)
         adp2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spnAddProductLocation.adapter = adp2

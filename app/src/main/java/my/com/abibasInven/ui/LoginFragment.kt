@@ -59,8 +59,6 @@ class LoginFragment : Fragment() {
 
         if (checkbox == "true") {
             vm.getAll()
-            val message = "Successfully login"
-            informationDialog(message)
             nav.navigate(R.id.productFragment)
         }else if(checkbox == "false"){
             super.onCreate(savedInstanceState)
@@ -134,8 +132,6 @@ class LoginFragment : Fragment() {
                                 if (task.isSuccessful) {
                                     u.attempt = 0
                                     vm.set(u)
-                                    val message = "Successfully login"
-                                    informationDialog(message)
                                     emailLogin = email
                                     passwordLogin = password
                                     nav.navigate(R.id.productFragment)

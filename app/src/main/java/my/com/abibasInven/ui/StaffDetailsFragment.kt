@@ -31,6 +31,7 @@ class StaffDetailsFragment : Fragment() {
         // TODO
         val s = vm.get(email)
 
+        binding.btnBackStaffDetails.setOnClickListener { nav.navigate(R.id.action_staffDetailsFragment_to_staffListFragment) }
         binding.staffDetailImg.setImageBitmap(s?.photo?.toBitmap())
         binding.lblDetailStaffName.setText(s?.name)
         binding.lblRole.setText(s?.role)
