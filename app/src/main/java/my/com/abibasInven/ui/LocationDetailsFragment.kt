@@ -59,6 +59,8 @@ class LocationDetailsFragment : Fragment() {
 
         binding.btnBackForLocationEditing2.setOnClickListener { nav.navigateUp() }
         binding.btnCloseLocationDetail.setOnClickListener { nav.navigateUp() }
+
+
         //bottom navigation
 
         binding.bottomNavigationView.selectedItemId = R.id.home

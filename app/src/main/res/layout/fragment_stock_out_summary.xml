@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.StockInSummaryFragment" >
+    tools:context=".ui.StockOutSummaryFragment" >
 
     <TextView
-        android:id="@+id/textView52"
+        android:id="@+id/textView53"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="28dp"
-        android:text="@string/stock_in_summary"
+        android:text="@string/stock_out_summary"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvStockInSummary"
+        android:id="@+id/rvStockOutSummary"
         android:layout_width="369dp"
         android:layout_height="443dp"
         android:layout_marginStart="20dp"
@@ -28,77 +28,73 @@
         android:layout_marginEnd="20dp"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnStockInSummaryAll"
-        tools:listitem="@layout/stockinsummary_rv" />
+        app:layout_constraintTop_toBottomOf="@+id/btnStockOutSummaryDaily"
+        tools:listitem="@layout/stockoutsummary_rv" />
 
     <TextView
-        android:id="@+id/lblStockInSummaryCount"
+        android:id="@+id/lblStockOutSummaryCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="36dp"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvStockInSummary"
-        tools:text="100record(s)" />
+        app:layout_constraintTop_toBottomOf="@+id/rvStockOutSummary"
+        tools:text="100 Record(s)" />
 
     <Button
-        android:id="@+id/btnCloseStockInSummary"
+        android:id="@+id/btnCloseStouckOutSummary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="172dp"
+        android:layout_marginStart="164dp"
         android:text="@string/close"
-        app:layout_constraintBottom_toBottomOf="@+id/lblStockInSummaryCount"
-        app:layout_constraintStart_toEndOf="@+id/lblStockInSummaryCount"
-        app:layout_constraintTop_toTopOf="@+id/lblStockInSummaryCount"
-        app:layout_constraintVertical_bias="0.541" />
+        app:layout_constraintBottom_toBottomOf="@+id/lblStockOutSummaryCount"
+        app:layout_constraintStart_toEndOf="@+id/lblStockOutSummaryCount"
+        app:layout_constraintTop_toTopOf="@+id/lblStockOutSummaryCount"
+        app:layout_constraintVertical_bias="0.625" />
 
     <Button
-        android:id="@+id/btnStockInSummaryMonthly"
+        android:id="@+id/btnStockOutSummaryMonthly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp"
         android:text="@string/monthly"
-        app:layout_constraintBottom_toBottomOf="@+id/btnStockInSummaryWeekly"
+        app:layout_constraintBottom_toBottomOf="@+id/btnStockOutSummaryWeekly"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/btnStockInSummaryWeekly"
-        app:layout_constraintTop_toTopOf="@+id/btnStockInSummaryWeekly"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toEndOf="@+id/btnStockOutSummaryWeekly"
+        app:layout_constraintTop_toTopOf="@+id/btnStockOutSummaryWeekly" />
 
     <Button
-        android:id="@+id/btnStockInSummaryWeekly"
+        android:id="@+id/btnStockOutSummaryWeekly"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
         android:text="@string/weekly"
-        app:layout_constraintBottom_toBottomOf="@+id/btnStockInSummaryDaily"
-        app:layout_constraintStart_toEndOf="@+id/btnStockInSummaryDaily"
-        app:layout_constraintTop_toTopOf="@+id/btnStockInSummaryDaily"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toBottomOf="@+id/btnStockOutSummaryDaily"
+        app:layout_constraintStart_toEndOf="@+id/btnStockOutSummaryDaily"
+        app:layout_constraintTop_toTopOf="@+id/btnStockOutSummaryDaily" />
 
     <Button
-        android:id="@+id/btnStockInSummaryDaily"
+        android:id="@+id/btnStockOutSummaryDaily"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="2dp"
         android:text="@string/daily"
-        app:layout_constraintBottom_toBottomOf="@+id/btnStockInSummaryAll"
-        app:layout_constraintStart_toEndOf="@+id/btnStockInSummaryAll"
-        app:layout_constraintTop_toTopOf="@+id/btnStockInSummaryAll"
+        app:layout_constraintBottom_toBottomOf="@+id/btnStockOutSummaryAll"
+        app:layout_constraintStart_toEndOf="@+id/btnStockOutSummaryAll"
+        app:layout_constraintTop_toTopOf="@+id/btnStockOutSummaryAll"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
-        android:id="@+id/btnStockInSummaryAll"
+        android:id="@+id/btnStockOutSummaryAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:text="@string/all"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView52" />
+        app:layout_constraintTop_toBottomOf="@+id/textView53" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
