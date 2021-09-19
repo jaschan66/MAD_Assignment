@@ -23,6 +23,7 @@ class DeliveryListingFragment : Fragment() {
     private lateinit var binding: FragmentDeliveryListingBinding
     private val nav by lazy {findNavController()}
     private val deliveryvm : DeliveryViewModel by activityViewModels()
+    private val productvm : ProductViewModel by activityViewModels()
     private val deliveryItemvm: DeliveryItemViewModel by activityViewModels()
 
     private lateinit var  adapter: DeliveryAdapter
@@ -43,7 +44,13 @@ class DeliveryListingFragment : Fragment() {
 
             }
             holder.btnDeliveryListingAddDeliveryItem.setOnClickListener {
-                nav.navigate(R.id.deliveryItemAddingFragment,bundleOf("currentDeliveryID" to delivery.ID))
+                if(productvm.getAllProductHaveQty().value == null){
+                    informationDialog("there is no product at store")
+                }
+                else{
+                    nav.navigate(R.id.deliveryItemAddingFragment,bundleOf("currentDeliveryID" to delivery.ID))
+                }
+
 
             }
             holder.btnDeleteDelivery.setOnClickListener {

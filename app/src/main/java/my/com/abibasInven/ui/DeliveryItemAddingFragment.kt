@@ -32,12 +32,16 @@ class DeliveryItemAddingFragment : Fragment() {
 
     private val currentDeliveryID by lazy { requireArguments().getString("currentDeliveryID","N/A") }
 
+
+    private var currentdeliveryItemID = ""
+
     //spnProduct
     private val vmSpn : SpinnerViewModel by activityViewModels()
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
+
 
 
         binding = FragmentDeliveryItemAddingBinding.inflate(inflater, container, false)
@@ -78,10 +82,7 @@ class DeliveryItemAddingFragment : Fragment() {
             }
         }
 
-        if(binding.spnDeliveryProduct2.size==0){
-            nav.navigateUp()
-            informationDialog("there is no product at store")
-        }
+
         binding.lblCurrentDeliveryID4.text = currentDeliveryID
 
         val  foundDeliveryData = deliveryvm.get(currentDeliveryID)
@@ -90,14 +91,22 @@ class DeliveryItemAddingFragment : Fragment() {
 
         if(foundDeliveryData !=null){
             val foundOutletData  = outletvm.get(foundDeliveryData.outletID)
+
+
             if(foundOutletData!=null){
                 binding.lblCurrentOutletName.text = foundOutletData.name
             }
         }
 
 
+
+
+
         binding.btnAddDeliveryItem.setOnClickListener { addDeliveryItem() }
         binding.btnCancelDeliveryItem.setOnClickListener { nav.navigateUp() }
+
+
+
 
         return binding.root
     }
@@ -106,48 +115,79 @@ class DeliveryItemAddingFragment : Fragment() {
 
     private fun addDeliveryItem() {
 
+
+
         // id generator for delivery item
         val id = "DVI" + (deliveryItemvm.calDeliveryItemSize() + 1).toString()
         val deliveryItemID = deliveryItemvm.validID(id)
 
+        currentdeliveryItemID = deliveryItemID
+
+
 //        // id generator for stockOut
-//        val id2 = "SO" + (stockOutvm.calStockOutSize() + 1).toString()
-//        val stockOutID = stockOutvm.validID(id2)
+        val id2 = "SO" + (stockOutvm.calStockOutSize() + 1).toString()
+        val stockOutID = stockOutvm.validID(id2)
 
         val currentDateTime = LocalDateTime.now()
         val dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
 
         // find the product picture by Delivery Item's product ID store in at here
-            val p = productvm.get(binding.spnDeliveryProduct2.selectedItem.toString())
+        val p = productvm.get(binding.spnDeliveryProduct2.selectedItem.toString())
 
 
 
-
-        if (currentDeliveryID != "N/A" && binding.edtDeliveryQty2.text.toString() != "" && binding.edtDeliveryQty2.text.toString().toInt() != 0 && p!=null ) {
-            val newDeliveryItem = DeliveryItem(
-                ID = deliveryItemID,
-                productID = binding.spnDeliveryProduct2.selectedItem.toString(),
-                deliveryQty = binding.edtDeliveryQty2.text.toString().toInt(),
-                deliveryID = currentDeliveryID,
-                deliveryItemPhoto = p!!.photo
-            )
-            deliveryItemvm.set(newDeliveryItem)
-            val updateProduct = Product(
-                ID = p.ID,
-                name = p.name,
-                qty = p.qty - binding.edtDeliveryQty2.text.toString().toInt(),
-                qtyThreshold = p.qtyThreshold,
-                categoryID = p.categoryID,
-                photo = p.photo,
-                locationID = p.locationID,
-                supplierID = p.supplierID,
-            )
-            productvm.set(updateProduct)
-            snackbar(binding.spnDeliveryProduct2.selectedItem.toString() + " has added to " + currentDeliveryID)
+        if(p!=null&&binding.edtDeliveryQty2.text.toString().toInt()>p.qty){
+            errorDialog("product ( ${p.ID} ) only have ${p.qty} quantity")
         }
-        else {
-        errorDialog("delivery quantity cannot be empty or 0 ")
-    }
+        else{
+            if (currentDeliveryID != "N/A" && binding.edtDeliveryQty2.text.toString() != "" && binding.edtDeliveryQty2.text.toString().toInt() != 0 && p!=null ) {
+                val newDeliveryItem = DeliveryItem(
+                    ID = deliveryItemID,
+                    productID = binding.spnDeliveryProduct2.selectedItem.toString(),
+                    deliveryQty = binding.edtDeliveryQty2.text.toString().toInt(),
+                    deliveryID = currentDeliveryID,
+                    deliveryItemPhoto = p!!.photo,
+                    stockOutID = stockOutID,
+                )
+                deliveryItemvm.set(newDeliveryItem)
+
+
+                val updateProduct = Product(
+                    ID = p.ID,
+                    name = p.name,
+                    qty = p.qty - binding.edtDeliveryQty2.text.toString().toInt(),
+                    qtyThreshold = p.qtyThreshold,
+                    categoryID = p.categoryID,
+                    photo = p.photo,
+                    locationID = p.locationID,
+                    supplierID = p.supplierID,
+                )
+                productvm.set(updateProduct)
+
+
+                val newStockOut  = StockOut(
+                    ID = stockOutID,
+                    dateTime = dtf.format(currentDateTime).toString(),
+                    deliveryID = currentDeliveryID,
+                    qty = binding.edtDeliveryQty2.text.toString().toInt(),
+                )
+                stockOutvm.set(newStockOut)
+
+
+
+                snackbar(binding.spnDeliveryProduct2.selectedItem.toString() + " has added to " + currentDeliveryID)
+
+
+
+            }
+            else {
+                errorDialog("delivery quantity cannot be empty or 0 ")
+            }
+        }
+
+
+
+
 
     }
 

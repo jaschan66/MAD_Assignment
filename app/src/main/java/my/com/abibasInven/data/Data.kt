@@ -18,6 +18,7 @@ data class StockOut(
     var ID          : String = "",
     var dateTime    : String = "",
     var deliveryID  : String = "",
+    var qty         : Int = 0,
 )
 
 data class Item(
@@ -113,4 +114,5 @@ data class DeliveryItem(
     var deliveryQty : Int = 0,
     var deliveryID : String = "",
     var deliveryItemPhoto : Blob = Blob.fromBytes(ByteArray(0)),
+    var stockOutID : String = "",
 )

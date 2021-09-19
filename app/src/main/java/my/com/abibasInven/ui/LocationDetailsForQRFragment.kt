@@ -1,5 +1,6 @@
 package my.com.abibasInven.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -55,6 +56,14 @@ class LocationDetailsForQRFragment : Fragment() {
                     lblLocationScanQRProductName.text = foundProductData.name
                     imgLocationScanQRProductPhoto.setImageBitmap(foundProductData.photo.toBitmap())
                     lblLocationScanQRProductQuantity.text = foundProductData.qty.toString()
+                }
+                when(foundProductData.locationID){
+                    binding.btnLocationDetailQRCompartment1.text -> binding.btnLocationDetailQRCompartment1.setBackgroundColor(Color.rgb(247, 177, 106))
+                    binding.btnLocationDetailQRCompartment2.text -> binding.btnLocationDetailQRCompartment2.setBackgroundColor(Color.rgb(247, 177, 106))
+                    binding.btnLocationDetailQRCompartment3.text -> binding.btnLocationDetailQRCompartment3.setBackgroundColor(Color.rgb(247, 177, 106))
+                    binding.btnLocationDetailQRCompartment4.text -> binding.btnLocationDetailQRCompartment4.setBackgroundColor(Color.rgb(247, 177, 106))
+                    binding.btnLocationDetailQRCompartment5.text -> binding.btnLocationDetailQRCompartment5.setBackgroundColor(Color.rgb(247, 177, 106))
+                    binding.btnLocationDetailQRCompartment6.text -> binding.btnLocationDetailQRCompartment6.setBackgroundColor(Color.rgb(247, 177, 106))
                 }
             }
 

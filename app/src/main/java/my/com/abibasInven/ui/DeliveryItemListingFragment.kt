@@ -29,6 +29,7 @@ class DeliveryItemListingFragment : Fragment() {
     private val deliveryItemvm: DeliveryItemViewModel by activityViewModels()
     private val outletvm: OutletViewModel by activityViewModels()
     private val productvm: ProductViewModel by activityViewModels()
+    private val stockOutvm: StockOutViewModel by activityViewModels()
 
     private val currentDeliveryID by lazy { requireArguments().getString("currentDeliveryID","N/A") }
 
@@ -105,6 +106,8 @@ class DeliveryItemListingFragment : Fragment() {
                 "completed"-> snackbar("cannot be cancelled, delivery is completed")
                 "ready"-> {
 
+
+
                     if(foundProductData!=null&&foundDeliveryItemData!=null){
                         val updateProductQty  = Product(
                             ID = foundProductData.ID,
@@ -117,6 +120,8 @@ class DeliveryItemListingFragment : Fragment() {
                             supplierID = foundProductData.supplierID,
                         )
                         productvm.set(updateProductQty)
+                        stockOutvm.remove(foundDeliveryItemData.stockOutID)
+
                     }
 
                     deliveryItemvm.delete(deliveryItemid)

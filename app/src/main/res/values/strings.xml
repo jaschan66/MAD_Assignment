@@ -72,6 +72,12 @@
     <string name="update_category">Update Category</string>
     <string name="logout">Logout</string>
     <string name="password">Password</string>
+    <string name="outlet_hint">Mid Valley</string>
+    <string name="add_outlet">Add Outlet</string>
+    <string name="edit_outlet">Edit Outlet</string>
+    <string name="manual">Manual</string>
+    <string name="stock_in">Stock In</string>
+    <string name="scan_qr">Scan QR</string>
     <string-array name="userRole">
         <item>Manager</item>
         <item>Staff</item>

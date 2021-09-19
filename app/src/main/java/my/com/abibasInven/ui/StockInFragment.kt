@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import my.com.abibasInven.R
@@ -28,15 +29,17 @@ class StockInFragment : Fragment() {
     //spnProduct
     private val vmSpn : SpinnerViewModel by activityViewModels()
 
+    private val productID by lazy { requireArguments().getString("productID","N/A") }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentStockInBinding.inflate(inflater, container, false)
 
 
+
         binding.btnBackForLocationEditing3.setOnClickListener { nav.navigateUp() }
         //binding.spnProduct.selectedItem.toString()
-        binding.btnStockIn.setOnClickListener { updateStockQty("P001") }
 
 
         //spnProduct
@@ -69,19 +72,41 @@ class StockInFragment : Fragment() {
             }
         }
 
+        if(productID!="N/A"){
+            binding.lblCurrentProductID.text = productID
+            binding.spnStockInProduct.isVisible = false
+            binding.btnStockIn.setOnClickListener { updateStockQty(binding.lblCurrentProductID.text.toString()) }
+        }
+        else{
+            binding.lblCurrentProductID.isVisible = false
+            binding.btnStockIn.setOnClickListener { updateStockQty(binding.spnStockInProduct.selectedItem.toString()) }
+        }
+
+
 
         return binding.root
     }
 
     private fun updateStockQty(rackProductID : String) {
+
+
         val currentDateTime = LocalDateTime.now()
         val dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
 
-//        val p = Product(
-//            ID = ""
-//
-//        )
-//        vm.set(p)
+        val foundProductData = vm.get(rackProductID)
+        if(foundProductData!=null){
+            val updateProductQty = Product(
+                ID = foundProductData.ID,
+                name = foundProductData.name,
+                qty = foundProductData.qty+binding.edtRackProductQuantity.text.toString().toInt(),
+                qtyThreshold =  foundProductData.qtyThreshold,
+                categoryID = foundProductData.categoryID,
+                photo = foundProductData.photo,
+                locationID = foundProductData.locationID,
+                supplierID = foundProductData.supplierID,
+            )
+            vm.set(updateProductQty)
+        }
         val s = StockIn(
             ID  = "SI001",
             productID   = rackProductID,

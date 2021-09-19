@@ -12,6 +12,7 @@ class ProductViewModel : ViewModel() {
     private var PRODUCT = listOf<Product>()
     private val product = MutableLiveData<List<Product>>()
     private val productHaveLocation = MutableLiveData<List<Product>>()
+    private val productHaveQty = MutableLiveData<List<Product>>()
     private val productLessQty = MutableLiveData<List<Product>>()
     private var supplierProduct = MutableLiveData<List<Product>>()
     private val result = MutableLiveData<List<Product>>()
@@ -23,6 +24,7 @@ class ProductViewModel : ViewModel() {
         col.addSnapshotListener { it, _ ->
             product.value = it?.toObjects()
             productHaveLocation.value = product.value?.filter { it -> it.locationID != "" }
+            productHaveQty.value = product.value?.filter { it -> it.qty != 0 }
             productLessQty.value = product.value?.filter { it -> it.qty < it.qtyThreshold }
             PRODUCT = it!!.toObjects<Product>()
             updateResult()
@@ -36,6 +38,7 @@ class ProductViewModel : ViewModel() {
     fun getCategoryProduct(cate: String): List<Product>? {
         return product.value?.filter { it -> it.categoryID == cate }
     }
+
 
     fun get(id: String): Product? {
         return product.value?.find { it -> it.ID == id }
@@ -61,6 +64,8 @@ class ProductViewModel : ViewModel() {
 
         result.value = list
     }
+
+    fun getAllProductHaveQty() = productHaveQty
 
     fun getAllProductHaveLocation() = productHaveLocation
 

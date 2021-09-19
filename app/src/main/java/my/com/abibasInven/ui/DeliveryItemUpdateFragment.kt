@@ -11,12 +11,11 @@ import com.example.logindemo.util.errorDialog
 import com.example.logindemo.util.snackbar
 import com.example.logindemo.util.toBitmap
 import my.com.abibasInven.R
-import my.com.abibasInven.data.DeliveryItem
-import my.com.abibasInven.data.DeliveryItemViewModel
-import my.com.abibasInven.data.Product
-import my.com.abibasInven.data.ProductViewModel
+import my.com.abibasInven.data.*
 import my.com.abibasInven.databinding.FragmentDeliveryItemListingBinding
 import my.com.abibasInven.databinding.FragmentDeliveryItemUpdateBinding
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 
 class DeliveryItemUpdateFragment : Fragment() {
@@ -26,6 +25,7 @@ class DeliveryItemUpdateFragment : Fragment() {
     private val nav by lazy {findNavController()}
     private val deliveryItemvm: DeliveryItemViewModel by activityViewModels()
     private val productvm: ProductViewModel by activityViewModels()
+    private val stockOutvm: StockOutViewModel by activityViewModels()
 
     private val currentDeliveryItemID by lazy { requireArguments().getString("currentDeliveryItemID","N/A") }
 
@@ -87,7 +87,8 @@ class DeliveryItemUpdateFragment : Fragment() {
 
         qtyChanges
 
-
+        val currentDateTime = LocalDateTime.now()
+        val dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
 
         if(foundProductData!=null&&foundDeliveryItem!=null){
 
@@ -136,6 +137,7 @@ class DeliveryItemUpdateFragment : Fragment() {
                         deliveryQty = binding.edtUpdateDeliveryItemQty.text.toString().toInt(),
                         deliveryID = foundDeliveryItem.deliveryID,
                         deliveryItemPhoto = foundDeliveryItem.deliveryItemPhoto,
+                        stockOutID = foundDeliveryItem.stockOutID,
                     )
                     deliveryItemvm.set(updateDeliveryItem)
 
@@ -150,6 +152,15 @@ class DeliveryItemUpdateFragment : Fragment() {
                         supplierID = foundProductData.supplierID,
                     )
                     productvm.set(updateProductQty)
+
+                    val newStockOut  = StockOut(
+                        ID = foundDeliveryItem.stockOutID,
+                        dateTime = dtf.format(currentDateTime).toString(),
+                        deliveryID = foundDeliveryItem.deliveryID,
+                        qty = newProductQty,
+                    )
+                    stockOutvm.set(newStockOut)
+
                     snackbar("updated new delivery item quantity")
                 }
             } else {
