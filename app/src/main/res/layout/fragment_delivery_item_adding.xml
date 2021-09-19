@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="172dp"
-        android:text="Add Delivery Item"
+        android:text="@string/add_delivery_item"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -52,7 +52,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Outlet"
+        android:text="@string/outlet"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -65,27 +65,29 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:text="Add"
+        android:text="@string/add"
         app:layout_constraintStart_toStartOf="@+id/guideline37"
         app:layout_constraintTop_toBottomOf="@+id/edtDeliveryQty2" />
 
     <EditText
         android:id="@+id/edtDeliveryQty2"
         android:layout_width="196dp"
-        android:layout_height="47dp"
+        android:layout_height="48dp"
         android:layout_marginStart="24dp"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@+id/textView39"
         app:layout_constraintStart_toStartOf="@+id/guideline37"
-        app:layout_constraintTop_toTopOf="@+id/textView39" />
+        app:layout_constraintTop_toTopOf="@+id/textView39"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <TextView
         android:id="@+id/textView39"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
-        android:text="Quantity"
+        android:text="@string/quantity"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -99,14 +101,15 @@
         android:layout_marginStart="24dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView38"
         app:layout_constraintStart_toEndOf="@+id/textView38"
-        app:layout_constraintTop_toTopOf="@+id/textView38" />
+        app:layout_constraintTop_toTopOf="@+id/textView38"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <TextView
         android:id="@+id/textView38"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Product ID"
+        android:text="@string/product_id"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -118,7 +121,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="Delivery ID"
+        android:text="@string/delivery_id"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -151,7 +154,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="Cancel"
+        android:text="@string/cancel"
         app:layout_constraintBottom_toBottomOf="@+id/btnAddDeliveryItem"
         app:layout_constraintStart_toEndOf="@+id/btnAddDeliveryItem"
         app:layout_constraintTop_toTopOf="@+id/btnAddDeliveryItem"

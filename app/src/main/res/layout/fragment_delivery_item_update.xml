@@ -32,7 +32,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="88dp"
-        android:text="delivery item quantity"
+        android:text="@string/delivery_item_quantity"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -49,14 +49,16 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView28"
         app:layout_constraintStart_toStartOf="@+id/guideline43"
         app:layout_constraintTop_toTopOf="@+id/textView28"
-        app:layout_constraintVertical_bias="0.714" />
+        app:layout_constraintVertical_bias="0.714"
+        tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck"
+        android:importantForAutofill="no" />
 
     <TextView
         android:id="@+id/textView50"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
-        android:text="Delivery item photo"
+        android:text="@string/delivery_item_photo"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -71,7 +73,9 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView50"
         app:layout_constraintStart_toEndOf="@+id/textView50"
         app:layout_constraintTop_toTopOf="@+id/textView50"
-        tools:src="@tools:sample/avatars" />
+        tools:ignore="ImageContrastCheck"
+        tools:src="@tools:sample/avatars"
+        android:contentDescription="@string/todo" />
 
     <Button
         android:id="@+id/btnEditDeliveryItem"
@@ -79,7 +83,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:text="Edit"
+        android:text="@string/edit"
         app:layout_constraintStart_toStartOf="@+id/guideline43"
         app:layout_constraintTop_toBottomOf="@+id/edtUpdateDeliveryItemQty" />
 
@@ -88,7 +92,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:text="Cancel"
+        android:text="@string/cancel"
         app:layout_constraintBottom_toBottomOf="@+id/btnEditDeliveryItem"
         app:layout_constraintStart_toEndOf="@+id/btnEditDeliveryItem"
         app:layout_constraintTop_toTopOf="@+id/btnEditDeliveryItem"

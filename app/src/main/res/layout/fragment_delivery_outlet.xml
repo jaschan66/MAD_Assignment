@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="45dp"
-        android:text="Outlet name"
+        android:text="@string/outlet_name"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -42,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="180dp"
-        android:text="TextView"
+        android:text="@string/textview"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -55,7 +55,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
-        android:text="Outlet map"
+        android:text="@string/outlet_map"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -67,7 +67,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="90dp"
-        android:text="Outlet PIN"
+        android:text="@string/outlet_pin"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
@@ -85,7 +85,8 @@
         app:layout_constraintStart_toStartOf="@+id/guideline39"
         app:layout_constraintTop_toTopOf="@+id/textView49"
         app:layout_constraintVertical_bias="0.435"
-        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+        tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/btnConfirmDeliveryPin"
@@ -93,7 +94,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        android:text="Confirm"
+        android:text="@string/confirm"
         app:layout_constraintStart_toStartOf="@+id/guideline39"
         app:layout_constraintTop_toBottomOf="@+id/edtDeliveryOutletPin" />
 
@@ -104,14 +105,15 @@
         android:layout_marginStart="24dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView47"
         app:layout_constraintStart_toStartOf="@+id/guideline39"
-        app:layout_constraintTop_toTopOf="@+id/textView47" />
+        app:layout_constraintTop_toTopOf="@+id/textView47"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
         android:id="@+id/btnCloseDeliveryOutlet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:text="Close"
+        android:text="@string/close"
         app:layout_constraintBottom_toBottomOf="@+id/btnConfirmDeliveryPin"
         app:layout_constraintStart_toEndOf="@+id/btnConfirmDeliveryPin"
         app:layout_constraintTop_toTopOf="@+id/btnConfirmDeliveryPin" />
