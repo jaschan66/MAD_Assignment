@@ -47,6 +47,7 @@
         android:ems="10"
         android:fontFamily="@font/questrial"
         android:hint="@string/category_hint"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
@@ -54,7 +55,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView40" />
+        app:layout_constraintTop_toBottomOf="@+id/textView40"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/textView40"

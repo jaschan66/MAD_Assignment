@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -29,9 +30,19 @@ class CategoryListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        vm.searchCategory("")
+
         binding = FragmentCategoryListBinding.inflate(inflater, container, false)
 
         binding.btnCategoryAdd.setOnClickListener { nav.navigate(R.id.categoryAddFragment) }
+
+        binding.CategorySearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(name: String) = true
+            override fun onQueryTextChange(name: String): Boolean {
+                vm.searchCategory(name)
+                return true
+            }
+        })
 
         adapter = CategoryAdapter() { holder, category ->
 
@@ -60,15 +71,17 @@ class CategoryListFragment : Fragment() {
             }
         }
         binding.categoryListRv.adapter = adapter
-        binding.categoryListRv.addItemDecoration(
-            DividerItemDecoration(
-                context,
-                DividerItemDecoration.VERTICAL
-            )
-        )
 
+        //Display all category
         vm.getAllCategory().observe(viewLifecycleOwner) {
             adapter.submitList(it)
+            binding.lblCategoryCount.text = "${it.size} Categories"
+        }
+
+        //Display search result
+        vm.getResult().observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+            binding.lblCategoryCount.text = "${it.size} Categories"
         }
 
         return binding.root

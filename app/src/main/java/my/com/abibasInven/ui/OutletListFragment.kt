@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -29,16 +30,28 @@ class OutletListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        vm.searchOutlet("")
+
         binding = FragmentOutletListBinding.inflate(inflater, container, false)
 
         binding.btnOutletAdd.setOnClickListener { nav.navigate(R.id.outletAddFragment) }
 
+        binding.OutletSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(name: String) = true
+            override fun onQueryTextChange(name: String): Boolean {
+                vm.searchOutlet(name)
+                return true
+            }
+        })
+
         adapter = OutletAdapter() { holder, outlet ->
 
-            //Haven't do
-//            holder.root.setOnClickListener {
-//                nav.navigate(R.id.outletDetailsFragment, bundleOf("outletId" to outlet.ID, "outletName" to outlet.name))
-//            }
+            holder.root.setOnClickListener {
+                nav.navigate(
+                    R.id.outletDetailsFragment,
+                    bundleOf("outletId" to outlet.ID, "outletName" to outlet.name)
+                )
+            }
             holder.btnUpdate.setOnClickListener {
                 nav.navigate(R.id.outletUpdateFragment, bundleOf("outletId" to outlet.ID))
             }
@@ -46,12 +59,11 @@ class OutletListFragment : Fragment() {
                 val builder = AlertDialog.Builder(context)
                 builder.setMessage("Are you sure you want to Delete?")
                     .setCancelable(false)
-                    .setPositiveButton("Yes") { dialog, id ->
-
+                    .setPositiveButton("Yes") { _, _ ->
                         snackbar("Outlet deleted successfully")
                         deleteOutlet(outlet.ID)
                     }
-                    .setNegativeButton("No") { dialog, id ->
+                    .setNegativeButton("No") { dialog, _ ->
                         // Dismiss the dialog
                         dialog.dismiss()
                     }
@@ -60,15 +72,15 @@ class OutletListFragment : Fragment() {
             }
         }
         binding.outletRv.adapter = adapter
-        binding.outletRv.addItemDecoration(
-            DividerItemDecoration(
-                context,
-                DividerItemDecoration.VERTICAL
-            )
-        )
 
         vm.getAllOutlet().observe(viewLifecycleOwner) {
             adapter.submitList(it)
+            binding.lblOutletCount.text = "${it.size} Outlet(s)"
+        }
+
+        vm.getResult().observe(viewLifecycleOwner) {
+            adapter.submitList(it)
+            binding.lblOutletCount.text = "${it.size} Outlet(s)"
         }
 
         return binding.root

@@ -10,9 +10,18 @@ class CategoryViewModel : ViewModel() {
 
     private val col = Firebase.firestore.collection("category")
     private val category = MutableLiveData<List<Category>>()
+    private var cate = listOf<Category>()
+    private val searchResult = MutableLiveData<List<Category>>()
+
+    private var name = "" // for searching purpose
 
     init {
-        col.addSnapshotListener { it, _ -> category.value = it?.toObjects() }
+        col.addSnapshotListener { it, _ ->
+            category.value = it?.toObjects()
+            cate = it!!.toObjects<Category>()
+            updateResult()
+        }
+
     }
 
 
@@ -29,6 +38,24 @@ class CategoryViewModel : ViewModel() {
         col.document(c.ID).set(c)
     }
 
+    fun searchCategory(name: String) {
+        this.name = name
+        updateResult()
+    }
+
+    private fun updateResult() {
+        var list = cate
+
+        //Search
+        list = list.filter {
+            it.name.contains(name, true)
+        }
+
+        searchResult.value = list
+    }
+
+    fun getResult() = searchResult
+
     fun remove(id: String) {
         col.document(id).delete()
     }
@@ -43,7 +70,7 @@ class CategoryViewModel : ViewModel() {
     }
 
     private fun categoryExists(name: String): Boolean {
-        return category.value?.any { it -> it.name == name } ?: false
+        return category.value?.any { it -> it.name.equals(name, true) } ?: false
     }
 
     fun validate(c: Category, insert: Boolean = true): String {
@@ -57,9 +84,6 @@ class CategoryViewModel : ViewModel() {
         errorMessage += if (c.name == "") "- Category name is required. \n"
         else if (categoryExists(c.name)) "- Category name exists. \n"
         else ""
-
-
-        //TODO Add in more validation based on the needs of your fields
 
         return errorMessage
     }
@@ -97,64 +121,6 @@ class CategoryViewModel : ViewModel() {
                 newID
             }
         }
-
-//        if (calSize() <= 1) {
-//            newID = "CA10" + (calSize() + 1)
-//            return newID
-//        } else {
-//            val getLastSupplier = category.value?.lastOrNull()?.ID.toString()
-//            newID = "CA10" + calSize() + 1
-//
-//            val num: String = getLastSupplier.substringAfterLast("CA10")
-//            num
-//
-//            if (getLastSupplier != "CA110") {
-//                if (idExists(newID)) {
-//                    val num: String = getLastSupplier.substringAfterLast("CA10")
-//                    num
-//                    if (num.toInt() >= 9) {
-//                        newID = "CA1" + (num.toIntOrNull()?.plus(1)).toString()
-//                        return newID
-//                    } else {
-//                        newID = "CA10" + (num.toIntOrNull()?.plus(1)).toString()
-//                        return newID
-//                    }
-//                } else {
-//                    val num: String = getLastSupplier.substringAfterLast("CA10")
-//                    num
-//                    if (num.toInt() >= 9) {
-//                        newID = "CA1" + (num.toIntOrNull()?.plus(1)).toString()
-//                        return newID
-//                    } else {
-//                        newID = "CA10" + (num.toIntOrNull()?.plus(1)).toString()
-//                        return newID
-//                    }
-//                }
-//            } else {
-//                if (idExists(newID)) {
-//                    val num: String = getLastSupplier.substringAfterLast("CA1")
-//                    num
-//                    if (num.toInt() >= 9) {
-//                        newID = "CA1" + (num.toIntOrNull()?.plus(1)).toString()
-//                        return newID
-//                    } else {
-//                        newID = "CA1" + (num.toIntOrNull()?.plus(1)).toString()
-//                        return newID
-//                    }
-//                } else {
-//                    val num: String = getLastSupplier.substringAfterLast("CA1")
-//                    num
-//                    if (num.toInt() >= 9) {
-//                        newID = "CA1" + (num.toIntOrNull()?.plus(1)).toString()
-//                        return newID
-//                    } else {
-//                        newID = "CA1" + (num.toIntOrNull()?.plus(1)).toString()
-//                        return newID
-//
-//                    }
-//                }
-//            }
-//        }
     }
 
 }

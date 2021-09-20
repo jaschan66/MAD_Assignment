@@ -36,7 +36,7 @@ class StaffDetailsFragment : Fragment() {
         binding.lblDetailStaffName.setText(s?.name)
         binding.lblRole.setText(s?.role)
 
-        binding.btnClose.setOnClickListener { nav.navigateUp() }
+        binding.btnClose.setOnClickListener { nav.navigate(R.id.action_staffDetailsFragment_to_staffListFragment) }
 
         return binding.root
     }

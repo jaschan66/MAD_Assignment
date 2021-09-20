@@ -15,7 +15,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.logindemo.util.snackbar
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -49,8 +48,10 @@ class SupplierDetailsFragment : Fragment(), OnMapReadyCallback {
     private val vm: SupplierViewModel by activityViewModels()
     private val vmProduct: ProductViewModel by activityViewModels()
     private lateinit var adapter: ProductAdapter
+    private lateinit var getSupplierID: String
 
     private val suppId by lazy { requireArguments().getString("suppId", null) }
+    private val productId by lazy { requireArguments().getString("productId", null) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,11 +74,22 @@ class SupplierDetailsFragment : Fragment(), OnMapReadyCallback {
             ) == PackageManager.PERMISSION_GRANTED
         ) {
 
-            val supp = vm.get(suppId)
-            if (supp == null) {
-                nav.navigateUp()
+            if (productId == null) {
+                val supp = vm.get(suppId)
+                if (supp == null) {
+                    nav.navigateUp()
+                } else {
+                    load(supp)
+                }
             } else {
-                load(supp)
+                val product = vmProduct.get(productId)
+                if (product == null) {
+                    nav.navigateUp()
+                } else {
+                    val supp = vm.get(product.supplierID)
+                    getSupplierID = supp!!.ID
+                    load(supp)
+                }
             }
 
             //Load map with supplier location from firebase
@@ -94,7 +106,7 @@ class SupplierDetailsFragment : Fragment(), OnMapReadyCallback {
         adapter = ProductAdapter() { holder, product ->
 
             holder.root.setOnClickListener {
-//                nav.navigate(R.id.staffDetailsFragment, bundleOf("product" to product.ID))
+                nav.navigate(R.id.productDetailFragment, bundleOf("ID" to product.ID))
             }
             holder.btnUpdate.setOnClickListener {
                 nav.navigate(R.id.productUpdateFragment, bundleOf("ID" to product.ID))
@@ -119,16 +131,14 @@ class SupplierDetailsFragment : Fragment(), OnMapReadyCallback {
         }
 
         binding.SupplierProductRv.adapter = adapter
-        binding.SupplierProductRv.addItemDecoration(
-            DividerItemDecoration(
-                context,
-                DividerItemDecoration.VERTICAL
-            )
-        )
 
-        val product = vmProduct.getSupplierProduct(suppId)
-        adapter.submitList(product)
-
+        if (productId == null) {
+            val product = vmProduct.getSupplierProduct(suppId)
+            adapter.submitList(product)
+        } else {
+            val product = vmProduct.getSupplierProduct(getSupplierID)
+            adapter.submitList(product)
+        }
 
         binding.map.onCreate(savedInstanceState)
         binding.map.onResume()

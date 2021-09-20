@@ -131,7 +131,8 @@
         android:textColorHint="@color/lightGrey"
         app:layout_constraintBottom_toBottomOf="@+id/textView12"
         app:layout_constraintStart_toEndOf="@+id/textView12"
-        app:layout_constraintTop_toTopOf="@+id/textView12" />
+        app:layout_constraintTop_toTopOf="@+id/textView12"
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/btnReset"
@@ -169,7 +170,8 @@
         android:textColorHint="@color/lightGrey"
         app:layout_constraintBottom_toBottomOf="@+id/textView7"
         app:layout_constraintStart_toEndOf="@+id/textView7"
-        app:layout_constraintTop_toTopOf="@+id/textView7" />
+        app:layout_constraintTop_toTopOf="@+id/textView7"
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/edtSupPhone"
@@ -185,7 +187,8 @@
         android:textColorHint="@color/lightGrey"
         app:layout_constraintBottom_toBottomOf="@+id/textView8"
         app:layout_constraintStart_toEndOf="@+id/textView8"
-        app:layout_constraintTop_toTopOf="@+id/textView8" />
+        app:layout_constraintTop_toTopOf="@+id/textView8"
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/edtSupLoc"
@@ -202,6 +205,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/textView9"
         app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toTopOf="@+id/textView9"
-        app:layout_constraintVertical_bias="0.461" />
+        app:layout_constraintVertical_bias="0.461"
+        tools:ignore="TextContrastCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

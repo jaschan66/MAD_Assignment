@@ -16,27 +16,53 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/btnScanSupplierQR"
+        android:layout_width="43dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="8dp"
+        android:backgroundTint="@color/grey"
+        android:paddingStart="10dp"
+        app:icon="@drawable/ic_baseline_qr_code_scanner_24"
+        app:layout_constraintBottom_toBottomOf="@+id/view4"
+        app:layout_constraintEnd_toStartOf="@+id/btnAddSupplier"
+        app:layout_constraintTop_toTopOf="@+id/view4"
+        tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+
     <TextView
         android:id="@+id/lblSupplierCount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
+        android:layout_marginEnd="11dp"
         android:fontFamily="@font/questrial"
         android:textColor="@color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/view4"
-        app:layout_constraintStart_toStartOf="@+id/view4"
+        app:layout_constraintStart_toEndOf="@+id/SupplierSearchView"
         app:layout_constraintTop_toTopOf="@+id/view4"
         tools:text="XXX" />
 
+    <SearchView
+        android:id="@+id/SupplierSearchView"
+        android:layout_width="180dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="8dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="@+id/view4"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/view4" />
+
     <Button
         android:id="@+id/btnAddSupplier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="30dp"
-        android:backgroundTint="#000000"
+        android:layout_width="43dp"
+        android:layout_height="46dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/grey"
         android:fontFamily="@font/questrial"
-        android:text="@string/add"
+        android:paddingStart="10dp"
         android:textSize="14sp"
+        app:icon="@drawable/ic_baseline_add_24"
         app:layout_constraintBottom_toBottomOf="@+id/view4"
         app:layout_constraintEnd_toEndOf="@+id/view4"
         app:layout_constraintTop_toTopOf="@+id/view4" />

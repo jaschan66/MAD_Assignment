@@ -83,10 +83,12 @@
         android:ems="10"
         android:fontFamily="@font/questrial"
         android:hint="@string/category_hint"
+        android:importantForAutofill="no"
         android:inputType="textPersonName"
         android:textColor="@color/black"
         android:textColorHint="@color/lightGrey"
         app:layout_constraintStart_toStartOf="@+id/guideline38"
-        app:layout_constraintTop_toBottomOf="@+id/textView34" />
+        app:layout_constraintTop_toBottomOf="@+id/textView34"
+        tools:ignore="TextContrastCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

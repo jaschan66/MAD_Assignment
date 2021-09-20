@@ -150,11 +150,4 @@ class ProductFragment : Fragment(){
     private fun deleteProduct(id: String) {
         vm.remove(id)
     }
-
-    fun onBackPressed(): Boolean {
-        return test == true
-    }
-
-
-
 }
