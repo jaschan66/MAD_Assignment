@@ -39,7 +39,6 @@
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/view4"
-        app:layout_constraintEnd_toStartOf="@+id/btnScanQR2"
         app:layout_constraintStart_toEndOf="@+id/SupplierSearchView"
         app:layout_constraintTop_toTopOf="@+id/view4"
         tools:text="XXX" />

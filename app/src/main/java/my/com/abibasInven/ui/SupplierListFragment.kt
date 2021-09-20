@@ -15,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.logindemo.util.errorDialog
 import com.example.logindemo.util.snackbar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.zxing.integration.android.IntentIntegrator
 import my.com.abibasInven.R
 import my.com.abibasInven.data.ProductViewModel
@@ -42,6 +43,9 @@ class SupplierListFragment : Fragment() {
         binding = FragmentSupplierListBinding.inflate(inflater, container, false)
 
         binding.btnAddSupplier.setOnClickListener { nav.navigate(R.id.supplierAddFragment) }
+
+        val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        bottomNav.visibility = View.VISIBLE
 
         binding.SupplierSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(name: String) = true

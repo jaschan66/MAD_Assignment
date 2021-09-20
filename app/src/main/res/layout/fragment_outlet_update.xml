@@ -53,7 +53,8 @@
         android:textColorHint="@color/lightGrey"
         app:layout_constraintBottom_toBottomOf="@+id/textView47"
         app:layout_constraintStart_toEndOf="@+id/textView47"
-        app:layout_constraintTop_toTopOf="@+id/textView47" />
+        app:layout_constraintTop_toTopOf="@+id/textView47"
+        tools:ignore="TextContrastCheck" />
 
     <EditText
         android:id="@+id/edtOutletUpdateName"
@@ -69,7 +70,8 @@
         android:textColorHint="@color/lightGrey"
         app:layout_constraintBottom_toBottomOf="@+id/textView46"
         app:layout_constraintStart_toEndOf="@+id/textView46"
-        app:layout_constraintTop_toTopOf="@+id/textView46" />
+        app:layout_constraintTop_toTopOf="@+id/textView46"
+        tools:ignore="TextContrastCheck" />
 
     <Button
         android:id="@+id/btnOutletUpdateLocation"

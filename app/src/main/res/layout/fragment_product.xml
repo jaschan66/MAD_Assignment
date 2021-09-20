@@ -8,12 +8,10 @@
 
     <View
         android:id="@+id/view5"
-        android:layout_width="390dp"
+        android:layout_width="0dp"
         android:layout_height="56dp"
-        android:background="#B1B1B1"
-        app:layout_constraintBottom_toTopOf="@+id/productrv"
+        android:background="@color/lightGrey"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -57,7 +55,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/productrv"
         android:layout_width="389dp"
-        android:layout_height="556dp"
+        android:layout_height="0dp"
         app:layoutManager="GridLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

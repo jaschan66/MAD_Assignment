@@ -121,64 +121,6 @@ class CategoryViewModel : ViewModel() {
                 newID
             }
         }
-
-//        if (calSize() <= 1) {
-//            newID = "CA10" + (calSize() + 1)
-//            return newID
-//        } else {
-//            val getLastSupplier = category.value?.lastOrNull()?.ID.toString()
-//            newID = "CA10" + calSize() + 1
-//
-//            val num: String = getLastSupplier.substringAfterLast("CA10")
-//            num
-//
-//            if (getLastSupplier != "CA110") {
-//                if (idExists(newID)) {
-//                    val num: String = getLastSupplier.substringAfterLast("CA10")
-//                    num
-//                    if (num.toInt() >= 9) {
-//                        newID = "CA1" + (num.toIntOrNull()?.plus(1)).toString()
-//                        return newID
-//                    } else {
-//                        newID = "CA10" + (num.toIntOrNull()?.plus(1)).toString()
-//                        return newID
-//                    }
-//                } else {
-//                    val num: String = getLastSupplier.substringAfterLast("CA10")
-//                    num
-//                    if (num.toInt() >= 9) {
-//                        newID = "CA1" + (num.toIntOrNull()?.plus(1)).toString()
-//                        return newID
-//                    } else {
-//                        newID = "CA10" + (num.toIntOrNull()?.plus(1)).toString()
-//                        return newID
-//                    }
-//                }
-//            } else {
-//                if (idExists(newID)) {
-//                    val num: String = getLastSupplier.substringAfterLast("CA1")
-//                    num
-//                    if (num.toInt() >= 9) {
-//                        newID = "CA1" + (num.toIntOrNull()?.plus(1)).toString()
-//                        return newID
-//                    } else {
-//                        newID = "CA1" + (num.toIntOrNull()?.plus(1)).toString()
-//                        return newID
-//                    }
-//                } else {
-//                    val num: String = getLastSupplier.substringAfterLast("CA1")
-//                    num
-//                    if (num.toInt() >= 9) {
-//                        newID = "CA1" + (num.toIntOrNull()?.plus(1)).toString()
-//                        return newID
-//                    } else {
-//                        newID = "CA1" + (num.toIntOrNull()?.plus(1)).toString()
-//                        return newID
-//
-//                    }
-//                }
-//            }
-//        }
     }
 
 }

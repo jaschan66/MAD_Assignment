@@ -86,6 +86,7 @@ class SupplierViewModel : ViewModel() {
 
         errorMessage += if (s.phoneNo == "") "- Phone no is required. \n"
         else if (!validCellPhone(s.phoneNo)) "- Phone no format is invalid. \n"
+        else if (!validCellPhoneLength(s.phoneNo)) "- Phone no length is invalid. \n"
         else ""
 
         errorMessage += if (s.name == "") "- Name is required. \n"
@@ -109,6 +110,10 @@ class SupplierViewModel : ViewModel() {
 
     private fun validCellPhone(number: String?): Boolean {
         return Patterns.PHONE.matcher(number).matches()
+    }
+
+    private fun validCellPhoneLength(num: String?): Boolean {
+        return (num?.length in 10..11)
     }
 
     fun validID(id: String): String {
