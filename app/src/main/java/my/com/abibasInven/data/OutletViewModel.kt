@@ -68,12 +68,16 @@ class OutletViewModel : ViewModel() {
             ?: false // if found return true if not found then return false
     }
 
+    private fun outletExists(name: String): Boolean {
+        return outlet.value?.any { it -> it.name.equals(name, true) } ?: false
+    }
+
     fun validate(o: Outlet, insert: Boolean = true): String {
         var errorMessage = ""
 
-        if (insert)/*if it is true */ {
+        if (insert) {
             errorMessage += if (o.ID == "") "- Outlet ID cannot be empty.\n"
-            else if (idExists(o.ID)) "- Outlet ID is duplicated.\n" //if the function return true then error message will be added
+            else if (idExists(o.ID)) "- Outlet ID is duplicated.\n"
             else ""
         }
 
@@ -83,8 +87,11 @@ class OutletViewModel : ViewModel() {
         errorMessage += if (o.longitude == 0.0) "- Outlet location is required. \n"
         else ""
 
-        errorMessage += if (o.name == "") "- Outlet name is required. \n"
-        else ""
+        errorMessage += when {
+            o.name == "" -> "- Outlet name is required. \n"
+            outletExists(o.name) -> "- Outlet name exists. \n"
+            else -> ""
+        }
 
         errorMessage += if (o.photo.toBytes().isEmpty()) "- Outlet photo is required. \n"
         else ""
@@ -97,8 +104,8 @@ class OutletViewModel : ViewModel() {
     fun validID(): String {
         var newID: String
 
-        val getLastOutlet = outlet.value?.lastOrNull()?.ID.toString()
-        val num: String = getLastOutlet.substringAfterLast("OL10")
+        var getLastOutlet = outlet.value?.lastOrNull()?.ID.toString()
+        var num = getLastOutlet.substringAfterLast("OL10")
         newID = "OL10" + (num.toIntOrNull()?.plus(1)).toString()
 
         if (newID == "OL1010") {
@@ -112,8 +119,8 @@ class OutletViewModel : ViewModel() {
                 newID
             }
             in 1..8 -> {
-                val getLastOutlet = outlet.value?.lastOrNull()?.ID.toString()
-                val num: String = getLastOutlet.substringAfterLast("OL10")
+                getLastOutlet = outlet.value?.lastOrNull()?.ID.toString()
+                num = getLastOutlet.substringAfterLast("OL10")
                 newID = "OL10" + (num.toIntOrNull()?.plus(1)).toString()
                 if (newID == "OL10null") {
                     newID = "OL111"
@@ -121,8 +128,8 @@ class OutletViewModel : ViewModel() {
                 } else newID
             }
             else -> {
-                val getLastOutlet = outlet.value?.lastOrNull()?.ID.toString()
-                val num: String = getLastOutlet.substringAfterLast("OL1")
+                getLastOutlet = outlet.value?.lastOrNull()?.ID.toString()
+                num = getLastOutlet.substringAfterLast("OL1")
                 newID = "OL1" + (num.toIntOrNull()?.plus(1)).toString()
                 newID
             }

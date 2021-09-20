@@ -192,20 +192,20 @@ class OutletUpdateFragment : Fragment(), OnMapReadyCallback {
             val chkID = vm.validID()
 
             val o = Outlet(
-                ID = chkID,
+                ID = outletId,
                 name = binding.edtOutletUpdateName.text.toString().trim(),
                 latitude = latitude,
                 longitude = longitude,
                 photo = binding.imgUpdateOutletPhoto.cropToBlob(700, 600),
             )
 
-            val err = vm.validate(o)
+            val err = vm.validate(o, false)
             if (err != "") {
                 errorDialog(err)
                 return
             } else {
                 vm.set(o)
-                nav.navigate(R.id.supplierListFragment)
+                nav.navigate(R.id.action_global_outletListFragment)
             }
         } else {
             errorDialog("- Location cannot be empty")

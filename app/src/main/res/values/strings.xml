@@ -123,6 +123,10 @@
     <string name="stock_in_quantity">stock in quantity</string>
     <string name="search">search</string>
     <string name="report">Report</string>
+    <string name="category_maintenance">Category Maintenance</string>
+    <string name="location_maintenance">Location Maintenance</string>
+    <string name="delivery_maintenance">Delivery Maintenance</string>
+    <string name="stock_maintenance">Stock Maintenance</string>
     <string-array name="userRole">
         <item>Manager</item>
         <item>Staff</item>

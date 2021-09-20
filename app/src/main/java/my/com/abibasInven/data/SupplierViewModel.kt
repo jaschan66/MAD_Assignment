@@ -74,20 +74,23 @@ class SupplierViewModel : ViewModel() {
         val regxName = Regex("^[\\p{L} .'-]+$")
         var errorMessage = ""
 
-        //if the function return true then error message will be added
-        if (insert)/*if it is true */ {
+        if (insert) {
             errorMessage += if (idExists(s.ID)) "- Supplier ID is duplicated.\n"
             else ""
         }
 
-        errorMessage += if (s.email == "") "- Email is required. \n"
-        else if (!isValidEmail(s.email)) "- Email format is invalid. \n"
-        else ""
+        errorMessage += when {
+            (s.email == "") -> "- Email is required.\n"
+            (!isValidEmail(s.email)) -> "- Email format is invalid. \n"
+            else -> ""
+        }
 
-        errorMessage += if (s.phoneNo == "") "- Phone no is required. \n"
-        else if (!validCellPhone(s.phoneNo)) "- Phone no format is invalid. \n"
-        else if (!validCellPhoneLength(s.phoneNo)) "- Phone no length is invalid. \n"
-        else ""
+        errorMessage += when {
+            (s.phoneNo == "") -> "- Phone no is required. \n"
+            (!validCellPhone(s.phoneNo)) -> "- Phone no format is invalid. \n"
+            (!validCellPhoneLength(s.phoneNo)) -> "- Phone no length is invalid. \n"
+            else -> ""
+        }
 
         errorMessage += if (s.name == "") "- Name is required. \n"
         else if (!s.name.matches(regxName)) "- Name is invalid. \n"
@@ -116,17 +119,38 @@ class SupplierViewModel : ViewModel() {
         return (num?.length in 10..11)
     }
 
-    fun validID(id: String): String {
-        val newID: String
-        val getLastSupplier = supplier.value?.lastOrNull()?.ID.toString()
+    fun validID(): String {
+        var newID: String
 
-        return if (idExists(id)) {
-            val num: String = getLastSupplier.substringAfterLast("SU")
-            newID = "SU" + (num.toIntOrNull()?.plus(1)).toString()
-            newID
-        } else {
-            newID = "SU" + (calSize() + 1).toString()
-            newID
+        var getLastOutlet = supplier.value?.lastOrNull()?.ID.toString()
+        var num = getLastOutlet.substringAfterLast("SU10")
+        newID = "SU10" + (num.toIntOrNull()?.plus(1)).toString()
+
+        if (newID == "SU1010") {
+            newID = "SU1" + (num.toIntOrNull()?.plus(1)).toString()
+            return newID
+        }
+
+        return when (calSize()) {
+            0 -> {
+                newID = "SU10" + (calSize() + 1)
+                newID
+            }
+            in 1..8 -> {
+                getLastOutlet = supplier.value?.lastOrNull()?.ID.toString()
+                num = getLastOutlet.substringAfterLast("SU10")
+                newID = "SU10" + (num.toIntOrNull()?.plus(1)).toString()
+                if (newID == "SU10null") {
+                    newID = "SU111"
+                    newID
+                } else newID
+            }
+            else -> {
+                getLastOutlet = supplier.value?.lastOrNull()?.ID.toString()
+                num = getLastOutlet.substringAfterLast("SU1")
+                newID = "SU1" + (num.toIntOrNull()?.plus(1)).toString()
+                newID
+            }
         }
     }
 }

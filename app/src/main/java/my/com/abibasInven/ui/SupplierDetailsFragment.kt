@@ -133,9 +133,11 @@ class SupplierDetailsFragment : Fragment(), OnMapReadyCallback {
         binding.SupplierProductRv.adapter = adapter
 
         if (productId == null) {
+            //load data using data from previous fragment
             val product = vmProduct.getSupplierProduct(suppId)
             adapter.submitList(product)
         } else {
+            //load data using data from QR code
             val product = vmProduct.getSupplierProduct(getSupplierID)
             adapter.submitList(product)
         }

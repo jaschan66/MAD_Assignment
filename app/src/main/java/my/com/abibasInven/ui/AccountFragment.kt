@@ -102,6 +102,11 @@ class AccountFragment : Fragment() {
             binding.accountManageStaff.isVisible = true
         }
 
+        binding.categoryMaintenance.setOnClickListener { nav.navigate(R.id.categoryListFragment) }
+        binding.locationMaintenance.setOnClickListener { nav.navigate(R.id.locationListingFragment) }
+        binding.deliveryMaintenance.setOnClickListener { nav.navigate(R.id.deliveryListingFragment) }
+        binding.stockMaintenance.setOnClickListener { nav.navigate(R.id.stockInSelectMethodFragment) }
+
         binding.accountManageStaff.setOnClickListener { nav.navigate(R.id.staffListFragment) }
 
         binding.acountLogOut.setOnClickListener { logout() }

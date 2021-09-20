@@ -32,9 +32,10 @@
                 android:id="@+id/view15"
                 android:layout_width="330dp"
                 android:layout_height="56dp"
-                android:background="@color/darkGrey"
+                android:background="@color/grey"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.508"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imgOutlet" />
 
@@ -69,8 +70,8 @@
                 android:layout_marginStart="8dp"
                 android:fontFamily="@font/questrial"
                 android:textAlignment="center"
-                android:textColor="@color/black"
-                android:textSize="34sp"
+                android:textColor="@color/white"
+                android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="@+id/view15"
                 app:layout_constraintEnd_toStartOf="@+id/btnOutletUpdate"
                 app:layout_constraintStart_toStartOf="@+id/view15"

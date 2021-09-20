@@ -76,14 +76,16 @@ class CategoryViewModel : ViewModel() {
     fun validate(c: Category, insert: Boolean = true): String {
         var errorMessage = ""
 
-        if (insert)/*if it is true */ {
-            errorMessage += if (idExists(c.ID)) "- Category ID is duplicated.\n" //if the function return true then error message will be added
+        if (insert) {
+            errorMessage += if (idExists(c.ID)) "- Category ID is duplicated.\n"
             else ""
         }
 
-        errorMessage += if (c.name == "") "- Category name is required. \n"
-        else if (categoryExists(c.name)) "- Category name exists. \n"
-        else ""
+        errorMessage += when {
+            (c.name == "") -> "- Category name is required. \n"
+            (categoryExists(c.name)) -> "- Category name exists. \n"
+            else -> ""
+        }
 
         return errorMessage
     }
@@ -91,8 +93,8 @@ class CategoryViewModel : ViewModel() {
     fun validID(): String {
         var newID: String
 
-        val getLastSupplier = category.value?.lastOrNull()?.ID.toString()
-        val num: String = getLastSupplier.substringAfterLast("CA10")
+        var getLastSupplier = category.value?.lastOrNull()?.ID.toString()
+        var num = getLastSupplier.substringAfterLast("CA10")
         newID = "CA10" + (num.toIntOrNull()?.plus(1)).toString()
 
         if (newID == "CA1010") {
@@ -106,8 +108,8 @@ class CategoryViewModel : ViewModel() {
                 newID
             }
             in 1..8 -> {
-                val getLastSupplier = category.value?.lastOrNull()?.ID.toString()
-                val num: String = getLastSupplier.substringAfterLast("CA10")
+                getLastSupplier = category.value?.lastOrNull()?.ID.toString()
+                num = getLastSupplier.substringAfterLast("CA10")
                 newID = "CA10" + (num.toIntOrNull()?.plus(1)).toString()
                 if (newID == "CA10null") {
                     newID = "CA111"
@@ -115,12 +117,11 @@ class CategoryViewModel : ViewModel() {
                 } else newID
             }
             else -> {
-                val getLastSupplier = category.value?.lastOrNull()?.ID.toString()
-                val num: String = getLastSupplier.substringAfterLast("CA1")
+                getLastSupplier = category.value?.lastOrNull()?.ID.toString()
+                num = getLastSupplier.substringAfterLast("CA1")
                 newID = "CA1" + (num.toIntOrNull()?.plus(1)).toString()
                 newID
             }
         }
     }
-
 }

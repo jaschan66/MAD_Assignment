@@ -121,12 +121,12 @@ class SupplierAddFragment : Fragment(), OnMapReadyCallback {
 
                 if (it.result != null) {
                     val location: Location = it.result
-                    val geopoint =
+                    val geoPoint =
                         location.latitude.toString() + "," + location.longitude.toString()
 
                     snackbar("Location received")
                     binding.edtSupLoc.isEnabled = true
-                    binding.edtSupLoc.setText(geopoint)
+                    binding.edtSupLoc.setText(geoPoint)
                     binding.edtSupLoc.isEnabled = false
 
                     binding.map.getMapAsync(this)
@@ -148,11 +148,11 @@ class SupplierAddFragment : Fragment(), OnMapReadyCallback {
 
                             // use your location object
                             // get latitude , longitude and other info from this
-                            val testGeoPoint =
+                            val anotherGeoPoint =
                                 lastLocation.latitude.toString() + "," + lastLocation.longitude.toString()
-                            snackbar(testGeoPoint)
+                            snackbar(anotherGeoPoint)
                             binding.edtSupLoc.isEnabled = true
-                            binding.edtSupLoc.setText(testGeoPoint)
+                            binding.edtSupLoc.setText(anotherGeoPoint)
                             binding.edtSupLoc.isEnabled = false
                         }
                     }
@@ -184,8 +184,7 @@ class SupplierAddFragment : Fragment(), OnMapReadyCallback {
             val longitude = splitPoint[1].toDouble()
 
             // Auto increment ID
-            val id = "SU" + (vm.calSize() + 1).toString()
-            val chkID = vm.validID(id)
+            val chkID = vm.validID()
 
             val s = Supplier(
                 ID = chkID,
