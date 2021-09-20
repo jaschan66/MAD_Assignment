@@ -10,11 +10,19 @@ class OutletViewModel : ViewModel() {
 
     private val col = Firebase.firestore.collection("outlet")
     private val outlet = MutableLiveData<List<Outlet>>()
+    private var outletList = listOf<Outlet>()
+    private val searchResult = MutableLiveData<List<Outlet>>()
+
+    private var name = "" // for searching purpose
+
 
     init {
-        col.addSnapshotListener { it, _ -> outlet.value = it?.toObjects() }
+        col.addSnapshotListener { it, _ ->
+            outlet.value = it?.toObjects()
+            outletList = it!!.toObjects()
+            updateResult()
+        }
     }
-
 
     fun get(id: String): Outlet? {
         return outlet.value?.find { it -> it.ID == id }
@@ -28,6 +36,24 @@ class OutletViewModel : ViewModel() {
     fun set(o: Outlet) {
         col.document(o.ID).set(o)
     }
+
+    fun searchOutlet(name: String) {
+        this.name = name
+        updateResult()
+    }
+
+    private fun updateResult() {
+        var list = outletList
+
+        //Search
+        list = list.filter {
+            it.name.contains(name, true)
+        }
+
+        searchResult.value = list
+    }
+
+    fun getResult() = searchResult
 
     fun remove(id: String) {
         col.document(id).delete()

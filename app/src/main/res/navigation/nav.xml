@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/supplierListFragment">
     <fragment
         android:id="@+id/accountFragment"
         android:name="my.com.abibasInven.ui.AccountFragment"
@@ -302,4 +302,10 @@
         app:destination="@id/loginFragment"
         app:popUpTo="@id/loginFragment"
         app:popUpToInclusive="true" />
+
+    <fragment
+        android:id="@+id/outletDetailsFragment"
+        android:name="my.com.abibasInven.ui.OutletDetailsFragment"
+        android:label="fragment_outlet_details"
+        tools:layout="@layout/fragment_outlet_details" />
 </navigation>

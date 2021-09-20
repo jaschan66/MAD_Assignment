@@ -13,11 +13,18 @@ class SupplierViewModel : ViewModel() {
 
     private val col = Firebase.firestore.collection("supplier")
     private val supplier = MutableLiveData<List<Supplier>>()
+    private var supp = listOf<Supplier>()
+    private val searchResult = MutableLiveData<List<Supplier>>()
+
+    private var name = "" // for searching purpose
 
     init {
-        col.addSnapshotListener { it, _ -> supplier.value = it?.toObjects() }
+        col.addSnapshotListener { it, _ ->
+            supplier.value = it?.toObjects()
+            supp = it!!.toObjects<Supplier>()
+            updateResult()
+        }
     }
-
 
     fun get(id: String): Supplier? {
         return supplier.value?.find { it -> it.ID == id }
@@ -31,6 +38,24 @@ class SupplierViewModel : ViewModel() {
     fun set(s: Supplier) {
         col.document(s.ID).set(s)
     }
+
+    fun searchSupplier(name: String) {
+        this.name = name
+        updateResult()
+    }
+
+    private fun updateResult() {
+        var list = supp
+
+        //Search
+        list = list.filter {
+            it.name.contains(name, true)
+        }
+
+        searchResult.value = list
+    }
+
+    fun getResult() = searchResult
 
     fun remove(id: String) {
         col.document(id).delete()

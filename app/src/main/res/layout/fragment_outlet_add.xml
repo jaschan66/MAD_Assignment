@@ -56,7 +56,8 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline39"
         app:layout_constraintStart_toStartOf="@+id/guideline36"
-        app:layout_constraintTop_toBottomOf="@+id/edtOutletLoc" />
+        app:layout_constraintTop_toBottomOf="@+id/edtOutletLoc"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
         android:id="@+id/btnOutletReset"
@@ -96,6 +97,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/add_outlet"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold"

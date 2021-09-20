@@ -9,5 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#24292E</color>
     <color name="lightGrey">#B1B1B1</color>
+    <color name="darkGrey">#959595</color>
     <color name="ic_launcher_background">#FFFFFF</color>
 </resources>

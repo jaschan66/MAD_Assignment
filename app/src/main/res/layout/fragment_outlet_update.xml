@@ -13,7 +13,8 @@
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline44"
         app:layout_constraintStart_toStartOf="@+id/guideline43"
-        app:layout_constraintTop_toBottomOf="@+id/edtOutletUpdateLoc" />
+        app:layout_constraintTop_toBottomOf="@+id/edtOutletUpdateLoc"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
         android:id="@+id/btnOutletUpdateSubmit"
