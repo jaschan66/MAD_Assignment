@@ -16,11 +16,6 @@
             app:popUpToInclusive="true" />
     </fragment>
     <fragment
-        android:id="@+id/homeFragment"
-        android:name="my.com.abibasInven.ui.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
-    <fragment
         android:id="@+id/productFragment"
         android:name="my.com.abibasInven.ui.ProductFragment"
         android:label="fragment_product"
@@ -83,7 +78,13 @@
         android:id="@+id/locationDetailsFragment"
         android:name="my.com.abibasInven.ui.LocationDetailsFragment"
         android:label="fragment_location_details"
-        tools:layout="@layout/fragment_location_details" />
+        tools:layout="@layout/fragment_location_details" >
+        <action
+            android:id="@+id/action_locationDetailsFragment_to_locationListingFragment"
+            app:destination="@id/locationListingFragment"
+            app:popUpTo="@id/locationListingFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
     <fragment
         android:id="@+id/staffListFragment"
         android:name="my.com.abibasInven.ui.StaffListFragment"
@@ -110,7 +111,11 @@
         android:id="@+id/locationAddingFragment"
         android:name="my.com.abibasInven.ui.LocationAddingFragment"
         android:label="fragment_location_adding"
-        tools:layout="@layout/fragment_location_adding" />
+        tools:layout="@layout/fragment_location_adding" >
+        <action
+            android:id="@+id/action_locationAddingFragment_to_locationListingFragment"
+            app:destination="@id/locationListingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/staffDetailsFragment"
         android:name="my.com.abibasInven.ui.StaffDetailsFragment"
@@ -164,12 +169,20 @@
         android:id="@+id/locationEditingFragment"
         android:name="my.com.abibasInven.ui.LocationEditingFragment"
         android:label="fragment_location_editing"
-        tools:layout="@layout/fragment_location_editing" />
+        tools:layout="@layout/fragment_location_editing" >
+        <action
+            android:id="@+id/action_locationEditingFragment_to_locationListingFragment"
+            app:destination="@id/locationListingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/stockInFragment"
         android:name="my.com.abibasInven.ui.StockInFragment"
         android:label="fragment_stock_in"
-        tools:layout="@layout/fragment_stock_in" />
+        tools:layout="@layout/fragment_stock_in" >
+        <action
+            android:id="@+id/action_stockInFragment_to_stockInSelectMethodFragment"
+            app:destination="@id/stockInSelectMethodFragment" />
+    </fragment>
     <fragment
         android:id="@+id/productAddFragment"
         android:name="my.com.abibasInven.ui.ProductAddFragment"
@@ -212,7 +225,11 @@
         android:id="@+id/deliveryAddingFragment"
         android:name="my.com.abibasInven.ui.DeliveryAddingFragment"
         android:label="fragment_delivery_adding"
-        tools:layout="@layout/fragment_delivery_adding" />
+        tools:layout="@layout/fragment_delivery_adding" >
+        <action
+            android:id="@+id/action_deliveryAddingFragment_to_deliveryListingFragment"
+            app:destination="@id/deliveryListingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/productUpdateFragment"
         android:name="my.com.abibasInven.ui.ProductUpdateFragment"
@@ -266,7 +283,11 @@
         android:id="@+id/deliveryItemAddingFragment"
         android:name="my.com.abibasInven.ui.DeliveryItemAddingFragment"
         android:label="fragment_delivery_item_adding"
-        tools:layout="@layout/fragment_delivery_item_adding" />
+        tools:layout="@layout/fragment_delivery_item_adding" >
+        <action
+            android:id="@+id/action_deliveryItemAddingFragment_to_deliveryListingFragment"
+            app:destination="@id/deliveryListingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/productNotificationFragment"
         android:name="my.com.abibasInven.ui.ProductNotificationFragment"
@@ -282,27 +303,47 @@
         android:id="@+id/deliveryItemListingFragment"
         android:name="my.com.abibasInven.ui.DeliveryItemListingFragment"
         android:label="fragment_delivery_item_listing"
-        tools:layout="@layout/fragment_delivery_item_listing" />
+        tools:layout="@layout/fragment_delivery_item_listing" >
+        <action
+            android:id="@+id/action_deliveryItemListingFragment_to_deliveryListingFragment"
+            app:destination="@id/deliveryListingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/deliveryOutletFragment"
         android:name="my.com.abibasInven.ui.DeliveryOutletFragment"
         android:label="fragment_delivery_outlet"
-        tools:layout="@layout/fragment_delivery_outlet" />
+        tools:layout="@layout/fragment_delivery_outlet" >
+        <action
+            android:id="@+id/action_deliveryOutletFragment_to_deliveryItemListingFragment"
+            app:destination="@id/deliveryItemListingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/deliveryOutletPinGenerateFragment"
         android:name="my.com.abibasInven.ui.DeliveryOutletPinGenerateFragment"
         android:label="fragment_delivery_outlet_pin_generate"
-        tools:layout="@layout/fragment_delivery_outlet_pin_generate" />
+        tools:layout="@layout/fragment_delivery_outlet_pin_generate" >
+        <action
+            android:id="@+id/action_deliveryOutletPinGenerateFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/deliveryItemUpdateFragment"
         android:name="my.com.abibasInven.ui.DeliveryItemUpdateFragment"
         android:label="fragment_delivery_item_update"
-        tools:layout="@layout/fragment_delivery_item_update" />
+        tools:layout="@layout/fragment_delivery_item_update" >
+        <action
+            android:id="@+id/action_deliveryItemUpdateFragment_to_deliveryItemListingFragment"
+            app:destination="@id/deliveryItemListingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/locationDetailsForQRFragment"
         android:name="my.com.abibasInven.ui.LocationDetailsForQRFragment"
         android:label="fragment_location_details_for_q_r"
-        tools:layout="@layout/fragment_location_details_for_q_r" />
+        tools:layout="@layout/fragment_location_details_for_q_r" >
+        <action
+            android:id="@+id/action_locationDetailsForQRFragment_to_locationListingFragment"
+            app:destination="@id/locationListingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/outletAddFragment"
         android:name="my.com.abibasInven.ui.OutletAddFragment"
@@ -369,4 +410,60 @@
         app:destination="@id/supplierListFragment"
         app:popUpTo="@id/supplierListFragment"
         app:popUpToInclusive="true"/>
+
+    <fragment
+        android:id="@+id/stockInSummaryFragment"
+        android:name="my.com.abibasInven.ui.StockInSummaryFragment"
+        android:label="fragment_stock_in_summary"
+        tools:layout="@layout/fragment_stock_in_summary" >
+        <action
+            android:id="@+id/action_stockInSummaryFragment_to_stockMainReportFragment"
+            app:destination="@id/stockMainReportFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/stockOutSummaryFragment"
+        android:name="my.com.abibasInven.ui.StockOutSummaryFragment"
+        android:label="fragment_stock_out_summary"
+        tools:layout="@layout/fragment_stock_out_summary" >
+        <action
+            android:id="@+id/action_stockOutSummaryFragment_to_stockMainReportFragment"
+            app:destination="@id/stockMainReportFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/stockInAndStockOutProductSummaryFragment"
+        android:name="my.com.abibasInven.ui.StockInAndStockOutProductSummaryFragment"
+        android:label="fragment_stock_in_and_stock_out_product_summary"
+        tools:layout="@layout/fragment_stock_in_and_stock_out_product_summary" >
+        <action
+            android:id="@+id/action_stockInAndStockOutProductSummaryFragment_to_stockMainReportFragment"
+            app:destination="@id/stockMainReportFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/stockOutletSummaryFragment"
+        android:name="my.com.abibasInven.ui.StockOutletSummaryFragment"
+        android:label="fragment_stock_outlet_summary"
+        tools:layout="@layout/fragment_stock_outlet_summary" >
+        <action
+            android:id="@+id/action_stockOutletSummaryFragment_to_stockMainReportFragment"
+            app:destination="@id/stockMainReportFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/stockLowReportFragment"
+        android:name="my.com.abibasInven.ui.StockLowReportFragment"
+        android:label="fragment_stock_low_report"
+        tools:layout="@layout/fragment_stock_low_report" >
+        <action
+            android:id="@+id/action_stockLowReportFragment_to_stockMainReportFragment"
+            app:destination="@id/stockMainReportFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/stockMainReportFragment"
+        android:name="my.com.abibasInven.ui.StockMainReportFragment"
+        android:label="fragment_stock_main_report"
+        tools:layout="@layout/fragment_stock_main_report" />
+    <action
+        android:id="@+id/action_global_stockMainReportFragment"
+        app:destination="@id/stockMainReportFragment"
+        app:popUpTo="@id/stockMainReportFragment"
+        app:popUpToInclusive="true" />
 </navigation>

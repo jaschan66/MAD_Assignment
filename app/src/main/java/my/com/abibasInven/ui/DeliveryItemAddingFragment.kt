@@ -103,7 +103,7 @@ class DeliveryItemAddingFragment : Fragment() {
 
 
         binding.btnAddDeliveryItem.setOnClickListener { addDeliveryItem() }
-        binding.btnCancelDeliveryItem.setOnClickListener { nav.navigateUp() }
+        binding.btnCancelDeliveryItem.setOnClickListener { nav.navigate(R.id.action_deliveryItemAddingFragment_to_deliveryListingFragment) }
 
 
 
@@ -164,14 +164,20 @@ class DeliveryItemAddingFragment : Fragment() {
                 )
                 productvm.set(updateProduct)
 
+                val foundDeliveryData = deliveryvm.get(currentDeliveryID)
+                if(foundDeliveryData!=null){
+                    val newStockOut  = StockOut(
+                        ID = stockOutID,
+                        dateTime = dtf.format(currentDateTime).toString(),
+                        deliveryID = currentDeliveryID,
+                        productID = p.ID,
+                        qty = binding.edtDeliveryQty2.text.toString().toInt(),
+                        outletID = foundDeliveryData.outletID
+                    )
+                    stockOutvm.set(newStockOut)
+                }
 
-                val newStockOut  = StockOut(
-                    ID = stockOutID,
-                    dateTime = dtf.format(currentDateTime).toString(),
-                    deliveryID = currentDeliveryID,
-                    qty = binding.edtDeliveryQty2.text.toString().toInt(),
-                )
-                stockOutvm.set(newStockOut)
+
 
 
 

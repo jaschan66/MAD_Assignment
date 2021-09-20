@@ -37,6 +37,13 @@ class LocationDetailsForQRFragment : Fragment() {
             informationDialog("QR code scanned data is not usable")
         }
 
+        vm.getAll()
+        locationvm.getAll()
+
+        binding.lblTestingProductID.text = productID
+
+
+
         val foundProductData = vm.get(productID)
 
 
@@ -69,7 +76,9 @@ class LocationDetailsForQRFragment : Fragment() {
 
         }
 
-        binding.btnLocationScanQRClose.setOnClickListener { nav.navigateUp() }
+        //binding.textView27.text = productID
+
+        binding.btnLocationScanQRClose.setOnClickListener { nav.navigate(R.id.action_locationDetailsForQRFragment_to_locationListingFragment) }
 
 
 

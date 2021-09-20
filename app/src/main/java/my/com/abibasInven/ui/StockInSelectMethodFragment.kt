@@ -29,7 +29,7 @@ class StockInSelectMethodFragment : Fragment() {
 
         with(binding){
 
-            btnStockInChoiceManual.setOnClickListener { nav.navigate(R.id.stockInFragment) }
+            btnStockInChoiceManual.setOnClickListener { nav.navigate(R.id.stockInFragment,bundleOf("productID" to "N/A") )}
 
             btnStockInChoiceSelectClose.setOnClickListener { nav.navigateUp() }
         }

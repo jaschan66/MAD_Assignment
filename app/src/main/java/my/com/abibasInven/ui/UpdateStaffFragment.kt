@@ -16,7 +16,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import my.com.abibasInven.R
 import my.com.abibasInven.data.User
 import my.com.abibasInven.data.UserViewModel
-import my.com.abibasInven.databinding.FragmentHomeBinding
 import my.com.abibasInven.databinding.FragmentUpdateStaffBinding
 
 

@@ -24,7 +24,6 @@ import com.theartofdev.edmodo.cropper.CropImage
 import kotlinx.coroutines.launch
 import my.com.abibasInven.R
 import my.com.abibasInven.data.*
-import my.com.abibasInven.databinding.FragmentHomeBinding
 import my.com.abibasInven.databinding.FragmentProductAddBinding
 import my.com.abibasInven.databinding.FragmentProductUpdateBinding
 import my.com.abibasInven.util.LocationAdapter

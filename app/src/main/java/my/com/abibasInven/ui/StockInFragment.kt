@@ -9,6 +9,9 @@ import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.example.logindemo.util.errorDialog
+import com.example.logindemo.util.snackbar
+import com.sun.mail.imap.protocol.ID
 import my.com.abibasInven.R
 import my.com.abibasInven.data.*
 import my.com.abibasInven.databinding.FragmentStaffListBinding
@@ -25,6 +28,8 @@ class StockInFragment : Fragment() {
     private val nav by lazy {findNavController()}
     private val vm : ProductViewModel by activityViewModels()
     private val vm2 : StockInViewModel by activityViewModels()
+    private val locationvm : LocationViewModel by activityViewModels()
+
 
     //spnProduct
     private val vmSpn : SpinnerViewModel by activityViewModels()
@@ -38,7 +43,7 @@ class StockInFragment : Fragment() {
 
 
 
-        binding.btnBackForLocationEditing3.setOnClickListener { nav.navigateUp() }
+        binding.btnBackForLocationEditing3.setOnClickListener { nav.navigate(R.id.action_stockInFragment_to_stockInSelectMethodFragment) }
         //binding.spnProduct.selectedItem.toString()
 
 
@@ -46,10 +51,18 @@ class StockInFragment : Fragment() {
         val spnProduct = vmSpn.getProduct()
         val spnArray2 = arrayListOf<String>()
 
+        //spnLocation
+        val spnLocation = vmSpn.getLocation()
+        val spnArray3 = arrayListOf<String>()
+
 
         val adp3 = ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item)
         adp3.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spnStockInProduct.adapter = adp3
+
+        val adp4 = ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item)
+        adp4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spnStockInLocation.adapter = adp4
 
 
         //spnProduct
@@ -72,6 +85,30 @@ class StockInFragment : Fragment() {
             }
         }
 
+        //spnLocation
+        spnLocation.observe(viewLifecycleOwner) { list ->
+            //list.groupBy { it.ID}
+            val num = list.size
+            val locationSize = vmSpn.calLocSize()
+            if (list.size > spnArray2.size) {
+                for (i in 0..locationSize - 1) {
+                    if(list[i].occupiedCapacity!=list[i].maxCapacity){
+                        adp4.add(list[i].ID)//change here to get value
+                        spnArray3.add(list[i].ID) //change here to get value
+                    }
+                }
+            } else if (num <= spnArray2.size ){
+                spnArray3.clear()
+                adp3.clear()
+                for (i in 0..locationSize - 1) {
+                    if(list[i].occupiedCapacity!=list[i].maxCapacity) {
+                        adp4.add(list[i].ID)
+                        spnArray3.add(list[i].ID)
+                    }
+                }
+            }
+        }
+
         if(productID!="N/A"){
             binding.lblCurrentProductID.text = productID
             binding.spnStockInProduct.isVisible = false
@@ -82,6 +119,7 @@ class StockInFragment : Fragment() {
             binding.btnStockIn.setOnClickListener { updateStockQty(binding.spnStockInProduct.selectedItem.toString()) }
         }
 
+        binding.btnCloseStockIn.setOnClickListener { nav.navigate(R.id.action_stockInFragment_to_stockInSelectMethodFragment) }
 
 
         return binding.root
@@ -89,31 +127,69 @@ class StockInFragment : Fragment() {
 
     private fun updateStockQty(rackProductID : String) {
 
+        val foundLocationData = locationvm.get(binding.spnStockInLocation.selectedItem.toString())
 
-        val currentDateTime = LocalDateTime.now()
-        val dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
 
-        val foundProductData = vm.get(rackProductID)
-        if(foundProductData!=null){
-            val updateProductQty = Product(
-                ID = foundProductData.ID,
-                name = foundProductData.name,
-                qty = foundProductData.qty+binding.edtRackProductQuantity.text.toString().toInt(),
-                qtyThreshold =  foundProductData.qtyThreshold,
-                categoryID = foundProductData.categoryID,
-                photo = foundProductData.photo,
-                locationID = foundProductData.locationID,
-                supplierID = foundProductData.supplierID,
-            )
-            vm.set(updateProductQty)
+
+
+        if(binding.edtRackProductQuantity.text.toString() == ""){
+            errorDialog("product quantity cannot be 0")
         }
-        val s = StockIn(
-            ID  = "SI001",
-            productID   = rackProductID,
-            qty       = binding.edtRackProductQuantity.text.toString().toInt(),
-            dateTime = dtf.format(currentDateTime).toString(),
-        )
-        vm2.set(s)
+        else if(foundLocationData!=null){
+            val foundProductData = vm.get(binding.spnStockInProduct.selectedItem.toString())
+            if(foundProductData!=null){
+                if(foundLocationData.categoryID != foundProductData.categoryID){
+                    errorDialog("Product (${foundProductData.ID}) category is ${foundProductData.categoryID}, but Location category is ${foundLocationData.categoryID}")
+                }
+                if(binding.edtRackProductQuantity.text.toString().toInt() > foundLocationData.maxCapacity){
+                    errorDialog("Location only left (${foundLocationData.maxCapacity}) storage quantity, please lower product quantity to stock in")
+                }
+            }
+        }
+        else{
+            val currentDateTime = LocalDateTime.now()
+            val dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
+
+            val foundProductData = vm.get(rackProductID)
+            if(foundProductData!=null){
+                val updateProductQty = Product(
+                    ID = foundProductData.ID,
+                    name = foundProductData.name,
+                    qty = foundProductData.qty+binding.edtRackProductQuantity.text.toString().toInt(),
+                    qtyThreshold =  foundProductData.qtyThreshold,
+                    categoryID = foundProductData.categoryID,
+                    photo = foundProductData.photo,
+                    locationID = foundProductData.locationID,
+                    supplierID = foundProductData.supplierID,
+                )
+                vm.set(updateProductQty)
+            }
+            //id-generator
+            val id = "SI" + (vm2.calStockInSize() + 1).toString()
+            val stockInID = vm2.validID(id)
+            val s = StockIn(
+                ID  = stockInID,
+                productID   = rackProductID,
+                qty       = binding.edtRackProductQuantity.text.toString().toInt(),
+                dateTime = dtf.format(currentDateTime).toString(),
+            )
+            vm2.set(s)
+
+            val foundLocationData = locationvm.get(binding.spnStockInLocation.selectedItem.toString())
+
+            if(foundLocationData!=null){
+                val updateLocation = Location(
+                    ID = foundLocationData.ID,
+                    rackType = foundLocationData.rackType,
+                    categoryID = foundLocationData.categoryID,
+                    occupiedCapacity = foundLocationData.occupiedCapacity+binding.edtRackProductQuantity.text.toString().toInt(),
+                    maxCapacity = foundLocationData.maxCapacity,
+                )
+            }
+            snackbar("product has been stocked in ")
+        }
+
+
     }
 
 

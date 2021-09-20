@@ -12,11 +12,16 @@ class DeliveryViewModel : ViewModel() {
     private val delivery = MutableLiveData<List<Delivery>>()
 
     init {
-        col.addSnapshotListener { it, _ -> delivery.value = it?.toObjects() }
+        col.addSnapshotListener { it, _ -> delivery.value = it?.toObjects()
+        }
     }
 
     fun get(id: String): Delivery? {
         return delivery.value?.find { it -> it.ID == id }
+    }
+
+    fun getByOutletID(outletID: String): Delivery? {
+        return delivery.value?.find { it -> it.outletID == outletID }
     }
 
     fun getAllDelivery() = delivery

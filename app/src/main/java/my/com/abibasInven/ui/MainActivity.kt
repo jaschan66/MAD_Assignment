@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.home     -> nav.navigate(R.id.homeFragment)
+                R.id.home     -> nav.navigate(R.id.action_global_stockMainReportFragment)
                 R.id.outlet   -> nav.navigate(R.id.action_global_outletListFragment)
                 R.id.account  -> nav.navigate(R.id.action_global_accountFragment)
                 R.id.supplier -> nav.navigate(R.id.action_global_supplierListFragment)

@@ -49,4 +49,6 @@ class StockInSummaryAdapter (
 
         fn(holder, stockIn)
     }
+
+
 }

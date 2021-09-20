@@ -16,10 +16,10 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline28"
-        app:layout_constraintHorizontal_bias="0.75"
+        app:layout_constraintHorizontal_bias="0.264"
         app:layout_constraintStart_toStartOf="@+id/guideline27"
         app:layout_constraintTop_toBottomOf="@+id/edtMaxCapacity2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.019" />
 
     <EditText
         android:id="@+id/edtMaxCapacity2"
@@ -53,6 +53,8 @@
         android:layout_marginTop="36dp"
         android:layout_marginEnd="14dp"
         android:text="@string/max_capacity"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline27"
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
@@ -60,11 +62,12 @@
         android:id="@+id/lblCompartmentDetails2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="48dp"
         android:text="@string/details"
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.408"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnUpdateCompartment5" />
 
@@ -75,6 +78,8 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="14dp"
         android:text="@string/category"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline27"
         app:layout_constraintTop_toBottomOf="@+id/lblCompartmentDetails2" />
 
@@ -175,17 +180,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_end="206dp"
+        app:layout_constraintGuide_end="242dp"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView18"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
-        android:text="@string/location_editing"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnBackForLocationEditing"
@@ -203,4 +199,15 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
+        android:id="@+id/btnCloseLocationEditing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="@string/close"
+        app:layout_constraintBottom_toBottomOf="@+id/btnUpdateCompartment7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnUpdateCompartment7"
+        app:layout_constraintTop_toTopOf="@+id/btnUpdateCompartment7" />
 </androidx.constraintlayout.widget.ConstraintLayout>

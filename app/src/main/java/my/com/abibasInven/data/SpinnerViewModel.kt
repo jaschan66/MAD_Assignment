@@ -13,12 +13,14 @@ class SpinnerViewModel : ViewModel() {
     private val col2 = Firebase.firestore.collection("category")
     private val col3 = Firebase.firestore.collection("product")
     private val col4 = Firebase.firestore.collection("outlet")
+    private val col5 = Firebase.firestore.collection("delivery")
 
     private val location = MutableLiveData<List<Location>>()
     private val supplier = MutableLiveData<List<Supplier>>()
     private val category = MutableLiveData<List<Category>>()
     private val product = MutableLiveData<List<Product>>()
     private val outlet = MutableLiveData<List<Outlet>>()
+    private val delivery = MutableLiveData<List<Delivery>>()
 
     init {
         col.addSnapshotListener { it, _ -> location.value = it?.toObjects() }
@@ -26,7 +28,10 @@ class SpinnerViewModel : ViewModel() {
         col2.addSnapshotListener { it, _ -> category.value = it?.toObjects() }
         col3.addSnapshotListener { it, _ -> product.value = it?.toObjects() }
         col4.addSnapshotListener { it, _ -> outlet.value = it?.toObjects() }
+        col5.addSnapshotListener { it, _ -> delivery.value = it?.toObjects() }
     }
+
+    fun getDelivery() = delivery
 
     fun getLocation() = location
 
@@ -47,6 +52,8 @@ class SpinnerViewModel : ViewModel() {
     fun calProductSize() = product.value?.size ?:0
 
     fun calOutletSize() = outlet.value?.size ?:0
+
+    fun calDeliverySize() = delivery.value?.size ?:0
 
 
 //    fun get(id: String): Category? {

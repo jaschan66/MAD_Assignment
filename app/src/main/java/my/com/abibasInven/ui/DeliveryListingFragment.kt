@@ -35,6 +35,11 @@ class DeliveryListingFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentDeliveryListingBinding.inflate(inflater, container, false)
 
+        val num = productvm.calSize()
+        num
+
+        val test =  productvm.getAllProductHaveQty().value
+
         adapter = DeliveryAdapter(){ holder, delivery ->
 
 
@@ -44,7 +49,7 @@ class DeliveryListingFragment : Fragment() {
 
             }
             holder.btnDeliveryListingAddDeliveryItem.setOnClickListener {
-                if(productvm.getAllProductHaveQty().value == null){
+                if(test == null){
                     informationDialog("there is no product at store")
                 }
                 else{

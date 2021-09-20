@@ -11,8 +11,8 @@
         android:title="@string/supplier" />
     <item
         android:id="@+id/home"
-        android:icon="@drawable/house_icon"
-        android:title="@string/home" />
+        android:icon="@drawable/report_icon"
+        android:title="@string/report" />
     <item
         android:id="@+id/outlet"
         android:icon="@drawable/building"

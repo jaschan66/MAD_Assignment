@@ -24,10 +24,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import my.com.abibasInven.R
-import my.com.abibasInven.data.ProductViewModel
-import my.com.abibasInven.data.UserViewModel
-import my.com.abibasInven.data.emailLogin
-import my.com.abibasInven.data.passwordLogin
+import my.com.abibasInven.data.*
 import my.com.abibasInven.databinding.FragmentAccountBinding
 import my.com.abibasInven.databinding.FragmentLoginBinding
 
@@ -37,6 +34,7 @@ class LoginFragment : Fragment() {
     private lateinit var binding: FragmentLoginBinding
     private val nav by lazy {findNavController()}
     private val vm: UserViewModel by activityViewModels()
+    private val outletvm: OutletViewModel by activityViewModels()
     private val vmPro: ProductViewModel by activityViewModels()
 
 
@@ -44,6 +42,8 @@ class LoginFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         binding = FragmentLoginBinding.inflate(inflater, container, false)
+
+        outletvm.getAllOutlet()
 
         vm.getAll()
         val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
@@ -58,12 +58,14 @@ class LoginFragment : Fragment() {
 
 
         if (checkbox == "true") {
+
+
+
             vm.getAll()
             nav.navigate(R.id.productFragment)
         }else if(checkbox == "false"){
             super.onCreate(savedInstanceState)
         }
-
         binding.btnForgetPass.setOnClickListener {
             val email    = binding.edtLoginEmail.text.toString().trim()
             nav.navigate(R.id.forgotPasswordFragment, bundleOf("email" to email))
@@ -134,7 +136,13 @@ class LoginFragment : Fragment() {
                                     vm.set(u)
                                     emailLogin = email
                                     passwordLogin = password
-                                    nav.navigate(R.id.productFragment)
+                                    //for outlet staff
+                                    if(u.role=="OL105"){
+                                        nav.navigate(R.id.deliveryOutletPinGenerateFragment, bundleOf("OutletID" to u.role))
+                                    }else{
+                                        nav.navigate(R.id.productFragment)
+                                    }
+
                                     val sharedPref = activity?.getSharedPreferences("email", MODE_PRIVATE)
                                     val editor : SharedPreferences.Editor = sharedPref!!.edit()
                                     editor.putString("emailLoginRmb",email)

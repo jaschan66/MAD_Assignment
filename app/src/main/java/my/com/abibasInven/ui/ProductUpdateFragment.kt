@@ -15,7 +15,6 @@ import my.com.abibasInven.data.Product
 import my.com.abibasInven.data.ProductViewModel
 import my.com.abibasInven.data.SpinnerViewModel
 import my.com.abibasInven.data.User
-import my.com.abibasInven.databinding.FragmentHomeBinding
 import my.com.abibasInven.databinding.FragmentProductUpdateBinding
 import android.R
 import com.google.android.material.bottomnavigation.BottomNavigationView

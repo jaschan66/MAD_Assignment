@@ -7,8 +7,25 @@
     tools:context=".ui.LocationAddingFragment">
 
     <Button
+        android:id="@+id/btnBackForLocationAdding"
+        android:layout_width="48dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="538dp"
+        android:padding="7dp"
+        app:icon="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline27"
+        app:layout_constraintHorizontal_bias="0.133"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <Button
         android:id="@+id/btnUpdateCompartment"
-        android:layout_width="103dp"
+        android:layout_width="80dp"
         android:layout_height="51dp"
         android:layout_marginStart="2dp"
         android:layout_marginTop="16dp"
@@ -16,29 +33,29 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline23"
-        app:layout_constraintHorizontal_bias="0.285"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/guideline24"
         app:layout_constraintTop_toBottomOf="@+id/edtMaxCapacity"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.017" />
 
     <EditText
         android:id="@+id/edtMaxCapacity"
-        android:layout_width="97dp"
-        android:layout_height="49dp"
+        android:layout_width="133dp"
+        android:layout_height="51dp"
         android:layout_marginStart="12dp"
         android:ems="10"
+        android:importantForAutofill="no"
         android:inputType="number"
         app:layout_constraintBottom_toBottomOf="@+id/textView24"
         app:layout_constraintStart_toStartOf="@+id/guideline24"
         app:layout_constraintTop_toTopOf="@+id/textView24"
         app:layout_constraintVertical_bias="0.466"
-        tools:ignore="SpeakableTextPresentCheck"
-        android:importantForAutofill="no" />
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <Spinner
         android:id="@+id/spnCategory"
-        android:layout_width="105dp"
-        android:layout_height="35dp"
+        android:layout_width="168dp"
+        android:layout_height="49dp"
         android:layout_marginStart="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView23"
         app:layout_constraintStart_toStartOf="@+id/guideline24"
@@ -127,16 +144,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintGuide_begin="196dp"
+        app:layout_constraintGuide_begin="169dp"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView24"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="60dp"
         android:layout_marginEnd="14dp"
         android:text="@string/max_capacity"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline24"
         app:layout_constraintTop_toBottomOf="@+id/textView23" />
 
@@ -144,9 +163,11 @@
         android:id="@+id/textView23"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="14dp"
         android:text="@string/category"
+        android:textColor="@color/black"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="@+id/guideline24"
         app:layout_constraintTop_toBottomOf="@+id/lblCompartmentDetails" />
 
@@ -175,5 +196,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="83dp" />
+
+    <Button
+        android:id="@+id/btnCloseLocationAdding"
+        android:layout_width="wrap_content"
+        android:layout_height="51dp"
+        android:layout_marginEnd="36dp"
+        android:text="@string/close"
+        app:layout_constraintBottom_toBottomOf="@+id/btnUpdateCompartment"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toEndOf="@+id/btnUpdateCompartment"
+        app:layout_constraintTop_toTopOf="@+id/btnUpdateCompartment"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

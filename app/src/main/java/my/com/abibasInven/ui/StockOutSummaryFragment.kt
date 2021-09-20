@@ -66,7 +66,7 @@ class StockOutSummaryFragment : Fragment() {
 
 
 
-        binding.btnCloseStouckOutSummary.setOnClickListener { nav.navigateUp() }
+        binding.btnCloseStouckOutSummary.setOnClickListener { nav.navigate(R.id.action_stockOutSummaryFragment_to_stockMainReportFragment) }
 
 
         return binding.root
@@ -172,6 +172,7 @@ class StockOutSummaryFragment : Fragment() {
         val currentDateTime = LocalDateTime.now()
 
         stockoutvm.getAll().observe(viewLifecycleOwner){ list->
+
 
             adapter.submitList(list.filter { LocalDateTime.parse(it.dateTime,formatter).dayOfMonth == currentDateTime.dayOfMonth })
             binding.lblStockOutSummaryCount.text = "${list.size} record(s)"

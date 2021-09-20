@@ -112,6 +112,17 @@
     <string name="located_here">Located here</string>
     <string name="outlet_location">Outlet Location</string>
     <string name="outlet_photo">Outlet photo</string>
+    <string name="stock_in_summary">Stock In Summary</string>
+    <string name="stock_out_summary">Stock Out Summary</string>
+    <string name="monthly">Monthly</string>
+    <string name="weekly">Weekly</string>
+    <string name="daily">Daily</string>
+    <string name="all">All</string>
+    <string name="summary">Summary</string>
+    <string name="stock_out">Stock out</string>
+    <string name="stock_in_quantity">stock in quantity</string>
+    <string name="search">search</string>
+    <string name="report">Report</string>
     <string-array name="userRole">
         <item>Manager</item>
         <item>Staff</item>

@@ -55,12 +55,12 @@ class DeliveryItemUpdateFragment : Fragment() {
 
         }
         else{
-            nav.navigateUp()
+            nav.navigate(R.id.action_deliveryItemUpdateFragment_to_deliveryItemListingFragment)
         }
 
 
         binding.btnEditDeliveryItem.setOnClickListener{ editDeliveryItem() }
-        binding.btnCancelEditDeliveryItem.setOnClickListener{ nav.navigateUp() }
+        binding.btnCancelEditDeliveryItem.setOnClickListener{ nav.navigate(R.id.action_deliveryItemUpdateFragment_to_deliveryItemListingFragment) }
 
 
         return binding.root

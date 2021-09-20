@@ -44,7 +44,7 @@ class DeliveryItemListingFragment : Fragment() {
 
         binding.lblDeliveryItemIDListing.text = "Delivery ID :$currentDeliveryID"
 
-        binding.btnCloseItemDeliveryListing.setOnClickListener { nav.navigateUp() }
+        binding.btnCloseItemDeliveryListing.setOnClickListener { nav.navigate(R.id.action_deliveryItemListingFragment_to_deliveryListingFragment) }
 
 
         adapter = DeliveryItemAdapter() { holder, deliveryItem ->
@@ -80,7 +80,7 @@ class DeliveryItemListingFragment : Fragment() {
             adapter.submitList(arrayDelivery)
             binding.lblDeliveryItemListingCount.text ="${arrayDelivery.size} delivery item(s)"
             if(arrayDelivery.size==0){
-                nav.navigateUp()
+                nav.navigate(R.id.action_deliveryItemListingFragment_to_deliveryListingFragment)
                 informationDialog("there is no relevant delivery item details")
             }
 
@@ -154,7 +154,7 @@ class DeliveryItemListingFragment : Fragment() {
             nav.navigate(R.id.deliveryOutletFragment, bundleOf("currentOutletID" to foundDeliveryData.outletID,"currentDeliveryID" to currentDeliveryID))
         }
         else{
-            nav.navigateUp()
+            nav.navigate(R.id.action_deliveryItemListingFragment_to_deliveryListingFragment)
             errorDialog("no current data is found")
         }
 

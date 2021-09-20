@@ -115,43 +115,8 @@ class LocationAddingFragment : Fragment() {
             btnUpdateCompartment.setOnClickListener { updateCompartmentDetails(currentCompartmentID) }
         }
 
-        //check whether it's being added
-//            val l = vm.getAll()
-//            var j = 0
-//            val locationFound = vm.getLocationSize()
-//            for (i in 1..locationFound){
-//
-//                if(l.value?.get(j)?.maxCapacity!! >0)
-//                {
-//                    when(l.value?.get(j)?.ID){
-//                        binding.btnCompartment1.text -> binding.btnCompartment1.setBackgroundColor(Color.BLUE)
-//                        binding.btnCompartment2.text -> binding.btnCompartment2.setBackgroundColor(Color.BLUE)
-//                        binding.btnCompartment3.text -> binding.btnCompartment3.setBackgroundColor(Color.BLUE)
-//                        binding.btnCompartment4.text -> binding.btnCompartment4.setBackgroundColor(Color.BLUE)
-//                        binding.btnCompartment5.text -> binding.btnCompartment5.setBackgroundColor(Color.BLUE)
-//                        binding.btnCompartment6.text -> binding.btnCompartment6.setBackgroundColor(Color.BLUE)
-//                    }
-//
-//
-//
-//                }
-//                j++
-//            }
-
-
-//        val buttonBackground: Drawable = binding.btnCompartment1.getBackground()
-//        val buttonColor = binding.btnCompartment1.getBackground() as ColorDrawable
-//         binding.textView23.text = buttonBackground.toString()
-//        when(Color.BLUE){
-//            (binding.btnCompartment1.background as ColorDrawable).color
-//        }
-
-//        binding.textView23.text=addCompartmentCount.toString()
-//       if(addCompartmentCount>5){
-//           nav.navigate(R.id.locationListingFragment)
-//       }
-
-
+        binding.btnCloseLocationAdding.setOnClickListener { componentDetailInvi() }
+        binding.btnBackForLocationAdding.setOnClickListener { nav.navigate(R.id.action_locationAddingFragment_to_locationListingFragment) }
 
         return binding.root
     }
@@ -268,6 +233,7 @@ class LocationAddingFragment : Fragment() {
             textView24.isVisible=false
             edtMaxCapacity.isVisible = false
             btnUpdateCompartment.isVisible = false
+            btnCloseLocationAdding.isVisible = false
         }
     }
     private fun componentDetailVisible(){
@@ -278,6 +244,7 @@ class LocationAddingFragment : Fragment() {
             textView24.isVisible=true
             edtMaxCapacity.isVisible = true
             btnUpdateCompartment.isVisible = true
+            btnCloseLocationAdding.isVisible = true
         }
     }
 

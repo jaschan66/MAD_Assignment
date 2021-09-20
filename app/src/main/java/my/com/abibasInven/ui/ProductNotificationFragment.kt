@@ -17,7 +17,6 @@ import com.google.firebase.auth.FirebaseAuth
 import my.com.abibasInven.R
 import my.com.abibasInven.data.ProductViewModel
 import my.com.abibasInven.data.SupplierViewModel
-import my.com.abibasInven.databinding.FragmentHomeBinding
 import my.com.abibasInven.databinding.FragmentProductNotificationBinding
 import my.com.abibasInven.util.ProductNotificationAdapter
 import my.com.abibasInven.util.StaffAdapter
@@ -40,7 +39,7 @@ class ProductNotificationFragment : Fragment() {
 
         vmSup.getAllSupplier()
 
-        binding.btnBack.setOnClickListener { nav.navigate(R.id.action_productNotificationFragment_to_productFragment) }
+//        binding.btnBack.setOnClickListener { nav.navigate(R.id.action_productNotificationFragment_to_productFragment) }
 
         adapter = ProductNotificationAdapter() { holder, product ->
             holder.root.setOnClickListener {

@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
+import my.com.abibasInven.R
 import my.com.abibasInven.data.StockInViewModel
 import my.com.abibasInven.databinding.FragmentStockInSummaryBinding
 import my.com.abibasInven.util.StockInSummaryAdapter
@@ -57,7 +58,7 @@ class StockInSummaryFragment : Fragment() {
 
 
 
-        binding.btnCloseStockInSummary.setOnClickListener { nav.navigateUp() }
+        binding.btnCloseStockInSummary.setOnClickListener { nav.navigate(R.id.action_stockInSummaryFragment_to_stockMainReportFragment) }
 
 
         return binding.root

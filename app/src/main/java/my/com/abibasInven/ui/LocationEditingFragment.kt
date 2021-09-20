@@ -76,6 +76,7 @@ class LocationEditingFragment : Fragment() {
         }
 
 
+        binding.btnCloseLocationEditing.setOnClickListener { componentDetailInvi() }
 
 
         if(isUpdateRack!="N/A"){
@@ -98,7 +99,7 @@ class LocationEditingFragment : Fragment() {
             btnUpdateCompartment5.setOnClickListener { displayCompartmentDetails(btnUpdateCompartment5.text.toString()) }
             btnUpdateCompartment6.setOnClickListener { displayCompartmentDetails(btnUpdateCompartment6.text.toString()) }
             btnUpdateCompartment7.setOnClickListener { updateCompartmentDetails(currentCompartmentID) }
-            btnBackForLocationEditing.setOnClickListener { nav.navigateUp() }
+            btnBackForLocationEditing.setOnClickListener { nav.navigate(R.id.action_locationEditingFragment_to_locationListingFragment) }
         }
 
 
@@ -192,6 +193,7 @@ class LocationEditingFragment : Fragment() {
             textView17.isVisible=false
             edtMaxCapacity2.isVisible = false
             btnUpdateCompartment7.isVisible = false
+            btnCloseLocationEditing.isVisible = false
         }
     }
     private fun componentDetailVisible() {
@@ -202,6 +204,7 @@ class LocationEditingFragment : Fragment() {
             textView17.isVisible = true
             edtMaxCapacity2.isVisible = true
             btnUpdateCompartment7.isVisible = true
+            btnCloseLocationEditing.isVisible = true
         }
     }
 

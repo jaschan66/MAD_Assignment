@@ -1,10 +1,12 @@
 package my.com.abibasInven.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -57,27 +59,19 @@ class LocationDetailsFragment : Fragment() {
 
 
 
-        binding.btnBackForLocationEditing2.setOnClickListener { nav.navigateUp() }
-        binding.btnCloseLocationDetail.setOnClickListener { nav.navigateUp() }
+        binding.btnCloseLocationDetail.setOnClickListener { nav.navigate(R.id.action_locationDetailsFragment_to_locationListingFragment)}
 
 
-        //bottom navigation
 
-        binding.bottomNavigationView.selectedItemId = R.id.home
 
-        binding.bottomNavigationView.setOnItemSelectedListener {
-            when(it.itemId){
 
-                R.id.home -> nav.navigate(R.id.homeFragment)
-                R.id.account -> nav.navigate(R.id.accountFragment)
-                R.id.product -> nav.navigate(R.id.productFragment)
-            }
-            true
-        }
         return binding.root
     }
 
+
     private fun showExistingCompartmentProduct(buttonID : String) {
+
+        btnChangeColor(buttonID)
 
         vm.getAllProductHaveLocation().observe(viewLifecycleOwner) { list ->
 
@@ -86,11 +80,106 @@ class LocationDetailsFragment : Fragment() {
                 p.locationID == buttonID
             }
             adapter.submitList(arrayLocation)
-            binding.lblLocationProductCount.text = "${list.size} product(s)"
+            binding.lblLocationProductCount.text = "${arrayLocation.size} product(s)"
 
         }
 
 
+    }
+    private fun btnChangeColor(buttonID : String){
+        when(buttonID){
+            binding.btnLocationDetailCompartment1.text ->{
+                binding.btnLocationDetailCompartment1.setBackgroundColor(Color.rgb(247, 177, 106))
+                binding.btnLocationDetailCompartment1.setTextColor(Color.BLACK)
+
+                binding.btnLocationDetailCompartment2.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment2.setTextColor(Color.WHITE)
+                binding.btnLocationDetailCompartment3.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment3.setTextColor(Color.WHITE)
+                binding.btnLocationDetailCompartment4.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment4.setTextColor(Color.WHITE)
+                binding.btnLocationDetailCompartment5.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment5.setTextColor(Color.WHITE)
+                binding.btnLocationDetailCompartment6.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment6.setTextColor(Color.WHITE)
+            }
+            binding.btnLocationDetailCompartment2.text ->{
+                binding.btnLocationDetailCompartment2.setBackgroundColor(Color.rgb(247, 177, 106))
+                binding.btnLocationDetailCompartment2.setTextColor(Color.BLACK)
+
+                binding.btnLocationDetailCompartment1.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment1.setTextColor(Color.WHITE)
+                binding.btnLocationDetailCompartment3.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment3.setTextColor(Color.WHITE)
+                binding.btnLocationDetailCompartment4.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment4.setTextColor(Color.WHITE)
+                binding.btnLocationDetailCompartment5.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment5.setTextColor(Color.WHITE)
+                binding.btnLocationDetailCompartment6.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment6.setTextColor(Color.WHITE)
+            }
+            binding.btnLocationDetailCompartment3.text ->{
+                binding.btnLocationDetailCompartment3.setBackgroundColor(Color.rgb(247, 177, 106))
+                binding.btnLocationDetailCompartment3.setTextColor(Color.BLACK)
+
+                binding.btnLocationDetailCompartment1.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment1.setTextColor(Color.WHITE)
+                binding.btnLocationDetailCompartment2.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment2.setTextColor(Color.WHITE)
+                binding.btnLocationDetailCompartment4.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment4.setTextColor(Color.WHITE)
+                binding.btnLocationDetailCompartment5.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment5.setTextColor(Color.WHITE)
+                binding.btnLocationDetailCompartment6.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment6.setTextColor(Color.WHITE)
+            }
+            binding.btnLocationDetailCompartment4.text ->{
+                binding.btnLocationDetailCompartment4.setBackgroundColor(Color.rgb(247, 177, 106))
+                binding.btnLocationDetailCompartment4.setTextColor(Color.BLACK)
+
+                binding.btnLocationDetailCompartment1.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment1.setTextColor(Color.WHITE)
+                binding.btnLocationDetailCompartment2.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment2.setTextColor(Color.WHITE)
+                binding.btnLocationDetailCompartment3.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment3.setTextColor(Color.WHITE)
+                binding.btnLocationDetailCompartment5.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment5.setTextColor(Color.WHITE)
+                binding.btnLocationDetailCompartment6.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment6.setTextColor(Color.WHITE)
+            }
+            binding.btnLocationDetailCompartment5.text ->{
+                binding.btnLocationDetailCompartment5.setBackgroundColor(Color.rgb(247, 177, 106))
+                binding.btnLocationDetailCompartment5.setTextColor(Color.BLACK)
+
+                binding.btnLocationDetailCompartment2.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment2.setTextColor(Color.WHITE)
+                binding.btnLocationDetailCompartment3.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment3.setTextColor(Color.WHITE)
+                binding.btnLocationDetailCompartment4.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment4.setTextColor(Color.WHITE)
+                binding.btnLocationDetailCompartment1.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment1.setTextColor(Color.WHITE)
+                binding.btnLocationDetailCompartment6.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment6.setTextColor(Color.WHITE)
+            }
+            binding.btnLocationDetailCompartment6.text ->{
+                binding.btnLocationDetailCompartment6.setBackgroundColor(Color.rgb(247, 177, 106))
+                binding.btnLocationDetailCompartment6.setTextColor(Color.BLACK)
+
+                binding.btnLocationDetailCompartment2.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment2.setTextColor(Color.WHITE)
+                binding.btnLocationDetailCompartment3.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment3.setTextColor(Color.WHITE)
+                binding.btnLocationDetailCompartment4.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment4.setTextColor(Color.WHITE)
+                binding.btnLocationDetailCompartment5.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment5.setTextColor(Color.WHITE)
+                binding.btnLocationDetailCompartment1.setBackgroundColor(Color.BLACK)
+                binding.btnLocationDetailCompartment1.setTextColor(Color.WHITE)
+            }
+
+        }
     }
 
 }

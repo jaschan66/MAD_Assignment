@@ -18,11 +18,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.zxing.integration.android.IntentIntegrator
 import my.com.abibasInven.R
-import my.com.abibasInven.data.Location
-import my.com.abibasInven.data.LocationViewModel
-import my.com.abibasInven.data.RackType
-import my.com.abibasInven.data.UserViewModel
-import my.com.abibasInven.databinding.FragmentHomeBinding
+import my.com.abibasInven.data.*
 import my.com.abibasInven.databinding.FragmentLocationListingBinding
 import my.com.abibasInven.util.LocationAdapter
 import my.com.abibasInven.util.StaffAdapter
@@ -34,6 +30,7 @@ class LocationListingFragment : Fragment() {
     private lateinit var binding: FragmentLocationListingBinding
     private val nav by lazy { findNavController() }
     private val vm: LocationViewModel by activityViewModels()
+    private val productvm: ProductViewModel by activityViewModels()
 
     private lateinit var adapter: LocationAdapter
 
@@ -41,6 +38,8 @@ class LocationListingFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentLocationListingBinding.inflate(inflater, container, false)
 
+        vm.getAll()
+        productvm.getAll()
         // TODO
         adapter = LocationAdapter() { holder, rackType ->
             // Item click
@@ -182,6 +181,9 @@ class LocationListingFragment : Fragment() {
                 if (result.contents == null) {
                     errorDialog("Result not found")
                 } else {
+                    vm.getAll()
+                    productvm.getAll()
+
                     nav.navigate(R.id.locationDetailsForQRFragment, bundleOf("productID" to result.contents))//Toast.makeText(this, "Scanned: " + result.contents, Toast.LENGTH_LONG).show()
                 }
             } else {

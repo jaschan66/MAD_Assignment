@@ -47,4 +47,14 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline36"
         app:layout_constraintTop_toBottomOf="@+id/btnOutletGeneratePin" />
 
+    <Button
+        android:id="@+id/btnOutletLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="64dp"
+        android:text="@string/logout"
+        app:layout_constraintStart_toStartOf="@+id/guideline36"
+        app:layout_constraintTop_toBottomOf="@+id/lblOuletGeneratedPin" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

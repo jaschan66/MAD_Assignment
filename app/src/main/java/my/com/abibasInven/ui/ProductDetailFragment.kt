@@ -18,7 +18,6 @@ import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
 import my.com.abibasInven.R
 import my.com.abibasInven.data.ProductViewModel
-import my.com.abibasInven.databinding.FragmentHomeBinding
 import my.com.abibasInven.databinding.FragmentProductDetailBinding
 
 

@@ -99,7 +99,7 @@ class DeliveryOutletFragment : Fragment(), OnMapReadyCallback {
                     //when permission is not granted
                     //Request permission
                     ActivityCompat.requestPermissions(requireActivity(), permissions, 100)
-                    nav.navigateUp()
+                    nav.navigate(R.id.action_deliveryOutletFragment_to_deliveryItemListingFragment)
                 }
 
 
@@ -107,7 +107,7 @@ class DeliveryOutletFragment : Fragment(), OnMapReadyCallback {
 
         }
         else{
-            nav.navigateUp()
+            nav.navigate(R.id.action_deliveryOutletFragment_to_deliveryItemListingFragment)
         }
         binding.btnConfirmDeliveryPin.setOnClickListener { checkDeliveryPin(binding.edtDeliveryOutletPin.text.toString()) }
 
@@ -115,7 +115,7 @@ class DeliveryOutletFragment : Fragment(), OnMapReadyCallback {
         binding.mapDeliveryOutlet.onCreate(savedInstanceState)
         binding.mapDeliveryOutlet.onResume()
         // Inflate the layout for this fragment
-        binding.btnCloseDeliveryOutlet.setOnClickListener { nav.navigateUp() }
+        binding.btnCloseDeliveryOutlet.setOnClickListener { nav.navigate(R.id.action_deliveryOutletFragment_to_deliveryItemListingFragment) }
         return binding.root
     }
 
@@ -141,12 +141,12 @@ class DeliveryOutletFragment : Fragment(), OnMapReadyCallback {
                 val currentDateTime = LocalDateTime.now()
                 val dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
 
-                val newStockOut = StockOut(
-                    ID = stockOutID,
-                    dateTime = dtf.format(currentDateTime).toString(),
-                    deliveryID = currentDeliveryID,
-                )
-                stockOutvm.set(newStockOut)
+//                val newStockOut = StockOut(
+//                    ID = stockOutID,
+//                    dateTime = dtf.format(currentDateTime).toString(),
+//                    deliveryID = currentDeliveryID,
+//                )
+//                stockOutvm.set(newStockOut)
 
                 informationDialog("delivery ( $currentDeliveryID ) task has completed")
 
