@@ -86,7 +86,7 @@ class AccountFragment : Fragment() {
 
         binding.accountChgPass.setOnClickListener {
             if (password != null) {
-                FirebaseAuth.getInstance().signInWithEmailAndPassword(emailLogin, password)
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(u.email, password)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
                             nav.navigate(R.id.resetPasswordFragment,args)

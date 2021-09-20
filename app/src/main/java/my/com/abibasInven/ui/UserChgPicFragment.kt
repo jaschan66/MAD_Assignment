@@ -52,7 +52,7 @@ class UserChgPicFragment : Fragment() {
         val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
         bottomNav.visibility = View.GONE
 
-        binding.btnBackUserChgPic.setOnClickListener { R.id.action_userChgPicFragment_to_accountFragment }
+        binding.btnBackUserChgPic.setOnClickListener { nav.navigate(R.id.action_userChgPicFragment_to_accountFragment) }
 
         binding.btnCamera.setOnClickListener {
             try {

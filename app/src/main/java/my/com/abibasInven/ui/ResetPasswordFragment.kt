@@ -38,9 +38,12 @@ class ResetPasswordFragment : Fragment() {
 
         binding = FragmentResetPasswordBinding.inflate(inflater, container, false)
 
+        val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        bottomNav.visibility = View.GONE
         // TODO
         auth = FirebaseAuth.getInstance()
         vm.getAll()
+        binding.btnBackResetPassword.setOnClickListener { nav.navigateUp() }
 
         binding.btnConfirm.setOnClickListener { changePassword() }
         return binding.root
