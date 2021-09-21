@@ -91,24 +91,17 @@ class ProductViewModel : ViewModel() {
     fun getResult() = result
 
 
-    private fun idExists(id: String): Boolean {
-        return product.value?.any { it -> it.ID == id }
-            ?: false // if found return true if not found then return false
+
+
+    private fun productExists(name: String): Boolean {
+        return product.value?.any { it -> it.name.equals(name, true) } ?: false
     }
 
     fun validate(p: Product): String {
         var errorMessage = ""
 
-        errorMessage += if (p.categoryID == "") "- Product name is required. \n"
-        else ""
-
         errorMessage += if (p.name == "") "- Name is required. \n"
-        else ""
-
-        errorMessage += if (p.locationID == "") "- Product name is required. \n"
-        else ""
-
-        errorMessage += if (p.supplierID == "") "- Product name is required. \n"
+        else if (productExists(p.name)) "- Product name already exists. \n"
         else ""
 
         errorMessage += if (p.photo.toBytes().isEmpty()) "- Product photo is required. \n"

@@ -52,9 +52,9 @@ class RegisterFragment : Fragment() {
                         }
                     )
             }
-//            else {
-//                errorDialog("The field cannot be empty")
-//            }
+            else {
+                errorDialog("The field cannot be empty")
+            }
 
         }
 

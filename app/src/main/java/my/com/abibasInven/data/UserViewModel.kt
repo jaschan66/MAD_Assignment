@@ -69,13 +69,10 @@ class UserViewModel : ViewModel() {
         user.value?.forEach { it -> remove(it.email) }
     }
 
-    fun deleteAllStaff() {
-        staff.value?.forEach { it -> remove(it.email) }
+    private fun userExists(name: String): Boolean {
+        return user.value?.any { it -> it.name.equals(name, true) } ?: false
     }
 
-    private fun idExists(email: String): Boolean {
-        return user.value?.any { it -> it.email == email } ?: false // if found return true if not found then return false
-    }
 
 
 
@@ -88,10 +85,9 @@ class UserViewModel : ViewModel() {
         else if (!isValidEmail(u.email)) "- Email format is invalid. \n"
         else ""
 
-        errorMessage += if (u.role == "") "- User role is required. \n"
-        else ""
 
         errorMessage += if (u.name == "") "- Name is required. \n"
+        else if (userExists(u.name)) "- User name already exists. \n"
         else if (!u.name.matches(regxName)) "- Name is invalid. \n"
         else ""
 

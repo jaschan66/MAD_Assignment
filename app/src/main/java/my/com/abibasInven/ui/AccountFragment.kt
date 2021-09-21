@@ -84,9 +84,6 @@ class AccountFragment : Fragment() {
             binding.accountImg.setImageResource(R.drawable.ic_addimg)
         }
 
-
-
-
         binding.accountChgPass.setOnClickListener {
             if (password != null) {
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(u.email, password)

@@ -25,7 +25,7 @@ class StaffListFragment : Fragment() {
     private lateinit var binding: FragmentStaffListBinding
     private val nav by lazy {findNavController()}
     private val vm: UserViewModel by activityViewModels()
-
+    private var auth : FirebaseAuth = FirebaseAuth.getInstance()
 
     private lateinit var adapter: StaffAdapter
 
@@ -57,20 +57,18 @@ class StaffListFragment : Fragment() {
                 nav.navigate(R.id.updateStaffFragment, bundleOf("email" to user.email))
             }
             holder.btnDelete.setOnClickListener {
-                //TODO Need to do the delete process for 2 times in order to delete the 2nd record and those after 2nd record as well
+                FirebaseAuth.getInstance().signInWithEmailAndPassword(user.email, user.password)
                 val builder = AlertDialog.Builder(context)
                 builder.setMessage("Are you sure you want to Delete?")
                     .setCancelable(false)
                     .setPositiveButton("Yes") { dialog, id ->
                         // Delete selected note from database
-                        var auth : FirebaseAuth = FirebaseAuth.getInstance()
-                        FirebaseAuth.getInstance().signInWithEmailAndPassword(user.email, user.password)
                         val user1 = auth.currentUser
                         user1?.delete()
                             ?.addOnCompleteListener { task ->
                                 if (task.isSuccessful) {
                                     snackbar("user deleted successfully")
-                                    deleteStaff(user.email)
+                                    vm.remove(user.email)
                                 }
                             }
                     }
@@ -92,10 +90,6 @@ class StaffListFragment : Fragment() {
         }
 
         return binding.root
-    }
-
-    private fun deleteStaff(email: String) {
-        vm.remove(email)
     }
 
 
