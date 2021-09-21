@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.logindemo.util.errorDialog
@@ -55,12 +56,13 @@ class DeliveryItemUpdateFragment : Fragment() {
 
         }
         else{
-            nav.navigate(R.id.action_deliveryItemUpdateFragment_to_deliveryItemListingFragment)
+            nav.navigateUp()
         }
 
 
         binding.btnEditDeliveryItem.setOnClickListener{ editDeliveryItem() }
-        binding.btnCancelEditDeliveryItem.setOnClickListener{ nav.navigate(R.id.action_deliveryItemUpdateFragment_to_deliveryItemListingFragment) }
+        binding.btnCancelEditDeliveryItem.setOnClickListener{ nav.navigateUp() }
+
 
 
         return binding.root
@@ -70,6 +72,7 @@ class DeliveryItemUpdateFragment : Fragment() {
 
         val foundProductData = productvm.get(foundDeliveryItemProductID)
         val foundDeliveryItem = deliveryItemvm.get(currentDeliveryItemID)
+        val foundStockOutData = stockOutvm.get(foundDeliveryItem!!.stockOutID)
         val num = foundDeliveryItem!!.deliveryQty
         num
         var qtyChanges = 0
@@ -90,7 +93,7 @@ class DeliveryItemUpdateFragment : Fragment() {
         val currentDateTime = LocalDateTime.now()
         val dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
 
-        if(foundProductData!=null&&foundDeliveryItem!=null){
+        if(foundProductData!=null&&foundDeliveryItem!=null&&foundStockOutData!=null){
 
             if (foundProductData.qty - qtyChanges >= 0){
                 if (qtyChanges < 0){
@@ -121,6 +124,17 @@ class DeliveryItemUpdateFragment : Fragment() {
                         supplierID = foundProductData.supplierID,
                     )
                     productvm.set(updateProductQty)
+
+                    val updateStockOut  = StockOut(
+                        ID = foundDeliveryItem.stockOutID,
+                        dateTime = dtf.format(currentDateTime).toString(),
+                        deliveryID = foundDeliveryItem.deliveryID,
+                        outletID = foundStockOutData.outletID,
+                        productID = foundStockOutData.productID,
+                        qty = newProductQty,
+                    )
+                    stockOutvm.set(updateStockOut)
+
                     snackbar("updated new delivery item quantity")
 
                 } else if (qtyChanges > 0 && foundProductData.qty != 0) {
@@ -153,13 +167,21 @@ class DeliveryItemUpdateFragment : Fragment() {
                     )
                     productvm.set(updateProductQty)
 
-                    val newStockOut  = StockOut(
-                        ID = foundDeliveryItem.stockOutID,
-                        dateTime = dtf.format(currentDateTime).toString(),
-                        deliveryID = foundDeliveryItem.deliveryID,
-                        qty = newProductQty,
-                    )
-                    stockOutvm.set(newStockOut)
+
+
+
+                        val updateStockOut  = StockOut(
+                            ID = foundDeliveryItem.stockOutID,
+                            dateTime = dtf.format(currentDateTime).toString(),
+                            deliveryID = foundDeliveryItem.deliveryID,
+                            outletID = foundStockOutData.outletID,
+                            productID = foundStockOutData.productID,
+                            qty = newProductQty,
+                        )
+                        stockOutvm.set(updateStockOut)
+
+
+
 
                     snackbar("updated new delivery item quantity")
                 }
@@ -168,93 +190,6 @@ class DeliveryItemUpdateFragment : Fragment() {
             }
 
 
-//            val num = foundProductData.qty - qtyChanges
-//            num
-//
-//            if( foundProductData.qty - qtyChanges !=0 ){
-//
-//                var newProductQty = 0
-//                val testingQty = foundProductData.qty
-//
-//                newProductQty = testingQty + qtyChanges
-//
-//            //TODO the increase of product qty is still not functioning
-//
-//                val updateDeliveryItem = DeliveryItem(
-//                    ID = currentDeliveryItemID,
-//                    productID = foundProductData.ID,
-//                    deliveryQty = binding.edtUpdateDeliveryItemQty.text.toString().toInt(),
-//                    deliveryID = foundDeliveryItem.deliveryID,
-//                    deliveryItemPhoto = foundDeliveryItem.deliveryItemPhoto,
-//                )
-//                deliveryItemvm.set(updateDeliveryItem)
-//                val updateProductQty = Product(
-//                    ID = foundProductData.ID,
-//                    name = foundProductData.name,
-//                    qty = newProductQty,
-//                    qtyThreshold =  foundProductData.qtyThreshold,
-//                    categoryID = foundProductData.categoryID,
-//                    photo = foundProductData.photo,
-//                    locationID = foundProductData.locationID,
-//                    supplierID = foundProductData.supplierID,
-//                )
-//                productvm.set(updateProductQty)
-//                snackbar("updated new delivery item quantity")
-
-
-//                if(qtyChanges>0){
-//                    val updateDeliveryItem = DeliveryItem(
-//                        ID = currentDeliveryItemID,
-//                        productID = foundProductData.ID,
-//                        deliveryQty = binding.edtUpdateDeliveryItemQty.text.toString().toInt(),
-//                        deliveryID = foundDeliveryItem.deliveryID,
-//                        deliveryItemPhoto = foundDeliveryItem.deliveryItemPhoto,
-//                    )
-//                    deliveryItemvm.set(updateDeliveryItem)
-//                    val updateProductQty = Product(
-//                        ID = foundProductData.ID,
-//                        name = foundProductData.name,
-//                        qty = foundProductData.qty + qtyChanges,
-//                        qtyThreshold =  foundProductData.qtyThreshold,
-//                        categoryID = foundProductData.categoryID,
-//                        photo = foundProductData.photo,
-//                        locationID = foundProductData.locationID,
-//                        supplierID = foundProductData.supplierID,
-//                    )
-//                    productvm.set(updateProductQty)
-//                    snackbar("updated new delivery item quantity")
-//                }
-//                else{
-//                    val updateDeliveryItem = DeliveryItem(
-//                        ID = currentDeliveryItemID,
-//                        productID = foundProductData.ID,
-//                        deliveryQty = binding.edtUpdateDeliveryItemQty.text.toString().toInt(),
-//                        deliveryID = foundDeliveryItem.deliveryID,
-//                        deliveryItemPhoto = foundDeliveryItem.deliveryItemPhoto,
-//                    )
-//                    deliveryItemvm.set(updateDeliveryItem)
-//                    val updateProductQty = Product(
-//                        ID = foundProductData.ID,
-//                        name = foundProductData.name,
-//                        qty = foundProductData.qty + qtyChanges,
-//                        qtyThreshold =  foundProductData.qtyThreshold,
-//                        categoryID = foundProductData.categoryID,
-//                        photo = foundProductData.photo,
-//                        locationID = foundProductData.locationID,
-//                        supplierID = foundProductData.supplierID,
-//                    )
-//                    productvm.set(updateProductQty)
-//                    snackbar("updated new delivery item quantity")
-//                }
-
-
-
-
-
-//            }
-//            else{
-//                errorDialog("current product(${foundProductData.ID}) only have ${foundProductData.qty}, please choose a lower quantity")
-//            }
         }
 
 

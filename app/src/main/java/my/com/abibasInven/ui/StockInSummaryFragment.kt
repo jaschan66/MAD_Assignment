@@ -137,8 +137,9 @@ class StockInSummaryFragment : Fragment() {
 
         stockinvm.getAll().observe(viewLifecycleOwner){ list->
 
-            adapter.submitList(list.filter { LocalDateTime.parse(it.dateTime,formatter).month.value == currentDateTime.month.value })
-            binding.lblStockInSummaryCount.text = "${list.size} record(s)"
+            val array= list.filter { LocalDateTime.parse(it.dateTime,formatter).month.value == currentDateTime.month.value }
+            adapter.submitList(array)
+            binding.lblStockInSummaryCount.text = "${array.size} record(s)"
         }
     }
 
@@ -150,8 +151,9 @@ class StockInSummaryFragment : Fragment() {
 
         stockinvm.getAll().observe(viewLifecycleOwner){ list->
 
-            adapter.submitList(list.filter { LocalDateTime.parse(it.dateTime,formatter).dayOfMonth in currentDateTime.dayOfMonth.minus(7) .. currentDateTime.dayOfMonth  })
-            binding.lblStockInSummaryCount.text = "${list.size} record(s)"
+            val array = list.filter { LocalDateTime.parse(it.dateTime,formatter).dayOfMonth in currentDateTime.dayOfMonth.minus(7) .. currentDateTime.dayOfMonth  }
+            adapter.submitList(array)
+            binding.lblStockInSummaryCount.text = "${array.size} record(s)"
         }
 
     }
@@ -165,8 +167,9 @@ class StockInSummaryFragment : Fragment() {
 
         stockinvm.getAll().observe(viewLifecycleOwner){ list->
 
-            adapter.submitList(list.filter { LocalDateTime.parse(it.dateTime,formatter).dayOfMonth == currentDateTime.dayOfMonth })
-            binding.lblStockInSummaryCount.text = "${list.size} record(s)"
+            val array = list.filter { LocalDateTime.parse(it.dateTime,formatter).dayOfMonth == currentDateTime.dayOfMonth }
+            adapter.submitList(array)
+            binding.lblStockInSummaryCount.text = "${array.size} record(s)"
         }
     }
 

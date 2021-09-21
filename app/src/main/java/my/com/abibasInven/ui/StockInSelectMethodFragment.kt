@@ -8,10 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.logindemo.util.errorDialog
 import com.google.zxing.integration.android.IntentIntegrator
 import my.com.abibasInven.R
+import my.com.abibasInven.data.LocationViewModel
+import my.com.abibasInven.data.ProductViewModel
+import my.com.abibasInven.data.StockInViewModel
 import my.com.abibasInven.databinding.FragmentLocationListingBinding
 import my.com.abibasInven.databinding.FragmentStockInBinding
 import my.com.abibasInven.databinding.FragmentStockInSelectMethodBinding
@@ -21,11 +25,17 @@ class StockInSelectMethodFragment : Fragment() {
 
     private lateinit var binding: FragmentStockInSelectMethodBinding
     private val nav by lazy { findNavController() }
+    private val productvm : ProductViewModel by activityViewModels()
+    private val stockinvm : StockInViewModel by activityViewModels()
+    private val locationvm : LocationViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentStockInSelectMethodBinding.inflate(inflater, container, false)
+        productvm.getAll()
+        stockinvm.getAll()
+        locationvm.getAll()
 
         with(binding){
 

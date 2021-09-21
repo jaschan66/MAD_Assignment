@@ -68,8 +68,8 @@ class DeliveryAddingFragment : Fragment() {
         binding.btnAddDelivery.setOnClickListener { addDelivery() }
         binding.btnCancelAddDelivery.setOnClickListener { nav.navigate(R.id.action_deliveryAddingFragment_to_deliveryListingFragment) }
 
-        val id1 = "DV"+ (deliveryvm.calDeliverySize() + 1).toString()
-        val deliveryID = deliveryvm.validID(id1)
+
+        val deliveryID = deliveryvm.validID()
         binding.lblCurrentDeliveryID.text = deliveryID
 
 
@@ -81,8 +81,8 @@ class DeliveryAddingFragment : Fragment() {
 
 
         // id generator for delivery item
-        val id1 = "DV"+ (deliveryvm.calDeliverySize() + 1).toString()
-        val deliveryID = deliveryvm.validID(id1)
+
+        val deliveryID = deliveryvm.validID()
 
 
 //binding.spnDeliveryOutlet.selectedItem.toString(),

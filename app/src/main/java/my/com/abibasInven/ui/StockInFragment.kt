@@ -38,6 +38,9 @@ class StockInFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
+        vm.getAll()
+        vm2.getAll()
+        locationvm.getAll()
         // Inflate the layout for this fragment
         binding = FragmentStockInBinding.inflate(inflater, container, false)
 
@@ -63,7 +66,6 @@ class StockInFragment : Fragment() {
         val adp4 = ArrayAdapter<String>(requireContext(),android.R.layout.simple_spinner_item)
         adp4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spnStockInLocation.adapter = adp4
-
 
         //spnProduct
         spnProduct.observe(viewLifecycleOwner) { list ->
@@ -127,66 +129,136 @@ class StockInFragment : Fragment() {
 
     private fun updateStockQty(rackProductID : String) {
 
+        val test = binding.spnStockInLocation.selectedItem.toString()
+        test
         val foundLocationData = locationvm.get(binding.spnStockInLocation.selectedItem.toString())
-
-
 
 
         if(binding.edtRackProductQuantity.text.toString() == ""){
             errorDialog("product quantity cannot be 0")
         }
         else if(foundLocationData!=null){
-            val foundProductData = vm.get(binding.spnStockInProduct.selectedItem.toString())
-            if(foundProductData!=null){
-                if(foundLocationData.categoryID != foundProductData.categoryID){
-                    errorDialog("Product (${foundProductData.ID}) category is ${foundProductData.categoryID}, but Location category is ${foundLocationData.categoryID}")
+
+            if (productID=="N/A"){
+                val test = binding.spnStockInProduct.selectedItem.toString()
+                val foundProductData = vm.get(test)
+                if(foundProductData!=null){
+//                    if(foundLocationData.categoryID != foundProductData.categoryID){
+//                        errorDialog("Product (${foundProductData.ID}) category is ${foundProductData.categoryID}, but Location category is ${foundLocationData.categoryID}")
+//                    }
+                     if((binding.edtRackProductQuantity.text.toString().toInt()+foundLocationData.occupiedCapacity) > foundLocationData.maxCapacity){
+                        errorDialog("Location only left (${foundLocationData.maxCapacity-((binding.edtRackProductQuantity.text.toString().toInt()+foundLocationData.occupiedCapacity))}) storage quantity, please lower product quantity to stock in")
+                    }
+                    else{
+                        //
+                        val currentDateTime = LocalDateTime.now()
+                        val dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
+
+                        val foundProductData = vm.get(rackProductID)
+                        if(foundProductData!=null){
+                            val updateProductQty = Product(
+                                ID = foundProductData.ID,
+                                name = foundProductData.name,
+                                qty = foundProductData.qty+binding.edtRackProductQuantity.text.toString().toInt(),
+                                qtyThreshold =  foundProductData.qtyThreshold,
+                                categoryID = foundProductData.categoryID,
+                                photo = foundProductData.photo,
+                                locationID = foundProductData.locationID,
+                                supplierID = foundProductData.supplierID,
+                            )
+                            vm.set(updateProductQty)
+                        }
+                        //id-generator
+
+                        val stockInID = vm2.validID()
+                        val s = StockIn(
+                            ID  = stockInID,
+                            productID   = rackProductID,
+                            qty       = binding.edtRackProductQuantity.text.toString().toInt(),
+                            dateTime = dtf.format(currentDateTime).toString(),
+                        )
+                        vm2.set(s)
+
+                        val foundLocationData = locationvm.get(binding.spnStockInLocation.selectedItem.toString())
+
+                        if(foundLocationData!=null){
+                            foundLocationData
+                            val updateLocation = Location(
+                                ID = foundLocationData.ID,
+                                rackType = foundLocationData.rackType,
+                                categoryID = foundLocationData.categoryID,
+                                occupiedCapacity = foundLocationData.occupiedCapacity+binding.edtRackProductQuantity.text.toString().toInt(),
+                                maxCapacity = foundLocationData.maxCapacity,
+                            )
+                            locationvm.set(updateLocation)
+                        }
+                        snackbar("product has been stocked in ")
+                        //
+                    }
+
+
                 }
-                if(binding.edtRackProductQuantity.text.toString().toInt() > foundLocationData.maxCapacity){
-                    errorDialog("Location only left (${foundLocationData.maxCapacity}) storage quantity, please lower product quantity to stock in")
+            } else {
+                val foundProductData = vm.get(productID)
+                if(foundProductData!=null){
+                    if(foundLocationData.categoryID != foundProductData.categoryID){
+                        errorDialog("Product (${foundProductData.ID}) category is ${foundProductData.categoryID}, but Location category is ${foundLocationData.categoryID}")
+                    }
+                    else if((binding.edtRackProductQuantity.text.toString().toInt()+foundLocationData.occupiedCapacity) > foundLocationData.maxCapacity){
+                        errorDialog("Location only left (${foundLocationData.maxCapacity}) storage quantity, please lower product quantity to stock in")
+                    }
+                    else{
+                        //
+                        val currentDateTime = LocalDateTime.now()
+                        val dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
+
+                        val foundProductData = vm.get(rackProductID)
+                        if(foundProductData!=null){
+                            val updateProductQty = Product(
+                                ID = foundProductData.ID,
+                                name = foundProductData.name,
+                                qty = foundProductData.qty+binding.edtRackProductQuantity.text.toString().toInt(),
+                                qtyThreshold =  foundProductData.qtyThreshold,
+                                categoryID = foundProductData.categoryID,
+                                photo = foundProductData.photo,
+                                locationID = foundProductData.locationID,
+                                supplierID = foundProductData.supplierID,
+                            )
+                            vm.set(updateProductQty)
+                        }
+                        //id-generator
+
+                        val stockInID = vm2.validID()
+                        val s = StockIn(
+                            ID  = stockInID,
+                            productID   = rackProductID,
+                            qty       = binding.edtRackProductQuantity.text.toString().toInt(),
+                            dateTime = dtf.format(currentDateTime).toString(),
+                        )
+                        vm2.set(s)
+
+                        val foundLocationData = locationvm.get(binding.spnStockInLocation.selectedItem.toString())
+
+                        if(foundLocationData!=null){
+                            foundLocationData
+                            val updateLocation = Location(
+                                ID = foundLocationData.ID,
+                                rackType = foundLocationData.rackType,
+                                categoryID = foundLocationData.categoryID,
+                                occupiedCapacity = foundLocationData.occupiedCapacity+binding.edtRackProductQuantity.text.toString().toInt(),
+                                maxCapacity = foundLocationData.maxCapacity,
+                            )
+                            locationvm.set(updateLocation)
+                        }
+                        snackbar("product has been stocked in ")
+                        //
+                    }
+
                 }
             }
-        }
-        else{
-            val currentDateTime = LocalDateTime.now()
-            val dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
 
-            val foundProductData = vm.get(rackProductID)
-            if(foundProductData!=null){
-                val updateProductQty = Product(
-                    ID = foundProductData.ID,
-                    name = foundProductData.name,
-                    qty = foundProductData.qty+binding.edtRackProductQuantity.text.toString().toInt(),
-                    qtyThreshold =  foundProductData.qtyThreshold,
-                    categoryID = foundProductData.categoryID,
-                    photo = foundProductData.photo,
-                    locationID = foundProductData.locationID,
-                    supplierID = foundProductData.supplierID,
-                )
-                vm.set(updateProductQty)
-            }
-            //id-generator
-            val id = "SI" + (vm2.calStockInSize() + 1).toString()
-            val stockInID = vm2.validID(id)
-            val s = StockIn(
-                ID  = stockInID,
-                productID   = rackProductID,
-                qty       = binding.edtRackProductQuantity.text.toString().toInt(),
-                dateTime = dtf.format(currentDateTime).toString(),
-            )
-            vm2.set(s)
 
-            val foundLocationData = locationvm.get(binding.spnStockInLocation.selectedItem.toString())
 
-            if(foundLocationData!=null){
-                val updateLocation = Location(
-                    ID = foundLocationData.ID,
-                    rackType = foundLocationData.rackType,
-                    categoryID = foundLocationData.categoryID,
-                    occupiedCapacity = foundLocationData.occupiedCapacity+binding.edtRackProductQuantity.text.toString().toInt(),
-                    maxCapacity = foundLocationData.maxCapacity,
-                )
-            }
-            snackbar("product has been stocked in ")
         }
 
 

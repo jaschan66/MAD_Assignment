@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -43,6 +44,14 @@ class DeliveryItemListingFragment : Fragment() {
 
 
         binding.lblDeliveryItemIDListing.text = "Delivery ID :$currentDeliveryID"
+
+        val foundDelivery = deliveryvm.get(currentDeliveryID)
+        if(foundDelivery!=null){
+            if(foundDelivery.deliveryStatus=="delivering"||foundDelivery.deliveryStatus=="completed"){
+                binding.btnDeliver.isEnabled = false
+                binding.btnDeliver.isVisible = false
+            }
+        }
 
         binding.btnCloseItemDeliveryListing.setOnClickListener { nav.navigate(R.id.action_deliveryItemListingFragment_to_deliveryListingFragment) }
 
@@ -154,7 +163,7 @@ class DeliveryItemListingFragment : Fragment() {
             nav.navigate(R.id.deliveryOutletFragment, bundleOf("currentOutletID" to foundDeliveryData.outletID,"currentDeliveryID" to currentDeliveryID))
         }
         else{
-            nav.navigate(R.id.action_deliveryItemListingFragment_to_deliveryListingFragment)
+            nav.navigateUp()
             errorDialog("no current data is found")
         }
 

@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -40,7 +41,10 @@ class DeliveryAdapter (
 
         holder.lblDeliveryID.text = delivery.ID
 
-
+        if(delivery.deliveryStatus=="delivering"||delivery.deliveryStatus=="completed"){
+            holder.btnDeliveryListingAddDeliveryItem.isVisible = false
+            holder.btnDeleteDelivery.isVisible = false
+        }
 
         fn(holder, delivery)
     }

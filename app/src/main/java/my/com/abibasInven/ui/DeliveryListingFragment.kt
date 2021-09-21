@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -35,6 +36,7 @@ class DeliveryListingFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentDeliveryListingBinding.inflate(inflater, container, false)
 
+
         val num = productvm.calSize()
         num
 
@@ -61,22 +63,66 @@ class DeliveryListingFragment : Fragment() {
             holder.btnDeleteDelivery.setOnClickListener {
 
             }
+
+
         }
         binding.rvDeliveryListing.adapter = adapter
         binding.rvDeliveryListing.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
 
+
+
+        binding.btnDeliveryListingAll.setOnClickListener { displayDeliveryListingAll() }
+        binding.btnDeliveryListingReady.setOnClickListener { displayDeliveryListingReady() }
+        binding.btnDeliveryListingDelivering.setOnClickListener { displayDeliveryListingDelivering() }
+        binding.btnDeliveryListingCompleted.setOnClickListener { displayDeliveryListingCompleted() }
+
+        binding.btnCreateDelivery.setOnClickListener { nav.navigate(R.id.deliveryAddingFragment) }
+
+        //        if(delivery.deliveryStatus=="delivering"||delivery.deliveryStatus=="completed")
+
+        deliveryvm.getAllDelivery().observe(viewLifecycleOwner){ list->
+            val array = list.filter { it.deliveryStatus=="ready" }
+            adapter.submitList(array)
+            binding.lblDeliveryCount.text = "${array.size} delivery(s)"
+        }
+
+
+        return binding.root
+    }
+
+    private fun displayDeliveryListingCompleted() {
+        deliveryvm.getAllDelivery().observe(viewLifecycleOwner){ list->
+            val array = list.filter { it.deliveryStatus=="completed" }
+            adapter.submitList(array)
+            binding.lblDeliveryCount.text = "${array.size} delivery(s)"
+        }
+    }
+
+    private fun displayDeliveryListingDelivering() {
+        deliveryvm.getAllDelivery().observe(viewLifecycleOwner){ list->
+            val array = list.filter { it.deliveryStatus=="delivering" }
+            adapter.submitList(array)
+            binding.lblDeliveryCount.text = "${array.size} delivery(s)"
+        }
+    }
+
+    private fun displayDeliveryListingReady() {
+
+        deliveryvm.getAllDelivery().observe(viewLifecycleOwner){ list->
+            val array = list.filter { it.deliveryStatus=="ready" }
+            adapter.submitList(array)
+            binding.lblDeliveryCount.text = "${array.size} delivery(s)"
+        }
+    }
+
+    private fun displayDeliveryListingAll() {
         deliveryvm.getAllDelivery().observe(viewLifecycleOwner){ list->
             adapter.submitList(list)
             binding.lblDeliveryCount.text = "${list.size} delivery(s)"
 
         }
 
-        binding.btnCreateDelivery.setOnClickListener { nav.navigate(R.id.deliveryAddingFragment) }
-
-
-        return binding.root
     }
-
 
 
 }

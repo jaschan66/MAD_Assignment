@@ -63,8 +63,8 @@
         android:id="@+id/btnAddDeliveryItem"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
         android:text="@string/add"
         app:layout_constraintStart_toStartOf="@+id/guideline37"
         app:layout_constraintTop_toBottomOf="@+id/edtDeliveryQty2" />
@@ -159,4 +159,5 @@
         app:layout_constraintStart_toEndOf="@+id/btnAddDeliveryItem"
         app:layout_constraintTop_toTopOf="@+id/btnAddDeliveryItem"
         app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

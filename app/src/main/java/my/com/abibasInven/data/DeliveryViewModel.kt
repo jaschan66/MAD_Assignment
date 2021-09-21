@@ -45,17 +45,38 @@ class DeliveryViewModel : ViewModel() {
             ?: false // if found return true if not found then return false
     }
 
-    fun validID(id: String): String {
-        val newID: String
-        val getLastDelivery = delivery.value?.lastOrNull()?.ID.toString()
+    fun validID(): String {
+        var newID: String
 
-        return if (idExists(id)) {
-            val num: String = getLastDelivery.substringAfterLast("DV")
-            newID = "DV" + (num.toIntOrNull()?.plus(1)).toString()
-            newID
-        } else {
-            newID = "DV" + (calDeliverySize() + 1).toString()
-            newID
+        val getLastDelivery = delivery.value?.lastOrNull()?.ID.toString()
+        val num: String = getLastDelivery.substringAfterLast("DV10")
+        newID = "DV10" + (num.toIntOrNull()?.plus(1)).toString()
+
+        if (newID == "DV1010") {
+            newID = "DV1" + (num.toIntOrNull()?.plus(1)).toString()
+            return newID
+        }
+
+        return when (calDeliverySize()) {
+            0 -> {
+                newID = "DV10" + (calDeliverySize() + 1)
+                newID
+            }
+            in 1..8 -> {
+                val getLastDelivery = delivery.value?.lastOrNull()?.ID.toString()
+                val num: String = getLastDelivery.substringAfterLast("DV10")
+                newID = "DV10" + (num.toIntOrNull()?.plus(1)).toString()
+                if (newID == "DV10null") {
+                    newID = "DV111"
+                    newID
+                } else newID
+            }
+            else -> {
+                val getLastDelivery = delivery.value?.lastOrNull()?.ID.toString()
+                val num: String = getLastDelivery.substringAfterLast("DV1")
+                newID = "DV1" + (num.toIntOrNull()?.plus(1)).toString()
+                newID
+            }
         }
     }
 

@@ -40,7 +40,6 @@ class LocationDetailsForQRFragment : Fragment() {
         vm.getAll()
         locationvm.getAll()
 
-        binding.lblTestingProductID.text = productID
 
 
 

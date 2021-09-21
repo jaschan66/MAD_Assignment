@@ -7,7 +7,7 @@
     tools:context=".ui.StockMainReportFragment" >
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnStockMainReport1"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -17,44 +17,44 @@
         app:layout_constraintTop_toBottomOf="@+id/textView56" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnStockMainReport2"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/stock_out_summary"
         app:layout_constraintEnd_toStartOf="@+id/guideline49"
         app:layout_constraintStart_toStartOf="@+id/guideline48"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        app:layout_constraintTop_toBottomOf="@+id/btnStockMainReport1" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnStockMainReport3"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Product Summary"
         app:layout_constraintEnd_toStartOf="@+id/guideline49"
         app:layout_constraintStart_toStartOf="@+id/guideline48"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/btnStockMainReport2" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/btnStockMainReport4"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="Delivery Summary"
         app:layout_constraintEnd_toStartOf="@+id/guideline49"
         app:layout_constraintStart_toStartOf="@+id/guideline48"
-        app:layout_constraintTop_toBottomOf="@+id/button3" />
+        app:layout_constraintTop_toBottomOf="@+id/btnStockMainReport3" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/btnStockMainReport5"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Low-In-Stock"
+        android:text="Low-In-Stock Report"
         app:layout_constraintEnd_toStartOf="@+id/guideline49"
         app:layout_constraintStart_toStartOf="@+id/guideline48"
-        app:layout_constraintTop_toBottomOf="@+id/button4" />
+        app:layout_constraintTop_toBottomOf="@+id/btnStockMainReport4" />
 
     <TextView
         android:id="@+id/textView56"

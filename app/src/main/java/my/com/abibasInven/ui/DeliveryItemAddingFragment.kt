@@ -29,6 +29,7 @@ class DeliveryItemAddingFragment : Fragment() {
     private val stockOutvm : StockOutViewModel by activityViewModels()
     private val deliveryvm : DeliveryViewModel by activityViewModels()
     private val outletvm : OutletViewModel by activityViewModels()
+    private val locationvm : LocationViewModel by activityViewModels()
 
     private val currentDeliveryID by lazy { requireArguments().getString("currentDeliveryID","N/A") }
 
@@ -118,15 +119,13 @@ class DeliveryItemAddingFragment : Fragment() {
 
 
         // id generator for delivery item
-        val id = "DVI" + (deliveryItemvm.calDeliveryItemSize() + 1).toString()
-        val deliveryItemID = deliveryItemvm.validID(id)
+        val deliveryItemID = deliveryItemvm.validID()
 
         currentdeliveryItemID = deliveryItemID
 
 
-//        // id generator for stockOut
-        val id2 = "SO" + (stockOutvm.calStockOutSize() + 1).toString()
-        val stockOutID = stockOutvm.validID(id2)
+        // id generator for stockOut
+        val stockOutID = stockOutvm.validID()
 
         val currentDateTime = LocalDateTime.now()
         val dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
@@ -150,6 +149,19 @@ class DeliveryItemAddingFragment : Fragment() {
                     stockOutID = stockOutID,
                 )
                 deliveryItemvm.set(newDeliveryItem)
+
+                val foundLocationData = locationvm.get(p.locationID)
+
+                if(foundLocationData!=null){
+                    val updateLocation = Location(
+                        ID = foundLocationData.ID,
+                        categoryID = foundLocationData.categoryID,
+                        occupiedCapacity = foundLocationData.occupiedCapacity-binding.edtDeliveryQty2.text.toString().toInt(),
+                        maxCapacity = foundLocationData.maxCapacity,
+                        rackType = foundLocationData.rackType,
+                    )
+                    locationvm.set(updateLocation)
+                }
 
 
                 val updateProduct = Product(
@@ -176,6 +188,8 @@ class DeliveryItemAddingFragment : Fragment() {
                     )
                     stockOutvm.set(newStockOut)
                 }
+
+
 
 
 

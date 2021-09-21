@@ -99,7 +99,8 @@ class DeliveryOutletFragment : Fragment(), OnMapReadyCallback {
                     //when permission is not granted
                     //Request permission
                     ActivityCompat.requestPermissions(requireActivity(), permissions, 100)
-                    nav.navigate(R.id.action_deliveryOutletFragment_to_deliveryItemListingFragment)
+                    nav.navigateUp()
+//                    nav.navigate(R.id.action_deliveryOutletFragment_to_deliveryListingFragment)
                 }
 
 
@@ -107,7 +108,8 @@ class DeliveryOutletFragment : Fragment(), OnMapReadyCallback {
 
         }
         else{
-            nav.navigate(R.id.action_deliveryOutletFragment_to_deliveryItemListingFragment)
+            nav.navigateUp()
+//            nav.navigate(R.id.action_deliveryOutletFragment_to_deliveryListingFragment)
         }
         binding.btnConfirmDeliveryPin.setOnClickListener { checkDeliveryPin(binding.edtDeliveryOutletPin.text.toString()) }
 
@@ -115,7 +117,7 @@ class DeliveryOutletFragment : Fragment(), OnMapReadyCallback {
         binding.mapDeliveryOutlet.onCreate(savedInstanceState)
         binding.mapDeliveryOutlet.onResume()
         // Inflate the layout for this fragment
-        binding.btnCloseDeliveryOutlet.setOnClickListener { nav.navigate(R.id.action_deliveryOutletFragment_to_deliveryItemListingFragment) }
+        binding.btnCloseDeliveryOutlet.setOnClickListener { nav.navigateUp() }
         return binding.root
     }
 
@@ -135,8 +137,7 @@ class DeliveryOutletFragment : Fragment(), OnMapReadyCallback {
                 deliveryvm.set(d)
 
                 // id generator for stockOut
-                val id = "SO" + (stockOutvm.calStockOutSize() + 1).toString()
-                val stockOutID = stockOutvm.validID(id)
+                val stockOutID = stockOutvm.validID()
 
                 val currentDateTime = LocalDateTime.now()
                 val dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
@@ -148,6 +149,7 @@ class DeliveryOutletFragment : Fragment(), OnMapReadyCallback {
 //                )
 //                stockOutvm.set(newStockOut)
 
+                nav.navigate(R.id.deliveryListingFragment)
                 informationDialog("delivery ( $currentDeliveryID ) task has completed")
 
             }

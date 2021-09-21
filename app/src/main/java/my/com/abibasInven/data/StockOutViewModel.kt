@@ -41,17 +41,38 @@ class StockOutViewModel : ViewModel() {
         return stockOut.value?.any { it -> it.ID == id } ?: false // if found return true if not found then return false
     }
 
-    fun validID(id: String): String {
-        val newID: String
-        val getLastStockOut = stockOut.value?.lastOrNull()?.ID.toString()
+    fun validID(): String {
+        var newID: String
 
-        return if (idExists(id)) {
-            val num: String = getLastStockOut.substringAfterLast("SO")
-            newID = "SO" + (num.toIntOrNull()?.plus(1)).toString()
-            newID
-        } else {
-            newID = "SO" + (calStockOutSize() + 1).toString()
-            newID
+        val getStockOut = stockOut.value?.lastOrNull()?.ID.toString()
+        val num: String = getStockOut.substringAfterLast("SO10")
+        newID = "SO10" + (num.toIntOrNull()?.plus(1)).toString()
+
+        if (newID == "SO1010") {
+            newID = "SO1" + (num.toIntOrNull()?.plus(1)).toString()
+            return newID
+        }
+
+        return when (calStockOutSize()) {
+            0 -> {
+                newID = "SO10" + (calStockOutSize() + 1)
+                newID
+            }
+            in 1..8 -> {
+                val getLastStockOut = stockOut.value?.lastOrNull()?.ID.toString()
+                val num: String = getLastStockOut.substringAfterLast("SO10")
+                newID = "SO10" + (num.toIntOrNull()?.plus(1)).toString()
+                if (newID == "SO10null") {
+                    newID = "SO111"
+                    newID
+                } else newID
+            }
+            else -> {
+                val getLastStockOut = stockOut.value?.lastOrNull()?.ID.toString()
+                val num: String = getLastStockOut.substringAfterLast("SO1")
+                newID = "SO1" + (num.toIntOrNull()?.plus(1)).toString()
+                newID
+            }
         }
     }
 

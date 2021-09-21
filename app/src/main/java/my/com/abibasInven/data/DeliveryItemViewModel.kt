@@ -44,17 +44,38 @@ class DeliveryItemViewModel : ViewModel() {
             ?: false // if found return true if not found then return false
     }
 
-    fun validID(id: String): String {
-        val newID: String
-        val getLastDeliveryItem = deliveryItem.value?.lastOrNull()?.ID.toString()
+    fun validID(): String {
+        var newID: String
 
-        return if (idExists(id)) {
-            val num: String = getLastDeliveryItem.substringAfterLast("DVI")
-            newID = "DVI" + (num.toIntOrNull()?.plus(1)).toString()
-            newID
-        } else {
-            newID = "DVI" + (calDeliveryItemSize() + 1).toString()
-            newID
+        val getLastDeliveryItem = deliveryItem.value?.lastOrNull()?.ID.toString()
+        val num: String = getLastDeliveryItem.substringAfterLast("DVI10")
+        newID = "DVI10" + (num.toIntOrNull()?.plus(1)).toString()
+
+        if (newID == "DVI1010") {
+            newID = "DVI1" + (num.toIntOrNull()?.plus(1)).toString()
+            return newID
+        }
+
+        return when (calDeliveryItemSize()) {
+            0 -> {
+                newID = "DVI10" + (calDeliveryItemSize() + 1)
+                newID
+            }
+            in 1..8 -> {
+                val getLastDeliveryItem = deliveryItem.value?.lastOrNull()?.ID.toString()
+                val num: String = getLastDeliveryItem.substringAfterLast("DVI10")
+                newID = "DVI10" + (num.toIntOrNull()?.plus(1)).toString()
+                if (newID == "DVI10null") {
+                    newID = "DVI111"
+                    newID
+                } else newID
+            }
+            else -> {
+                val getLastDelivery = deliveryItem.value?.lastOrNull()?.ID.toString()
+                val num: String = getLastDelivery.substringAfterLast("DVI1")
+                newID = "DVI1" + (num.toIntOrNull()?.plus(1)).toString()
+                newID
+            }
         }
     }
 

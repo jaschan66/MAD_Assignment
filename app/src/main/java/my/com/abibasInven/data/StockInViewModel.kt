@@ -43,17 +43,38 @@ class StockInViewModel : ViewModel() {
 
 
 
-    fun validID(id: String): String {
-        val newID: String
-        val getLastStockIn = stockIn.value?.lastOrNull()?.ID.toString()
+    fun validID(): String {
+        var newID: String
 
-        return if (idExists(id)) {
-            val num: String = getLastStockIn.substringAfterLast("SI")
-            newID = "SI" + (num.toIntOrNull()?.plus(1)).toString()
-            newID
-        } else {
-            newID = "SI" + (calStockInSize() + 1).toString()
-            newID
+        val getStockIn = stockIn.value?.lastOrNull()?.ID.toString()
+        val num: String = getStockIn.substringAfterLast("SI10")
+        newID = "SI10" + (num.toIntOrNull()?.plus(1)).toString()
+
+        if (newID == "SI1010") {
+            newID = "SI1" + (num.toIntOrNull()?.plus(1)).toString()
+            return newID
+        }
+
+        return when (calStockInSize()) {
+            0 -> {
+                newID = "SI10" + (calStockInSize() + 1)
+                newID
+            }
+            in 1..8 -> {
+                val getLastStockIn = stockIn.value?.lastOrNull()?.ID.toString()
+                val num: String = getLastStockIn.substringAfterLast("SI10")
+                newID = "SI10" + (num.toIntOrNull()?.plus(1)).toString()
+                if (newID == "SI10null") {
+                    newID = "SI111"
+                    newID
+                } else newID
+            }
+            else -> {
+                val getLastStockIn = stockIn.value?.lastOrNull()?.ID.toString()
+                val num: String = getLastStockIn.substringAfterLast("SI1")
+                newID = "SI1" + (num.toIntOrNull()?.plus(1)).toString()
+                newID
+            }
         }
     }
 
