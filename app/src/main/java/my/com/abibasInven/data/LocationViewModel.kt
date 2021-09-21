@@ -61,6 +61,9 @@ class LocationViewModel : ViewModel() {
         return location.value?.find { l -> l.ID == id }
     }
 
+    fun getCategorylocation(cate: String): List<Location>? {
+        return location.value?.filter { it -> it.categoryID == cate }
+    }
 
 
     fun getLocationSize() = rackType.value?.size ?:0

@@ -102,8 +102,6 @@ class SupplierViewModel : ViewModel() {
         errorMessage += if (s.longitude == 0.0) "- Longitude is required. \n"
         else ""
 
-        //TODO Add in more validation based on the needs of your fields
-
         return errorMessage
     }
 
