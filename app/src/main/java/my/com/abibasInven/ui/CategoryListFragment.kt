@@ -10,11 +10,12 @@ import android.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.logindemo.util.snackbar
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import my.com.abibasInven.R
 import my.com.abibasInven.data.CategoryViewModel
+import my.com.abibasInven.data.LocationViewModel
+import my.com.abibasInven.data.ProductViewModel
 import my.com.abibasInven.databinding.FragmentCategoryListBinding
 import my.com.abibasInven.util.CategoryAdapter
 
@@ -23,6 +24,8 @@ class CategoryListFragment : Fragment() {
     private lateinit var binding: FragmentCategoryListBinding
     private val nav by lazy { findNavController() }
     private val vm: CategoryViewModel by activityViewModels()
+    private val vmProduct: ProductViewModel by activityViewModels()
+    private val vmLocation: LocationViewModel by activityViewModels()
 
     private lateinit var adapter: CategoryAdapter
 
@@ -59,20 +62,26 @@ class CategoryListFragment : Fragment() {
                 nav.navigate(R.id.categoryUpdateFragment, bundleOf("categoryId" to category.ID))
             }
             holder.btnDelete.setOnClickListener {
-                val builder = AlertDialog.Builder(context)
-                builder.setMessage("Are you sure you want to Delete?")
-                    .setCancelable(false)
-                    .setPositiveButton("Yes") { dialog, id ->
+                if (vmProduct.getCategoryProduct(category.ID)?.size == 0 &&
+                    vmLocation.getCategorylocation(category.ID)?.size == 0) {
 
-                        snackbar("Category deleted successfully")
-                        deleteCategory(category.ID)
-                    }
-                    .setNegativeButton("No") { dialog, id ->
-                        // Dismiss the dialog
-                        dialog.dismiss()
-                    }
-                val alert = builder.create()
-                alert.show()
+                    val builder = AlertDialog.Builder(context)
+                    builder.setMessage("Are you sure you want to Delete?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes") { dialog, id ->
+
+                            snackbar("Category deleted successfully")
+                            deleteCategory(category.ID)
+                        }
+                        .setNegativeButton("No") { dialog, id ->
+                            // Dismiss the dialog
+                            dialog.dismiss()
+                        }
+                    val alert = builder.create()
+                    alert.show()
+                } else {
+                    snackbar("Category is in use and cannot be deleted")
+                }
             }
         }
         binding.categoryListRv.adapter = adapter

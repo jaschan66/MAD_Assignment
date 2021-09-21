@@ -38,7 +38,8 @@ class SupplierListFragment : Fragment() {
     ): View? {
 
         // Enable bottom navigation menu
-        val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        val bottomNav: BottomNavigationView =
+            requireActivity().findViewById(R.id.bottomNavigationView)
         bottomNav.visibility = View.VISIBLE
 
         vmProduct.getAll()
@@ -73,20 +74,24 @@ class SupplierListFragment : Fragment() {
                 nav.navigate(R.id.supplierUpdateFragment, bundleOf("suppId" to user.ID))
             }
             holder.btnDelete.setOnClickListener {
-                val builder = AlertDialog.Builder(context)
-                builder.setMessage("Are you sure you want to Delete?")
-                    .setCancelable(false)
-                    .setPositiveButton("Yes") { _, _ ->
+                if (vmProduct.getSupplierProduct(user.ID)?.size == 0) {
+                    val builder = AlertDialog.Builder(context)
+                    builder.setMessage("Are you sure you want to Delete?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes") { _, _ ->
 
-                        snackbar("Supplier deleted successfully")
-                        deleteSupplier(user.ID)
-                    }
-                    .setNegativeButton("No") { dialog, _ ->
-                        // Dismiss the dialog
-                        dialog.dismiss()
-                    }
-                val alert = builder.create()
-                alert.show()
+                            snackbar("Supplier deleted successfully")
+                            deleteSupplier(user.ID)
+                        }
+                        .setNegativeButton("No") { dialog, _ ->
+                            // Dismiss the dialog
+                            dialog.dismiss()
+                        }
+                    val alert = builder.create()
+                    alert.show()
+                } else {
+                    snackbar("Supplier is in use and cannot be deleted")
+                }
             }
         }
 

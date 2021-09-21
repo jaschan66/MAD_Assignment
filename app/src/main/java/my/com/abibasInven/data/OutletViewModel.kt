@@ -96,8 +96,6 @@ class OutletViewModel : ViewModel() {
         errorMessage += if (o.photo.toBytes().isEmpty()) "- Outlet photo is required. \n"
         else ""
 
-        //TODO Add in more validation based on the needs of your fields
-
         return errorMessage
     }
 
