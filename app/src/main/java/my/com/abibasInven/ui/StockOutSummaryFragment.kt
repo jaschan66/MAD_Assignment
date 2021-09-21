@@ -10,6 +10,7 @@ import android.widget.Button
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import my.com.abibasInven.R
 import my.com.abibasInven.data.StockInViewModel
 import my.com.abibasInven.data.StockOutViewModel
@@ -34,6 +35,10 @@ class StockOutSummaryFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
+        // Enable bottom navigation menu
+        val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        bottomNav.visibility = View.GONE
+
         binding = FragmentStockOutSummaryBinding.inflate(inflater, container, false)
 
         // Inflate the layout for this fragment

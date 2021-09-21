@@ -14,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.logindemo.util.errorDialog
 import com.example.logindemo.util.snackbar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.google.zxing.integration.android.IntentIntegrator
@@ -35,6 +36,10 @@ class LocationListingFragment : Fragment() {
     private lateinit var adapter: LocationAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        // Enable bottom navigation menu
+        val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        bottomNav.visibility = View.GONE
+
         // Inflate the layout for this fragment
         binding = FragmentLocationListingBinding.inflate(inflater, container, false)
 

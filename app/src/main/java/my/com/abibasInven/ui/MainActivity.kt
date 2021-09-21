@@ -35,15 +35,14 @@ class MainActivity : AppCompatActivity() {
         val num = nav.currentDestination?.label
 
         when(num){
-            "fragment_product"         -> confirmClose()
-            "fragment_account"         -> confirmClose()
-            "fragment_home"            -> confirmClose()
-            "fragment_login"           -> confirmClose()
-            "fragment_supplier_list"   -> confirmClose()
-            "fragment_outlet_list"     -> confirmClose()
+            "fragment_product"           -> confirmClose()
+            "fragment_account"           -> confirmClose()
+            "fragment_stock_main_report" -> confirmClose()
+            "fragment_login"             -> confirmClose()
+            "fragment_supplier_list"     -> confirmClose()
+            "fragment_outlet_list"       -> confirmClose()
+            else                         -> nav.popBackStack()
         }
-
-        //nav.popBackStack()
     }
 
 
@@ -55,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
         builder.setMessage("Exit Abibbas app?")
             .setCancelable(true)
-            .setPositiveButton("Yes, I am sure") { _, _ ->
+            .setPositiveButton("Yes") { _, _ ->
                 super.finish()
             }
             .setNegativeButton("Cancel") { dialog, _ ->

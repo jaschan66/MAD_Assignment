@@ -11,6 +11,7 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.logindemo.util.errorDialog
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.zxing.integration.android.IntentIntegrator
 import my.com.abibasInven.R
 import my.com.abibasInven.data.LocationViewModel
@@ -31,6 +32,11 @@ class StockInSelectMethodFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
+
+        // Enable bottom navigation menu
+        val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        bottomNav.visibility = View.GONE
+
         // Inflate the layout for this fragment
         binding = FragmentStockInSelectMethodBinding.inflate(inflater, container, false)
         productvm.getAll()

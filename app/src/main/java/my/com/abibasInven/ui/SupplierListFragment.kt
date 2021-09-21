@@ -37,16 +37,16 @@ class SupplierListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        // Enable bottom navigation menu
+        val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        bottomNav.visibility = View.VISIBLE
+
         vmProduct.getAll()
         vm.searchSupplier("")
 
         binding = FragmentSupplierListBinding.inflate(inflater, container, false)
 
         binding.btnAddSupplier.setOnClickListener { nav.navigate(R.id.supplierAddFragment) }
-
-        // Enable bottom navigation menu
-        val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
-        bottomNav.visibility = View.VISIBLE
 
         // Search Supplier
         binding.SupplierSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {

@@ -11,6 +11,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.logindemo.util.errorDialog
 import com.example.logindemo.util.snackbar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sun.mail.imap.protocol.ID
 import my.com.abibasInven.R
 import my.com.abibasInven.data.*
@@ -38,6 +39,11 @@ class StockInFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
+
+        // Enable bottom navigation menu
+        val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        bottomNav.visibility = View.GONE
+
         vm.getAll()
         vm2.getAll()
         locationvm.getAll()
