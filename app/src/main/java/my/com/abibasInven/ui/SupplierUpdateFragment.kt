@@ -27,6 +27,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import my.com.abibasInven.R
 import my.com.abibasInven.data.Supplier
 import my.com.abibasInven.data.SupplierViewModel
@@ -57,6 +58,10 @@ class SupplierUpdateFragment : Fragment(), OnMapReadyCallback {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        // Disable bottom navigation menu
+        val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        bottomNav.visibility = View.GONE
 
         binding = FragmentSupplierUpdateBinding.inflate(inflater, container, false)
 
@@ -164,8 +169,6 @@ class SupplierUpdateFragment : Fragment(), OnMapReadyCallback {
                     binding.edtSupLoc.setText(geopoint)
                     binding.edtSupLoc.isEnabled = false
 
-                    // binding.map.getMapAsync(this)
-
                 } else {
                     //Initialize location request
                     locationRequest = LocationRequest()
@@ -186,6 +189,7 @@ class SupplierUpdateFragment : Fragment(), OnMapReadyCallback {
                             // get latitude , longitude and other info from this
                             val testGeoPoint =
                                 lastLocation.latitude.toString() + "," + lastLocation.longitude.toString()
+
                             snackbar(testGeoPoint)
                             binding.edtSupLoc.isEnabled = true
                             binding.edtSupLoc.setText(testGeoPoint)

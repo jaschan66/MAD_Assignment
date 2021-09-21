@@ -41,7 +41,7 @@ class CategoryDetailsFragment : Fragment() {
         adapter = ProductAdapter() { holder, product ->
 
             holder.root.setOnClickListener {
-//                nav.navigate(R.id.staffDetailsFragment, bundleOf("product" to product.ID))
+                nav.navigate(R.id.productDetailFragment, bundleOf("ID" to product.ID))
             }
             holder.btnUpdate.setOnClickListener {
                 nav.navigate(R.id.productUpdateFragment, bundleOf("ID" to product.ID))

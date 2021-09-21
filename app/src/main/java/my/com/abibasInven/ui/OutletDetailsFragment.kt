@@ -19,6 +19,8 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import my.com.abibasInven.R
 import my.com.abibasInven.data.Outlet
 import my.com.abibasInven.data.OutletViewModel
 import my.com.abibasInven.databinding.FragmentOutletDetailsBinding
@@ -46,6 +48,10 @@ class OutletDetailsFragment : Fragment(), OnMapReadyCallback {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        // Disable bottom navigation menu
+        val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        bottomNav.visibility = View.GONE
 
         binding = FragmentOutletDetailsBinding.inflate(inflater, container, false)
 

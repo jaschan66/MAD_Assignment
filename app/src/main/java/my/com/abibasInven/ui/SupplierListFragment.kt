@@ -44,9 +44,11 @@ class SupplierListFragment : Fragment() {
 
         binding.btnAddSupplier.setOnClickListener { nav.navigate(R.id.supplierAddFragment) }
 
+        // Enable bottom navigation menu
         val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
         bottomNav.visibility = View.VISIBLE
 
+        // Search Supplier
         binding.SupplierSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(name: String) = true
             override fun onQueryTextChange(name: String): Boolean {
@@ -55,6 +57,7 @@ class SupplierListFragment : Fragment() {
             }
         })
 
+        // Scan OR-code
         binding.btnScanSupplierQR.setOnClickListener {
             val scanner = IntentIntegrator.forSupportFragment(this)
             scanner.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE)
