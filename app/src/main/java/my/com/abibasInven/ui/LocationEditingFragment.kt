@@ -119,7 +119,8 @@ class LocationEditingFragment : Fragment() {
                 ID = currentCompartmentID,
                 categoryID = binding.spnCategory2.selectedItem.toString(),
                 occupiedCapacity = 0,
-                maxCapacity = binding.edtMaxCapacity2.text.toString().toInt()
+                maxCapacity = binding.edtMaxCapacity2.text.toString().toInt(),
+                rackType = rackID,
                 //categoryID = binding.spnCategory.selectedItem.toString()
             )
             vm.set(uLocation)

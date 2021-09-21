@@ -153,7 +153,7 @@ class StockInFragment : Fragment() {
 //                        errorDialog("Product (${foundProductData.ID}) category is ${foundProductData.categoryID}, but Location category is ${foundLocationData.categoryID}")
 //                    }
                      if((binding.edtRackProductQuantity.text.toString().toInt()+foundLocationData.occupiedCapacity) > foundLocationData.maxCapacity){
-                        errorDialog("Location only left (${foundLocationData.maxCapacity-((binding.edtRackProductQuantity.text.toString().toInt()+foundLocationData.occupiedCapacity))}) storage quantity, please lower product quantity to stock in")
+                        errorDialog(" please lower product quantity to stock in")
                     }
                     else{
                         //
@@ -211,7 +211,7 @@ class StockInFragment : Fragment() {
                         errorDialog("Product (${foundProductData.ID}) category is ${foundProductData.categoryID}, but Location category is ${foundLocationData.categoryID}")
                     }
                     else if((binding.edtRackProductQuantity.text.toString().toInt()+foundLocationData.occupiedCapacity) > foundLocationData.maxCapacity){
-                        errorDialog("Location only left (${foundLocationData.maxCapacity}) storage quantity, please lower product quantity to stock in")
+                        errorDialog("please lower product quantity to stock in")
                     }
                     else{
                         //
