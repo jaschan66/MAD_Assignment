@@ -36,27 +36,41 @@ class DeliveryListingFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentDeliveryListingBinding.inflate(inflater, container, false)
 
+        productvm.getAll()
 
         val num = productvm.calSize()
         num
 
-        val test =  productvm.getAllProductHaveQty().value
+        val test =  productvm.getAllProductHaveQty()
+        test
 
         adapter = DeliveryAdapter(){ holder, delivery ->
 
 
             holder.btnDeliveryDetail.setOnClickListener {
 
+                val foundDeliveryItem = deliveryItemvm.getByDeliveryID(delivery.ID)
+                if(foundDeliveryItem!=null){
                     nav.navigate(R.id.deliveryItemListingFragment,bundleOf("currentDeliveryID" to delivery.ID))
+                }
+                else{
+                    informationDialog(" there is no relevant details about it")
+                }
+
+
 
             }
             holder.btnDeliveryListingAddDeliveryItem.setOnClickListener {
+
                 if(test == null){
+
                     informationDialog("there is no product at store")
                 }
                 else{
                     nav.navigate(R.id.deliveryItemAddingFragment,bundleOf("currentDeliveryID" to delivery.ID))
                 }
+
+
 
 
             }

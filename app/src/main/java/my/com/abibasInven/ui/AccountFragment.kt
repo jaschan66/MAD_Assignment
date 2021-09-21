@@ -35,10 +35,13 @@ class AccountFragment : Fragment() {
     private val nav by lazy {findNavController()}
 
     private val vm : UserViewModel by activityViewModels()
+    private val productvm : ProductViewModel by activityViewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         binding = FragmentAccountBinding.inflate(inflater, container, false)
+
+        productvm.getAll()
 
         val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
         bottomNav.visibility = View.VISIBLE

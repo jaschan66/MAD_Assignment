@@ -164,17 +164,17 @@ class DeliveryItemAddingFragment : Fragment() {
                 }
 
 
-                val updateProduct = Product(
-                    ID = p.ID,
-                    name = p.name,
-                    qty = p.qty - binding.edtDeliveryQty2.text.toString().toInt(),
-                    qtyThreshold = p.qtyThreshold,
-                    categoryID = p.categoryID,
-                    photo = p.photo,
-                    locationID = p.locationID,
-                    supplierID = p.supplierID,
-                )
-                productvm.set(updateProduct)
+//                val updateProduct = Product(
+//                    ID = p.ID,
+//                    name = p.name,
+//                    qty = p.qty - binding.edtDeliveryQty2.text.toString().toInt(),
+//                    qtyThreshold = p.qtyThreshold,
+//                    categoryID = p.categoryID,
+//                    photo = p.photo,
+//                    locationID = p.locationID,
+//                    supplierID = p.supplierID,
+//                )
+//                productvm.set(updateProduct)
 
                 val foundDeliveryData = deliveryvm.get(currentDeliveryID)
                 if(foundDeliveryData!=null){

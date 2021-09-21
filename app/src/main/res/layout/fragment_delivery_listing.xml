@@ -25,12 +25,13 @@
         android:layout_width="365dp"
         android:layout_height="405dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="20dp"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView31"
+        app:layout_constraintTop_toBottomOf="@+id/btnDeliveryListingReady"
         tools:listitem="@layout/deliverylisting_rv" />
 
     <TextView
@@ -54,6 +55,53 @@
         android:text="@string/create_delivery"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvDeliveryListing" />
+
+    <Button
+        android:id="@+id/btnDeliveryListingReady"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="Ready"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnDeliveryListingAll"
+        app:layout_constraintStart_toEndOf="@+id/btnDeliveryListingAll"
+        app:layout_constraintTop_toTopOf="@+id/btnDeliveryListingAll"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btnDeliveryListingDelivering"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="devliering"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnDeliveryListingReady"
+        app:layout_constraintStart_toEndOf="@+id/btnDeliveryListingReady"
+        app:layout_constraintTop_toTopOf="@+id/btnDeliveryListingReady"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btnDeliveryListingCompleted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:text="Completed"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnDeliveryListingDelivering"
+        app:layout_constraintStart_toEndOf="@+id/btnDeliveryListingDelivering"
+        app:layout_constraintTop_toTopOf="@+id/btnDeliveryListingDelivering"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/btnDeliveryListingAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/all"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

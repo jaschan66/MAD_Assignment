@@ -88,10 +88,9 @@ class DeliveryItemListingFragment : Fragment() {
             }
             adapter.submitList(arrayDelivery)
             binding.lblDeliveryItemListingCount.text ="${arrayDelivery.size} delivery item(s)"
-            if(arrayDelivery.size==0){
-                nav.navigate(R.id.action_deliveryItemListingFragment_to_deliveryListingFragment)
-                informationDialog("there is no relevant delivery item details")
-            }
+
+
+
 
         }
 
