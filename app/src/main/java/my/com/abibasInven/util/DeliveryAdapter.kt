@@ -25,7 +25,6 @@ class DeliveryAdapter (
         val lblDeliveryID : TextView = view.findViewById(R.id.lblDeliveryItemID)
         val btnDeliveryListingAddDeliveryItem : Button = view.findViewById(R.id.btnDeliveryListingAddDeliveryItem)
         val btnDeliveryDetail : Button = view.findViewById(R.id.btnDeliveryDetail)
-        val btnDeleteDelivery : Button = view.findViewById(R.id.btnDeleteDelivery)
 
     }
 
@@ -43,7 +42,6 @@ class DeliveryAdapter (
 
         if(delivery.deliveryStatus=="delivering"||delivery.deliveryStatus=="completed"){
             holder.btnDeliveryListingAddDeliveryItem.isVisible = false
-            holder.btnDeleteDelivery.isVisible = false
         }
 
         fn(holder, delivery)

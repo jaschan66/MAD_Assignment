@@ -78,9 +78,7 @@ class DeliveryListingFragment : Fragment() {
 
 
             }
-            holder.btnDeleteDelivery.setOnClickListener {
 
-            }
 
 
         }

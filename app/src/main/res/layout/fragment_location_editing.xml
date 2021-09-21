@@ -37,8 +37,8 @@
 
     <Spinner
         android:id="@+id/spnCategory2"
-        android:layout_width="105dp"
-        android:layout_height="35dp"
+        android:layout_width="168dp"
+        android:layout_height="49dp"
         android:layout_marginStart="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView14"
         app:layout_constraintStart_toStartOf="@+id/guideline27"
@@ -50,8 +50,8 @@
         android:id="@+id/textView17"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="14dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginEnd="8dp"
         android:text="@string/max_capacity"
         android:textColor="@color/black"
         android:textSize="20sp"
