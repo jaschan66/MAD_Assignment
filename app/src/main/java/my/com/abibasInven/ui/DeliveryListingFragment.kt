@@ -41,7 +41,7 @@ class DeliveryListingFragment : Fragment() {
         val num = productvm.calSize()
         num
 
-        val test =  productvm.getAllProductHaveQty()
+        val test =  productvm.getAllProductHaveQty().value
         test
 
         adapter = DeliveryAdapter(){ holder, delivery ->
@@ -62,8 +62,7 @@ class DeliveryListingFragment : Fragment() {
             }
             holder.btnDeliveryListingAddDeliveryItem.setOnClickListener {
 
-                if(test == null){
-
+                if(test!!.size == 0){
                     informationDialog("there is no product at store")
                 }
                 else{

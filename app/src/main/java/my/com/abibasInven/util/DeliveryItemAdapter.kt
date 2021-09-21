@@ -5,16 +5,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.logindemo.util.toBitmap
 import my.com.abibasInven.R
 import my.com.abibasInven.data.DeliveryItem
+import my.com.abibasInven.data.DeliveryViewModel
 
 class DeliveryItemAdapter (
     val fn: (DeliveryItemAdapter.ViewHolder, DeliveryItem) -> Unit = { _, _ ->}
 ): ListAdapter<DeliveryItem, DeliveryItemAdapter.ViewHolder>(DeliveryItemAdapter.DiffCallback) {
+
 
     companion object DiffCallback : DiffUtil.ItemCallback<DeliveryItem>() {
         override fun areItemsTheSame(a: DeliveryItem, b: DeliveryItem)    = a.ID == b.ID
@@ -42,6 +45,7 @@ class DeliveryItemAdapter (
         holder.lblDeliveryItemID.text = deliveryItem.ID
         holder.imgDeliveryItemPhoto.setImageBitmap(deliveryItem.deliveryItemPhoto.toBitmap())
         holder.lblDeliveryItemQty.text = deliveryItem.deliveryQty.toString()
+
 
         fn(holder, deliveryItem)
     }
