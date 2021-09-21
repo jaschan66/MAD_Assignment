@@ -12,6 +12,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.example.logindemo.util.snackbar
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import my.com.abibasInven.R
 import my.com.abibasInven.data.OutletViewModel
 import my.com.abibasInven.databinding.FragmentOutletListBinding
@@ -29,6 +30,10 @@ class OutletListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        // Disable bottom navigation menu
+        val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        bottomNav.visibility = View.VISIBLE
 
         vm.searchOutlet("")
 

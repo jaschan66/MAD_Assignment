@@ -29,6 +29,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.theartofdev.edmodo.cropper.CropImage
 import my.com.abibasInven.R
 import my.com.abibasInven.data.Outlet
@@ -60,6 +61,12 @@ class OutletAddFragment : Fragment(), OnMapReadyCallback {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        // Disable bottom navigation menu
+        val bottomNav : BottomNavigationView = requireActivity().findViewById(R.id.bottomNavigationView)
+        bottomNav.visibility = View.GONE
+
+        noImg = false
 
         binding = FragmentOutletAddBinding.inflate(inflater, container, false)
 
@@ -219,7 +226,7 @@ class OutletAddFragment : Fragment(), OnMapReadyCallback {
     private fun reset() {
         with(binding) {
             edtOutletName.text.clear()
-            imgAddOutletPhoto.setImageResource(R.drawable.ic_addimg)
+            imgAddOutletPhoto.setImageResource(R.drawable.camera_icon)
             edtOutletLoc.text.clear()
             outletMap.isVisible = false
 

@@ -45,7 +45,6 @@ class RegisterUserFragment : Fragment() {
 
         binding = FragmentRegisterUserBinding.inflate(inflater, container, false)
         // TODO
-        binding.addImgView.setImageResource(R.drawable.ic_addimg)
         binding.addImgView.setOnClickListener { try {
             CropImage.activity()
                 .start(requireContext(),this)
@@ -76,7 +75,7 @@ class RegisterUserFragment : Fragment() {
             return
         } else {
             vm.set(u)
-            nav.navigate(R.id.staffListFragment)
+            nav.navigate(R.id.action_registerUserFragment_to_staffListFragment)
         }
     }
 

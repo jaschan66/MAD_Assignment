@@ -55,12 +55,11 @@
         android:id="@+id/imgAddProductPhoto"
         android:layout_width="143dp"
         android:layout_height="131dp"
-        android:layout_marginTop="16dp"
         android:contentDescription="@string/addproductimage"
-        android:src="@drawable/ic_adding"
         app:layout_constraintEnd_toStartOf="@+id/guideline32"
         app:layout_constraintStart_toStartOf="@+id/guideline31"
-        app:layout_constraintTop_toTopOf="@+id/guideline33" />
+        app:layout_constraintTop_toTopOf="@+id/guideline33"
+        app:srcCompat="@drawable/camera_icon" />
 
     <TextView
         android:id="@+id/textView17"

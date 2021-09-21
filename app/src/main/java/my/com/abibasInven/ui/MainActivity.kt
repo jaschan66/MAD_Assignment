@@ -1,8 +1,10 @@
 package my.com.abibasInven.ui
 
+import android.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.fragment.findNavController
+import com.example.logindemo.util.snackbar
 import my.com.abibasInven.R
 import my.com.abibasInven.databinding.ActivityMainBinding
 
@@ -33,19 +35,34 @@ class MainActivity : AppCompatActivity() {
         val num = nav.currentDestination?.label
 
         when(num){
-            "fragment_product"         -> super.finish()
-            "fragment_account"         -> super.finish()
-            "fragment_home"            -> super.finish()
-            "fragment_login"           -> super.finish()
-            "fragment_supplier_list"   -> super.finish()
-            "fragment_outlet_list"     -> super.finish()
+            "fragment_product"         -> confirmClose()
+            "fragment_account"         -> confirmClose()
+            "fragment_home"            -> confirmClose()
+            "fragment_login"           -> confirmClose()
+            "fragment_supplier_list"   -> confirmClose()
+            "fragment_outlet_list"     -> confirmClose()
         }
 
-        nav.popBackStack()
+        //nav.popBackStack()
     }
 
 
     override fun onSupportNavigateUp(): Boolean {
         return nav.navigateUp() || super.onSupportNavigateUp()
+    }
+
+    private fun confirmClose() {
+        val builder = AlertDialog.Builder(this)
+        builder.setMessage("Exit Abibbas app?")
+            .setCancelable(true)
+            .setPositiveButton("Yes, I am sure") { _, _ ->
+                super.finish()
+            }
+            .setNegativeButton("Cancel") { dialog, _ ->
+                // Dismiss the dialog
+                dialog.dismiss()
+            }
+        val alert = builder.create()
+        alert.show()
     }
 }

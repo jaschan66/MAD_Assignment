@@ -135,7 +135,6 @@ class OutletUpdateFragment : Fragment(), OnMapReadyCallback {
                     binding.edtOutletUpdateLoc.setText(geopoint)
                     binding.edtOutletUpdateLoc.isEnabled = false
 
-                    //binding.outletUpdateMap.getMapAsync(this)
                 } else {
                     //Initialize location request
                     locationRequest = LocationRequest()

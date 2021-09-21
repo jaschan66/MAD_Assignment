@@ -25,7 +25,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:paddingStart="20dp">
 
                 <ImageView
                     android:id="@+id/accountImg"
@@ -33,6 +34,7 @@
                     android:layout_height="150dp"
                     android:layout_weight="1"
                     android:contentDescription="@string/accountimg"
+                    android:cropToPadding="false"
                     tools:ignore="ImageContrastCheck"
                     tools:src="@tools:sample/avatars" />
 

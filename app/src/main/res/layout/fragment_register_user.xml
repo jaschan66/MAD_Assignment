@@ -42,6 +42,7 @@
         app:layout_constraintEnd_toStartOf="@+id/guideline9"
         app:layout_constraintStart_toStartOf="@+id/guideline8"
         app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/camera_icon"
         tools:ignore="ImageContrastCheck" />
 
     <TextView

@@ -29,12 +29,13 @@
         android:id="@+id/btnOutletAdd"
         android:layout_width="43dp"
         android:layout_height="46dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="24dp"
         android:paddingStart="10dp"
         app:icon="@drawable/ic_baseline_add_24"
         app:layout_constraintBottom_toBottomOf="@+id/view16"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view16" />
+        app:layout_constraintTop_toTopOf="@+id/view16"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/outlet_rv"
